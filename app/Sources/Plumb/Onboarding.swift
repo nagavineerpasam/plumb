@@ -12,7 +12,7 @@ struct Onboarding: View {
                 .font(.system(size: 52, weight: .light))
                 .foregroundStyle(.tint)
                 .symbolEffect(.pulse, isActive: problem == nil)
-            Text("Setting up Writing Signals").font(.title.weight(.semibold))
+            Text("Setting up Plumb").font(.title.weight(.semibold))
             Text("Downloading the language models once. After this everything runs on your Mac, offline and private.")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)

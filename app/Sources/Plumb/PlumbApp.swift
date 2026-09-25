@@ -3,7 +3,7 @@ import SwiftUI
 import WritingSignalsCore
 
 @main
-struct WritingSignalsApp: App {
+struct PlumbApp: App {
     @State private var model = AppModel()
 
     init() {
@@ -14,7 +14,7 @@ struct WritingSignalsApp: App {
     }
 
     var body: some Scene {
-        WindowGroup("Writing Signals") {
+        WindowGroup("Plumb") {
             ContentView(model: model)
                 .frame(minWidth: 960, minHeight: 600)
         }
@@ -188,7 +188,14 @@ enum WorkerLocation {
     }
 
     static var notesFolder: URL {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("Writing Signals", isDirectory: true)
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let folder = documents.appendingPathComponent("Plumb", isDirectory: true)
+        // Notes written before the app was named Plumb move over once.
+        let old = documents.appendingPathComponent("Writing Signals", isDirectory: true)
+        let files = FileManager.default
+        if !files.fileExists(atPath: folder.path), files.fileExists(atPath: old.path) {
+            try? files.moveItem(at: old, to: folder)
+        }
+        return folder
     }
 }

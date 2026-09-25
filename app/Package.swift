@@ -2,11 +2,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "WritingSignals",
+    name: "Plumb",
     platforms: [.macOS(.v14)],
     targets: [
         .target(name: "WritingSignalsCore"),
-        .executableTarget(name: "WritingSignals", dependencies: ["WritingSignalsCore"]),
+        .executableTarget(name: "Plumb", dependencies: ["WritingSignalsCore"]),
         .testTarget(name: "WritingSignalsCoreTests", dependencies: ["WritingSignalsCore"]),
     ]
 )

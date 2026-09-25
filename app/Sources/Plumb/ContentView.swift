@@ -52,7 +52,7 @@ struct ContentView: View {
                              initialText: model.openedText, onChange: model.edited)
                     .opacity(model.selection == nil ? 0 : 1)
             }
-            .navigationTitle(model.selection?.title ?? "Writing Signals")
+            .navigationTitle(model.selection?.title ?? "Plumb")
             .navigationSubtitle(model.statusLine)
             .inspector(isPresented: $model.showDashboard) {
                 Dashboard(summary: model.analyzer.summary,
