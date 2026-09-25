@@ -5,13 +5,14 @@
 <h1 align="center">Plumb</h1>
 
 <p align="center">A private notes app that shows you, sentence by sentence, how well you write English.<br>
-Grammar, sense, spelling, tone and confidence, live as you type or speak. Nothing leaves your Mac.</p>
+Grammar, sense, spelling, tone and confidence, live as you type or speak. Nothing leaves your Mac.<br>
+<b>Free and open source, forever.</b></p>
 
 ---
 
 ## Install (Apple Silicon Mac, macOS 14 or newer)
 
-1. **Download** `Plumb-0.1.0-arm64.dmg` from the [latest release](https://github.com/nagavineerpasam/plumb-releases/releases/latest).
+1. **Download** `Plumb-0.1.0-arm64.dmg` from the [latest release](https://github.com/nagavineerpasam/plumb/releases/latest).
 2. **Open** the downloaded file and **drag Plumb onto Applications**.
 3. **Open Plumb** from Applications. The first time, macOS stops it because it isn't from the App Store:
    - click **Done** on the warning,
@@ -68,7 +69,7 @@ Real-world accuracy is lower than these numbers, especially for Sense. Plumb is 
 ## Build from source
 
 ```bash
-git clone https://github.com/nagavineerpasam/plumb.git && cd plumb      # private: needs access
+git clone https://github.com/nagavineerpasam/plumb.git && cd plumb
 python3.12 -m venv .venv && .venv/bin/pip install -e "engine[test]"   # the signal engine
 cd app && swift run                                                   # the app (uses the venv above)
 ```
@@ -84,4 +85,5 @@ cd app && swift run                                                   # the app 
 
 ## License
 
-Apache-2.0. See [LICENSE](LICENSE).
+- **Code:** Apache-2.0. See [LICENSE](LICENSE).
+- **The writing model** (`plumb-model.zip` on the releases page) is free for **non-commercial use**. It was fine-tuned from Laya on data that includes research-and-education-only datasets (CoLA, DAIR Emotion) and sentences drafted with the help of an AI assistant. It's meant for personal learning, not for building paid products. If you fork Plumb to sell it, retrain the model on data you're licensed to use commercially.
