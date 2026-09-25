@@ -71,7 +71,7 @@ struct Dashboard: View {
                     .font(.system(size: 34, weight: .semibold)).monospacedDigit()
                     .contentTransition(.numericText(value: score ?? 0))
                     .foregroundStyle(score.map(band) ?? .secondary)
-                Text(score.map(verdict) ?? "Checking…").font(.body).foregroundStyle(.secondary)
+                if score == nil { Text("Checking…").font(.body).foregroundStyle(.secondary) }
             }
             bar(score ?? 0, color: score.map(band) ?? .secondary)
         }
@@ -115,10 +115,6 @@ struct Dashboard: View {
     }
 
     private func band(_ score: Double) -> Color { score >= 0.85 ? .green : score >= 0.6 ? .orange : .red }
-
-    private func verdict(_ score: Double) -> String {
-        score >= 0.85 ? "Well written" : score >= 0.6 ? "A few things to fix" : "Needs work"
-    }
 
     /// Tone and emotion as words, then the three scales as labelled bars.
     private var voiceBars: some View {

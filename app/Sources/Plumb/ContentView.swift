@@ -94,6 +94,20 @@ struct ContentView: View {
             .opacity(model.selection == nil ? 0 : 1)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay {
+            GeometryReader { geo in
+                if model.dictation.isListening && !model.dictation.heardSomething {
+                    Label("Start speaking…", systemImage: "waveform")
+                        .font(.title3.weight(.medium)).foregroundStyle(.secondary)
+                        .symbolEffect(.variableColor.iterative, isActive: true)
+                        .frame(maxWidth: .infinity)
+                        .position(x: geo.size.width / 2, y: geo.size.height * 0.7)
+                        .transition(.opacity)
+                }
+            }
+            .allowsHitTesting(false)
+            .animation(.smooth, value: model.dictation.heardSomething)
+        }
         .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
     }
@@ -101,9 +115,10 @@ struct ContentView: View {
     private func sidebarButton(_ title: String, systemImage: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Label(title, systemImage: systemImage)
-                .font(.callout).foregroundStyle(.secondary)
+                .font(.callout.weight(.medium)).foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 12).padding(.vertical, 7)
+                .padding(.horizontal, 12).padding(.vertical, 8)
+                .background(Palette.card.opacity(0.7), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -202,19 +217,19 @@ struct TitleField: View {
     }
 }
 
-/// Click (or ⌥⌘D) to speak into the note at the cursor; click again to stop. Glows with the
-/// microphone level while listening.
+/// A small rounded "Speak" pill by the title. Click (or ⌥⌘D) to speak into the note at the
+/// cursor; click again to stop. While listening it turns accent-coloured and glows with the level.
 struct MicButton: View {
     @Bindable var dictation: Dictation
 
     var body: some View {
         Button { dictation.toggle() } label: {
-            Image(systemName: dictation.isListening ? "mic.fill" : "mic")
-                .font(.system(size: 15, weight: .medium))
+            Label(dictation.isListening ? "Stop" : "Speak", systemImage: dictation.isListening ? "mic.fill" : "mic")
+                .font(.callout.weight(.medium))
                 .foregroundStyle(dictation.isListening ? Color.white : Color.secondary)
-                .frame(width: 30, height: 30)
+                .padding(.horizontal, 12).padding(.vertical, 6)
                 .background {
-                    Circle().fill(dictation.isListening ? Color.accentColor : Color.clear)
+                    Capsule().fill(dictation.isListening ? Color.accentColor : Color.secondary.opacity(0.12))
                         .shadow(color: .accentColor.opacity(dictation.isListening ? 0.25 + dictation.level * 0.6 : 0),
                                 radius: 4 + dictation.level * 10)
                 }

@@ -9,6 +9,8 @@ import WritingSignalsCore
 @MainActor @Observable
 final class Dictation {
     private(set) var isListening = false
+    /// Whether any words have arrived since listening started (hides the "Start speaking…" prompt).
+    private(set) var heardSomething = false
     /// 0...1 microphone level for the button's glow.
     private(set) var level: Double = 0
     var problem: String?
@@ -48,6 +50,7 @@ final class Dictation {
         guard !isListening, let textView else { return }
         guard #available(macOS 26, *) else { return }
         problem = nil
+        heardSomething = false
         buffer = DictationBuffer(selection: textView.selectedRange(), in: textView.string, keeping: hints)
         isListening = true
         session = Task { await self.run() }
@@ -87,7 +90,7 @@ final class Dictation {
         }
         do {
             let transcriber = SpeechTranscriber(locale: Locale(identifier: "en-US"), transcriptionOptions: [],
-                                                reportingOptions: [.volatileResults],
+                                                reportingOptions: [.volatileResults, .fastResults],
                                                 attributeOptions: [.transcriptionConfidence])
             if let install = try await AssetInventory.assetInstallationRequest(supporting: [transcriber]) {
                 try await install.downloadAndInstall()  // once, the first time
@@ -114,6 +117,7 @@ final class Dictation {
                     apply { $0.volatile(text.trimmingCharacters(in: .whitespaces)) }
                 }
                 lastSound = Date()
+                heardSomething = true
             }
             try await analyzer.finalizeAndFinishThroughEndOfInput()
         } catch {
@@ -144,7 +148,7 @@ final class Dictation {
         let node = engine.inputNode
         let micFormat = node.outputFormat(forBus: 0)
         let converter = AVAudioConverter(from: micFormat, to: format)
-        node.installTap(onBus: 0, bufferSize: 2048, format: micFormat) { [weak self] buffer, _ in
+        node.installTap(onBus: 0, bufferSize: 1024, format: micFormat) { [weak self] buffer, _ in
             let rms = Self.rms(buffer)
             Task { @MainActor in
                 self?.level = min(1, rms * 12)
