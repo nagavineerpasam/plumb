@@ -25,6 +25,7 @@ struct ContentView: View {
         }
         .padding(.horizontal, 12).padding(.bottom, 12)
         .padding(.top, 44)  // room for the window buttons
+        .background(alignment: .top) { TitleBarArea().frame(height: 44) }
         .background(Palette.canvas)
         .ignoresSafeArea()
         .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
@@ -257,5 +258,27 @@ struct MicButton: View {
         .help(dictation.isListening ? "Stop listening (⌥⌘D)" : "Speak into your note (⌥⌘D)")
         .alert(dictation.problem ?? "", isPresented: Binding(get: { dictation.problem != nil },
                                                              set: { if !$0 { dictation.problem = nil } })) {}
+    }
+}
+
+/// The strip along the top where a title bar would be: drag to move the window, double-click to
+/// zoom or minimise, following System Settings → Desktop & Dock → "Double-click a window's title bar".
+struct TitleBarArea: NSViewRepresentable {
+    func makeNSView(context: Context) -> NSView { TitleBarView() }
+    func updateNSView(_ nsView: NSView, context: Context) {}
+
+    final class TitleBarView: NSView {
+        override func mouseDown(with event: NSEvent) {
+            guard let window else { return }
+            if event.clickCount == 2 {
+                switch UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick") {
+                case "Minimize": window.performMiniaturize(nil)
+                case "None": break
+                default: window.performZoom(nil)
+                }
+            } else {
+                window.performDrag(with: event)
+            }
+        }
     }
 }
