@@ -4,7 +4,17 @@ import Observation
 public struct Note: Identifiable, Hashable, Sendable {
     public var id: URL { url }
     public let url: URL
+    public var modified: Date = .distantPast
     public var title: String { url.deletingPathExtension().lastPathComponent }
+
+    public init(url: URL, modified: Date = .distantPast) {
+        self.url = url
+        self.modified = modified
+    }
+
+    // A note is its file; the date is just for display.
+    public static func == (a: Note, b: Note) -> Bool { a.url == b.url }
+    public func hash(into hasher: inout Hasher) { hasher.combine(url) }
 }
 
 /// Notes are plain Markdown files, one per note, in a folder the user owns.
@@ -74,6 +84,6 @@ public final class NoteStore {
         func modified(_ url: URL) -> Date {
             (try? url.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate) ?? .distantPast
         }
-        notes = urls.sorted { modified($0) > modified($1) }.map(Note.init)
+        notes = urls.map { Note(url: $0, modified: modified($0)) }.sorted { $0.modified > $1.modified }
     }
 }

@@ -31,8 +31,9 @@ struct SentenceCard: View {
                 Spacer()
                 Text(headline(name, signal))
                     .font(.caption.weight(.semibold))
+                    .foregroundStyle(name == "grammar" && signal.value == "yes" ? Color.red : Color.primary)
                     .padding(.horizontal, 8).padding(.vertical, 2)
-                    .background(Palette.color(signal: name, value: signal.value).opacity(0.18), in: Capsule())
+                    .background((name == "grammar" && signal.value == "yes" ? Color.red : Color.secondary).opacity(0.14), in: Capsule())
             }
             if let (low, high) = Palette.scales[name], let score = signal.score {
                 ScaleBar(value: score, low: low, high: high)

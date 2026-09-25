@@ -24,16 +24,16 @@ struct SignalEditor: NSViewRepresentable {
         text.allowsUndo = true
         text.isAutomaticQuoteSubstitutionEnabled = false
         text.drawsBackground = false
-        text.textContainerInset = NSSize(width: 48, height: 40)
+        text.textContainerInset = NSSize(width: 52, height: 44)
         text.isVerticallyResizable = true
         text.autoresizingMask = [.width]
         text.textContainer?.widthTracksTextView = true
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineHeightMultiple = 1.45
+        paragraph.lineHeightMultiple = 1.55
         paragraph.paragraphSpacing = 10
         text.defaultParagraphStyle = paragraph
-        let body = NSFont.systemFont(ofSize: 18)
-        text.font = NSFont(descriptor: body.fontDescriptor.withDesign(.serif) ?? body.fontDescriptor, size: 18)
+        let body = NSFont.systemFont(ofSize: 19)
+        text.font = NSFont(descriptor: body.fontDescriptor.withDesign(.serif) ?? body.fontDescriptor, size: 19)
         text.typingAttributes[.paragraphStyle] = paragraph
 
         let scroll = NSScrollView()
@@ -98,12 +98,14 @@ struct SignalEditor: NSViewRepresentable {
                     layout.addRenderingAttribute(.underlineColor, value: NSColor.tertiaryLabelColor, for: range)
                     continue
                 }
-                if grammar.value == "yes" {
-                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.16), for: range)
-                    layout.addRenderingAttribute(.underlineStyle, value: NSUnderlineStyle.thick.rawValue, for: range)
-                    layout.addRenderingAttribute(.underlineColor, value: NSColor.systemRed.withAlphaComponent(0.7), for: range)
-                } else {
-                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemGreen.withAlphaComponent(0.07), for: range)
+                // Graphite: a soft band under each sentence, red and heavier for a likely mistake.
+                let wrong = grammar.value == "yes"
+                layout.addRenderingAttribute(.underlineStyle, value: NSUnderlineStyle.thick.rawValue, for: range)
+                layout.addRenderingAttribute(.underlineColor,
+                    value: wrong ? NSColor.systemRed.withAlphaComponent(0.75) : NSColor.systemGreen.withAlphaComponent(0.3),
+                    for: range)
+                if wrong {
+                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.06), for: range)
                 }
             }
             text.refreshHover()

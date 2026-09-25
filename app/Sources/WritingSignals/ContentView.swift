@@ -11,8 +11,13 @@ struct ContentView: View {
         NavigationSplitView {
             List(selection: Binding(get: { model.selection }, set: { model.open($0) })) {
                 ForEach(model.store?.notes ?? []) { note in
-                    Label(note.title, systemImage: "doc.text")
-                        .tag(note)
+                    HStack {
+                        Text(note.title).lineLimit(1)
+                        Spacer()
+                        Text(note.modified, format: .relative(presentation: .named, unitsStyle: .narrow))
+                            .font(.caption).foregroundStyle(.tertiary).monospacedDigit()
+                    }
+                    .tag(note)
                         .contextMenu {
                             Button("Rename…") { newTitle = note.title; renaming = note }
                             Button("Delete…", role: .destructive) { confirmDelete = note }

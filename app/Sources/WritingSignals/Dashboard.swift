@@ -1,4 +1,3 @@
-import Charts
 import SwiftUI
 import WritingSignalsCore
 
@@ -18,8 +17,8 @@ struct Dashboard: View {
                         .padding(.top, 40)
                 } else {
                     grammar
-                    tile("Emotion mix") { donut(summary.emotion, colors: Palette.emotions) }
-                    tile("Tone") { bars(summary.tone, colors: Palette.tones) }
+                    tile("Emotion mix") { mix(summary.emotion, colors: Palette.emotions) }
+                    tile("Tone") { mix(summary.tone, colors: Palette.tones) }
                     tile("Voice") {
                         VStack(spacing: 14) {
                             ForEach(["confidence", "clarity", "formality"], id: \.self) { name in
@@ -39,7 +38,7 @@ struct Dashboard: View {
                     }
                 }
             }
-            .padding(16)
+            .padding(.horizontal, 18).padding(.vertical, 6)
             .animation(.smooth, value: summary)
         }
     }
@@ -67,13 +66,13 @@ struct Dashboard: View {
                     Text(correct, format: .percent.precision(.fractionLength(0))).font(.headline)
                 }
                 .gaugeStyle(.accessoryCircularCapacity)
-                .tint(Gradient(colors: [.red, .orange, .green]))
-                .scaleEffect(1.3)
-                .frame(width: 72, height: 72)
+                .tint(.green)
+                .scaleEffect(1.25)
+                .frame(width: 68, height: 68)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("sentences look correct").font(.subheadline)
+                    Text("\(summary.scoredSentences - Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())) of \(summary.scoredSentences) sentences look correct").font(.subheadline)
                     let wrong = Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())
-                    Text(wrong == 0 ? "No likely mistakes" : "\(wrong) likely \(wrong == 1 ? "mistake" : "mistakes") highlighted in red")
+                    Text(wrong == 0 ? "No likely mistakes" : "\(wrong) likely \(wrong == 1 ? "mistake" : "mistakes") underlined in red")
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
@@ -88,42 +87,30 @@ struct Dashboard: View {
         }
     }
 
-    private func donut(_ shares: [String: Double], colors: [String: Color]) -> some View {
+    /// Shares as one segmented bar with a legend underneath.
+    private func mix(_ shares: [String: Double], colors: [String: Color]) -> some View {
         let items = shares.sorted { $0.value > $1.value }
-        return HStack(spacing: 16) {
-            Chart(items, id: \.key) { label, share in
-                SectorMark(angle: .value("Share", share), innerRadius: .ratio(0.62), angularInset: 1.5)
-                    .cornerRadius(3)
-                    .foregroundStyle(colors[label] ?? .gray)
-            }
-            .frame(width: 110, height: 110)
-            VStack(alignment: .leading, spacing: 6) {
-                ForEach(items, id: \.key) { label, share in
-                    HStack(spacing: 6) {
-                        Circle().fill(colors[label] ?? .gray).frame(width: 8, height: 8)
-                        Text(label.capitalized).font(.caption)
-                        Spacer()
-                        Text(share, format: .percent.precision(.fractionLength(0)))
-                            .font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+        return VStack(alignment: .leading, spacing: 10) {
+            GeometryReader { geo in
+                HStack(spacing: 2) {
+                    ForEach(items, id: \.key) { label, share in
+                        Rectangle().fill(colors[label] ?? .gray)
+                            .frame(width: max(0, (geo.size.width - CGFloat(items.count - 1) * 2) * share))
                     }
                 }
             }
-        }
-    }
-
-    private func bars(_ shares: [String: Double], colors: [String: Color]) -> some View {
-        Chart(shares.sorted { $0.value > $1.value }, id: \.key) { label, share in
-            BarMark(x: .value("Share", share), y: .value("Tone", label.capitalized))
-                .foregroundStyle((colors[label] ?? .gray).gradient)
-                .cornerRadius(4)
-                .annotation(position: .trailing) {
-                    Text(share, format: .percent.precision(.fractionLength(0)))
-                        .font(.caption2.monospacedDigit()).foregroundStyle(.secondary)
+            .frame(height: 8)
+            .clipShape(Capsule())
+            HStack(spacing: 12) {
+                ForEach(items, id: \.key) { label, share in
+                    HStack(spacing: 5) {
+                        RoundedRectangle(cornerRadius: 2).fill(colors[label] ?? .gray).frame(width: 8, height: 8)
+                        Text("\(label.capitalized) \(Int((share * 100).rounded()))%")
+                    }
                 }
+            }
+            .font(.caption).foregroundStyle(.secondary)
         }
-        .chartXScale(domain: 0...1.15)
-        .chartXAxis(.hidden)
-        .frame(height: CGFloat(max(shares.count, 1)) * 30)
     }
 
     private func tile<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
@@ -131,8 +118,8 @@ struct Dashboard: View {
             Text(title.uppercased()).font(.caption2.weight(.semibold)).tracking(0.8).foregroundStyle(.secondary)
             content()
         }
-        .padding(14)
+        .padding(.vertical, 14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.background.secondary, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay(alignment: .bottom) { Divider() }
     }
 }
