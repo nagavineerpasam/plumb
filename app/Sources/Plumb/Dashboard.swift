@@ -79,6 +79,7 @@ struct Dashboard: View {
             }
         }
         if Palette.grammarReady { summary.grammarFlagged.forEach { add($0, .red, "Grammar mistake") } }
+        if Palette.senseReady { summary.senseFlagged.forEach { add($0, .red, "Doesn't make sense") } }
         summary.mechanics.forEach { add($0.sentence, .orange, $0.issue.message) }
         return groups
     }

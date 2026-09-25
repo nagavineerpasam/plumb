@@ -24,7 +24,7 @@ struct SentenceCard: View {
     }
 
     private func row(_ name: String, _ signal: Signal) -> some View {
-        let mistake = name == "grammar" && signal.value == "yes"
+        let mistake = (name == "grammar" || name == "sense") && signal.value == "yes"
         return HStack {
             Text(Palette.titles[name] ?? name).foregroundStyle(.secondary)
             Spacer()
@@ -47,6 +47,9 @@ struct SentenceCard: View {
             let p = signal.distribution["yes"] ?? 0
             let base = signal.value == "yes" ? "Likely a mistake" : "Looks correct"
             return (0.35...0.65).contains(p) ? "\(base) · unsure" : base
+        }
+        if name == "sense" {
+            return signal.value == "yes" ? "Doesn't read as correct English" : "Makes sense"
         }
         if let score = signal.score { return Palette.word(for: name, at: score) }
         let ranked = signal.distribution.sorted { $0.value > $1.value }

@@ -4,6 +4,8 @@ import sys
 
 import pytest
 
+from writing_signals import CATALOGUE_VERSION
+
 
 class Worker:
     """Drives the signal worker exactly as the app does: JSON lines over stdin/stdout."""
@@ -41,7 +43,7 @@ def worker():
 
 
 def test_announces_ready_with_catalogue_version(worker):
-    assert worker.next("ready")["catalogue_version"] == "1"
+    assert worker.next("ready")["catalogue_version"] == CATALOGUE_VERSION
 
 
 def test_scores_sentences_by_id(worker):

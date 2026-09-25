@@ -7,6 +7,7 @@ from typing import Any, Dict, List
 # Which labelled source each signal's bar is judged on, and the bar itself.
 BARS = {
     "grammar": ("cola", 0.75),
+    "sense": ("claude-draft", 0.75),
     "emotion": ("dair", 0.55),
     "tone": ("claude-draft", 0.70),
     "formality": ("claude-draft", 0.70),

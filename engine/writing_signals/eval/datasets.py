@@ -32,7 +32,15 @@ def load_dair() -> List[Example]:
              "expected": DAIR_TO_CATALOGUE[names[r["label"]]], "source": "dair"} for r in rows]
 
 
+SENSE_PATH = os.path.join(DATA_DIR, "sense_test_draft.jsonl")
+
+
 def load_drafted(path: str = DRAFT_PATH) -> List[Example]:
-    """The Claude-drafted English set (DRAFT until the developer reviews it)."""
-    with open(path, encoding="utf-8") as f:
-        return [json.loads(line) for line in f if line.strip()]
+    """The Claude-drafted English sets (DRAFT until the developer reviews them): the main set
+    plus the sense set once it exists."""
+    rows = []
+    for p in (path, SENSE_PATH) if path == DRAFT_PATH else (path,):
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as f:
+                rows += [json.loads(line) for line in f if line.strip()]
+    return rows

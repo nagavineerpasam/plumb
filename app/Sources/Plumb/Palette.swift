@@ -21,13 +21,16 @@ enum Palette {
     /// On since the fine-tuned model passed its bar (CoLA 0.789 vs 0.75; 25 of 30 everyday
     /// mistakes caught with no false alarms). The base model flagged 0 of 30.
     static let grammarReady = true
+    /// Off until a fine-tuned model passes the sense accuracy bar (tickets 15 and 17).
+    static let senseReady = false
 
     static var order: [String] {
-        (grammarReady ? ["grammar"] : []) + ["tone", "emotion", "confidence", "clarity", "formality"]
+        (grammarReady ? ["grammar"] : []) + (senseReady ? ["sense"] : [])
+            + ["tone", "emotion", "confidence", "clarity", "formality"]
     }
 
     static let titles = [
-        "grammar": "Grammar", "tone": "Tone", "emotion": "Emotion",
+        "grammar": "Grammar", "sense": "Sense", "tone": "Tone", "emotion": "Emotion",
         "confidence": "Confidence", "clarity": "Clarity", "formality": "Formality",
     ]
 
@@ -64,7 +67,7 @@ enum Palette {
         switch signal {
         case "emotion": emotions[value] ?? .gray
         case "tone": tones[value] ?? .gray
-        case "grammar": value == "yes" ? .red : .green
+        case "grammar", "sense": value == "yes" ? .red : .green
         default: .accentColor
         }
     }

@@ -4,12 +4,17 @@ The accuracy check, the fine-tuning data builder and the worker all read this mo
 so what we measure is exactly what the app shows. Bump CATALOGUE_VERSION on any change.
 """
 
-CATALOGUE_VERSION = "1"
+CATALOGUE_VERSION = "2"
 
 QUESTIONS = {
     "grammar": {
         "type": "noul",
         "instructions": "Does this sentence contain a grammatical mistake?",
+    },
+    # v2. "yes" means a problem, like grammar: broken phrasing, word salad, a meaningless ending.
+    "sense": {
+        "type": "noul",
+        "instructions": "Does this sentence fail to make sense as natural English, for example broken phrasing, word salad or a meaningless ending?",
     },
     "tone": {
         "type": "choice",

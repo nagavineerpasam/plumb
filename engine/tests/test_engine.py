@@ -40,3 +40,9 @@ def test_grammar_flags_broken_sentence_above_its_correction(engine):
         broken["signals"]["grammar"]["distribution"]["yes"]
         > fixed["signals"]["grammar"]["distribution"]["yes"]
     )
+
+
+def test_every_sentence_gets_a_sense_verdict(engine):
+    result = engine.score(["I love cats and I hate dogs because of okay."])[0]
+
+    assert set(result["signals"]["sense"]["distribution"]) == {"yes", "no"}

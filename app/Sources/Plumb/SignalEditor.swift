@@ -101,6 +101,10 @@ struct SignalEditor: NSViewRepresentable {
                     // Still being checked: no mark (hovering shows "Analysing…"), and never the old colour.
                     continue
                 }
+                if Palette.senseReady, signals.signals["sense"]?.value == "yes" {
+                    // Doesn't make sense: a soft red wash over the whole sentence.
+                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.12), for: range)
+                }
                 guard Palette.grammarReady, let grammar = signals.signals["grammar"] else { continue }
                 // Graphite: a soft band under each sentence, red and heavier for a likely mistake.
                 let wrong = grammar.value == "yes"

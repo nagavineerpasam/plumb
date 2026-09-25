@@ -21,6 +21,8 @@ public struct NoteSummary: Sendable, Equatable {
     public var mechanicsIssues: Int { mechanics.count }
     /// Sentences the grammar signal marks as likely containing a mistake.
     public var grammarFlagged: [String] = []
+    /// Sentences the sense signal marks as not making sense as natural English.
+    public var senseFlagged: [String] = []
     /// How well the note is written, 0...1: each sentence starts at 100%, loses the likelihood of a
     /// grammar mistake when one is judged likely, and 10 points per spelling or punctuation slip;
     /// the note is the average.
@@ -29,6 +31,7 @@ public struct NoteSummary: Sendable, Equatable {
     init(_ sentences: [AnalyzedSentence]) {
         mechanics = sentences.flatMap { s in (s.mechanics ?? []).map { MechanicsFinding(sentence: s.text, issue: $0) } }
         grammarFlagged = sentences.filter { $0.signals?.signals["grammar"]?.value == "yes" }.map(\.text)
+        senseFlagged = sentences.filter { $0.signals?.signals["sense"]?.value == "yes" }.map(\.text)
         let judged = sentences.compactMap { s -> Double? in
             guard let p = s.signals?.signals["grammar"]?.distribution["yes"] else { return nil }
             // Only a judged mistake (p >= 0.5) costs points: the trained model puts correct

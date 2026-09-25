@@ -243,4 +243,18 @@ final class NoteAnalyzerTests: XCTestCase {
 
         XCTAssertEqual(analyzer.summary.correctness, 1)
     }
+
+    func testSummaryListsSentencesThatDontMakeSense() async {
+        let client = FakeSignalClient()
+        client.script = [
+            "I love cats because of okay.": ["sense": Signal(value: "yes", distribution: ["yes": 0.8, "no": 0.2])],
+            "I love cats.": ["sense": Signal(value: "no", distribution: ["yes": 0.1, "no": 0.9])],
+        ]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "I love cats. I love cats because of okay.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.summary.senseFlagged, ["I love cats because of okay."])
+    }
 }
