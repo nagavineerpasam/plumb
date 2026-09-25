@@ -1,5 +1,5 @@
 #!/bin/bash
-# Builds Plumb.app (with its own Python and the signal engine inside) and Plumb.dmg.
+# Builds Plumb.app (with its own Python and the signal engine inside), Plumb.dmg and its SHA-256.
 # Usage: app/scripts/build-release.sh [version]     Output: dist/
 set -euo pipefail
 
@@ -71,5 +71,7 @@ DMG="$DIST/Plumb.dmg"   # fixed name: the README links to releases/latest/downlo
 rm -f "$DMG"
 hdiutil create -quiet -volname "Plumb" -srcfolder "$STAGE" -ov -format UDZO "$DMG"
 rm -rf "$STAGE"
+# The installer refuses a download that doesn't match this fingerprint.
+(cd "$DIST" && shasum -a 256 Plumb.dmg > Plumb.dmg.sha256)
 
 echo "✓ $(du -sh "$APP" | cut -f1) app, $(du -sh "$DMG" | cut -f1) disk image: $DMG"

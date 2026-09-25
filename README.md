@@ -8,10 +8,13 @@
 A private AI English coach for your Mac: talk or type, and Plumb catches your mistakes live, on your Mac.<br>
 Free and open source, forever. · <a href="https://plumbapp.vercel.app">plumbapp.vercel.app</a></p>
 
-<p align="center">
-  <a href="https://github.com/nagavineerpasam/plumb/releases/latest/download/Plumb.dmg"><b>⬇&nbsp;&nbsp;Download Plumb for Mac</b></a><br>
-  <sub>Apple Silicon (M1 or newer) · macOS 14 or newer · free</sub>
-</p>
+<p align="center"><b>Install:</b> paste this into Terminal and press Return</p>
+
+```bash
+curl -fsSL https://plumbapp.vercel.app/install.sh | bash
+```
+
+<p align="center"><sub>Apple Silicon (M1 or newer) · macOS 14 or newer · free · <a href="install.sh">read the script</a> · or <a href="https://github.com/nagavineerpasam/plumb/releases/latest/download/Plumb.dmg">download the .dmg</a></sub></p>
 
 <p align="center">
   <picture>
@@ -113,7 +116,7 @@ python3.12 -m venv .venv && .venv/bin/pip install -e "engine[test]"   # the sign
 cd app && swift run                                                   # the app (uses the venv above)
 ```
 
-- **Release build:** `app/scripts/build-release.sh 0.1.0` builds `dist/Plumb.dmg` (the app itself is assembled in `dist/app.noindex/`, hidden from Spotlight) with Python and the engine inside.
+- **Release build:** `app/scripts/build-release.sh 0.1.0` builds `dist/Plumb.dmg` and `dist/Plumb.dmg.sha256` (upload both; the installer checks the fingerprint) (the app itself is assembled in `dist/app.noindex/`, hidden from Spotlight) with Python and the engine inside.
 - **Tests:** `swift test` in `app/`, and `pytest` in `engine/`.
 - **Retraining:** the model is fine-tuned on Kaggle with `engine/notebooks/writing_signals_finetune_kaggle.ipynb`.
 
