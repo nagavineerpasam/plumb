@@ -17,7 +17,7 @@ from .engine import TRAINED_DIR
 
 # Plumb's fine-tuned model, attached to the latest GitHub release. Overridable for testing.
 MODEL_URL = os.environ.get(
-    "PLUMB_MODEL_URL", "https://github.com/nagavineerpasam/plumb/releases/latest/download/plumb-model.zip")
+    "PLUMB_MODEL_URL", "https://github.com/nagavineerpasam/plumb-releases/releases/latest/download/plumb-model.zip")
 MODEL_DIR = TRAINED_DIR
 
 

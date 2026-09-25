@@ -11,7 +11,7 @@ Grammar, sense, spelling, tone and confidence, live as you type or speak. Nothin
 
 ## Install (Apple Silicon Mac, macOS 14 or newer)
 
-1. **Download** `Plumb-0.1.0-arm64.dmg` from the [latest release](https://github.com/nagavineerpasam/plumb/releases/latest).
+1. **Download** `Plumb-0.1.0-arm64.dmg` from the [latest release](https://github.com/nagavineerpasam/plumb-releases/releases/latest).
 2. **Open** the downloaded file and **drag Plumb onto Applications**.
 3. **Open Plumb** from Applications. The first time, macOS stops it because it isn't from the App Store:
    - click **Done** on the warning,
@@ -68,7 +68,7 @@ Real-world accuracy is lower than these numbers, especially for Sense. Plumb is 
 ## Build from source
 
 ```bash
-git clone https://github.com/nagavineerpasam/plumb.git && cd plumb
+git clone https://github.com/nagavineerpasam/plumb.git && cd plumb      # private: needs access
 python3.12 -m venv .venv && .venv/bin/pip install -e "engine[test]"   # the signal engine
 cd app && swift run                                                   # the app (uses the venv above)
 ```
