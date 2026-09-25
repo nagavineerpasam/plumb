@@ -26,6 +26,17 @@ final class ProgressStoreTests: XCTestCase {
         XCTAssertEqual(reopened.points(since: .distantPast).map(\.note), [note("a"), note("b")])
     }
 
+    func testPreviousScoreIsTheLatestOtherChat() throws {
+        let store = ProgressStore(file: file)
+        try store.record(note("old"), correctness: 0.4, at: now.addingTimeInterval(-2 * day))
+        try store.record(note("last"), correctness: 0.6, at: now.addingTimeInterval(-day))
+        try store.record(note("current"), correctness: 0.9, at: now)
+
+        XCTAssertEqual(store.previousScore(excluding: note("current")), 0.6)
+        XCTAssertEqual(store.previousScore(excluding: note("last")), 0.9, "reopening an older chat compares with the latest other one")
+        XCTAssertNil(ProgressStore(file: file.appendingPathExtension("empty")).previousScore(excluding: note("current")))
+    }
+
     func testRenameKeepsTheScoreAndDeleteRemovesIt() throws {
         let store = ProgressStore(file: file)
         try store.record(note("draft"), correctness: 0.8, at: now)

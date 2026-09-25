@@ -27,7 +27,7 @@ struct PlumbApp: App {
         .windowStyle(.hiddenTitleBar)
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button("New Note") { model.newNote() }.keyboardShortcut("n")
+                Button("New Chat") { model.newNote() }.keyboardShortcut("n")
             }
         }
 
@@ -163,8 +163,42 @@ final class AppModel {
         return score >= 0.85 ? .clean : score >= 0.6 ? .mechanics : .attention
     }
 
+    /// The friendly line at the bottom of a scored chat ("You scored 72 🎉 Up from 60 last time."),
+    /// shown a few seconds after the user stops typing or talking; nil while hidden.
+    private(set) var nudge: String?
+    private var nudgeTask: Task<Void, Never>?
+    /// Chats worked on this session (only these get the nudge) and those where it was closed.
+    private var workedOn: Set<URL> = []
+    private var nudgeClosed: Set<URL> = []
+
+    /// Hides the nudge while things change, and shows it again after a quiet moment.
+    private func settleNudge() {
+        nudge = nil
+        nudgeTask?.cancel()
+        nudgeTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(3))
+            guard let self, !Task.isCancelled else { return }
+            self.nudge = self.currentNudge()
+        }
+    }
+
+    private func currentNudge() -> String? {
+        guard let note = selection, workedOn.contains(note.url), !nudgeClosed.contains(note.url),
+              !dictation.isListening, !analyzer.sentences.isEmpty,
+              analyzer.sentences.allSatisfy({ $0.signals != nil }),
+              let score = analyzer.summary.correctness else { return nil }
+        return ScoreNudge.message(score: score, previous: progress.previousScore(excluding: note.url))
+    }
+
+    /// The ✕ on the nudge: hide it for this chat.
+    func closeNudge() {
+        if let url = selection?.url { nudgeClosed.insert(url) }
+        nudge = nil
+    }
+
     /// Remembers the open note's state for its sidebar dot.
     func record(_ summary: NoteSummary) {
+        defer { settleNudge() }
         guard let url = selection?.url else { return }
         let grammar = Palette.grammarReady && !summary.grammarFlagged.isEmpty
         statuses[url] = grammar ? .attention
@@ -209,12 +243,15 @@ final class AppModel {
         flush()
         selection = note
         openedText = (try? note.map { try store?.text(of: $0) ?? "" }) ?? ""
+        settleNudge()
     }
 
     func edited(_ text: String) {
         guard let note = selection else { return }
         lastEdit = Date()
         unsaved = (note, text)
+        workedOn.insert(note.url)
+        settleNudge()
         saveTask?.cancel()
         saveTask = Task {
             try? await Task.sleep(for: .milliseconds(600))

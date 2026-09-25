@@ -31,7 +31,7 @@ struct Dashboard: View {
                             .font(.body).foregroundStyle(.secondary)
                     }
                 } else {
-                    tile("Correctness", busy: pending > 0) { correctness }
+                    tile("Score", busy: pending > 0) { correctness }
                     tile("Needs a look") { issues }
                     if Palette.flowReady {
                         Button {
@@ -67,7 +67,7 @@ struct Dashboard: View {
         } else {
             let score = shown.correctness
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(score.map { "\(Int(($0 * 100).rounded()))%" } ?? "–")
+                Text(score.map { "\(Int(($0 * 100).rounded()))" } ?? "–")
                     .font(.system(size: 34, weight: .semibold)).monospacedDigit()
                     .contentTransition(.numericText(value: score ?? 0))
                     .foregroundStyle(score.map(Palette.band) ?? .secondary)
@@ -100,7 +100,7 @@ struct Dashboard: View {
                 groups.append((sentence, [(color, text)]))
             }
         }
-        if Palette.grammarReady { shown.grammarFlagged.forEach { add($0, .red, "Grammar mistake") } }
+        if Palette.grammarReady { shown.grammarFlagged.forEach { add($0, .red, Explanations.short(for: $0)) } }
         if Palette.senseReady { shown.senseFlagged.forEach { add($0, .red, "Doesn't make sense") } }
         if Palette.flowReady { shown.flowFlagged.forEach { add($0, .red, "Doesn't follow on") } }
         shown.mechanics.forEach { add($0.sentence, .orange, $0.issue.message) }

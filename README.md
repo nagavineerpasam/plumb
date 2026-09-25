@@ -14,7 +14,7 @@ Free and open source, forever. · <a href="https://plumbapp.vercel.app">plumbapp
 curl -fsSL https://plumbapp.vercel.app/install.sh | bash
 ```
 
-<p align="center"><sub>Apple Silicon (M1 or newer) · macOS 14 or newer · free · <a href="install.sh">read the script</a> · or <a href="https://github.com/nagavineerpasam/plumb/releases/latest/download/Plumb.dmg">download the .dmg</a></sub></p>
+<p align="center"><sub>Apple Silicon (M1 or newer) · macOS 14 or newer · free · <a href="install.sh">read the script</a></sub></p>
 
 <p align="center">
   <picture>
@@ -59,21 +59,15 @@ Hover any sentence for its Correctness and voice:
 
 ## Install
 
-1. **[Download Plumb.dmg](https://github.com/nagavineerpasam/plumb/releases/latest/download/Plumb.dmg)**, open it, and **drag Plumb onto Applications**.
-2. **Open Plumb.** The first time, macOS stops it because it isn't from the App Store:
-   - click **Done** on the warning,
-   - open **System Settings → Privacy & Security**,
-   - scroll down to *"Plumb" was blocked* and click **Open Anyway**, then **Open**.
-
-   You only do this once. (Plumb isn't signed with a paid Apple developer certificate yet.)
-
-**Comfortable with Terminal?** Install (or update) with one command instead. It skips the macOS warning, because apps fetched with `curl` aren't marked as downloaded from the internet:
+Open **Terminal**, paste this and press Return:
 
 ```bash
 curl -fsSL https://plumbapp.vercel.app/install.sh | bash
 ```
 
-The script ([`install.sh`](install.sh)) checks your Mac, downloads the latest `Plumb.dmg` from the releases page, copies Plumb into Applications and opens it. Your notes are left untouched.
+That's it: Plumb opens when it's done. Run the same command later to update.
+
+The script ([`install.sh`](install.sh)) is short and safe to read first. It checks your Mac, downloads Plumb from this repo's releases, refuses the download unless it matches its published fingerprint, copies Plumb into Applications and opens it. It needs no password and changes no macOS security settings. Your notes are left untouched. Nothing else needs to be installed first, not even on a brand-new Mac.
 
 On first launch Plumb downloads its writing model (about 800 MB) once, with a progress bar. The first time you click **Speak**, it also downloads its voice model (about 130 MB). After that it works completely offline.
 
@@ -116,7 +110,7 @@ python3.12 -m venv .venv && .venv/bin/pip install -e "engine[test]"   # the sign
 cd app && swift run                                                   # the app (uses the venv above)
 ```
 
-- **Release build:** `app/scripts/build-release.sh 0.1.0` builds `dist/Plumb.dmg` and `dist/Plumb.dmg.sha256` (upload both; the installer checks the fingerprint) (the app itself is assembled in `dist/app.noindex/`, hidden from Spotlight) with Python and the engine inside.
+- **Release build:** `app/scripts/build-release.sh 0.1.0` builds the release disk image and its SHA-256 fingerprint in `dist/` (upload both; the installer checks the fingerprint), with Python and the engine inside the app.
 - **Tests:** `swift test` in `app/`, and `pytest` in `engine/`.
 - **Retraining:** the model is fine-tuned on Kaggle with `engine/notebooks/writing_signals_finetune_kaggle.ipynb`.
 

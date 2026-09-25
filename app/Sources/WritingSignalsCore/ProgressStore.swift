@@ -48,6 +48,11 @@ public final class ProgressStore: @unchecked Sendable {
         lock.withLock { byNote[note] != nil }
     }
 
+    /// The score of the most recently edited chat other than `note`, to compare against.
+    public func previousScore(excluding note: URL) -> Double? {
+        lock.withLock { byNote.values.filter { $0.note != note }.max { $0.date < $1.date }?.correctness }
+    }
+
     /// Points edited on or after `start`, oldest first.
     public func points(since start: Date) -> [Point] {
         lock.withLock { byNote.values.filter { $0.date >= start }.sorted { $0.date < $1.date } }

@@ -53,10 +53,10 @@ struct ProgressPage: View {
                 Text("Progress").font(.system(size: 24, weight: .semibold))
                 if let average = week.average {
                     HStack(alignment: .firstTextBaseline, spacing: 10) {
-                        Text("\(Int((average * 100).rounded()))%")
+                        Text("\(Int((average * 100).rounded()))")
                             .font(.system(size: 34, weight: .semibold)).monospacedDigit()
                             .foregroundStyle(Palette.band(average))
-                        Text("average this week").foregroundStyle(.secondary)
+                        Text("average score this week").foregroundStyle(.secondary)
                         if let change = week.change {
                             let points = Int((change * 100).rounded())
                             Label("\(points >= 0 ? "+" : "−")\(abs(points)) pts vs last week",
@@ -82,15 +82,15 @@ struct ProgressPage: View {
     private var chart: some View {
         Chart {
             ForEach(points, id: \.note) { point in
-                AreaMark(x: .value("Edited", point.date), y: .value("Correctness", point.correctness))
+                AreaMark(x: .value("Edited", point.date), y: .value("Score", point.correctness))
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(LinearGradient(colors: [Color.accentColor.opacity(0.22), Color.accentColor.opacity(0)],
                                                     startPoint: .top, endPoint: .bottom))
-                LineMark(x: .value("Edited", point.date), y: .value("Correctness", point.correctness))
+                LineMark(x: .value("Edited", point.date), y: .value("Score", point.correctness))
                     .interpolationMethod(.catmullRom)
                     .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round))
                     .foregroundStyle(Color.accentColor)
-                PointMark(x: .value("Edited", point.date), y: .value("Correctness", point.correctness))
+                PointMark(x: .value("Edited", point.date), y: .value("Score", point.correctness))
                     .symbolSize(hovered == point ? 140 : 60)
                     .foregroundStyle(Palette.band(point.correctness))
             }
@@ -104,7 +104,7 @@ struct ProgressPage: View {
                             Text(title(hovered)).font(.callout.weight(.semibold))
                             Text(hovered.date, format: .dateTime.day().month().hour().minute())
                                 .font(.caption).foregroundStyle(.secondary)
-                            Text("\(Int((hovered.correctness * 100).rounded()))% correct")
+                            Text("Score \(Int((hovered.correctness * 100).rounded()))")
                                 .font(.callout.weight(.medium)).foregroundStyle(Palette.band(hovered.correctness))
                         }
                         .padding(10)
@@ -117,7 +117,7 @@ struct ProgressPage: View {
         .chartYAxis {
             AxisMarks(values: [0, 0.25, 0.5, 0.75, 1]) { value in
                 AxisGridLine().foregroundStyle(.quaternary)
-                AxisValueLabel { if let v = value.as(Double.self) { Text("\(Int(v * 100))%") } }
+                AxisValueLabel { if let v = value.as(Double.self) { Text("\(Int(v * 100))") } }
             }
         }
         .chartXAxis { AxisMarks { _ in AxisGridLine().foregroundStyle(.clear); AxisValueLabel() } }

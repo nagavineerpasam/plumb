@@ -58,7 +58,8 @@ main() {
 
   step "Opening Plumb"
   open "$APP"
-  printf '\nPlumb is installed. The first launch downloads its writing model once (about 800 MB).\n'
+  printf '\n🎉 Plumb is installed! Start speaking.\n'
+  printf 'The first launch downloads its writing model once (about 800 MB).\n'
 }
 
 main "$@"

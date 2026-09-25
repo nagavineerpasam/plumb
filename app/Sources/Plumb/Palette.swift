@@ -17,6 +17,9 @@ enum Palette {
     /// "Soft": a light grey canvas with white rounded cards (dark: charcoal on near-black).
     static let canvas = adaptive(light: 0xf6f7f9, dark: 0x191b20)
     static let card = adaptive(light: 0xffffff, dark: 0x23262c)
+    /// The website's warm sunrise orange, for the friendly score bar and its button.
+    static let sunrise = adaptive(light: 0xe8743b, dark: 0xf08a55)
+    static let sunriseWash = adaptive(light: 0xfdeee3, dark: 0x3a2b22)
 
     /// On since the fine-tuned model passed its bar (CoLA 0.789 vs 0.75; 25 of 30 everyday
     /// mistakes caught with no false alarms). The base model flagged 0 of 30.

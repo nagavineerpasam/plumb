@@ -7,7 +7,6 @@ struct ContentView: View {
     @Bindable var model: AppModel
     @State private var showSettings = false
     @State private var confirmDelete: Note?
-    @State private var renaming: Note?
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -45,17 +44,14 @@ struct ContentView: View {
 
     private var sidebar: some View {
         VStack(alignment: .leading, spacing: 2) {
-            sidebarButton("New note", systemImage: "plus") { model.newNote() }
+            sidebarButton("New chat", systemImage: "plus") { model.newNote() }
                 .padding(.bottom, 8)
             ScrollView {
                 VStack(alignment: .leading, spacing: 2) {
                     ForEach(model.store?.notes ?? []) { note in
                         NoteRow(note: note, status: model.status(of: note), isSelected: note == model.selection,
-                                isRenaming: Binding(get: { renaming == note }, set: { renaming = $0 ? note : nil }),
-                                open: { model.open(note) },
-                                rename: { model.rename(note, to: $0) })
+                                open: { model.open(note) })
                             .contextMenu {
-                                Button("Rename") { renaming = note }
                                 Button("Delete…", role: .destructive) { confirmDelete = note }
                             }
                     }
@@ -89,9 +85,9 @@ struct ContentView: View {
         ZStack {
             if model.selection == nil {
                 ContentUnavailableView {
-                    Label("No note open", systemImage: "note.text")
+                    Label("No chat open", systemImage: "bubble.left.and.text.bubble.right")
                 } actions: {
-                    Button("New note") { model.newNote() }.buttonStyle(.borderedProminent)
+                    Button("New chat") { model.newNote() }.buttonStyle(.borderedProminent)
                 }
             }
             VStack(alignment: .leading, spacing: 0) {
@@ -137,6 +133,14 @@ struct ContentView: View {
             .allowsHitTesting(false)
             .animation(.smooth, value: model.dictation.heardSomething)
         }
+        .overlay(alignment: .bottom) {
+            if let nudge = model.nudge, !model.dictation.isListening {
+                ScoreNudgeBar(message: nudge, newChat: { model.newNote() }, close: { model.closeNudge() })
+                    .padding(.horizontal, 28).padding(.bottom, 22)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .animation(.spring(duration: 0.45, bounce: 0.2), value: model.nudge)
         .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
     }
@@ -147,7 +151,7 @@ struct ContentView: View {
                 .font(.callout.weight(.medium)).foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 12).padding(.vertical, 8)
-                .background(Palette.card.opacity(0.7), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .background(Palette.card.opacity(0.7), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -156,33 +160,18 @@ struct ContentView: View {
     }
 }
 
-/// A note in the sidebar: status dot, title, when it was last changed. The open note sits on a
-/// white pill. Click the open note's title (or double-click any note) to rename it in place.
+/// A chat in the sidebar: status dot, title, when it was last changed. The open one sits on a
+/// white pill. A click just opens it; renaming happens in the chat's own title.
 struct NoteRow: View {
     let note: Note
     let status: NoteStatus
     let isSelected: Bool
-    @Binding var isRenaming: Bool
     let open: () -> Void
-    let rename: (String) -> Void
-
-    @State private var draft = ""
-    @FocusState private var focused: Bool
 
     var body: some View {
         HStack(spacing: 10) {
             Circle().fill(status.color).frame(width: 8, height: 8)
-            if isRenaming {
-                TextField("Title", text: $draft)
-                    .textFieldStyle(.plain)
-                    .focused($focused)
-                    .onSubmit(commit)
-                    .onExitCommand { isRenaming = false }
-                    .onChange(of: focused) { _, now in if !now { commit() } }
-                    .onAppear { draft = note.title; focused = true }
-            } else {
-                Text(note.title).lineLimit(1)
-            }
+            Text(note.title).lineLimit(1)
             Spacer()
             Text(note.modified, format: .relative(presentation: .named, unitsStyle: .narrow))
                 .font(.caption).foregroundStyle(.tertiary).monospacedDigit()
@@ -191,21 +180,13 @@ struct NoteRow: View {
         .padding(.horizontal, 12).padding(.vertical, 9)
         .background {
             if isSelected {
-                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Palette.card)
+                RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Palette.card)
                     .shadow(color: .black.opacity(0.06), radius: 1, y: 1)
             }
         }
         .contentShape(Rectangle())
         .pointingHand()
-        .onTapGesture(count: 2) { open(); isRenaming = true }
-        .onTapGesture { isSelected ? (isRenaming = true) : open() }
-    }
-
-    private func commit() {
-        guard isRenaming else { return }
-        isRenaming = false
-        let title = draft.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !title.isEmpty, title != note.title { rename(title) }
+        .onTapGesture(perform: open)
     }
 }
 
@@ -350,5 +331,49 @@ struct VoiceSetupBar: View {
         }
         .padding(.horizontal, 16).padding(.vertical, 12)
         .background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+}
+
+/// A rounded bar floating at the bottom of a scored chat, in the website's warm sunrise colours:
+/// how you did compared with last time, and a cute button to go again.
+struct ScoreNudgeBar: View {
+    let message: String
+    let newChat: () -> Void
+    let close: () -> Void
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "sparkles")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(Palette.sunrise)
+            Text(message)
+                .font(.system(size: 14, weight: .medium))
+                .lineLimit(2)
+            Spacer(minLength: 8)
+            Button(action: newChat) {
+                Label("New chat", systemImage: "plus")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 14).padding(.vertical, 7)
+                    .background(Palette.sunrise, in: Capsule())
+                    .shadow(color: Palette.sunrise.opacity(0.35), radius: 6, y: 3)
+            }
+            .buttonStyle(.plain)
+            .pointingHand()
+            Button(action: close) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 10, weight: .bold))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 24, height: 24)
+                    .background(.primary.opacity(0.06), in: Circle())
+            }
+            .buttonStyle(.plain)
+            .pointingHand()
+            .help("Hide for this chat")
+        }
+        .padding(.leading, 18).padding(.trailing, 10).padding(.vertical, 10)
+        .background(Palette.sunriseWash, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous).strokeBorder(Palette.sunrise.opacity(0.28)))
+        .shadow(color: .black.opacity(0.08), radius: 16, y: 6)
     }
 }

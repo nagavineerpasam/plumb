@@ -13,6 +13,11 @@ struct SentenceCard: View {
                 Label("Plumb wasn't sure it heard “\(unsureWord)”. Try saying it more clearly.", systemImage: "waveform")
                     .font(.callout).foregroundStyle(.secondary)
             }
+            if Palette.grammarReady, sentence.signals?.signals["grammar"]?.value == "yes" {
+                Label(Explanations.grammar(for: sentence.text), systemImage: "exclamationmark.circle.fill")
+                    .font(.callout).foregroundStyle(.red)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             ForEach(Array((sentence.mechanics ?? []).enumerated()), id: \.offset) { _, issue in
                 Label(issue.message, systemImage: "exclamationmark.circle")
                     .font(.callout).foregroundStyle(.orange)
@@ -24,9 +29,9 @@ struct SentenceCard: View {
             if let signals = sentence.signals?.signals {
                 if Palette.grammarReady, let score = sentence.correctness {
                     HStack {
-                        Text("Correctness").foregroundStyle(.secondary)
+                        Text("Score").foregroundStyle(.secondary)
                         Spacer()
-                        Text("\(Int((score * 100).rounded()))%")
+                        Text("\(Int((score * 100).rounded()))")
                             .fontWeight(.semibold).monospacedDigit()
                             .foregroundStyle(Palette.band(score))
                     }
@@ -102,5 +107,36 @@ struct ScaleBar: View {
             }
             .font(.caption2).foregroundStyle(.tertiary)
         }
+    }
+}
+
+/// What to tell the learner about a grammar mistake Laya found: the word and a fix when macOS's
+/// grammar checker can place it, otherwise a gentle hint. Cached per sentence text.
+@MainActor
+enum Explanations {
+    private static var cache: [String: GrammarDetail?] = [:]
+
+    static func detail(for sentence: String) -> GrammarDetail? {
+        if let known = cache[sentence] { return known }
+        let found = GrammarExplainer.explain(sentence)
+        if cache.count > 500 { cache.removeAll() }
+        cache[sentence] = found
+        return found
+    }
+
+    /// The card's line, e.g. “is” doesn’t agree with the rest of the sentence. Try “are”.
+    static func grammar(for sentence: String) -> String {
+        guard let detail = detail(for: sentence) else {
+            return "Something in this sentence isn’t quite right. Try reading it aloud, and check the verb forms and word order."
+        }
+        guard let fix = detail.fixes.first else { return detail.message }
+        return detail.message + " Try “\(fix)”."
+    }
+
+    /// The short version for the "Needs a look" list.
+    static func short(for sentence: String) -> String {
+        guard let detail = detail(for: sentence) else { return "Grammar mistake" }
+        let word = (sentence as NSString).substring(with: detail.range)
+        return detail.fixes.first.map { "“\(word)” → “\($0)”" } ?? "Check “\(word)”"
     }
 }
