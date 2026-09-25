@@ -6,7 +6,7 @@ set -euo pipefail
 VERSION="${1:-0.1.0}"
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DIST="$ROOT/dist"
-APP="$DIST/Plumb.app"
+APP="$DIST/app.noindex/Plumb.app"  # Spotlight skips .noindex folders, so this copy never shows up as a second Plumb
 CACHE="$DIST/cache"
 PYTHON_URL="https://github.com/astral-sh/python-build-standalone/releases/download/20260924/cpython-3.12.14%2B20260924-aarch64-apple-darwin-install_only.tar.gz"
 
@@ -14,7 +14,7 @@ echo "▸ Building the app (release)"
 swift build -c release --package-path "$ROOT/app" --arch arm64
 
 echo "▸ Assembling Plumb.app"
-rm -rf "$APP"
+rm -rf "$APP" "$DIST/Plumb.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$CACHE"
 BIN="$(swift build -c release --package-path "$ROOT/app" --arch arm64 --show-bin-path)"
 cp "$BIN/Plumb" "$APP/Contents/MacOS/Plumb"
@@ -63,7 +63,7 @@ codesign --force --deep --sign - "$APP"
 codesign --verify --deep "$APP"
 
 echo "▸ Making the disk image"
-STAGE="$DIST/dmg"
+STAGE="$DIST/dmg.noindex"
 rm -rf "$STAGE" && mkdir -p "$STAGE"
 cp -R "$APP" "$STAGE/"
 ln -s /Applications "$STAGE/Applications"

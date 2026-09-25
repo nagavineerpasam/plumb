@@ -105,7 +105,7 @@ python3.12 -m venv .venv && .venv/bin/pip install -e "engine[test]"   # the sign
 cd app && swift run                                                   # the app (uses the venv above)
 ```
 
-- **Release build:** `app/scripts/build-release.sh 0.1.0` builds `dist/Plumb.app` and `dist/Plumb.dmg` with Python and the engine inside.
+- **Release build:** `app/scripts/build-release.sh 0.1.0` builds `dist/Plumb.dmg` (the app itself is assembled in `dist/app.noindex/`, hidden from Spotlight) with Python and the engine inside.
 - **Tests:** `swift test` in `app/`, and `pytest` in `engine/`.
 - **Retraining:** the model is fine-tuned on Kaggle with `engine/notebooks/writing_signals_finetune_kaggle.ipynb`.
 
