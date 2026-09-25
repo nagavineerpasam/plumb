@@ -203,6 +203,15 @@ final class SignalTextView: NSTextView {
     private var lastPoint: NSPoint?
     private var closeTimer: Timer?
 
+    /// The generous line spacing makes AppKit draw the cursor as tall as the whole line; draw it
+    /// at the text's own height instead, sitting on the baseline.
+    override func drawInsertionPoint(in rect: NSRect, color: NSColor, turnedOn flag: Bool) {
+        let font = self.font ?? .systemFont(ofSize: 17)
+        let height = min(rect.height, ceil(font.ascender - font.descender) + 2)
+        let caret = NSRect(x: rect.minX, y: rect.maxY - height - 1, width: 2, height: height)
+        super.drawInsertionPoint(in: caret, color: color, turnedOn: flag)
+    }
+
     /// Take the cursor as soon as the editor is on screen, so typing works without a click.
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
