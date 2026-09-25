@@ -1,0 +1,800 @@
+{"sentence": "She go to the office every morning.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "They was waiting for the bus.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He don't know the answer.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I has finished my homework.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We goed to the park yesterday.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The children is playing outside.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She can sings very well.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "There is many problems with this plan.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I am agree with you.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He have two brother.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She goes to the office every morning.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "They were waiting for the bus.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "He doesn't know the answer.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I have finished my homework.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "We went to the park yesterday.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "The children are playing outside.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "She can sing very well.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "There are many problems with this plan.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I agree with you.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "He has two brothers.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "We hereby acknowledge receipt of your application dated 3 March.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Please be advised that the meeting has been rescheduled to Thursday.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The committee respectfully requests that all submissions be received by noon.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Kindly find attached the documents pertaining to the aforementioned contract.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "We regret to inform you that your request cannot be accommodated at this time.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Attendance at the annual general meeting is mandatory for all board members.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "I would be grateful if you could confirm your availability at your earliest convenience.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The undersigned certifies that the information provided is accurate and complete.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Your account will be reviewed in accordance with the applicable regulations.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Should you require further information, please do not hesitate to contact our office.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The train leaves at 8:15 from platform four.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The report has twelve pages and three appendices.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Water boils at one hundred degrees Celsius at sea level.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store is open from nine to six on weekdays.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The new software update changes the layout of the settings menu.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Most of the participants finished the survey within ten minutes.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The library moved to the second floor last year.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The package weighs about two kilograms.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Prices for the tickets start at twenty euros.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The meeting covered the budget and the hiring plan.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "lol yeah I totally forgot about that, my bad.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Gonna grab some food, wanna come?", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Nah, the movie was kinda meh tbh.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Dude, that party last night was wild.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Can't make it today, catch you later.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Yep, just crashed on the couch all weekend.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Ugh, Mondays, am I right?", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Hit me up when you're free, no rush.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "The game was sick, you shoulda been there.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Whatever works for you, I'm easy.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "I hope you have a wonderful birthday, you truly deserve it!", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "It was so lovely to see you again, let's not wait so long next time.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thank you so much for your help, it really made my day.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Take care of yourself and give my best to your family.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "I'm always here if you need someone to talk to.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Welcome to the team, we're really happy to have you with us!", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Your cake was delicious, you have to share the recipe with me.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Wishing you lots of luck with the new job, you'll do great.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Feel free to drop by anytime, the door is always open for you.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Congratulations on the baby, I'm so happy for you both!", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "hey, u around later?", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "gotta run, talk soon!", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "nope, not gonna happen lol.", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "that's super cool, thx!", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "kinda tired, might skip the gym.", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "yo, where'd you put my charger?", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "oops, wrong chat haha.", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "sounds good, see ya!", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "wanna swap shifts tmrw?", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "omg that's hilarious.", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "I will send you the file this afternoon.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The meeting starts at ten.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Could you check the numbers again?", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We need more chairs for the event.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The shop closes early on Sundays.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I read the article you mentioned.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bus was late this morning.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Please close the window when you leave.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We finished the first draft yesterday.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The printer on the third floor is broken.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I would be most grateful for your prompt consideration of this matter.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "We cordially invite you to attend the award ceremony.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Please accept our sincere apologies for any inconvenience caused.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The board has approved the proposal pending final review.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "I am writing to formally request an extension of the deadline.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Your cooperation in this regard is greatly appreciated.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "We are pleased to inform you that your application has been successful.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "All correspondence should be addressed to the chief executive.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "It is with great pleasure that we announce the appointment of Dr. Lee.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The aforementioned terms shall remain in effect until further notice.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The meeting is at three o'clock.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I bought milk and bread at the store.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The train to Hamburg leaves from platform two.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Please fill in the form and return it by Monday.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I'm not sure, but maybe we could possibly try a different approach?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I might be wrong, but I think the numbers could be a bit off.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Perhaps, if it's not too much trouble, we could meet later?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I guess it might work, although I'm not really certain.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Sorry if this is a silly question, but could it be the server?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "It's just a thought, and I could be mistaken, but maybe we wait?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I kind of feel like it may not be the best idea, maybe.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I don't know, it probably depends, I suppose.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Would it maybe be okay if I tried to present, if nobody minds?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I think, possibly, the deadline might need to move a little.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "The meeting is scheduled for Tuesday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I sent the invoice yesterday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The team reviewed the proposal last week.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Sales increased by four percent in March.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The office will be closed on Friday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We use this tool to track expenses.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "She joined the company in 2019.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The file contains the latest figures.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The workshop has twelve participants.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Lunch is served in the main hall.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We will launch the product on Monday, no delays.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This is the right decision, and I stand by it completely.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I am certain the numbers are correct.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We must fix this bug before anything else ships.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I will lead the project and deliver it on time.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "There is no doubt that this plan will succeed.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Our approach is clearly the best option on the table.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I strongly recommend we sign the contract today.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Stop the rollout now; the data proves it is failing.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I know exactly what needs to be done, and I will do it.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "The thing with the stuff from before, it went to where it did, so that's it then or not.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Due to the fact that it was which it had been, the outcome, as mentioned, is thereby it.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "He told him that he would give him his book after he saw him at his house.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "If not unless we don't avoid failing to skip it, then it won't not work.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Regarding the matter of the issue concerning the aspect of the problem, it is what the situation is.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The report the manager the team hired wrote was lost.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Moving forward the synergy of the leveraged paradigm holistically actions the deliverables.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "She said it was fine but also not, kind of, depending on the other one, which wasn't.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Before after the meeting the plan changed back to what it will be.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Items not unlike those not previously excluded may not be ineligible.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The meeting was moved, I think to Thursday, because of the room thing.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "We should update the system soon since some parts are kind of old.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The results were mostly good, except for a few areas we need to look at.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "Send the file to the team, or at least the people who need it.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The new process is faster in some ways but slower in others.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "I finished most of the tasks, apart from the ones that depend on the other team.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "Prices went up a bit, probably because of the supplier changes.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The app crashes sometimes when you open it after the update.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "Let's talk about the budget stuff at the next meeting.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The client liked the design, though they want some changes to it.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The meeting is on Thursday at 10 a.m. in Room 4.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Please send the signed contract to Maria by Friday.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The app crashes when you open Settings after installing version 2.3.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Sales rose 4% in March because of the spring promotion.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "We will replace the old server next month to reduce downtime.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Click \"Save\" before closing the window, or your changes will be lost.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The library closes at 8 p.m. on weekdays and at 5 p.m. on Saturdays.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Our team needs two more developers to finish the project by June.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Turn off the oven after 40 minutes and let the bread cool.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The client approved the design but asked for a darker blue.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "This letter serves to confirm that your subscription has been cancelled effective immediately.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The Department of Transportation advises commuters to expect delays on the northbound line.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Applicants are required to submit all supporting documentation no later than the stated deadline.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The University hereby confirms enrollment for the academic year commencing in September.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Please be informed that access to the premises will be restricted during renovation works.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The Board wishes to express its appreciation for the staff's continued dedication.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "It has come to our attention that the account balance remains outstanding.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The undersigned hereby authorizes the release of medical records to the specified provider.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Passengers are kindly requested to remain seated until the aircraft has come to a complete stop.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This notice serves to inform residents of a scheduled water outage on Tuesday.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The committee has resolved to postpone the vote until further consultation has taken place.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Customers are advised that returns will not be accepted without a valid receipt.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "We wish to draw your attention to clause four of the enclosed agreement.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The hospital regrets any inconvenience caused by the rescheduling of your appointment.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "All visitors must report to reception and sign the register upon arrival.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The council has approved the proposed amendments to the zoning regulations.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This correspondence is to notify you of a change in your assigned case worker.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The airline apologizes for the delay and will provide compensation in accordance with policy.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Employees are reminded that annual leave requests must be submitted in writing.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The examination board reserves the right to withhold results pending further review.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "It is hereby stated that the terms of this lease are non-negotiable.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The manufacturer's warranty does not extend to damage caused by improper use.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The ministry has issued updated guidance regarding the handling of personal data.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This is to certify that the bearer has completed the required training program.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The tribunal will convene at nine o'clock to hear the remaining submissions.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "We are obliged to inform you that the contract will not be renewed.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The clinic requests that patients arrive fifteen minutes prior to their scheduled time.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Notice is hereby given of an extraordinary general meeting to be held next month.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The firm shall not be held liable for losses arising from third-party actions.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Residents are requested to dispose of household waste in accordance with the posted schedule.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The registrar's office confirms that your transcript has been processed and dispatched.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This agreement is entered into by and between the parties named below.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The audit findings will be presented to the executive committee for review.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Kindly note that the office will observe reduced hours during the holiday period.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The insurer reserves the right to investigate any claim prior to settlement.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Applicants who fail to meet the eligibility criteria will be notified accordingly.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The court has scheduled the hearing for the fourteenth of next month.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Please retain this document for your records, as it may be required for future reference.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The embassy advises all travelers to register their itinerary before departure.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "It is the policy of this institution to review all complaints within thirty days.", "language": "en", "signal": "tone", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The office moved to a new building on Fifth Avenue in April.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The recipe requires three eggs and a cup of sugar.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bridge was built in 1978 and renovated twice since then.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The conference has four keynote speakers this year.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The car gets about thirty miles per gallon on the highway.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The museum added a new wing for modern art last spring.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The flight from Chicago to Denver takes about two and a half hours.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The company employs roughly two hundred people across three offices.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The garden has six rows of vegetables and two apple trees.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The school year starts on the first Monday of September.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The report lists the top ten vendors by revenue.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The apartment has two bedrooms and one bathroom.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store sells both fresh and frozen produce.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The device charges fully in about ninety minutes.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The team plays its home games on Saturday afternoons.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The library added self-checkout machines last year.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The hospital has three wings and a separate outpatient building.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The road connects the two towns through a mountain pass.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The class meets twice a week for ninety minutes each session.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The invoice lists five items and a delivery charge.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The city installed new streetlights along the main avenue.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The plane has a seating capacity of one hundred and eighty.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bakery opens at six and closes at two.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The survey included responses from four hundred employees.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The building has an elevator and two staircases.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The trail is about eight kilometers long with moderate elevation gain.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The company was founded in 1996 by two engineers.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The clinic offers appointments on weekdays and Saturday mornings.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The database stores customer records and order history.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The parking lot has space for around fifty cars.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The film runs for just over two hours.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The warehouse ships orders within two business days.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The course covers eight modules over ten weeks.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The river flows through three different counties.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The phone comes in three colors and two storage sizes.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The team relocated to the fourth floor last month.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The market is open every day except Monday.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The policy covers up to five thousand dollars in damages.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The station has two platforms and a small waiting area.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The factory produces around a thousand units per day.", "language": "en", "signal": "tone", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "Ngl that meeting could've been an email.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Just woke up, gonna need like three coffees today.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Ha, classic, that's so on brand for him.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Kinda swamped rn, hit me up later?", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "We def need to hang out more, it's been forever.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Tbh I forgot we even had homework due today.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Y'all coming to the thing on Friday or nah?", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Ugh, traffic was brutal, took me forever to get home.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Not gonna lie, that pizza place slaps.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Just saying, that plan sounds kinda sketchy.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Gimme a sec, I'm mid-bite over here.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Yeah nah, I'm good, already ate.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Lowkey obsessed with this new show, no spoilers pls.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Bro just texted me out of nowhere after like two years.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "My bad, totally spaced on your message.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "It's giving chaotic energy today, not gonna lie.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Fr though, who scheduled a call for 8am on a Monday.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Kinda over this whole week already, ngl.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "We should prob just wing it honestly.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Grabbed some snacks, figured you'd want in.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Ok that's actually kinda funny lol.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Not me forgetting my own password again.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Eh, could go either way, no biggie.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Same, I'm exhausted, this week's been a lot.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Just chilling, watching random stuff on the couch.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Can we push it to tmrw, I'm beat.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "That test was rough, no cap.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Idk man, just vibes at this point.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "We're def gonna be late, traffic's a mess.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Popped by the store, grabbed the usual stuff.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Honestly kinda proud of myself for finishing that.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "It's fine, we'll figure it out as we go.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "That new update is kinda annoying not gonna lie.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Gonna crash early tonight, been a long one.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Just fyi, the wifi's been super spotty all day.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Meh, could be worse, could be better.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Snuck in a nap between meetings, don't judge me.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Honestly the trip was kinda a mess but fun anyway.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "We basically just winged the whole presentation lol.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "Not stressed, just mildly panicking, same thing right.", "language": "en", "signal": "tone", "expected": "casual", "source": "claude-draft"}
+{"sentence": "So proud of you for finishing the marathon, you worked so hard for this.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Just wanted to check in and see how you're feeling, thinking of you.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thanks again for watching the kids, it really meant a lot to us.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Hope your first week at the new job goes wonderfully, you've got this.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "It made my whole day hearing your voice, let's talk again soon.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Wishing you a speedy recovery, rest up and take all the time you need.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "So excited for your trip, send lots of photos while you're away!", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "You did such a great job on the presentation, I was really impressed.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Sending you a big hug, I know this week has been tough.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thank you for always being there, I really appreciate you.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Welcome home, we missed having you around so much.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Good luck on your exam tomorrow, you've prepared so well for this.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "It was wonderful catching up with you, let's do it again soon.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Happy anniversary to you both, wishing you many more years of happiness.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thank you for the lovely dinner, everything was absolutely delicious.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Proud of you for speaking up, that took real courage.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Hope you're settling in well at the new house, let me know if you need anything.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Sending warm wishes your way as you start this new chapter.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Congratulations on the promotion, you've earned every bit of it.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thinking of you and your family during this difficult time.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "You always know how to make people smile, thank you for that.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "So happy you're finally coming to visit, can't wait to see you.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Wishing you a wonderful holiday season filled with joy and rest.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thanks for lending an ear yesterday, it really helped to talk things through.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "You're doing an amazing job, don't forget to be proud of yourself too.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Welcome to the neighborhood, let us know if you ever need a hand.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Sending good vibes your way for the big interview tomorrow.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "It was such a joy having you over, come back anytime.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thank you for always checking in on me, it means more than you know.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Wishing your little one a very happy birthday, hope it's a great day.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "You handled that so gracefully, I really admire how calm you stayed.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Hope you feel better soon, sending lots of love your way.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thanks for helping me move, I owe you big time.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "So glad we reconnected, let's not lose touch again.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Congratulations on the new puppy, he's absolutely adorable.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "You inspire me every day with how hard you work.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Take all the time you need, we're all rooting for you.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Thank you for the thoughtful gift, you really know me so well.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "Wishing you safe travels and an amazing adventure ahead.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "It's always such a pleasure spending time with you, thank you for today.", "language": "en", "signal": "tone", "expected": "friendly", "source": "claude-draft"}
+{"sentence": "running late, be there in 10", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "u free this wknd? was thinking we could grab food or something", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "lol same, literally just said that", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "brb, gotta grab something from the kitchen real quick, don't leave", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "omw, traffic's kinda bad tho", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "def down for that, lmk when", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "nah i'm good thx, already ate before i left the house", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "just landed, gonna text when i'm settled", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "can u send that doc again?", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "idk, maybe next week? this week is kinda packed for me", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "ttyl, gotta run, my mom's calling me for dinner rn", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "srsly can't believe that happened", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "np, happy to help, just lmk if you need anything else", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "gimme a min, almost done", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "that's wild lol, didn't see that coming at all tbh", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "k sounds good, i'll swing by after i finish work", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "omg wait really? since when did that happen, tell me everything", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "brb making coffee, my brain isn't working without it rn", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "tbh forgot all about it", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "yea i'll be there around 6ish", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "no worries, whenever works for you, i'm free most of the week", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "lemme know if that works", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "haha ok fair enough, i guess i'll just wing it then", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "wya, we're waiting outside the store, hurry up lol", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "gonna be a bit late, sry", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "u good? haven't heard from u in a bit", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "yup all set on my end", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "kk see u then, don't forget to bring the charger", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "that meeting ran forever lol", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "can u grab milk on the way home?", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "omw now, be there soon", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "all good, no rush, just lmk whenever you get a sec", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "lol yeah that tracks, he's always late to everything", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "gtg, talk later, gotta pick up my sister from practice", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "u down to swap seats?", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "just checking in, u ok?", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "yea it's fine, don't stress", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "can't rn, in a meeting", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "lol classic, saw that coming", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "sending it over now, one sec", "language": "en", "signal": "formality", "expected": "informal", "source": "claude-draft"}
+{"sentence": "I picked up the dry cleaning on my way home.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The report is ready for your review.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We rescheduled the call to Thursday afternoon.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The kids have a dentist appointment next week.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I left the keys on the kitchen counter.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The delivery should arrive sometime this afternoon.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We need to order more printer paper.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The flight lands at six in the evening.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I updated the spreadsheet with the latest numbers.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The plumber is coming by tomorrow morning.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We're out of coffee, I'll pick some up later.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The presentation covers three main topics.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I finished reading the book you recommended.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The car needs an oil change soon.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We moved the furniture around in the living room.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The class starts at nine and ends at noon.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I emailed the client the updated proposal.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store is having a sale this weekend.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We planted tomatoes and peppers in the garden.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The package should be delivered by Friday.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I booked the hotel for our trip next month.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The team finished the project ahead of schedule.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We watched a movie after dinner last night.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The doctor recommended more rest and water.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I need to renew my passport before the trip.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The meeting covered budget updates and next steps.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We switched internet providers last week.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The gym added new equipment to the weight room.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I dropped the car off for its inspection.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The recipe turned out better than expected.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We're painting the spare room this weekend.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The train was on time this morning.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I organized the files into separate folders.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The corner shop restocked its shelves late last night.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We signed up for a cooking class together.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The report took longer than we planned.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "I replaced the batteries in the smoke detector.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The kids finished their homework before dinner.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We compared prices before choosing a plan.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The office got new chairs last month.", "language": "en", "signal": "formality", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The applicant shall provide proof of residency within fourteen days of this notice.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "It is incumbent upon all parties to adhere to the terms set forth herein.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The committee shall convene annually to review the organization's bylaws.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This certificate is issued in recognition of exemplary service to the institution.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The petitioner respectfully requests that the court grant an extension of time.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "All disputes arising under this agreement shall be resolved through arbitration.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The recipient is hereby notified of their right to appeal this decision.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The foregoing terms constitute the entire agreement between the parties.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This document shall serve as official confirmation of the transaction.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The council extends its gratitude to all who contributed to this endeavor.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Failure to comply with the aforementioned conditions may result in termination.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The board of directors unanimously approved the resolution at its last session.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This instrument is executed under seal and delivered as of the date above.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The applicant must furnish evidence satisfactory to the licensing authority.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The parties agree to indemnify and hold harmless one another from any claims.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "It is the solemn duty of this office to uphold the standards herein described.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The undersigned witnesses attest to the authenticity of this document.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This charter shall remain binding until formally amended or revoked.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The tribunal's ruling shall be final and not subject to further appeal.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The estate shall be distributed in accordance with the provisions of the will.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The applicant's credentials have been duly verified by the registrar.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This proclamation is issued by order of the governing council.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The signatories hereby acknowledge receipt of the terms and conditions.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The institution reserves all rights not expressly granted herein.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The committee's deliberations shall remain confidential until publication.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This deed transfers all right, title, and interest in the property described below.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The applicant is required to appear in person before the tribunal.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The foregoing resolution was adopted by a majority vote of the assembly.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This memorandum sets forth the obligations of each contracting party.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The recipient shall be entitled to compensation as stipulated in article five.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "It is hereby ordained that the ceremony shall proceed as scheduled.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The trustees shall exercise their duties with the utmost diligence and care.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This warrant authorizes the bearer to act on behalf of the institution.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The parties shall execute this agreement in duplicate originals.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The commission shall report its findings to the legislature by year's end.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This affidavit is sworn and subscribed before a notary public.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The successor shall assume all rights and obligations of the predecessor.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The applicant's request has been duly considered and is hereby granted.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "This covenant shall run with the land and bind all future owners.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "The proceedings shall be conducted in accordance with established protocol.", "language": "en", "signal": "formality", "expected": "formal", "source": "claude-draft"}
+{"sentence": "Sorry to bother you, but could we maybe push the deadline a bit?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I could be totally off here, but did we forget to invite the client?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "This might sound weird, but should we maybe try a different color?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I guess we could give it a shot, if that's okay with everyone?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Not sure this is right, but is the budget number supposed to be lower?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Sort of thinking we might want to slow down, if that makes sense?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Could be wrong, but didn't we already send that email last week?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I don't want to overstep, but maybe we should double-check the figures?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "This is probably a silly idea, but what if we tried it earlier?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I'm second-guessing myself, but was the meeting moved to Friday?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "It's just a hunch, but the plan might need a little more time.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Apologies if this has already been asked, but is the report finished?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I'm not entirely certain, though it seems like the numbers might be off.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "We could try this, I think, though I'm honestly not too sure.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Maybe it's just me, but does this timeline feel a bit tight?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I hate to second-guess this, but should we run it by legal first?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Not 100% on this, but I think the meeting starts at ten?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Might be nothing, but the server seems a little slow today, no?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I could be way off base here, but is this the final version?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Kind of unsure, honestly, whether this approach will even work.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "This is probably nothing, but should someone check the printer?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I don't know, maybe we're overthinking this whole thing?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Just a guess, but I think the flight leaves around noon?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "We might want to reconsider, though I could easily be wrong about it.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Feels like it could go either way, if I'm honest.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I hope this isn't a dumb question, but where do we send the invoice?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Perhaps I'm missing something, but the numbers don't quite add up?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Not fully sure, but I think we already paid that invoice?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "It's a bit unclear to me, but maybe the meeting got cancelled?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I'm probably wrong, but wasn't the deadline supposed to be next week?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Might just be me overthinking, but should we double-check the address?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I could see it going either way, but maybe we wait a bit longer.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "This may be off, but I think we're short on staff this weekend.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Sorry, quick question, is it okay if I maybe join a bit late?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Not totally sure this is the right call, but let's maybe try it?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I guess it's possible the file didn't send, could you check?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I might be overreacting, but does this seem a little rushed to you?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "We could possibly be mistaken, but the totals seem a bit high.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "Just thinking out loud here, but maybe we should wait on this one?", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "I'm honestly not sure, but perhaps it's worth asking someone else first.", "language": "en", "signal": "confidence", "expected": "hesitant", "source": "claude-draft"}
+{"sentence": "The invoice was sent on Tuesday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The package arrived this morning.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The report covers the last quarter.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We ordered new chairs for the office.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The car was serviced last week.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The class meets on Wednesdays.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store closes at eight tonight.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We reviewed the contract yesterday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The flight departs from gate twelve.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The team finished the training session.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bill is due at the end of the month.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We updated the website last night.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The kids went to school on the bus.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The results were posted this afternoon.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The library added new books to the shelf.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We signed the lease on Monday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The meeting lasted about an hour.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The shipment left the warehouse yesterday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The doctor's office called this morning.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We moved the appointment to next week.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The printer needs a new toner cartridge.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The event starts at seven in the evening.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We paid the electricity bill online.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The survey closed at midnight.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The garden was watered this morning.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The application was submitted on time.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The car has about half a tank of gas.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store restocked the shelves overnight.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The train arrives at platform three.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We replaced the light bulbs in the hallway.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The meeting notes were shared afterward.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The account was updated last night.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bakery sells out of bread by noon.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We cleaned the garage over the weekend.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The order was placed this morning.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The office reopens after the holiday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The results came back within a week.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We scheduled the interview for Thursday.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bridge closes for maintenance next month.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The file was uploaded to the shared drive.", "language": "en", "signal": "confidence", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "We will hit the deadline, no exceptions.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Send the report today, it cannot wait any longer.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This is the correct approach, and we're moving forward with it.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I guarantee this will work if we follow the plan exactly.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We need to cut costs now, there's no other option.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I'm confident this is the best candidate for the role.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Fix the leak immediately before it causes more damage.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This decision is final, and I stand behind it fully.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We will not miss this opportunity, full stop.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "The data is clear, we should switch vendors now.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I will personally make sure this gets done on time.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Cancel the order, this is not up for discussion.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We must act now, delaying any further isn't an option.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This plan will succeed, I have no doubts about it.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Everyone needs to submit their forms by end of day, no excuses.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I know this is the right call, and I'll take full responsibility.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We are absolutely doing this project this quarter.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Stop everything and address this issue right now.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This is non-negotiable, the launch date stays the same.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I'm certain we made the right choice hiring her.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We will deliver this on schedule, guaranteed.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Take the offer, it's clearly the best one available.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This strategy works, and the results prove it.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Reject the proposal, it doesn't meet our standards.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I have zero doubt this will pay off.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We're finishing this today, whatever it takes.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "The evidence is overwhelming, we need to change course now.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I insist we address this before the meeting ends.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This is exactly what needs to happen, no debate.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We will win this contract, I'm sure of it.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Shut it down now, the risk is too high.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I fully back this decision and will defend it.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "There's no question this is the better option.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We must hire more staff before the season starts.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This plan is airtight, trust me on this one.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Approve the budget now, we can't afford to wait.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "I know for a fact the numbers are accurate.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "We're doing this my way, it's the only way that works.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "This is absolutely the right time to expand.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "Commit to the schedule now, there's no room for delay.", "language": "en", "signal": "confidence", "expected": "assertive", "source": "claude-draft"}
+{"sentence": "So basically what happened was the thing with the order, it didn't really go through, or maybe it did, but then the other one also showed up so now we have two, or maybe none.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "He said he'd send it to her before she left, but then she said she never got it from him, so I don't know who has it now.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The update kind of fixes the bug but also sort of doesn't, depending on which version you're on, which nobody seems to know for sure.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "We need to circle back on the deliverable once the stakeholder alignment has been actioned, pending further synergy across the workstream.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "I told them what I told you before, but then they changed it, so what I said might not be what's happening now, if that makes sense.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The meeting got pushed, then pushed again, and now I think it's back to the original time, unless it isn't, we'll see.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "It's not that it's wrong exactly, it's more that it's not quite right either, if you know what I mean, which maybe you don't.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The file the guy from the other team sent the guy who left last week apparently still hasn't been forwarded to the new guy.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "So the refund is processing, except it's not, because the system flagged it, but only sometimes, and nobody's really sure why.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Basically the thing is, when the other thing happens, this thing usually happens too, unless it doesn't, which happens sometimes.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "She mentioned the plan changed but didn't say how, and then he said it hadn't changed, so now nobody knows which version is current.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Leveraging cross-functional bandwidth, we should ideate on the next steps once the framework has been holistically operationalized.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The invoice, which was sent before the one that was cancelled, might be the same as the one we already paid, or a different one entirely.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "It's kind of working now, except when it isn't, and even then it sometimes still is, so it's hard to say.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "He returned the one she borrowed from him after she gave it back, but I'm not sure which item they're even talking about.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The report says the numbers went up, but also down, depending on how you read the chart, which honestly could mean either.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Not to say it's not fine, because it kind of is, but also it's not, in a way that's hard to explain.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The client wants the thing changed but not really changed, more like adjusted, but not in the way we adjusted it last time.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "I think the plan is the new plan, unless the old plan is actually still the plan, in which case ignore what I said earlier.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The system auto-updates the record unless the manual override overrides the auto-update, which itself can be overridden manually.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "So he told her that he'd talked to the guy about the thing, but the guy said he never heard about any of it from anyone.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The delay is due to the thing with the other thing, which itself was caused by the first thing, so it's all kind of circular.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "We should synergize the deliverable bandwidth to holistically leverage the actionable takeaways from the stakeholder touchpoint.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The order that got cancelled might not actually be cancelled, since the cancellation email also got cancelled somehow.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "I said I'd help with it, but then she said she'd help with it too, so now neither of us is really sure who's doing what.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The document references the previous version, which references an even earlier version, and nobody can find the original.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "It's approved, but pending approval, which is different from being unapproved, though it's also not fully approved yet.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "He asked if she'd asked him about the thing she meant to ask, but he wasn't sure if that was the same thing she asked before.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The ticket is closed but still open, in the sense that it's marked resolved but nothing was actually resolved.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "We're optimizing the value proposition by circling back on the actionable synergies within the broader ecosystem framework.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The two files look the same but aren't, except in the parts where they are, which makes it hard to tell which one's newer.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "She said the change was reverted, but the thing it was reverted to also got changed, so it's unclear what's live now.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "It's confirmed, unless the confirmation gets overridden by the pending review, which itself depends on the earlier confirmation.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The team lead told the intern to tell the manager what the other manager had already told someone else about the deadline.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "Not unlike the previous issue, which wasn't unrelated to the one before that, this new issue isn't not connected either.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The budget got reallocated to the thing that used to be the other thing before it became this thing, so it's confusing now.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "He forwarded the email she sent to the person who forwarded it to him in the first place, so it's gone in a circle.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The setting only applies when the other setting doesn't apply, except when both apply, in which case neither really does.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "It works fine except when it doesn't, which is most of the time, but also sometimes it's the opposite of that.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "The proposal addresses the concern raised about the concern that was raised about the original concern, but not really.", "language": "en", "signal": "clarity", "expected": "confusing", "source": "claude-draft"}
+{"sentence": "We'll probably move the launch to sometime next month, depending on how testing goes.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The issue seems to be with one of the settings, not totally sure which one though.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "I fixed most of the bugs, just a couple of small things left.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The trip is mostly planned, just need to sort out the hotel stuff.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "Sales were pretty good this quarter, a bit better than expected overall.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The report covers most of what we discussed, minus a couple of the details.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "We should hear back from them soon, probably by the end of the week.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The new process is better in most ways, though a few things still feel clunky.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "I talked to someone in support, they said it should be fixed eventually.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The budget is roughly on track, give or take a bit here and there.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "Most of the team is on board with the plan, a couple still have questions.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The app works fine most of the time, just occasionally glitches a bit.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "We covered the main points in the meeting, though some things got skipped.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The delivery should arrive sometime this week, not exactly sure which day.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The changes mostly fixed the layout, though a few pages still look off.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "I think the deadline moved, but I'm not totally sure to when.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The results were decent overall, with some areas needing more work.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "We made progress on the project, just not as much as we hoped.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The venue is booked, just need to confirm a few of the details.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "Most of the feedback was positive, with a bit of criticism here and there.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The system update should roll out soon, timing is still being worked out.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The plan mostly makes sense, though a couple of parts feel a bit vague.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "I finished the bulk of the report, just the summary section is left.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The costs came in roughly as planned, with a small overrun somewhere.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The new hire seems to be settling in well, still learning the ropes though.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "We're mostly aligned on the design, just a few small tweaks needed.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The store had most of what we needed, missing a couple of items.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The client seemed happy overall, mentioned a few minor concerns.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The renovation is nearly done, just some finishing touches left.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The survey results were mixed, leaning slightly positive overall.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "We covered most of the syllabus, a bit behind on the last chapter.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The car's running better now, though there's still a small noise sometimes.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The meeting went fine, though we didn't get through everything on the list.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "I've mostly recovered, just still feeling a bit tired some days.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The project is roughly on schedule, with a bit of slack built in.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "We got most of the packing done, just a few odds and ends left.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The new menu is mostly the same, with a couple of new dishes added.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The training covered the basics, some of the finer points were skipped.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The neighborhood's pretty quiet, aside from the occasional bit of noise.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "The results came back mostly normal, with one value slightly off.", "language": "en", "signal": "clarity", "expected": "somewhat clear", "source": "claude-draft"}
+{"sentence": "Submit the expense report to Finance by 5 p.m. on Friday.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The dentist appointment is scheduled for October 3rd at 2:15 p.m.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Turn left at the second traffic light and the store is on your right.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The package will be delivered between 9 a.m. and noon on Thursday.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Preheat the oven to 375 degrees before putting in the casserole.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The team increased revenue by 12% in the second quarter of this year.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Email the signed contract to legal@company.com before the end of the day.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The flight to Chicago departs at 6:45 a.m. from Terminal 2.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Replace the air filter every three months to keep the unit running well.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The library book is due back on the 14th; return it to avoid a fine.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The workshop runs from 10 a.m. to noon in Conference Room B.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Add two cups of water and simmer the soup for twenty minutes.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The rent payment is due on the first of every month via bank transfer.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Mark's presentation covers the marketing budget for the next fiscal year.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The car needs new brake pads; the mechanic quoted 180 dollars for the repair.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Class starts at 8:30 a.m. sharp, so arrive by 8:20 to get settled.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The refund of 45 dollars will appear on your card within five business days.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Water the tomato plants every morning during the first two weeks after planting.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The quarterly report is due to the CFO by the last Friday of March.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Take the 7:15 train from Platform 3 to reach downtown by 8 a.m.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The vaccine appointment is at the community clinic on Baker Street, 3 p.m. Tuesday.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Update the invoice template to include the new tax rate of 8%.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The moving truck arrives at 9 a.m. on Saturday to load the furniture.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Set the alarm for 6 a.m. to catch the early bus to the airport.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The warranty covers parts and labor for two years from the purchase date.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Hand in the permission slip to the school office by Wednesday morning.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The store offers a 20% discount on all shoes this weekend only.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Charge the laptop fully before the flight since there are no outlets on board.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The plumber will arrive between 1 and 3 p.m. to fix the leaking pipe.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Submit your vacation request at least two weeks before the start date.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The recipe serves four and takes about thirty minutes to prepare.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Pick up the prescription from the pharmacy on Fifth Avenue after 4 p.m.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The project deadline is March 30th, with a review meeting on March 25th.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Enter your employee ID and password to access the payroll portal.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The concert starts at 8 p.m., and doors open one hour earlier.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Sign the delivery form and leave it with the front desk receptionist.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The gym closes at 10 p.m. on weekdays and 8 p.m. on weekends.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Book the conference room for 2 p.m. Thursday for the client call.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The report shows a 15% drop in expenses compared to last year.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "Renew your parking permit online before it expires on June 1st.", "language": "en", "signal": "clarity", "expected": "clear", "source": "claude-draft"}
+{"sentence": "The office relocated to a building near the train station.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The recipe calls for two cups of rice and one onion.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The report was submitted before the deadline.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store opens at eight and closes at six.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The car has four seats and a small trunk.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The class covers grammar and vocabulary each week.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The flight has a layover in Amsterdam.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The garden has three rows of carrots.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The invoice lists the items purchased last month.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The building has five floors and two elevators.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bus stops outside the grocery store.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The laptop has sixteen gigabytes of memory.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The museum is closed on Mondays.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The recipe takes about forty minutes to prepare.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The team meets every other Tuesday.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The package weighs just under a kilogram.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The library extended its hours for exam season.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The road was repaved last summer.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The phone battery lasts about a day.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The clinic is open six days a week.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bridge spans the river near downtown.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The application requires two references.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The course runs for eight weeks.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The apartment building has underground parking.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store sells both books and stationery.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The train has six carriages.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The report includes charts for each region.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The warehouse stores items on three levels.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The school has about six hundred students.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The event takes place in the main hall.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The device connects over wifi or bluetooth.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The park has a playground and a pond.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The company has offices in four countries.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The recipe uses fresh basil and tomatoes.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The exam has three sections and a time limit.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The parking garage has space for two hundred cars.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The hotel has a pool and a small gym.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The database updates automatically every night.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The shop sells produce from local farms.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The airport has two terminals.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The form asks for your name and address.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The bakery makes bread fresh every morning.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The office uses a shared calendar for meetings.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The trail loops around the lake.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The printer is located on the second floor.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The store accepts returns within thirty days.", "language": "en", "signal": "emotion", "expected": "neutral", "source": "claude-draft"}
+{"sentence": "The manager along with her team are reviewing the budget.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The manager along with her team is reviewing the budget.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Each of the students have submitted their essay.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Each of the students has submitted their essay.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "There's three emails waiting for your reply.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "There are three emails waiting for your reply.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Neither of the printers are working today.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Neither of the printers is working today.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "The news about the layoffs were shocking to everyone.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The news about the layoffs was shocking to everyone.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I seen the email you sent last night.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I saw the email you sent last night.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "She has went to the store already.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She has gone to the store already.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "By the time we arrived, the meeting already started.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "By the time we arrived, the meeting had already started.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "He finish the report before lunch yesterday.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He finished the report before lunch yesterday.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Yesterday I go to the dentist for a checkup.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Yesterday I went to the dentist for a checkup.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I need to buy new umbrella before it rains.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I need to buy a new umbrella before it rains.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "She works as engineer at a tech company.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She works as an engineer at a tech company.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "We watched movie last night that you recommended.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We watched the movie last night that you recommended.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "He is only person who can fix this.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He is the only person who can fix this.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I found an old photo of the house in box.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I found an old photo of the house in a box.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I'm looking forward to see you next week.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I'm looking forward to seeing you next week.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "She arrived to the office late again.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She arrived at the office late again.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "We should discuss about the budget tomorrow.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We should discuss the budget tomorrow.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "He is married with a doctor.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He is married to a doctor.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I bought three loaf of bread at the market.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I bought three loaves of bread at the market.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "There are two mouse in the kitchen again.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "There are two mice in the kitchen again.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "We need more informations before deciding.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We need more information before deciding.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "She has two childs from her first marriage.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She has two children from her first marriage.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Me and him went to the store earlier.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He and I went to the store earlier.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "The manager gave the assignment to Sarah and I.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The manager gave the assignment to Sarah and me.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Us kids used to play in that park every day.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We kids used to play in that park every day.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Between you and I, the project is behind schedule.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Between you and me, the project is behind schedule.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Always he arrives late to the morning meetings.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He always arrives late to the morning meetings.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Not only she finished the report but also reviewed it twice.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Not only did she finish the report but she also reviewed it twice.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I know not what to do about this situation.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I don't know what to do about this situation.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "Yesterday to the market went my mother alone.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Yesterday my mother went to the market alone.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I don't have no time to finish this today.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I don't have time to finish this today.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "She didn't say nothing about the schedule change.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She didn't say anything about the schedule change.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "We haven't seen nobody from the other team all week.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We haven't seen anybody from the other team all week.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "There isn't no reason to cancel the trip now.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "There isn't any reason to cancel the trip now.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "I look forward to receive your reply soon.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "I look forward to receiving your reply soon.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "She made him to clean his room before dinner.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "She made him clean his room before dinner.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "They suggested to postpone the meeting until Friday.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "They suggested postponing the meeting until Friday.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "We need finish this project before the deadline.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We need to finish this project before the deadline.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}
+{"sentence": "He can to help you move the boxes tomorrow.", "language": "en", "signal": "grammar", "expected": "yes", "source": "claude-draft"}
+{"sentence": "He can help you move the boxes tomorrow.", "language": "en", "signal": "grammar", "expected": "no", "source": "claude-draft"}

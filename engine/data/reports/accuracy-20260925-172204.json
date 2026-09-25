@@ -1,0 +1,156 @@
+{
+  "timestamp": "20260925-172204",
+  "catalogue_version": "1",
+  "machine": "arm64 26.6.2",
+  "threads": 4,
+  "samples": {
+    "cola": 300,
+    "dair": 300,
+    "claude-draft": 800,
+    "note": "seeded sample of 300"
+  },
+  "scoring_seconds": 830.3,
+  "signals": {
+    "grammar": {
+      "bar_source": "cola",
+      "bar": 0.75,
+      "n": 300,
+      "accuracy": 0.6733333333333333,
+      "majority_baseline": 0.6666666666666666,
+      "pass": false,
+      "by_source": {
+        "claude-draft": {
+          "n": 100,
+          "accuracy": 0.51
+        },
+        "cola": {
+          "n": 300,
+          "accuracy": 0.6733333333333333
+        }
+      },
+      "by_language": {
+        "en": {
+          "n": 400,
+          "accuracy": 0.6325
+        }
+      },
+      "best_threshold": {
+        "threshold": 0.35,
+        "accuracy": 0.6833333333333333
+      }
+    },
+    "emotion": {
+      "bar_source": "dair",
+      "bar": 0.55,
+      "n": 300,
+      "accuracy": 0.5033333333333333,
+      "majority_baseline": 0.4166666666666667,
+      "pass": false,
+      "by_source": {
+        "claude-draft": {
+          "n": 50,
+          "accuracy": 0.94
+        },
+        "dair": {
+          "n": 300,
+          "accuracy": 0.5033333333333333
+        }
+      },
+      "by_language": {
+        "en": {
+          "n": 350,
+          "accuracy": 0.5657142857142857
+        }
+      }
+    },
+    "tone": {
+      "bar_source": "claude-draft",
+      "bar": 0.7,
+      "n": 200,
+      "accuracy": 0.63,
+      "majority_baseline": 0.25,
+      "pass": false,
+      "by_source": {
+        "claude-draft": {
+          "n": 200,
+          "accuracy": 0.63
+        }
+      },
+      "by_language": {
+        "en": {
+          "n": 200,
+          "accuracy": 0.63
+        }
+      }
+    },
+    "formality": {
+      "bar_source": "claude-draft",
+      "bar": 0.7,
+      "n": 150,
+      "accuracy": 0.6066666666666667,
+      "majority_baseline": 0.3333333333333333,
+      "pass": false,
+      "by_source": {
+        "claude-draft": {
+          "n": 150,
+          "accuracy": 0.6066666666666667
+        }
+      },
+      "by_language": {
+        "en": {
+          "n": 150,
+          "accuracy": 0.6066666666666667
+        }
+      }
+    },
+    "confidence": {
+      "bar_source": "claude-draft",
+      "bar": 0.7,
+      "n": 150,
+      "accuracy": 0.7066666666666667,
+      "majority_baseline": 0.3333333333333333,
+      "pass": true,
+      "by_source": {
+        "claude-draft": {
+          "n": 150,
+          "accuracy": 0.7066666666666667
+        }
+      },
+      "by_language": {
+        "en": {
+          "n": 150,
+          "accuracy": 0.7066666666666667
+        }
+      }
+    },
+    "clarity": {
+      "bar_source": "claude-draft",
+      "bar": 0.7,
+      "n": 150,
+      "accuracy": 0.41333333333333333,
+      "majority_baseline": 0.3333333333333333,
+      "pass": false,
+      "by_source": {
+        "claude-draft": {
+          "n": 150,
+          "accuracy": 0.41333333333333333
+        }
+      },
+      "by_language": {
+        "en": {
+          "n": 150,
+          "accuracy": 0.41333333333333333
+        }
+      }
+    }
+  },
+  "latency": {
+    "calls": 40,
+    "p50_ms": 503.7872919929214,
+    "p95_ms": 574.5570562547073
+  },
+  "checkpoint": {
+    "repo": "convaiinnovations/laya",
+    "revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+  }
+}
