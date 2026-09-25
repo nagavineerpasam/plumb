@@ -2,7 +2,13 @@ import SwiftUI
 
 /// How each signal is named, ordered and coloured across the editor, cards and dashboard.
 enum Palette {
-    static let order = ["grammar", "tone", "emotion", "confidence", "clarity", "formality"]
+    /// Off until a fine-tuned model passes the grammar accuracy bar (ticket 05). The base model
+    /// flagged 0 of 30 broken test sentences, so showing its verdict would teach wrong things.
+    static let grammarReady = false
+
+    static var order: [String] {
+        (grammarReady ? ["grammar"] : []) + ["tone", "emotion", "confidence", "clarity", "formality"]
+    }
 
     static let titles = [
         "grammar": "Grammar", "tone": "Tone", "emotion": "Emotion",

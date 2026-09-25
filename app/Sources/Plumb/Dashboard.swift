@@ -22,7 +22,15 @@ struct Dashboard: View {
                         description: Text("Each sentence is checked as soon as you pause."))
                         .padding(.top, 40)
                 } else {
-                    section("Grammar") { grammar }
+                    section("Grammar") {
+                        if Palette.grammarReady {
+                            grammar
+                        } else {
+                            Label("The grammar check arrives after training. Until then Plumb doesn't guess.",
+                                  systemImage: "hourglass")
+                                .font(.callout).foregroundStyle(.secondary)
+                        }
+                    }
                     section("Spelling & punctuation") { mechanics }
                     if !summary.emotion.isEmpty { section("Emotion") { mix(summary.emotion, colors: Palette.emotions) } }
                     if !summary.tone.isEmpty { section("Tone") { mix(summary.tone, colors: Palette.tones) } }

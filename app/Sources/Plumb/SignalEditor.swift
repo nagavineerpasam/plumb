@@ -97,13 +97,14 @@ struct SignalEditor: NSViewRepresentable {
                 guard let start = content.location(whole.location, offsetBy: sentence.range.location),
                       let end = content.location(start, offsetBy: sentence.range.length),
                       let range = NSTextRange(location: start, end: end) else { continue }
-                guard let grammar = sentence.signals?.signals["grammar"] else {
+                guard let signals = sentence.signals else {
                     // Still being analysed: a quiet dotted line, never the old colour.
                     layout.addRenderingAttribute(.underlineStyle,
                         value: NSUnderlineStyle([.single, .patternDot]).rawValue, for: range)
                     layout.addRenderingAttribute(.underlineColor, value: NSColor.tertiaryLabelColor, for: range)
                     continue
                 }
+                guard Palette.grammarReady, let grammar = signals.signals["grammar"] else { continue }
                 // Graphite: a soft band under each sentence, red and heavier for a likely mistake.
                 let wrong = grammar.value == "yes"
                 layout.addRenderingAttribute(.underlineStyle, value: NSUnderlineStyle.thick.rawValue, for: range)
@@ -122,7 +123,7 @@ struct SignalEditor: NSViewRepresentable {
                     let local = issue.range ?? NSRange(location: 0, length: sentence.range.length)
                     let absolute = NSRange(location: sentence.range.location + local.location, length: local.length)
                     guard let range = textRange(absolute, content, whole) else { continue }
-                    if issue.kind == .spelling || sentence.signals?.signals["grammar"]?.value != "yes" {
+                    if issue.kind == .spelling || !Palette.grammarReady || sentence.signals?.signals["grammar"]?.value != "yes" {
                         layout.addRenderingAttribute(.underlineStyle, value: dotted, for: range)
                         layout.addRenderingAttribute(.underlineColor, value: amber, for: range)
                     }
