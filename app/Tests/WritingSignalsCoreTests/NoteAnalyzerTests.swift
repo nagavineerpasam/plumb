@@ -216,8 +216,9 @@ final class NoteAnalyzerTests: XCTestCase {
         analyzer.update(text: "He go home. She went home")
         await analyzer.idle()
 
-        // "He go home." = 100 × (1 − 0.9) = 10; "She went home" = 100 × (1 − 0.1) − 10 for the missing full stop = 80.
-        XCTAssertEqual(analyzer.summary.correctness ?? -1, 0.45, accuracy: 0.001)
+        // "He go home." = 100 × (1 − 0.9) = 10; "She went home" is judged correct (0.1 < 0.5), so
+        // 100 − 10 for the missing full stop = 90. Average: 50%.
+        XCTAssertEqual(analyzer.summary.correctness ?? -1, 0.5, accuracy: 0.001)
     }
 
     func testCorrectnessNeverGoesBelowZero() async {
@@ -229,5 +230,17 @@ final class NoteAnalyzerTests: XCTestCase {
         await analyzer.idle()
 
         XCTAssertEqual(analyzer.summary.correctness, 0)
+    }
+
+    func testFlawlessWritingScoresFullCorrectness() async {
+        // The trained model gives correct sentences a mistake probability around 0.3; below 0.5 costs nothing.
+        let client = FakeSignalClient()
+        client.script = ["She went home.": ["grammar": Signal(value: "no", distribution: ["yes": 0.3, "no": 0.7])]]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "She went home.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.summary.correctness, 1)
     }
 }

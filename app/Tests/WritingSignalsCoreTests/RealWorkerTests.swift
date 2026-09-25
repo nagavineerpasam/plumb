@@ -19,7 +19,7 @@ final class RealWorkerTests: XCTestCase {
 
         let results = try await client.score([SentenceRequest(id: "s1", text: "We are very happy with the result.")])
 
-        XCTAssertEqual(results["s1"]?.model, "english")
+        XCTAssertTrue(["english", "plumb"].contains(results["s1"]?.model ?? ""))
         XCTAssertEqual(Set(results["s1"]?.signals.keys ?? [:].keys),
                        ["grammar", "tone", "formality", "emotion", "confidence", "clarity"])
     }

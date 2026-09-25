@@ -21,15 +21,19 @@ public struct NoteSummary: Sendable, Equatable {
     public var mechanicsIssues: Int { mechanics.count }
     /// Sentences the grammar signal marks as likely containing a mistake.
     public var grammarFlagged: [String] = []
-    /// How well the note is written, 0...1: each sentence starts at 100%, loses its likelihood of a
-    /// grammar mistake and 10 points per spelling or punctuation slip; the note is the average.
+    /// How well the note is written, 0...1: each sentence starts at 100%, loses the likelihood of a
+    /// grammar mistake when one is judged likely, and 10 points per spelling or punctuation slip;
+    /// the note is the average.
     public var correctness: Double?
 
     init(_ sentences: [AnalyzedSentence]) {
         mechanics = sentences.flatMap { s in (s.mechanics ?? []).map { MechanicsFinding(sentence: s.text, issue: $0) } }
         grammarFlagged = sentences.filter { $0.signals?.signals["grammar"]?.value == "yes" }.map(\.text)
         let judged = sentences.compactMap { s -> Double? in
-            guard let mistake = s.signals?.signals["grammar"]?.distribution["yes"] else { return nil }
+            guard let p = s.signals?.signals["grammar"]?.distribution["yes"] else { return nil }
+            // Only a judged mistake (p >= 0.5) costs points: the trained model puts correct
+            // sentences around 0.3, which should still count as fully correct.
+            let mistake = p >= 0.5 ? p : 0
             return max(0, 1 - mistake - 0.1 * Double(s.mechanics?.count ?? 0))
         }
         if !judged.isEmpty { correctness = judged.reduce(0, +) / Double(judged.count) }

@@ -18,9 +18,9 @@ enum Palette {
     static let canvas = adaptive(light: 0xf6f7f9, dark: 0x191b20)
     static let card = adaptive(light: 0xffffff, dark: 0x23262c)
 
-    /// Off until a fine-tuned model passes the grammar accuracy bar (ticket 05). The base model
-    /// flagged 0 of 30 broken test sentences, so showing its verdict would teach wrong things.
-    static let grammarReady = false
+    /// On since the fine-tuned model passed its bar (CoLA 0.789 vs 0.75; 25 of 30 everyday
+    /// mistakes caught with no false alarms). The base model flagged 0 of 30.
+    static let grammarReady = true
 
     static var order: [String] {
         (grammarReady ? ["grammar"] : []) + ["tone", "emotion", "confidence", "clarity", "formality"]

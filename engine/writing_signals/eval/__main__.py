@@ -63,8 +63,8 @@ def main():
         rng = random.Random(13)
         cola, dair = rng.sample(cola, min(args.sample, len(cola))), rng.sample(dair, min(args.sample, len(dair)))
 
-    from ..engine import CHECKPOINT
-    checkpoint = args.checkpoint or CHECKPOINT
+    from ..engine import CHECKPOINT, default_checkpoint
+    checkpoint = args.checkpoint or default_checkpoint()
     engine = SignalEngine(checkpoint, device=args.device)
     started = time.time()
     rows = predict(engine, cola + dair + drafted)

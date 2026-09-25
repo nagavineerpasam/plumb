@@ -51,7 +51,7 @@ def test_scores_sentences_by_id(worker):
 
     assert result["id"] == "r1"
     assert set(result["sentences"]) == {"s1"}
-    assert result["sentences"]["s1"]["model"] == "english"
+    assert result["sentences"]["s1"]["model"] in {"english", "plumb"}
     assert "grammar" in result["sentences"]["s1"]["signals"]
 
 

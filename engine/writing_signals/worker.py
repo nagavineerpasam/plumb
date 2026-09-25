@@ -20,6 +20,9 @@ MODEL_FILES = ["model.safetensors", "rl_agent_config.json", "encoder/*", "tokeni
 
 def ensure_models(emit: Callable[[dict], None]) -> None:
     """Fetch the English checkpoint once, reporting bytes as they arrive."""
+    from .engine import TRAINED_DIR, default_checkpoint
+    if default_checkpoint() == TRAINED_DIR:
+        return  # Plumb's own model is installed; nothing to fetch.
     from huggingface_hub import HfApi, hf_hub_download
     from huggingface_hub.utils import filter_repo_objects
 

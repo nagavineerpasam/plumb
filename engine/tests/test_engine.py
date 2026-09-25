@@ -19,10 +19,13 @@ def test_scores_every_signal_for_each_sentence(engine):
         assert sum(signal["distribution"].values()) == pytest.approx(1.0, abs=1e-3), name
 
 
-def test_uses_the_english_checkpoint_on_cpu(engine):
+def test_uses_plumbs_model_when_installed_otherwise_the_english_checkpoint(engine):
+    from writing_signals.engine import TRAINED_DIR, default_checkpoint
+
     results = engine.score(["Please send me the report by Friday."])
 
-    assert results[0]["model"] == "english"
+    expected = "plumb" if default_checkpoint() == TRAINED_DIR else "english"
+    assert results[0]["model"] == expected
     assert engine.device == "cpu"
 
 
