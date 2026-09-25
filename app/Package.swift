@@ -6,7 +6,8 @@ let package = Package(
     platforms: [.macOS(.v14)],
     targets: [
         .target(name: "WritingSignalsCore"),
-        .executableTarget(name: "Plumb", dependencies: ["WritingSignalsCore"]),
+        .executableTarget(name: "Plumb", dependencies: ["WritingSignalsCore"],
+                          resources: [.copy("Resources/AppIcon.icns")]),
         .testTarget(name: "WritingSignalsCoreTests", dependencies: ["WritingSignalsCore"]),
     ]
 )

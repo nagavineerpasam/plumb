@@ -10,6 +10,10 @@ struct PlumbApp: App {
         // Launched from `swift run` there is no bundle, so ask to be a regular foreground app.
         NSApplication.shared.setActivationPolicy(.regular)
         NSApplication.shared.activate()
+        // A packaged .app gets its icon from Info.plist; `swift run` needs it set here.
+        if let url = Bundle.module.url(forResource: "AppIcon", withExtension: "icns") {
+            NSApplication.shared.applicationIconImage = NSImage(contentsOf: url)
+        }
         (UserDefaults.standard.string(forKey: "appearance").flatMap(Appearance.init(rawValue:)) ?? .system).apply()
     }
 
