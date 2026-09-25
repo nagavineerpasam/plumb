@@ -1,0 +1,11 @@
+[project]
+name = "writing-signals"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["laya==0.3.20"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools]
+packages = ["writing_signals"]
