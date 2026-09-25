@@ -32,8 +32,23 @@ public struct SentenceRequest: Codable, Sendable, Equatable {
     }
 }
 
+/// A sentence and the one before it, for the flow check.
+public struct FlowRequest: Codable, Sendable, Equatable {
+    public var id: String
+    public var previous: String
+    public var sentence: String
+
+    public init(id: String, previous: String, sentence: String) {
+        self.id = id
+        self.previous = previous
+        self.sentence = sentence
+    }
+}
+
 /// Scores sentences. The real one talks to the signal worker; tests use a fake.
 public protocol SignalClient: Sendable {
     /// Returns signals keyed by sentence id. Sentences superseded by a newer request may be missing.
     func score(_ sentences: [SentenceRequest]) async throws -> [String: SentenceSignals]
+    /// Returns, keyed by sentence id, whether each sentence fails to follow the one before it.
+    func flow(_ pairs: [FlowRequest]) async throws -> [String: Signal]
 }

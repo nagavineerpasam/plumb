@@ -11,6 +11,10 @@ struct SentenceCard: View {
                 Label(issue.message, systemImage: "exclamationmark.circle")
                     .font(.callout).foregroundStyle(.orange)
             }
+            if Palette.flowReady, sentence.flow?.value == "yes" {
+                Label("Doesn't follow from the previous sentence", systemImage: "arrow.turn.down.right")
+                    .font(.callout).foregroundStyle(.red)
+            }
             if let signals = sentence.signals?.signals {
                 ForEach(Palette.order, id: \.self) { name in
                     if let signal = signals[name] { row(name, signal) }

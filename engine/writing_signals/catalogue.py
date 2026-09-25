@@ -56,3 +56,15 @@ QUESTIONS = {
 }
 
 SIGNALS = tuple(QUESTIONS)
+
+# Flow is asked about a pair of neighbouring sentences, so it has its own question and state.
+# "yes" means a problem, like grammar and sense.
+FLOW_QUESTION = {
+    "type": "noul",
+    "instructions": "Does the second sentence fail to follow naturally from the first, for example a sudden topic jump, a contradiction or a broken connection?",
+}
+
+
+def flow_state(previous: str, sentence: str) -> str:
+    """How a sentence pair is shown to the model. Training uses exactly the same format."""
+    return f"First sentence: {previous}\nSecond sentence: {sentence}"

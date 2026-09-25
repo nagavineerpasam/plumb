@@ -5,6 +5,8 @@ import WritingSignalsCore
 struct Dashboard: View {
     let summary: NoteSummary
     let pending: Int
+    var checkFlow: () async -> Void = {}
+    @State private var checkingFlow = false
 
     var body: some View {
         ScrollView {
@@ -45,6 +47,18 @@ struct Dashboard: View {
                         }
                     }
                     tile("Needs a look") { issues }
+                    if Palette.flowReady {
+                        Button {
+                            checkingFlow = true
+                            Task { await checkFlow(); checkingFlow = false }
+                        } label: {
+                            Label(checkingFlow ? "Checking flow…" : "Check flow", systemImage: "arrow.triangle.branch")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .controlSize(.large)
+                        .disabled(checkingFlow)
+                        .help("Check whether each sentence follows on from the one before it")
+                    }
                     if summary.confidence != nil {
                         tile("Voice") { voiceBars }
                     }
@@ -80,6 +94,7 @@ struct Dashboard: View {
         }
         if Palette.grammarReady { summary.grammarFlagged.forEach { add($0, .red, "Grammar mistake") } }
         if Palette.senseReady { summary.senseFlagged.forEach { add($0, .red, "Doesn't make sense") } }
+        if Palette.flowReady { summary.flowFlagged.forEach { add($0, .red, "Doesn't follow on") } }
         summary.mechanics.forEach { add($0.sentence, .orange, $0.issue.message) }
         return groups
     }

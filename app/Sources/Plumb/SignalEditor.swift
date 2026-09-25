@@ -101,6 +101,10 @@ struct SignalEditor: NSViewRepresentable {
                     // Still being checked: no mark (hovering shows "Analysing…"), and never the old colour.
                     continue
                 }
+                if Palette.flowReady, sentence.flow?.value == "yes" {
+                    // Doesn't follow the sentence before: a red band down its full length.
+                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.08), for: range)
+                }
                 if Palette.senseReady, signals.signals["sense"]?.value == "yes" {
                     // Doesn't make sense: a soft red wash over the whole sentence.
                     layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.12), for: range)

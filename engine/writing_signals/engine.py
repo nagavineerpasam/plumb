@@ -1,9 +1,9 @@
 import os
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 from laya import Agent
 
-from .catalogue import QUESTIONS
+from .catalogue import FLOW_QUESTION, QUESTIONS, flow_state
 
 # English only, on the CPU: 2.0 GB and ~0.5 s per sentence on an M1, which fits 8 GB Macs.
 # The Apple GPU path costs ~4 GB for the same model.
@@ -55,3 +55,10 @@ class SignalEngine:
             }
             for out in outputs
         ]
+
+    def flow(self, pairs: List[Tuple[str, str]]) -> List[Dict[str, Any]]:
+        """For each (previous, sentence) pair: does the sentence fail to follow on?"""
+        if not pairs:
+            return []
+        outputs = self.agent.predict_batch([flow_state(p, s) for p, s in pairs], {"flow": FLOW_QUESTION})
+        return [_signal(out["answers"]["flow"], FLOW_QUESTION) for out in outputs]

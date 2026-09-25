@@ -10,6 +10,9 @@ final class FakeSignalClient: SignalClient, @unchecked Sendable {
     /// When set, calls wait here until the test releases them.
     var gate: AsyncStream<Void>.Iterator?
     private(set) var requests: [[String]] = []
+    /// Sentences that don't follow from the one before them.
+    var flowBreaks: Set<String> = []
+    private(set) var flowRequests: [[FlowRequest]] = []
 
     func score(_ sentences: [SentenceRequest]) async throws -> [String: SentenceSignals] {
         requests.append(sentences.map(\.text))
@@ -28,6 +31,16 @@ final class FakeSignalClient: SignalClient, @unchecked Sendable {
                 "grammar": Signal(value: wrong ? "yes" : "no",
                                   distribution: ["yes": wrong ? 0.9 : 0.1, "no": wrong ? 0.1 : 0.9]),
             ])
+        }
+        return out
+    }
+
+    func flow(_ pairs: [FlowRequest]) async throws -> [String: Signal] {
+        flowRequests.append(pairs)
+        var out: [String: Signal] = [:]
+        for p in pairs {
+            let broken = flowBreaks.contains(p.sentence)
+            out[p.id] = Signal(value: broken ? "yes" : "no", distribution: ["yes": broken ? 0.8 : 0.2, "no": broken ? 0.2 : 0.8])
         }
         return out
     }

@@ -257,4 +257,42 @@ final class NoteAnalyzerTests: XCTestCase {
 
         XCTAssertEqual(analyzer.summary.senseFlagged, ["I love cats because of okay."])
     }
+
+    func testCheckFlowScoresEachSentenceAgainstTheOneBefore() async {
+        let client = FakeSignalClient()
+        client.flowBreaks = ["My cat loves tuna."]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+        analyzer.update(text: "The report is due Friday. I will send a draft Thursday. My cat loves tuna.")
+        await analyzer.idle()
+
+        await analyzer.checkFlow()
+
+        XCTAssertEqual(client.flowRequests.last?.map(\.previous),
+                       ["The report is due Friday.", "I will send a draft Thursday."])
+        XCTAssertNil(analyzer.sentences[0].flow)
+        XCTAssertEqual(analyzer.sentences.dropFirst().map { $0.flow?.value }, ["no", "yes"])
+        XCTAssertEqual(analyzer.summary.flowFlagged, ["My cat loves tuna."])
+    }
+
+    func testEditingASentenceClearsOnlyTheFlowThatDependsOnIt() async {
+        let client = FakeSignalClient()
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+        analyzer.update(text: "One. Two. Three.")
+        await analyzer.idle()
+        await analyzer.checkFlow()
+
+        analyzer.update(text: "One. Two, edited. Three.")
+        await analyzer.idle()
+
+        // "Two, edited." is new, and "Three." now follows a different sentence: both need checking again.
+        XCTAssertNil(analyzer.sentences[1].flow)
+        XCTAssertNil(analyzer.sentences[2].flow)
+
+        analyzer.update(text: "One. Two, edited. Three. Four.")
+        await analyzer.checkFlow()
+        analyzer.update(text: "One. Two, edited. Three. Four, changed.")
+        await analyzer.idle()
+
+        XCTAssertNotNil(analyzer.sentences[2].flow)  // "Three." still follows "Two, edited."
+    }
 }

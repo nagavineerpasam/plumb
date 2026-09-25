@@ -26,7 +26,7 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
     private var process: Process?
     private var input: FileHandle?
     private var buffer = Data()
-    private var waiting: [String: CheckedContinuation<[String: SentenceSignals], Error>] = [:]
+    private var waiting: [String: CheckedContinuation<Incoming, Error>] = [:]
     private var nextID = 0
     private var stopping = false
     private var restartDelay: Duration = .seconds(1)
@@ -74,10 +74,19 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
     public var isRunning: Bool { lock.withLock { process?.isRunning ?? false } }
 
     public func score(_ sentences: [SentenceRequest]) async throws -> [String: SentenceSignals] {
+        try await send { id in ScoreRequest(id: id, sentences: sentences) }.sentences ?? [:]
+    }
+
+    public func flow(_ pairs: [FlowRequest]) async throws -> [String: Signal] {
+        try await send { id in FlowMessage(id: id, pairs: pairs) }.flowSentences ?? [:]
+    }
+
+    /// Writes one request line and waits for the worker's answer to that request id.
+    private func send(_ make: @escaping (String) -> some Encodable) async throws -> Incoming {
         try await withCheckedThrowingContinuation { continuation in
             let sent: (FileHandle, Data)? = lock.withLock {
                 guard let input, process?.isRunning == true,
-                      let body = try? JSONEncoder().encode(ScoreRequest(id: "r\(nextID + 1)", sentences: sentences))
+                      let body = try? JSONEncoder().encode(make("r\(nextID + 1)"))
                 else { return nil }
                 nextID += 1
                 waiting["r\(nextID)"] = continuation
@@ -116,9 +125,9 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
             onEvent(.ready(catalogueVersion: message.catalogue_version ?? ""))
         case "progress":
             onEvent(.progress(downloaded: message.downloaded ?? 0, total: message.total ?? 0))
-        case "result":
+        case "result", "flow_result":
             if let id = message.id, let continuation = lock.withLock({ waiting.removeValue(forKey: id) }) {
-                continuation.resume(returning: message.sentences ?? [:])
+                continuation.resume(returning: message)
             }
         case "error":
             let text = message.message ?? "unknown worker error"
@@ -165,7 +174,15 @@ private struct ScoreRequest: Encodable {
     let sentences: [SentenceRequest]
 }
 
-private struct Incoming: Decodable {
+private struct FlowMessage: Encodable {
+    let type = "flow"
+    let id: String
+    let pairs: [FlowRequest]
+}
+
+/// Any message from the worker. `sentences` holds full signals in a score result and a single
+/// flow signal per sentence in a flow result, so it is decoded both ways.
+private struct Incoming: Decodable, Sendable {
     let type: String
     let id: String?
     let catalogue_version: String?
@@ -173,4 +190,19 @@ private struct Incoming: Decodable {
     let total: Int64?
     let message: String?
     let sentences: [String: SentenceSignals]?
+    let flowSentences: [String: Signal]?
+
+    enum CodingKeys: String, CodingKey { case type, id, catalogue_version, downloaded, total, message, sentences }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        type = try c.decode(String.self, forKey: .type)
+        id = try c.decodeIfPresent(String.self, forKey: .id)
+        catalogue_version = try c.decodeIfPresent(String.self, forKey: .catalogue_version)
+        downloaded = try c.decodeIfPresent(Int64.self, forKey: .downloaded)
+        total = try c.decodeIfPresent(Int64.self, forKey: .total)
+        message = try c.decodeIfPresent(String.self, forKey: .message)
+        sentences = type == "result" ? try c.decodeIfPresent([String: SentenceSignals].self, forKey: .sentences) : nil
+        flowSentences = type == "flow_result" ? try c.decodeIfPresent([String: Signal].self, forKey: .sentences) : nil
+    }
 }

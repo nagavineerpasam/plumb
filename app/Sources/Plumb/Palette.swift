@@ -23,6 +23,8 @@ enum Palette {
     static let grammarReady = true
     /// Off until a fine-tuned model passes the sense accuracy bar (tickets 15 and 17).
     static let senseReady = false
+    /// Off until a fine-tuned model passes the flow accuracy bar (tickets 16 and 17).
+    static let flowReady = false
 
     static var order: [String] {
         (grammarReady ? ["grammar"] : []) + (senseReady ? ["sense"] : [])

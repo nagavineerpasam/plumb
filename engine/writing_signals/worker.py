@@ -74,6 +74,13 @@ def _plan(batch: List[dict]) -> List[List[dict]]:
             for i, request in enumerate(batch)]
 
 
+def _valid_flow(message) -> bool:
+    return (isinstance(message, dict) and message.get("type") == "flow"
+            and isinstance(message.get("id"), str) and isinstance(message.get("pairs"), list)
+            and all(isinstance(p, dict) and all(isinstance(p.get(k), str) for k in ("id", "previous", "sentence"))
+                    for p in message["pairs"]))
+
+
 def _valid(message) -> bool:
     return (isinstance(message, dict) and message.get("type") == "score"
             and isinstance(message.get("id"), str) and isinstance(message.get("sentences"), list)
@@ -104,9 +111,9 @@ def main() -> int:
                 continue
             if isinstance(message, dict) and message.get("type") == "shutdown":
                 break
-            if not _valid(message):
+            if not (_valid(message) or _valid_flow(message)):
                 request_id = message.get("id") if isinstance(message, dict) else None
-                emit({"type": "error", "id": request_id, "message": "expected a score request with id and sentences"})
+                emit({"type": "error", "id": request_id, "message": "expected a score request (id, sentences) or a flow request (id, pairs)"})
                 continue
             inbox.put(message)
         inbox.put(None)
@@ -131,7 +138,16 @@ def main() -> int:
             except queue.Empty:
                 break
         closing = None in batch
-        batch = [m for m in batch if m is not None]
+        # Flow is only asked for on demand, so it is answered as it comes, never superseded.
+        for request in [m for m in batch if m is not None and m["type"] == "flow"]:
+            try:
+                signals = engine.flow([(p["previous"], p["sentence"]) for p in request["pairs"]])
+            except Exception as exc:
+                emit({"type": "error", "id": request["id"], "message": str(exc)})
+            else:
+                emit({"type": "flow_result", "id": request["id"],
+                      "sentences": {p["id"]: sig for p, sig in zip(request["pairs"], signals)}})
+        batch = [m for m in batch if m is not None and m["type"] == "score"]
         if batch:
             owned = _plan(batch)
             flat = [s for sentences in owned for s in sentences]

@@ -10,6 +10,10 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
     public var signals: SentenceSignals?
     /// Capitalization and punctuation slips; nil until the typing pause.
     public var mechanics: [MechanicsIssue]?
+    /// Whether this sentence fails to follow the one before it; nil until flow is checked.
+    public var flow: Signal?
+    /// The sentence this flow result was judged against; a different neighbour voids it.
+    var flowPreviousID: String?
 }
 
 /// Keeps a note's per-sentence signals current as the user types.
@@ -39,10 +43,17 @@ public final class NoteAnalyzer {
             if let kept = previous[text]?.first {
                 previous[text]?.removeFirst()
                 return AnalyzedSentence(id: kept.id, text: text, range: range, signals: kept.signals,
-                                        mechanics: kept.mechanics)
+                                        mechanics: kept.mechanics, flow: kept.flow, flowPreviousID: kept.flowPreviousID)
             }
             nextID += 1
             return AnalyzedSentence(id: "s\(nextID)", text: text, range: range)
+        }
+        // A flow result only holds while the sentence before it is the same one.
+        for i in sentences.indices where sentences[i].flow != nil {
+            if i == 0 || sentences[i].flowPreviousID != sentences[i - 1].id {
+                sentences[i].flow = nil
+                sentences[i].flowPreviousID = nil
+            }
         }
         pending?.cancel()
         pending = Task { [debounce] in
@@ -50,6 +61,23 @@ public final class NoteAnalyzer {
             guard !Task.isCancelled else { return }
             self.checkMechanics()
             await self.scoreUnscored()
+        }
+    }
+
+    /// Checks, on request, whether each sentence follows the one before it. Only pairs without a
+    /// current result are sent; results for pairs that changed meanwhile are dropped.
+    public func checkFlow() async {
+        let pairs = sentences.indices.dropFirst().filter { sentences[$0].flow == nil }.map {
+            (FlowRequest(id: sentences[$0].id, previous: sentences[$0 - 1].text, sentence: sentences[$0].text),
+             sentences[$0 - 1].id)
+        }
+        guard !pairs.isEmpty, let results = try? await client.flow(pairs.map(\.0)) else { return }
+        for (request, previousID) in pairs {
+            guard let signal = results[request.id],
+                  let i = sentences.firstIndex(where: { $0.id == request.id }),
+                  i > 0, sentences[i - 1].id == previousID else { continue }
+            sentences[i].flow = signal
+            sentences[i].flowPreviousID = previousID
         }
     }
 

@@ -27,6 +27,8 @@ class Worker:
             message = json.loads(line)
             if message["type"] == kind:
                 return message
+            if message["type"] == "error" and kind != "error":
+                raise AssertionError(f"worker reported an error instead of {kind!r}: {message}")
         raise AssertionError(f"worker exited before sending {kind!r}")
 
     def close(self):
@@ -77,3 +79,14 @@ def test_newer_request_supersedes_queued_older_text(worker):
     assert (old["id"], new["id"]) == ("old", "new")
     assert set(old["sentences"]) == {"s2"}
     assert set(new["sentences"]) == {"s1"}
+
+
+def test_scores_flow_for_sentence_pairs(worker):
+    worker.send({"type": "flow", "id": "f1", "pairs": [
+        {"id": "s2", "previous": "The report is due on Friday.", "sentence": "I will send a draft on Thursday."},
+    ]})
+
+    result = worker.next("flow_result")
+
+    assert result["id"] == "f1"
+    assert set(result["sentences"]["s2"]["distribution"]) == {"yes", "no"}

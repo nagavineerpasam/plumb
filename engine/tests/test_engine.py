@@ -46,3 +46,15 @@ def test_every_sentence_gets_a_sense_verdict(engine):
     result = engine.score(["I love cats and I hate dogs because of okay."])[0]
 
     assert set(result["signals"]["sense"]["distribution"]) == {"yes", "no"}
+
+
+def test_flow_scores_each_sentence_against_the_one_before(engine):
+    results = engine.flow([
+        ("The report is due on Friday.", "I will send you a draft on Thursday."),
+        ("The report is due on Friday.", "My cat loves tuna."),
+    ])
+
+    assert len(results) == 2
+    for signal in results:
+        assert set(signal["distribution"]) == {"yes", "no"}
+        assert signal["value"] in {"yes", "no"}

@@ -21,7 +21,7 @@ final class RealWorkerTests: XCTestCase {
 
         XCTAssertTrue(["english", "plumb"].contains(results["s1"]?.model ?? ""))
         XCTAssertEqual(Set(results["s1"]?.signals.keys ?? [:].keys),
-                       ["grammar", "tone", "formality", "emotion", "confidence", "clarity"])
+                       ["grammar", "sense", "tone", "formality", "emotion", "confidence", "clarity"])
     }
 
     func testWorkerIsRestartedAfterItCrashes() async throws {
@@ -62,5 +62,17 @@ final class RealWorkerTests: XCTestCase {
 
         XCTAssertEqual(analyzer.sentences.count, 3)
         XCTAssertEqual(analyzer.sentences.filter { $0.signals == nil }.map(\.text), [])
+    }
+
+    func testRealWorkerChecksFlow() async throws {
+        let client = WorkerClient(executable: try devPython())
+        try client.start()
+        defer { client.stop() }
+
+        let results = try await client.flow([
+            FlowRequest(id: "s2", previous: "The report is due on Friday.", sentence: "I will send a draft on Thursday."),
+        ])
+
+        XCTAssertEqual(Set(results["s2"]?.distribution.keys ?? [:].keys), ["yes", "no"])
     }
 }
