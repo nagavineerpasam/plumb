@@ -5,21 +5,18 @@ struct ContentView: View {
     @Bindable var model: AppModel
     @State private var confirmDelete: Note?
     @State private var renaming: Note?
-    @State private var newTitle = ""
 
     var body: some View {
         NavigationSplitView {
             List(selection: Binding(get: { model.selection }, set: { model.open($0) })) {
                 ForEach(model.store?.notes ?? []) { note in
-                    HStack {
-                        Text(note.title).lineLimit(1)
-                        Spacer()
-                        Text(note.modified, format: .relative(presentation: .named, unitsStyle: .narrow))
-                            .font(.caption).foregroundStyle(.tertiary).monospacedDigit()
-                    }
-                    .tag(note)
+                    NoteRow(note: note, isSelected: note == model.selection,
+                            isRenaming: Binding(get: { renaming == note }, set: { renaming = $0 ? note : nil }),
+                            open: { model.open(note) },
+                            rename: { model.rename(note, to: $0) })
+                        .tag(note)
                         .contextMenu {
-                            Button("Rename…") { newTitle = note.title; renaming = note }
+                            Button("Rename") { renaming = note }
                             Button("Delete…", role: .destructive) { confirmDelete = note }
                         }
                 }
@@ -63,10 +60,47 @@ struct ContentView: View {
                             isPresented: Binding(get: { confirmDelete != nil }, set: { if !$0 { confirmDelete = nil } })) {
             Button("Move to Trash", role: .destructive) { confirmDelete.map(model.delete) }
         }
-        .alert("Rename note", isPresented: Binding(get: { renaming != nil }, set: { if !$0 { renaming = nil } })) {
-            TextField("Title", text: $newTitle)
-            Button("Rename") { renaming.map { model.rename($0, to: newTitle) } }
-            Button("Cancel", role: .cancel) {}
+    }
+}
+
+/// A note in the sidebar. Click the selected note's title (or double-click any note) to rename it
+/// in place; Return saves, Esc cancels.
+struct NoteRow: View {
+    let note: Note
+    let isSelected: Bool
+    @Binding var isRenaming: Bool
+    let open: () -> Void
+    let rename: (String) -> Void
+
+    @State private var draft = ""
+    @FocusState private var focused: Bool
+
+    var body: some View {
+        HStack {
+            if isRenaming {
+                TextField("Title", text: $draft)
+                    .textFieldStyle(.plain)
+                    .focused($focused)
+                    .onSubmit(commit)
+                    .onExitCommand { isRenaming = false }
+                    .onChange(of: focused) { _, now in if !now { commit() } }
+                    .onAppear { draft = note.title; focused = true }
+            } else {
+                Text(note.title).lineLimit(1)
+                    .onTapGesture(count: 2) { open(); isRenaming = true }
+                    .onTapGesture { isSelected ? (isRenaming = true) : open() }
+            }
+            Spacer()
+            Text(note.modified, format: .relative(presentation: .named, unitsStyle: .narrow))
+                .font(.caption).foregroundStyle(.tertiary).monospacedDigit()
         }
+        .contentShape(Rectangle())
+    }
+
+    private func commit() {
+        guard isRenaming else { return }
+        isRenaming = false
+        let title = draft.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !title.isEmpty, title != note.title { rename(title) }
     }
 }

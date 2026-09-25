@@ -128,7 +128,12 @@ final class AppModel {
         flush()
         perform {
             guard let renamed = try store?.rename(note, to: title) else { return }
-            if selection == note { selection = renamed }
+            if selection == note {
+                // The editor reloads when the file changes; give it the text just saved, not the
+                // text from when the note was opened.
+                openedText = try store?.text(of: renamed) ?? openedText
+                selection = renamed
+            }
         }
     }
 
