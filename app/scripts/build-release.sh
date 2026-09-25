@@ -1,5 +1,5 @@
 #!/bin/bash
-# Builds Plumb.app (with its own Python and the signal engine inside) and Plumb-<version>-arm64.dmg.
+# Builds Plumb.app (with its own Python and the signal engine inside) and Plumb.dmg.
 # Usage: app/scripts/build-release.sh [version]     Output: dist/
 set -euo pipefail
 
@@ -48,7 +48,14 @@ PY="$APP/Contents/Resources/python/bin/python3"
 "$PY" -m pip install --quiet --no-cache-dir --disable-pip-version-check "$ROOT/engine"
 # Trim what the app never uses at runtime.
 SITE="$APP/Contents/Resources/python/lib/python3.12"
-rm -rf "$SITE/test" "$SITE/idlelib" "$SITE/tkinter" "$SITE/site-packages/torch/include"
+rm -rf "$SITE/test" "$SITE/idlelib" "$SITE/tkinter" "$SITE/ensurepip" "$SITE/lib2to3" "$SITE/pydoc_data"
+PKGS="$SITE/site-packages"
+# Tested removable: none of these are imported at runtime. (torch/bin, torchgen and sympy are
+# needed and must stay.)
+rm -rf "$PKGS/torch/include" "$PKGS/torch/share" "$PKGS/pip" "$PKGS"/pip-*.dist-info \
+       "$PKGS/setuptools" "$PKGS"/setuptools-*.dist-info "$PKGS/_distutils_hack" "$PKGS/distutils-precedence.pth" \
+       "$PKGS/pygments" "$PKGS"/pygments-*.dist-info "$PKGS/hf_xet" "$PKGS"/hf_xet-*.dist-info \
+       "$PKGS/networkx" "$PKGS"/networkx-*.dist-info
 find "$APP/Contents/Resources/python" -name "__pycache__" -type d -prune -exec rm -rf {} +
 "$PY" -c "import writing_signals, laya, torch; print('  engine OK, torch', torch.__version__)"
 
@@ -61,7 +68,7 @@ STAGE="$DIST/dmg"
 rm -rf "$STAGE" && mkdir -p "$STAGE"
 cp -R "$APP" "$STAGE/"
 ln -s /Applications "$STAGE/Applications"
-DMG="$DIST/Plumb-$VERSION-arm64.dmg"
+DMG="$DIST/Plumb.dmg"   # fixed name: the README links to releases/latest/download/Plumb.dmg
 rm -f "$DMG"
 hdiutil create -quiet -volname "Plumb" -srcfolder "$STAGE" -ov -format UDZO "$DMG"
 rm -rf "$STAGE"
