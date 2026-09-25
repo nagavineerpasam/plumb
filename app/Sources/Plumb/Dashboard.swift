@@ -5,47 +5,33 @@ import WritingSignalsCore
 struct Dashboard: View {
     let summary: NoteSummary
     let pending: Int
+    /// Whether the note has any text; the welcome tile shows only for an empty note.
+    var hasText = true
+    /// Changes when a different note opens, so the previous note's values aren't shown.
+    var noteID: URL?
     var checkFlow: () async -> Void = {}
     @State private var checkingFlow = false
+    /// The last fully scored summary. While sentences are re-checked the tiles keep these values
+    /// (with a small spinner) instead of emptying, then animate to the new ones.
+    @State private var settled: NoteSummary?
+
+    /// Scored values from the last settled summary, spelling and punctuation always live.
+    private var shown: NoteSummary {
+        guard var s = settled else { return summary }
+        s.mechanics = summary.mechanics
+        return s
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                if pending > 0 {
-                    HStack(spacing: 6) {
-                        ProgressView().controlSize(.small)
-                        Text("Checking \(pending) \(pending == 1 ? "sentence" : "sentences")…")
-                            .font(.caption).foregroundStyle(.secondary)
-                    }
-                    .padding(.horizontal, 6).padding(.top, 2)
-                }
-                if summary.scoredSentences == 0 && summary.mechanics.isEmpty {
+                if !hasText {
                     tile("Plumb") {
                         Text("Start writing. Each sentence is checked as soon as you pause.")
                             .font(.body).foregroundStyle(.secondary)
                     }
                 } else {
-                    tile("Correctness") {
-                        if Palette.grammarReady, let score = summary.correctness {
-                            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                                Text(score, format: .percent.precision(.fractionLength(0)))
-                                    .font(.system(size: 34, weight: .semibold)).monospacedDigit()
-                                    .foregroundStyle(band(score))
-                                Text(verdict(score)).font(.body).foregroundStyle(.secondary)
-                            }
-                            GeometryReader { geo in
-                                ZStack(alignment: .leading) {
-                                    Capsule().fill(.quaternary)
-                                    Capsule().fill(band(score)).frame(width: max(6, geo.size.width * score))
-                                }
-                            }
-                            .frame(height: 6)
-                        } else {
-                            Label("The grammar check is training. Your score appears once it passes its accuracy test.",
-                                  systemImage: "hourglass")
-                                .font(.body).foregroundStyle(.secondary)
-                        }
-                    }
+                    tile("Correctness", busy: pending > 0) { correctness }
                     tile("Needs a look") { issues }
                     if Palette.flowReady {
                         Button {
@@ -59,14 +45,36 @@ struct Dashboard: View {
                         .disabled(checkingFlow)
                         .help("Check whether each sentence follows on from the one before it")
                     }
-                    if summary.confidence != nil {
-                        tile("Voice") { voiceBars }
-                    }
+                    tile("Voice", busy: pending > 0) { voiceBars }
                 }
             }
-            .animation(.smooth, value: summary)
+            .animation(.smooth(duration: 0.35), value: shown)
         }
         .scrollIndicators(.never)
+        .onChange(of: summary, initial: true) { _, new in
+            if new.scoredSentences > 0 || pending == 0 { settled = new }
+        }
+        .onChange(of: pending) { _, now in if now == 0 { settled = summary } }
+        .onChange(of: noteID) { _, _ in settled = nil }
+    }
+
+    @ViewBuilder
+    private var correctness: some View {
+        if !Palette.grammarReady {
+            Label("The grammar check is training. Your score appears once it passes its accuracy test.",
+                  systemImage: "hourglass")
+                .font(.body).foregroundStyle(.secondary)
+        } else {
+            let score = shown.correctness
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(score.map { "\(Int(($0 * 100).rounded()))%" } ?? "–")
+                    .font(.system(size: 34, weight: .semibold)).monospacedDigit()
+                    .contentTransition(.numericText(value: score ?? 0))
+                    .foregroundStyle(score.map(band) ?? .secondary)
+                Text(score.map(verdict) ?? "Checking…").font(.body).foregroundStyle(.secondary)
+            }
+            bar(score ?? 0, color: score.map(band) ?? .secondary)
+        }
     }
 
     /// One short line per issue, in reading order. Hovering a sentence shows its details.
@@ -92,10 +100,10 @@ struct Dashboard: View {
                 groups.append((sentence, [(color, text)]))
             }
         }
-        if Palette.grammarReady { summary.grammarFlagged.forEach { add($0, .red, "Grammar mistake") } }
-        if Palette.senseReady { summary.senseFlagged.forEach { add($0, .red, "Doesn't make sense") } }
-        if Palette.flowReady { summary.flowFlagged.forEach { add($0, .red, "Doesn't follow on") } }
-        summary.mechanics.forEach { add($0.sentence, .orange, $0.issue.message) }
+        if Palette.grammarReady { shown.grammarFlagged.forEach { add($0, .red, "Grammar mistake") } }
+        if Palette.senseReady { shown.senseFlagged.forEach { add($0, .red, "Doesn't make sense") } }
+        if Palette.flowReady { shown.flowFlagged.forEach { add($0, .red, "Doesn't follow on") } }
+        shown.mechanics.forEach { add($0.sentence, .orange, $0.issue.message) }
         return groups
     }
 
@@ -115,20 +123,13 @@ struct Dashboard: View {
     /// Tone and emotion as words, then the three scales as labelled bars.
     private var voiceBars: some View {
         VStack(alignment: .leading, spacing: 14) {
-            if let tone = summary.tone.max(by: { $0.value < $1.value })?.key { textRow("Tone", tone.capitalized) }
-            if let emotion = summary.emotion.max(by: { $0.value < $1.value })?.key { textRow("Emotion", emotion.capitalized) }
+            textRow("Tone", shown.tone.max(by: { $0.value < $1.value })?.key.capitalized ?? "–")
+            textRow("Emotion", shown.emotion.max(by: { $0.value < $1.value })?.key.capitalized ?? "–")
             ForEach(["confidence", "clarity", "formality"], id: \.self) { name in
-                if let value = scale(name) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        textRow(Palette.titles[name] ?? name, Palette.word(for: name, at: value))
-                        GeometryReader { geo in
-                            ZStack(alignment: .leading) {
-                                Capsule().fill(.quaternary)
-                                Capsule().fill(Color.accentColor.opacity(0.75)).frame(width: max(6, geo.size.width * value))
-                            }
-                        }
-                        .frame(height: 6)
-                    }
+                let value = scale(name)
+                VStack(alignment: .leading, spacing: 8) {
+                    textRow(Palette.titles[name] ?? name, value.map { Palette.word(for: name, at: $0) } ?? "–")
+                    bar(value ?? 0, color: Color.accentColor.opacity(0.75))
                 }
             }
         }
@@ -139,20 +140,35 @@ struct Dashboard: View {
             Text(label).font(.body)
             Spacer()
             Text(value).font(.body).foregroundStyle(.secondary)
+                .contentTransition(.interpolate)
         }
     }
 
     private func scale(_ name: String) -> Double? {
         switch name {
-        case "confidence": summary.confidence
-        case "clarity": summary.clarity
-        default: summary.formality
+        case "confidence": shown.confidence
+        case "clarity": shown.clarity
+        default: shown.formality
         }
     }
 
-    private func tile<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+    /// A 0...1 bar whose fill slides to new values instead of jumping.
+    private func bar(_ value: Double, color: Color) -> some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                Capsule().fill(.quaternary)
+                Capsule().fill(color).frame(width: value > 0 ? max(6, geo.size.width * value) : 0)
+            }
+        }
+        .frame(height: 6)
+    }
+
+    private func tile<Content: View>(_ title: String, busy: Bool = false, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+            HStack(spacing: 6) {
+                Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+                if busy { ProgressView().controlSize(.mini).transition(.opacity) }
+            }
             content()
         }
         .padding(18)
@@ -160,5 +176,6 @@ struct Dashboard: View {
         .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
     }
+
 
 }
