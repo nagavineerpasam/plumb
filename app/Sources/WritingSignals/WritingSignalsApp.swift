@@ -10,6 +10,7 @@ struct WritingSignalsApp: App {
         // Launched from `swift run` there is no bundle, so ask to be a regular foreground app.
         NSApplication.shared.setActivationPolicy(.regular)
         NSApplication.shared.activate()
+        (UserDefaults.standard.string(forKey: "appearance").flatMap(Appearance.init(rawValue:)) ?? .system).apply()
     }
 
     var body: some Scene {
@@ -18,6 +19,39 @@ struct WritingSignalsApp: App {
                 .frame(minWidth: 960, minHeight: 600)
         }
         .windowToolbarStyle(.unified)
+
+        Settings {
+            SettingsView()
+        }
+    }
+}
+
+enum Appearance: String, CaseIterable, Identifiable {
+    case system = "System", light = "Light", dark = "Dark"
+    var id: String { rawValue }
+
+    func apply() {
+        NSApplication.shared.appearance = switch self {
+        case .system: nil
+        case .light: NSAppearance(named: .aqua)
+        case .dark: NSAppearance(named: .darkAqua)
+        }
+    }
+}
+
+struct SettingsView: View {
+    @AppStorage("appearance") private var appearance = Appearance.system
+
+    var body: some View {
+        Form {
+            Picker("Appearance", selection: $appearance) {
+                ForEach(Appearance.allCases) { Text($0.rawValue).tag($0) }
+            }
+            .pickerStyle(.segmented)
+        }
+        .padding(24)
+        .frame(width: 380)
+        .onChange(of: appearance, initial: true) { _, value in value.apply() }
     }
 }
 

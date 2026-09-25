@@ -16,6 +16,19 @@ enum Palette {
         "formality": ("Informal", "Formal"),
     ]
 
+    /// Five words along each scale, low to high. Card and panel both use these.
+    static let scaleWords = [
+        "confidence": ["Hesitant", "Somewhat hesitant", "Balanced", "Fairly assertive", "Assertive"],
+        "clarity": ["Confusing", "Somewhat unclear", "Fairly clear", "Clear", "Very clear"],
+        "formality": ["Informal", "Somewhat informal", "Neutral", "Fairly formal", "Formal"],
+    ]
+
+    static func word(for scale: String, at position: Double) -> String {
+        let words = scaleWords[scale] ?? []
+        guard !words.isEmpty else { return "" }
+        return words[min(words.count - 1, max(0, Int(position * Double(words.count))))]
+    }
+
     static let emotions: [String: Color] = [
         "joy": .yellow, "anger": .red, "sadness": .blue,
         "fear": .purple, "surprise": .orange, "neutral": .gray,

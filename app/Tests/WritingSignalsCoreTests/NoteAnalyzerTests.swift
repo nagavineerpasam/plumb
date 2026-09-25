@@ -110,4 +110,66 @@ final class NoteAnalyzerTests: XCTestCase {
         analyzer.update(text: "मैं घर जा रहा हूँ। तुम कहाँ हो?")
         XCTAssertEqual(analyzer.sentences.map(\.text), ["मैं घर जा रहा हूँ।", "तुम कहाँ हो?"])
     }
+
+    func testMechanicsFlagsCapitalizationAndPunctuation() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "hello how are you? Yesterday i went home. Is everything right")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.map(\.kind) }, [
+            [.lowercaseStart],
+            [.lowercaseI],
+            [.missingEndPunctuation],
+        ])
+        XCTAssertEqual(analyzer.summary.mechanicsIssues, 3)
+    }
+
+    func testMechanicsCatchesRepeatedWordsAndExtraSpaces() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "We went to the the park.  It was  sunny.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.map(\.kind) }, [[.repeatedWord], [.extraSpace]])
+    }
+
+    func testSentenceStartingWithLowercaseIIsFlaggedOnce() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "i think so. i.e. we wait.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.first?.mechanics?.map(\.kind), [.lowercaseStart])
+    }
+
+    func testCleanSentencesHaveNoMechanicsIssues() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "Hello, how are you? \"Is everything right?\" I asked. 3 people came!")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics }, [[], [], []])
+        XCTAssertEqual(analyzer.summary.mechanicsIssues, 0)
+    }
+
+    func testMechanicsWaitForThePauseLikeTheOtherSignals() {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .seconds(60))
+
+        analyzer.update(text: "is everything right")
+
+        XCTAssertNil(analyzer.sentences.first?.mechanics)
+    }
+
+    func testMisspelledWordsAreMarkedWithoutSuggestions() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "We should seperate the reports untill Friday.")
+        await analyzer.idle()
+
+        let spelling = analyzer.sentences.first?.mechanics?.filter { $0.kind == .spelling } ?? []
+        XCTAssertEqual(spelling.map(\.word), ["seperate", "untill"])
+        let text = analyzer.sentences[0].text as NSString
+        XCTAssertEqual(spelling.compactMap(\.range).map { text.substring(with: $0) }, ["seperate", "untill"])
+    }
 }

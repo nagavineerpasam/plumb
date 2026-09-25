@@ -29,11 +29,10 @@ struct SignalEditor: NSViewRepresentable {
         text.autoresizingMask = [.width]
         text.textContainer?.widthTracksTextView = true
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineHeightMultiple = 1.55
+        paragraph.lineHeightMultiple = 1.5
         paragraph.paragraphSpacing = 10
         text.defaultParagraphStyle = paragraph
-        let body = NSFont.systemFont(ofSize: 19)
-        text.font = NSFont(descriptor: body.fontDescriptor.withDesign(.serif) ?? body.fontDescriptor, size: 19)
+        text.font = .systemFont(ofSize: 17)
         text.typingAttributes[.paragraphStyle] = paragraph
 
         let scroll = NSScrollView()
@@ -80,6 +79,13 @@ struct SignalEditor: NSViewRepresentable {
             }
         }
 
+        /// NSTextRange for a UTF-16 range of the document.
+        private func textRange(_ range: NSRange, _ content: NSTextContentManager, _ whole: NSTextRange) -> NSTextRange? {
+            guard let start = content.location(whole.location, offsetBy: range.location),
+                  let end = content.location(start, offsetBy: range.length) else { return nil }
+            return NSTextRange(location: start, end: end)
+        }
+
         private func apply(_ sentences: [AnalyzedSentence]) {
             guard let text = textView, let layout = text.textLayoutManager,
                   let content = layout.textContentManager else { return }
@@ -106,6 +112,20 @@ struct SignalEditor: NSViewRepresentable {
                     for: range)
                 if wrong {
                     layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.06), for: range)
+                }
+            }
+            // Mechanics: amber dots under a misspelled word, or under the sentence for other slips.
+            let amber = NSColor.systemOrange
+            let dotted = NSUnderlineStyle([.single, .patternDot]).rawValue
+            for sentence in sentences {
+                for issue in sentence.mechanics ?? [] {
+                    let local = issue.range ?? NSRange(location: 0, length: sentence.range.length)
+                    let absolute = NSRange(location: sentence.range.location + local.location, length: local.length)
+                    guard let range = textRange(absolute, content, whole) else { continue }
+                    if issue.kind == .spelling || sentence.signals?.signals["grammar"]?.value != "yes" {
+                        layout.addRenderingAttribute(.underlineStyle, value: NSUnderlineStyle.thick.rawValue | dotted, for: range)
+                        layout.addRenderingAttribute(.underlineColor, value: amber, for: range)
+                    }
                 }
             }
             text.refreshHover()

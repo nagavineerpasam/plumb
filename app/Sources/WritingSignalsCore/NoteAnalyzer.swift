@@ -8,6 +8,8 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
     /// Where the sentence sits in the note, as a UTF-16 range for the text view.
     public let range: NSRange
     public var signals: SentenceSignals?
+    /// Capitalization and punctuation slips; nil until the typing pause.
+    public var mechanics: [MechanicsIssue]?
 }
 
 /// Keeps a note's per-sentence signals current as the user types.
@@ -15,7 +17,7 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
 public final class NoteAnalyzer {
     public private(set) var sentences: [AnalyzedSentence] = []
 
-    public var summary: NoteSummary { NoteSummary(sentences.compactMap(\.signals)) }
+    public var summary: NoteSummary { NoteSummary(sentences) }
 
     private let client: SignalClient
     private let debounce: Duration
@@ -36,15 +38,17 @@ public final class NoteAnalyzer {
         sentences = Self.split(text).map { text, range in
             if let kept = previous[text]?.first {
                 previous[text]?.removeFirst()
-                return AnalyzedSentence(id: kept.id, text: text, range: range, signals: kept.signals)
+                return AnalyzedSentence(id: kept.id, text: text, range: range, signals: kept.signals,
+                                        mechanics: kept.mechanics)
             }
             nextID += 1
-            return AnalyzedSentence(id: "s\(nextID)", text: text, range: range, signals: nil)
+            return AnalyzedSentence(id: "s\(nextID)", text: text, range: range)
         }
         pending?.cancel()
         pending = Task { [debounce] in
             try? await Task.sleep(for: debounce)
             guard !Task.isCancelled else { return }
+            self.checkMechanics()
             await self.scoreUnscored()
         }
     }
@@ -52,6 +56,13 @@ public final class NoteAnalyzer {
     /// Waits until the analysis started by the latest update has finished.
     public func idle() async {
         await pending?.value
+    }
+
+    private func checkMechanics() {
+        for i in sentences.indices where sentences[i].mechanics == nil {
+            // Splitting uses the raw text, so extra spaces survive into the sentence's range.
+            sentences[i].mechanics = Mechanics.check(sentences[i].text)
+        }
     }
 
     /// Scores every sentence still without signals. If the worker is down (crashed and

@@ -10,8 +10,12 @@ public struct NoteSummary: Sendable, Equatable {
     public var confidence: Double?
     public var clarity: Double?
     public var formality: Double?
+    /// Capitalization and punctuation slips across the note.
+    public var mechanicsIssues = 0
 
-    init(_ scored: [SentenceSignals]) {
+    init(_ sentences: [AnalyzedSentence]) {
+        mechanicsIssues = sentences.reduce(0) { $0 + ($1.mechanics?.count ?? 0) }
+        let scored = sentences.compactMap(\.signals)
         guard !scored.isEmpty else { return }
         let n = Double(scored.count)
         scoredSentences = scored.count

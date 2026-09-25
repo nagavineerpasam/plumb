@@ -17,6 +17,7 @@ struct Dashboard: View {
                         .padding(.top, 40)
                 } else {
                     grammar
+                    tile("Mechanics") { mechanics }
                     tile("Emotion mix") { mix(summary.emotion, colors: Palette.emotions) }
                     tile("Tone") { mix(summary.tone, colors: Palette.tones) }
                     tile("Voice") {
@@ -27,8 +28,8 @@ struct Dashboard: View {
                                         HStack {
                                             Text(Palette.titles[name] ?? name).font(.subheadline.weight(.medium))
                                             Spacer()
-                                            Text(value, format: .percent.precision(.fractionLength(0)))
-                                                .font(.subheadline.monospacedDigit()).foregroundStyle(.secondary)
+                                            Text(Palette.word(for: name, at: value))
+                                                .font(.subheadline).foregroundStyle(.secondary)
                                         }
                                         ScaleBar(value: value, low: low, high: high)
                                     }
@@ -51,7 +52,8 @@ struct Dashboard: View {
                 ProgressView().controlSize(.small)
                 Text("\(pending) analysing").font(.caption).foregroundStyle(.secondary)
             } else {
-                Text("\(summary.scoredSentences) sentences").font(.caption).foregroundStyle(.secondary)
+                Text(summary.scoredSentences == 1 ? "1 sentence" : "\(summary.scoredSentences) sentences")
+                    .font(.caption).foregroundStyle(.secondary)
             }
         }
     }
@@ -63,19 +65,33 @@ struct Dashboard: View {
                 Gauge(value: correct) {
                     EmptyView()
                 } currentValueLabel: {
-                    Text(correct, format: .percent.precision(.fractionLength(0))).font(.headline)
+                    Text("\(correctCount)/\(summary.scoredSentences)").font(.headline).monospacedDigit()
                 }
                 .gaugeStyle(.accessoryCircularCapacity)
                 .tint(.green)
                 .scaleEffect(1.25)
                 .frame(width: 68, height: 68)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("\(summary.scoredSentences - Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())) of \(summary.scoredSentences) sentences look correct").font(.subheadline)
+                    Text("\(correctCount) of \(summary.scoredSentences) \(summary.scoredSentences == 1 ? "sentence looks" : "sentences look") correct").font(.subheadline)
                     let wrong = Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())
                     Text(wrong == 0 ? "No likely mistakes" : "\(wrong) likely \(wrong == 1 ? "mistake" : "mistakes") underlined in red")
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
+        }
+    }
+
+    private var correctCount: Int {
+        summary.scoredSentences - Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())
+    }
+
+    private var mechanics: some View {
+        HStack(spacing: 10) {
+            Image(systemName: summary.mechanicsIssues == 0 ? "checkmark.circle" : "exclamationmark.circle")
+                .font(.title3).foregroundStyle(summary.mechanicsIssues == 0 ? Color.green : Color.orange)
+            Text(summary.mechanicsIssues == 0 ? "Spelling, capitals and punctuation look fine"
+                 : "\(summary.mechanicsIssues) spelling or punctuation \(summary.mechanicsIssues == 1 ? "slip" : "slips") underlined in amber")
+                .font(.subheadline)
         }
     }
 
@@ -105,7 +121,8 @@ struct Dashboard: View {
                 ForEach(items, id: \.key) { label, share in
                     HStack(spacing: 5) {
                         RoundedRectangle(cornerRadius: 2).fill(colors[label] ?? .gray).frame(width: 8, height: 8)
-                        Text("\(label.capitalized) \(Int((share * 100).rounded()))%")
+                        let count = Int((share * Double(summary.scoredSentences)).rounded())
+                        Text("\(label.capitalized) · \(count) of \(summary.scoredSentences)")
                     }
                 }
             }

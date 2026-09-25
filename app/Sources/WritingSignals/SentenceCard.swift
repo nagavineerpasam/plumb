@@ -8,9 +8,18 @@ struct SentenceCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text(sentence.text)
-                .font(.system(.callout, design: .serif))
+                .font(.callout)
                 .lineLimit(3)
                 .foregroundStyle(.secondary)
+            if let issues = sentence.mechanics, !issues.isEmpty {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Mechanics").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+                    ForEach(Array(issues.enumerated()), id: \.offset) { _, issue in
+                        Label(issue.message, systemImage: "exclamationmark.circle")
+                            .font(.caption).foregroundStyle(.orange)
+                    }
+                }
+            }
             if let signals = sentence.signals?.signals {
                 ForEach(Palette.order, id: \.self) { name in
                     if let signal = signals[name] { row(name, signal) }
@@ -38,6 +47,7 @@ struct SentenceCard: View {
             if let (low, high) = Palette.scales[name], let score = signal.score {
                 ScaleBar(value: score, low: low, high: high)
             } else if name != "grammar" {
+                // These bars are the model's certainty for this one sentence.
                 ForEach(signal.distribution.sorted { $0.value > $1.value }.prefix(3), id: \.key) { label, p in
                     HStack(spacing: 8) {
                         Text(label.capitalized).font(.caption2).frame(width: 64, alignment: .leading)
@@ -50,15 +60,19 @@ struct SentenceCard: View {
         }
     }
 
+    /// Words only: scales name their position, choices name the top label or say "unsure".
     private func headline(_ name: String, _ signal: Signal) -> String {
         if name == "grammar" {
             let p = signal.distribution["yes"] ?? 0
-            return signal.value == "yes"
-                ? "Likely a mistake · \(Int((p * 100).rounded()))%"
-                : "Looks correct · \(Int(((1 - p) * 100).rounded()))%"
+            let base = signal.value == "yes" ? "Likely a mistake" : "Looks correct"
+            return (0.35...0.65).contains(p) ? "\(base) · unsure" : base
         }
-        let p = signal.distribution[signal.value] ?? 0
-        return "\(signal.value.capitalized) · \(Int((p * 100).rounded()))%"
+        if let score = signal.score { return Palette.word(for: name, at: score) }
+        let ranked = signal.distribution.sorted { $0.value > $1.value }
+        if ranked.count > 1, ranked[0].value - ranked[1].value < 0.08 {
+            return "Unsure: \(ranked[0].key.capitalized) or \(ranked[1].key.capitalized)"
+        }
+        return signal.value.capitalized
     }
 }
 
