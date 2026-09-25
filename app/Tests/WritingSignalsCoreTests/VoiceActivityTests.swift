@@ -34,6 +34,17 @@ final class VoiceActivityTests: XCTestCase {
         XCTAssertTrue(feed(&detector, 0.008, seconds: 12).suffix(50).allSatisfy { $0 }, "speech never becomes the new background")
     }
 
+    func testTalkingTheMomentSpeakIsClickedStillCounts() {
+        var detector = VoiceActivity()
+        // Speech straight away, no quiet lead-in: loud syllables with the short gaps between words.
+        let speech = (0..<150).map { $0 % 10 < 7 ? 0.012 : 0.003 }
+        let heard = speech.map { detector.hears($0) }
+
+        XCTAssertTrue(heard.prefix(5).allSatisfy { $0 }, "the first words aren't swallowed while the room is measured")
+        let syllables = zip(speech, heard).dropFirst(50).filter { $0.0 == 0.012 }
+        XCTAssertTrue(syllables.allSatisfy { $0.1 }, "the floor settles on the gaps, not on the voice")
+    }
+
     func testSilenceAfterSpeechIsNotVoice() {
         var detector = VoiceActivity()
         _ = feed(&detector, 0.002, seconds: 1)
