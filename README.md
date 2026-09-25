@@ -64,15 +64,15 @@ Hover any sentence for its Correctness and voice:
 
    You only do this once. (Plumb isn't signed with a paid Apple developer certificate yet.)
 
-On first launch Plumb downloads its writing model (about 800 MB) once, with a progress bar. After that it works completely offline.
+On first launch Plumb downloads its writing model (about 800 MB) once, with a progress bar. The first time you click **Speak**, it also downloads its voice model (about 130 MB). After that it works completely offline.
 
-**Requirements:** an Apple Silicon Mac (M1 or newer), macOS 14 or newer, and about 2.5 GB of free disk space. Speaking into notes currently needs macOS 26.
+**Requirements:** an Apple Silicon Mac (M1 or newer), macOS 14 or newer, and about 2.7 GB of free disk space.
 
 Your notes are plain Markdown files in `~/Library/Application Support/Plumb/Notes` (Settings → Show notes in Finder).
 
 ## Privacy
 
-Everything runs on your Mac: the writing model, speech recognition, your notes. There are no accounts, no tracking and no servers. The only network access is the one-time model download.
+Everything runs on your Mac: the writing model, speech recognition, your notes. There are no accounts, no tracking and no servers. The only network access is the one-time download of the writing and voice models from GitHub.
 
 ## How it works
 
@@ -84,6 +84,8 @@ Plumb is built on [Laya](https://github.com/NandhaKishorM/laya), an open-source 
 - how confident and how clear is it?
 
 Spelling, capitals and punctuation use the built-in macOS spell checker plus exact rules.
+
+Speech is turned into text by [Whisper](https://github.com/openai/whisper) (base.en), running on the Neural Engine through [WhisperKit](https://github.com/argmaxinc/WhisperKit). Whisper writes down what you actually said, mistakes included, so Plumb can show you the grammar slips you make out loud.
 
 Accuracy of the shipped model, measured on text it never trained on:
 
@@ -110,6 +112,7 @@ cd app && swift run                                                   # the app 
 ## Credits
 
 - [Laya](https://github.com/NandhaKishorM/laya) by Nanda Kishor M (Apache-2.0).
+- [Whisper](https://github.com/openai/whisper) by OpenAI (MIT), run with [WhisperKit](https://github.com/argmaxinc/WhisperKit) by Argmax (MIT).
 - Trained with [CoLA](https://nyu-mll.github.io/CoLA/), [DAIR Emotion](https://huggingface.co/datasets/dair-ai/emotion) and [Pavlick formality scores](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores) (CC BY 3.0), plus hand-drafted English sets in `engine/data`.
 
 ## License
