@@ -98,10 +98,7 @@ struct SignalEditor: NSViewRepresentable {
                       let end = content.location(start, offsetBy: sentence.range.length),
                       let range = NSTextRange(location: start, end: end) else { continue }
                 guard let signals = sentence.signals else {
-                    // Still being analysed: a quiet dotted line, never the old colour.
-                    layout.addRenderingAttribute(.underlineStyle,
-                        value: NSUnderlineStyle([.single, .patternDot]).rawValue, for: range)
-                    layout.addRenderingAttribute(.underlineColor, value: NSColor.tertiaryLabelColor, for: range)
+                    // Still being checked: no mark (hovering shows "Analysing…"), and never the old colour.
                     continue
                 }
                 guard Palette.grammarReady, let grammar = signals.signals["grammar"] else { continue }
