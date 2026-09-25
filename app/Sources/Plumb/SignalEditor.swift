@@ -79,6 +79,25 @@ struct SignalEditor: NSViewRepresentable {
             }
         }
 
+        /// Where a mechanics issue without its own range should be marked: the word it names,
+        /// or the last word for a missing full stop.
+        static func place(_ issue: MechanicsIssue, in sentence: String) -> NSRange {
+            let text = sentence as NSString
+            if issue.kind == .missingEndPunctuation {
+                let last = text.range(of: #"\S+\s*$"#, options: .regularExpression)
+                return last.location == NSNotFound ? NSRange(location: 0, length: text.length) : last
+            }
+            if issue.kind == .extraSpace {
+                let gap = text.range(of: "  ")
+                if gap.location != NSNotFound { return gap }
+            }
+            if let word = issue.word {
+                let found = text.range(of: word, options: .caseInsensitive)
+                if found.location != NSNotFound { return found }
+            }
+            return NSRange(location: 0, length: text.length)
+        }
+
         /// NSTextRange for a UTF-16 range of the document.
         private func textRange(_ range: NSRange, _ content: NSTextContentManager, _ whole: NSTextRange) -> NSTextRange? {
             guard let start = content.location(whole.location, offsetBy: range.location),
@@ -86,54 +105,36 @@ struct SignalEditor: NSViewRepresentable {
             return NSTextRange(location: start, end: end)
         }
 
+        /// TextKit 2 rendering attributes draw background colours but ignore underlines, so the
+        /// underlines are drawn by SignalTextView itself from `marks`.
         private func apply(_ sentences: [AnalyzedSentence]) {
             guard let text = textView, let layout = text.textLayoutManager,
                   let content = layout.textContentManager else { return }
             let whole = layout.documentRange
-            for key in [NSAttributedString.Key.backgroundColor, .underlineStyle, .underlineColor] {
-                layout.removeRenderingAttribute(key, for: whole)
-            }
+            layout.removeRenderingAttribute(.backgroundColor, for: whole)
+            var marks: [SignalTextView.Mark] = []
             for sentence in sentences {
-                guard let start = content.location(whole.location, offsetBy: sentence.range.location),
-                      let end = content.location(start, offsetBy: sentence.range.length),
-                      let range = NSTextRange(location: start, end: end) else { continue }
-                guard let signals = sentence.signals else {
-                    // Still being checked: no mark (hovering shows "Analysing…"), and never the old colour.
-                    continue
+                guard let signals = sentence.signals else { continue }  // still being checked: no mark
+                let range = sentence.range
+                if (Palette.flowReady && sentence.flow?.value == "yes")
+                    || (Palette.senseReady && signals.signals["sense"]?.value == "yes"),
+                   let wash = textRange(range, content, whole) {
+                    // Doesn't make sense, or doesn't follow on: a soft red wash over the sentence.
+                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.14), for: wash)
                 }
-                if Palette.flowReady, sentence.flow?.value == "yes" {
-                    // Doesn't follow the sentence before: a red band down its full length.
-                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.08), for: range)
-                }
-                if Palette.senseReady, signals.signals["sense"]?.value == "yes" {
-                    // Doesn't make sense: a soft red wash over the whole sentence.
-                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.12), for: range)
-                }
-                guard Palette.grammarReady, let grammar = signals.signals["grammar"] else { continue }
-                // Graphite: a soft band under each sentence, red and heavier for a likely mistake.
-                let wrong = grammar.value == "yes"
-                layout.addRenderingAttribute(.underlineStyle, value: NSUnderlineStyle.thick.rawValue, for: range)
-                layout.addRenderingAttribute(.underlineColor,
-                    value: wrong ? NSColor.systemRed.withAlphaComponent(0.75) : NSColor.systemGreen.withAlphaComponent(0.3),
-                    for: range)
-                if wrong {
-                    layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.06), for: range)
+                if Palette.grammarReady, signals.signals["grammar"]?.value == "yes" {
+                    marks.append(.init(range: range, color: .systemRed, dotted: false))
                 }
             }
-            // Mechanics: amber dots under a misspelled word, or under the sentence for other slips.
-            let amber = NSColor.systemOrange
-            let dotted = NSUnderlineStyle([.thick, .patternDot]).rawValue
+            // Mechanics: amber dots under the word involved.
             for sentence in sentences {
                 for issue in sentence.mechanics ?? [] {
-                    let local = issue.range ?? NSRange(location: 0, length: sentence.range.length)
-                    let absolute = NSRange(location: sentence.range.location + local.location, length: local.length)
-                    guard let range = textRange(absolute, content, whole) else { continue }
-                    if issue.kind == .spelling || !Palette.grammarReady || sentence.signals?.signals["grammar"]?.value != "yes" {
-                        layout.addRenderingAttribute(.underlineStyle, value: dotted, for: range)
-                        layout.addRenderingAttribute(.underlineColor, value: amber, for: range)
-                    }
+                    let local = issue.range ?? Self.place(issue, in: sentence.text)
+                    marks.append(.init(range: NSRange(location: sentence.range.location + local.location, length: local.length),
+                                       color: .systemOrange, dotted: true))
                 }
             }
+            text.marks = marks
             text.refreshHover()
         }
     }
@@ -141,7 +142,40 @@ struct SignalEditor: NSViewRepresentable {
 
 /// Shows a card with every signal when the pointer rests on a sentence.
 final class SignalTextView: NSTextView {
+    struct Mark: Equatable {
+        let range: NSRange
+        let color: NSColor
+        let dotted: Bool
+    }
+
+    /// Underlines to draw: solid red for grammar mistakes, amber dots for spelling and punctuation.
+    var marks: [Mark] = [] {
+        didSet { if marks != oldValue { needsDisplay = true } }
+    }
     var sentenceAt: (Int) -> AnalyzedSentence? = { _ in nil }
+
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        guard let layout = textLayoutManager, let content = layout.textContentManager else { return }
+        let origin = textContainerOrigin
+        for mark in marks {
+            guard let start = content.location(layout.documentRange.location, offsetBy: mark.range.location),
+                  let end = content.location(start, offsetBy: mark.range.length),
+                  let range = NSTextRange(location: start, end: end) else { continue }
+            layout.enumerateTextSegments(in: range, type: .standard, options: []) { _, frame, baseline, _ in
+                let y = origin.y + frame.minY + baseline + 4
+                let line = NSBezierPath()
+                line.move(to: NSPoint(x: origin.x + frame.minX, y: y))
+                line.line(to: NSPoint(x: origin.x + frame.maxX, y: y))
+                line.lineWidth = mark.dotted ? 2 : 2.5
+                line.lineCapStyle = .round
+                if mark.dotted { line.setLineDash([0.1, 4], count: 2, phase: 0) }
+                mark.color.withAlphaComponent(mark.dotted ? 1 : 0.85).setStroke()
+                line.stroke()
+                return true
+            }
+        }
+    }
     private let popover = NSPopover()
     private var hovered: AnalyzedSentence?
     private var lastPoint: NSPoint?
