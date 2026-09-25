@@ -23,7 +23,9 @@ def test_first_launch_downloads_and_unpacks_the_model_with_progress(tmp_path, mo
 
     assert (target / "model.safetensors").stat().st_size == 50_000
     assert (target / "tokenizer" / "tokenizer.json").exists()
-    assert events[-1] == {"type": "progress", "downloaded": source.stat().st_size, "total": source.stat().st_size}
+    size = source.stat().st_size
+    assert events[-2:] == [{"type": "progress", "downloaded": size, "total": size},
+                           {"type": "stage", "stage": "unpacking"}]  # so the app never looks stuck at 100%
     assert not any(p.name.endswith(".part") for p in (tmp_path / "support").iterdir())
 
 

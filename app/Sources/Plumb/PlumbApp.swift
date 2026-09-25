@@ -96,6 +96,8 @@ final class AppModel {
     private var backfill: Task<Void, Never>?
     let store: NoteStore?
     private(set) var phase = Phase.starting
+    /// First-launch setup step shown by the onboarding: 0 downloading, 1 unpacking, 2 starting up.
+    private(set) var setupStep = 0
     private(set) var selection: Note?
     private(set) var openedText = ""
     var showDashboard = true
@@ -268,7 +270,12 @@ final class AppModel {
                 // The setup screen held focus; give the cursor back to the note.
                 if let text = dictation.textView { text.window?.makeFirstResponder(text) }
             case let .progress(done, total):
-                if done < total { phase = .downloading(done, total, problem: nil) }
+                // Once setup has started, keep showing it through 100% until the model is running.
+                if case .downloading = phase { phase = .downloading(done, total, problem: nil) }
+                else if done < total { phase = .downloading(done, total, problem: nil) }
+            case let .stage(stage):
+                guard case .downloading = phase else { return }  // only the first launch shows the steps
+                setupStep = stage == "loading" ? 2 : 1
             case let .failed(message):
                 if case let .downloading(done, total, _) = phase {
                     phase = .downloading(done, total, problem: message)

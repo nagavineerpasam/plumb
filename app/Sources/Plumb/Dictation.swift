@@ -16,6 +16,9 @@ final class Dictation {
     private(set) var level: Double = 0
     /// Set while the voice model downloads (0..<1) and loads (1); nil otherwise.
     private(set) var preparing: Double?
+    /// True while voice is being set up for the very first time (download plus the one-time
+    /// preparation for this Mac), so the note can explain it's a one-off.
+    private(set) var settingUpFirstTime = false
     var problem: String?
 
     /// Words Whisper was unsure of, in note coordinates (for the "maybe misheard" hint).
@@ -122,6 +125,8 @@ final class Dictation {
         preparing = 0
         defer { preparing = nil }
         let model = VoiceModel(folder: WorkerLocation.dataFolder.appendingPathComponent("Voice", isDirectory: true))
+        settingUpFirstTime = !model.isInstalled
+        defer { settingUpFirstTime = false }
         if !model.isInstalled {
             try await model.install(from: VoiceModel.releaseURL) { [weak self] fraction in
                 Task { @MainActor in
@@ -207,10 +212,10 @@ final class Dictation {
               let converter = AVAudioConverter(from: micFormat, to: whisperFormat) else {
             throw DictationError.noAudioFormat
         }
-        let onLevel: @Sendable (Double) -> Void = { [weak self] rms in
+        let onLevel: @Sendable (Double, Bool) -> Void = { [weak self] rms, voiced in
             Task { @MainActor in
                 self?.level = min(1, rms * 12)
-                if rms > HeardAudio.voiceLevel { self?.lastSound = Date() }
+                if voiced { self?.lastSound = Date() }
             }
         }
         node.installTap(onBus: 0, bufferSize: 1024, format: micFormat,
@@ -225,10 +230,9 @@ final class Dictation {
     /// it converts each buffer to 16 kHz mono for Whisper and reports the level to the main thread.
     nonisolated private static func tap(converter: AVAudioConverter, to format: AVAudioFormat,
                                         from micFormat: AVAudioFormat, into audio: HeardAudio,
-                                        onLevel: @escaping @Sendable (Double) -> Void) -> AVAudioNodeTapBlock {
+                                        onLevel: @escaping @Sendable (Double, Bool) -> Void) -> AVAudioNodeTapBlock {
         { buffer, _ in
             let level = rms(buffer)
-            onLevel(level)
             let capacity = AVAudioFrameCount(Double(buffer.frameLength) * format.sampleRate / micFormat.sampleRate) + 1024
             guard let out = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: capacity) else { return }
             var fed = false
@@ -238,8 +242,8 @@ final class Dictation {
                 status.pointee = .haveData
                 return buffer
             }
-            guard let data = out.floatChannelData?[0] else { return }
-            audio.append(UnsafeBufferPointer(start: data, count: Int(out.frameLength)), voiced: level > HeardAudio.voiceLevel)
+            let samples = out.floatChannelData.map { UnsafeBufferPointer(start: $0[0], count: Int(out.frameLength)) }
+            onLevel(level, audio.append(samples ?? UnsafeBufferPointer(start: nil, count: 0), level: level))
         }
     }
 
@@ -264,16 +268,18 @@ final class Dictation {
 /// The 16 kHz audio heard since Speak was clicked, written by the audio thread and read by the
 /// transcription loop, plus where the voice was last heard.
 final class HeardAudio: @unchecked Sendable {
-    /// Microphone level above which the audio counts as someone speaking.
-    static let voiceLevel = 0.01
     private let lock = NSLock()
     private var all: [Float] = []
     private var lastVoice = 0
+    private var activity = VoiceActivity()
 
-    func append(_ chunk: UnsafeBufferPointer<Float>, voiced: Bool) {
+    /// Adds a buffer at microphone level `level`; returns whether it sounded like speech.
+    func append(_ chunk: UnsafeBufferPointer<Float>, level: Double) -> Bool {
         lock.withLock {
             all.append(contentsOf: chunk)
+            let voiced = activity.hears(level)
             if voiced { lastVoice = all.count }
+            return voiced
         }
     }
 
@@ -282,7 +288,7 @@ final class HeardAudio: @unchecked Sendable {
 
     func samples(_ range: Range<Int>) -> [Float] { lock.withLock { Array(all[range.clamped(to: 0..<all.count)]) } }
 
-    func reset() { lock.withLock { all.removeAll(); lastVoice = 0 } }
+    func reset() { lock.withLock { all.removeAll(); lastVoice = 0; activity = VoiceActivity() } }
 }
 
 enum DictationError: LocalizedError {

@@ -3,6 +3,8 @@ import Foundation
 public enum WorkerEvent: Sendable, Equatable {
     case ready(catalogueVersion: String)
     case progress(downloaded: Int64, total: Int64)
+    /// First-launch setup after the download: "unpacking", then "loading".
+    case stage(String)
     case failed(String)
     case exited
 }
@@ -125,6 +127,8 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
             onEvent(.ready(catalogueVersion: message.catalogue_version ?? ""))
         case "progress":
             onEvent(.progress(downloaded: message.downloaded ?? 0, total: message.total ?? 0))
+        case "stage":
+            onEvent(.stage(message.stage ?? ""))
         case "result", "flow_result":
             if let id = message.id, let continuation = lock.withLock({ waiting.removeValue(forKey: id) }) {
                 continuation.resume(returning: message)
@@ -187,12 +191,13 @@ private struct Incoming: Decodable, Sendable {
     let id: String?
     let catalogue_version: String?
     let downloaded: Int64?
+    let stage: String?
     let total: Int64?
     let message: String?
     let sentences: [String: SentenceSignals]?
     let flowSentences: [String: Signal]?
 
-    enum CodingKeys: String, CodingKey { case type, id, catalogue_version, downloaded, total, message, sentences }
+    enum CodingKeys: String, CodingKey { case type, id, catalogue_version, downloaded, stage, total, message, sentences }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -200,6 +205,7 @@ private struct Incoming: Decodable, Sendable {
         id = try c.decodeIfPresent(String.self, forKey: .id)
         catalogue_version = try c.decodeIfPresent(String.self, forKey: .catalogue_version)
         downloaded = try c.decodeIfPresent(Int64.self, forKey: .downloaded)
+        stage = try c.decodeIfPresent(String.self, forKey: .stage)
         total = try c.decodeIfPresent(Int64.self, forKey: .total)
         message = try c.decodeIfPresent(String.self, forKey: .message)
         sentences = type == "result" ? try c.decodeIfPresent([String: SentenceSignals].self, forKey: .sentences) : nil

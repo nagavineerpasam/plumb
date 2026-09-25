@@ -1,7 +1,7 @@
 """Signal worker: newline-delimited JSON over stdin/stdout, started by the app.
 
 App -> worker: {"type": "score", "id", "sentences": [{"id", "text"}]} and {"type": "shutdown"}.
-Worker -> app: ready, progress, result, error. See the spec for the full contract.
+Worker -> app: ready, progress, stage (unpacking, loading), result, error. See the spec for the full contract.
 """
 import json
 import os
@@ -56,6 +56,9 @@ def ensure_models(emit: Callable[[dict], None]) -> None:
                 if now - last > 0.25:
                     emit({"type": "progress", "downloaded": done, "total": total})
                     last = now
+    size = total or done
+    emit({"type": "progress", "downloaded": size, "total": size})
+    emit({"type": "stage", "stage": "unpacking"})
     staging = MODEL_DIR + ".unpacking"
     shutil.rmtree(staging, ignore_errors=True)
     with zipfile.ZipFile(part) as archive:
@@ -63,8 +66,6 @@ def ensure_models(emit: Callable[[dict], None]) -> None:
     shutil.rmtree(MODEL_DIR, ignore_errors=True)
     os.replace(staging, MODEL_DIR)
     os.remove(part)
-    size = total or done
-    emit({"type": "progress", "downloaded": size, "total": size})
 
 
 def _plan(batch: List[dict]) -> List[List[dict]]:
@@ -127,6 +128,7 @@ def main() -> int:
 
     try:
         ensure_models(emit)
+        emit({"type": "stage", "stage": "loading"})
         from .engine import SignalEngine
         engine = SignalEngine()
     except Exception as exc:

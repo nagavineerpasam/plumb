@@ -31,7 +31,7 @@ struct ContentView: View {
         .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
         .overlay {
             if case let .downloading(done, total, problem) = model.phase {
-                Onboarding(downloaded: done, total: total, problem: problem).transition(.opacity)
+                Onboarding(step: model.setupStep, downloaded: done, total: total, problem: problem).transition(.opacity)
             }
         }
         .alert(model.error ?? "", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {}
@@ -95,6 +95,11 @@ struct ContentView: View {
                 }
             }
             VStack(alignment: .leading, spacing: 0) {
+                if model.dictation.settingUpFirstTime, let progress = model.dictation.preparing {
+                    VoiceSetupBar(progress: progress)
+                        .padding(.horizontal, 20).padding(.top, 16)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                }
                 HStack {
                     TitleField(title: model.selection?.title ?? "") { model.renameSelection(to: $0) }
                     Spacer()
@@ -106,21 +111,26 @@ struct ContentView: View {
                     .pointingHand()
                     .help(model.showDashboard ? "Hide signals" : "Show signals")
                 }
-                .padding(.horizontal, 52).padding(.top, 40)
+                .padding(.horizontal, 52).padding(.top, model.dictation.settingUpFirstTime ? 20 : 40)
                 SignalEditor(analyzer: model.analyzer, dictation: model.dictation, noteID: model.selection?.url,
                              initialText: model.openedText, onChange: model.edited)
             }
             .opacity(model.selection == nil ? 0 : 1)
+            .animation(.smooth, value: model.dictation.settingUpFirstTime)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay {
             GeometryReader { geo in
                 if model.dictation.isListening && !model.dictation.heardSomething {
-                    Label("Start speaking…", systemImage: "waveform")
-                        .font(.title3.weight(.medium)).foregroundStyle(.secondary)
-                        .symbolEffect(.variableColor.iterative, isActive: true)
-                        .frame(maxWidth: .infinity)
-                        .position(x: geo.size.width / 2, y: geo.size.height * 0.7)
+                    VStack(spacing: 14) {
+                        Image(systemName: "waveform")
+                            .font(.system(size: 34, weight: .medium))
+                            .symbolEffect(.variableColor.iterative, isActive: true)
+                        Text("Listening").font(.system(size: 28, weight: .semibold))
+                    }
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .position(x: geo.size.width / 2, y: geo.size.height / 2)
                         .transition(.opacity)
                 }
             }
@@ -246,15 +256,21 @@ struct MicButton: View {
     @Bindable var dictation: Dictation
 
     private var title: String {
-        if let preparing = dictation.preparing {
-            return preparing < 1 ? "Getting voice ready… \(Int(preparing * 100))%" : "Getting voice ready…"
-        }
-        return dictation.isListening ? "Stop" : "Speak"
+        if dictation.preparing != nil { return "Starting…" }
+        return dictation.isListening ? "Listening" : "Speak"
     }
 
     var body: some View {
         Button { dictation.toggle() } label: {
-            Label(title, systemImage: dictation.isListening ? "mic.fill" : "mic")
+            HStack(spacing: 7) {
+                if dictation.isListening {
+                    Circle().fill(.white).frame(width: 7, height: 7)
+                        .phaseAnimator([1.0, 0.35]) { dot, opacity in dot.opacity(opacity) } animation: { _ in .easeInOut(duration: 0.8) }
+                } else {
+                    Image(systemName: "mic")
+                }
+                Text(title)
+            }
                 .font(.callout.weight(.medium))
                 .foregroundStyle(dictation.isListening ? Color.white : Color.secondary)
                 .padding(.horizontal, 12).padding(.vertical, 6)
@@ -269,7 +285,7 @@ struct MicButton: View {
         .disabled(dictation.preparing != nil)
         .pointingHand()
         .keyboardShortcut("d", modifiers: [.option, .command])
-        .help(dictation.isListening ? "Stop listening (⌥⌘D)" : "Speak into your note (⌥⌘D)")
+        .help(dictation.isListening ? "Click to stop (⌥⌘D)" : "Speak into your note (⌥⌘D)")
         .alert(dictation.problem ?? "", isPresented: Binding(get: { dictation.problem != nil },
                                                              set: { if !$0 { dictation.problem = nil } })) {}
     }
@@ -306,5 +322,33 @@ extension View {
             case .ended: NSCursor.arrow.set()
             }
         }
+    }
+}
+
+/// Shown across the top of the note the very first time Speak is used, while the voice model
+/// downloads and is prepared for this Mac. It never appears again.
+struct VoiceSetupBar: View {
+    let progress: Double
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Label(progress < 1 ? "Setting up voice for the first time. This happens only once."
+                                   : "Almost ready… preparing voice for this Mac.",
+                      systemImage: "waveform")
+                    .font(.callout.weight(.medium))
+                Spacer()
+                if progress < 1 {
+                    Text("\(Int(progress * 100))%").font(.callout.monospacedDigit()).foregroundStyle(.secondary)
+                }
+            }
+            if progress < 1 {
+                ProgressView(value: progress).progressViewStyle(.linear)
+            } else {
+                ProgressView().progressViewStyle(.linear)
+            }
+        }
+        .padding(.horizontal, 16).padding(.vertical, 12)
+        .background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }
