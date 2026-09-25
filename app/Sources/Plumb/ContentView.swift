@@ -45,6 +45,8 @@ struct ContentView: View {
 
     private var sidebar: some View {
         VStack(alignment: .leading, spacing: 2) {
+            sidebarButton("New note", systemImage: "plus") { model.newNote() }
+                .padding(.bottom, 8)
             ScrollView {
                 VStack(alignment: .leading, spacing: 2) {
                     ForEach(model.store?.notes ?? []) { note in
@@ -61,7 +63,6 @@ struct ContentView: View {
             }
             .scrollIndicators(.never)
             Spacer(minLength: 8)
-            sidebarButton("New note", systemImage: "plus") { model.newNote() }
             sidebarButton("Progress", systemImage: "chart.line.uptrend.xyaxis") {
                 withAnimation(.smooth) { model.showingProgress.toggle() }
             }
@@ -102,6 +103,7 @@ struct ContentView: View {
                         Image(systemName: "sidebar.right")
                     }
                     .buttonStyle(.borderless).foregroundStyle(.tertiary)
+                    .pointingHand()
                     .help(model.showDashboard ? "Hide signals" : "Show signals")
                 }
                 .padding(.horizontal, 52).padding(.top, 40)
@@ -140,6 +142,7 @@ struct ContentView: View {
         }
         .buttonStyle(.plain)
         .focusable(false)  // typing must never "press" a sidebar button
+        .pointingHand()
     }
 }
 
@@ -183,6 +186,7 @@ struct NoteRow: View {
             }
         }
         .contentShape(Rectangle())
+        .pointingHand()
         .onTapGesture(count: 2) { open(); isRenaming = true }
         .onTapGesture { isSelected ? (isRenaming = true) : open() }
     }
@@ -254,6 +258,7 @@ struct MicButton: View {
                 .animation(.easeOut(duration: 0.12), value: dictation.level)
         }
         .buttonStyle(.plain)
+        .pointingHand()
         .keyboardShortcut("d", modifiers: [.option, .command])
         .help(dictation.isListening ? "Stop listening (⌥⌘D)" : "Speak into your note (⌥⌘D)")
         .alert(dictation.problem ?? "", isPresented: Binding(get: { dictation.problem != nil },
@@ -278,6 +283,18 @@ struct TitleBarArea: NSViewRepresentable {
                 }
             } else {
                 window.performDrag(with: event)
+            }
+        }
+    }
+}
+
+extension View {
+    /// Shows the pointing-hand cursor over something clickable, like a link.
+    func pointingHand() -> some View {
+        onContinuousHover { phase in
+            switch phase {
+            case .active: NSCursor.pointingHand.set()
+            case .ended: NSCursor.arrow.set()
             }
         }
     }

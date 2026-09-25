@@ -41,6 +41,9 @@ public final class NoteAnalyzer {
     private let retryDelay: Duration
     private var pending: Task<Void, Never>?
     private var nextID = 0
+    /// Results already worked out this session, by sentence text, so reopening a note shows its
+    /// signals at once instead of checking unchanged sentences again.
+    private var known: [String: (signals: SentenceSignals?, mechanics: [MechanicsIssue]?)] = [:]
 
     public init(client: SignalClient, debounce: Duration = .milliseconds(300),
                 retryDelay: Duration = .seconds(1)) {
@@ -59,7 +62,8 @@ public final class NoteAnalyzer {
                                         mechanics: kept.mechanics, flow: kept.flow, flowPreviousID: kept.flowPreviousID)
             }
             nextID += 1
-            return AnalyzedSentence(id: "s\(nextID)", text: text, range: range)
+            return AnalyzedSentence(id: "s\(nextID)", text: text, range: range,
+                                    signals: known[text]?.signals, mechanics: known[text]?.mechanics)
         }
         // A flow result only holds while the sentence before it is the same one.
         for i in sentences.indices where sentences[i].flow != nil {
@@ -103,6 +107,7 @@ public final class NoteAnalyzer {
         for i in sentences.indices where sentences[i].mechanics == nil {
             // Splitting uses the raw text, so extra spaces survive into the sentence's range.
             sentences[i].mechanics = Mechanics.check(sentences[i].text)
+            known[sentences[i].text, default: (nil, nil)].mechanics = sentences[i].mechanics
         }
     }
 
@@ -116,7 +121,10 @@ public final class NoteAnalyzer {
             do {
                 let results = try await client.score(requests)
                 for i in sentences.indices {
-                    if let signals = results[sentences[i].id] { sentences[i].signals = signals }
+                    if let signals = results[sentences[i].id] {
+                        sentences[i].signals = signals
+                        known[sentences[i].text, default: (nil, nil)].signals = signals
+                    }
                 }
                 return
             } catch {

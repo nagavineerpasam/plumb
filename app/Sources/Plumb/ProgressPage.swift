@@ -125,11 +125,16 @@ struct ProgressPage: View {
             GeometryReader { geo in
                 Rectangle().fill(.clear).contentShape(Rectangle())
                     .onContinuousHover { phase in
-                        guard case let .active(location) = phase, let frame = chart.plotFrame else { hovered = nil; return }
+                        guard case let .active(location) = phase, let frame = chart.plotFrame else {
+                            hovered = nil
+                            NSCursor.arrow.set()
+                            return
+                        }
                         let x = location.x - geo[frame].origin.x
                         hovered = points.min { a, b in
                             abs((chart.position(forX: a.date) ?? 0) - x) < abs((chart.position(forX: b.date) ?? 0) - x)
                         }
+                        (hovered == nil ? NSCursor.arrow : NSCursor.pointingHand).set()  // a click opens the note
                     }
                     .onTapGesture {
                         if let hovered, let note = notes.first(where: { $0.url == hovered.note }) { open(note) }

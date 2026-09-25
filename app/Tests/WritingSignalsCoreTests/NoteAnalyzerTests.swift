@@ -28,6 +28,22 @@ final class NoteAnalyzerTests: XCTestCase {
         XCTAssertTrue(analyzer.sentences.allSatisfy { $0.signals != nil })
     }
 
+    func testReopeningAnUnchangedNoteShowsItsSignalsWithoutRechecking() async {
+        let client = FakeSignalClient()
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+        analyzer.update(text: "First note is here. It has two sentences.")
+        await analyzer.idle()
+        analyzer.update(text: "A different note.")
+        await analyzer.idle()
+        let checksSoFar = client.requests.count
+
+        analyzer.update(text: "First note is here. It has two sentences.")
+
+        XCTAssertTrue(analyzer.sentences.allSatisfy { $0.signals != nil }, "signals show at once, no loading")
+        await analyzer.idle()
+        XCTAssertEqual(client.requests.count, checksSoFar, "nothing is sent to the model again")
+    }
+
     func testResultForTextThatChangedMeanwhileIsNeverShown() async {
         let client = FakeSignalClient()
         let (release, releaser) = AsyncStream.makeStream(of: Void.self)
