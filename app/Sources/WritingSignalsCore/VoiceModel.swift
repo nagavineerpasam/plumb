@@ -62,6 +62,10 @@ public struct VoiceModel: Sendable {
             if done > 0 { request.setValue("bytes=\(done)-", forHTTPHeaderField: "Range") }
             let (stream, response) = try await URLSession.shared.bytes(for: request)
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            if status == 416, done > 0 {  // nothing left past the partial: it's complete, go unzip
+                progress(1)
+                return
+            }
             guard status == 200 || status == 206 else { throw VoiceModelError.http(status) }
             if status == 200, done > 0 {  // the server ignored the range: start over
                 try out.truncate(atOffset: 0)

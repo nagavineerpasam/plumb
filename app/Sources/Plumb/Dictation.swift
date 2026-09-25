@@ -43,6 +43,8 @@ final class Dictation {
     private var lastSound = Date()
     private var silenceTimer: Timer?
     private var unloadTimer: Timer?
+    /// The current Speak session, from the click until the last words have settled.
+    private var session: Task<Void, Never>?
     /// True while Plumb itself edits the text, so those edits aren't mistaken for the user's.
     private(set) var applyingEdit = false
 
@@ -51,9 +53,14 @@ final class Dictation {
     }
 
     func start() {
-        guard !isListening, preparing == nil, textView != nil else { return }
+        // `session` is set at once, so a second click (or ⌥⌘D) while the first is still getting
+        // the microphone or the model ready can't start a second session.
+        guard session == nil, textView != nil else { return }
         problem = nil
-        Task { await self.run() }
+        session = Task {
+            await self.run()
+            self.session = nil
+        }
     }
 
     /// Stops the microphone; the words already spoken still settle.
