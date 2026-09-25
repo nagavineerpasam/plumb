@@ -1,0 +1,750 @@
+{"sentence": "I wonder if we should push the launch back by a week or two.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's possible the numbers in column three are outdated, but I haven't checked.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The shipment might be delayed, though nobody has actually confirmed that yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm leaning toward the blue design, but I could easily change my mind.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Feel free to correct me, but didn't we already approve this budget last month?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Unless I'm mistaken, the warranty claim needs to go through the manufacturer directly.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Off the top of my head, the total might be somewhere around three thousand.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "If I had to guess, the server outage started sometime after midnight.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Is the deadline still Friday?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Take this with a grain of salt, but sales might be a little softer this quarter.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Would you mind checking if the invitation actually went out to everyone?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Can we maybe hold off on the announcement until legal has looked at it?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I have a hunch the leak is coming from the upstairs bathroom, but I'm not certain.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It could just be me, but the app seems to load a bit slower today.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm inclined to think the survey results are skewed, though I'd want a second opinion.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Should we perhaps ask someone from accounting before we finalize the numbers?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I hope this doesn't sound too forward, but could we start the call a bit earlier?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "My best guess is the delay has something to do with customs, but who knows.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "There might be a typo somewhere in the contract, though I'd have to look again.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Switching vendors is worth a look, I suppose, if the current one keeps missing dates.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm not entirely convinced this plan covers every edge case we discussed.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Honestly, I'm not sure who signed off on the last revision, if anyone did.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It seems like the printer might be out of toner, but someone should double-check.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Would it be alright if we pushed the review to next week instead?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I could be reading this wrong, but the chart looks like it's trending down.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Assuming I understood the brief correctly, the deadline is sometime next month.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Part of me thinks we should wait, though I can see the case for moving now.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm fairly certain the flight leaves in the evening, but let me double-check that.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "A backup plan seems wise, just in case the first vendor falls through.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's hard to say for sure, but attendance seems lower than last year's event.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Is there any chance the training session got cancelled without anyone telling me?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I suspect the issue is with the login page, although it could be something else entirely.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "To be honest, I'm still a little fuzzy on how the new onboarding process is supposed to work, especially the approvals part, so bear with me if I ask basic questions.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "This might be a stretch, but could the delay be tied to the holiday schedule?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I keep going back and forth on whether we should renew the lease this year.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Somebody should probably verify this, but I think the invoice total looks a little high.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The launch date might have shifted \u2014 I haven't seen the latest update, so please correct me if I'm wrong.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We may need more time on this, though I'm still working out the exact number.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's a little unclear to me whether the warranty covers accidental damage or not.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Maybe I misread the schedule, but doesn't the workshop start an hour earlier now?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I don't want to speak too soon, but the test results look promising so far.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The file might not have uploaded correctly, so it could be worth resending just in case.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I get the sense the client isn't fully on board yet, but I could be misreading it.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We should probably ask, but I think the return policy is thirty days.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm second in line on this, so I'd rather not commit to a date just yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Honestly, the more I look at these figures, the less sure I feel about them.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Was the meeting room double-booked again?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "My guess is the store closes at nine, though I wouldn't bet on it.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We might be overestimating demand, though the early numbers do look decent.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's worth double-checking, but I don't think the form asks for a phone number.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm somewhat torn on whether we should hire internally or go external for this role.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It occurs to me that the delay might actually be on the supplier's end, not ours.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I could have this backwards, but I thought the report was due before lunch.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "There's a decent chance we'll need to revise the timeline once testing starts.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm not totally clear on why the account got flagged, to be honest.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We may have underestimated the cost, though I'd want to run the numbers again.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's possible nobody has told maintenance about the broken elevator yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I lean toward thinking the meeting should be virtual, but I'm open to either.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Correct me if I'm wrong, but I don't think anyone confirmed the caterer yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm still weighing whether to bring this up in the all-hands or keep it small.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The route might be faster through downtown, though traffic is hard to predict.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I have a feeling the login issue is tied to the recent update, but I'm guessing.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We could be jumping to conclusions here, so maybe we should wait for the audit.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Maybe Thursday works better than Wednesday?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It looks like the numbers might not add up, though I could be missing a column.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I wouldn't rule out a scheduling conflict, but I haven't checked the calendar yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The fridge in the break room has been making an odd noise lately, probably nothing, but worth a look.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm somewhat hesitant to commit to a launch date without hearing from QA first.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The vendor quote is probably out of date by now, though I haven't asked them to confirm.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I guess it's worth asking whether the policy applies to part-time staff too.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "This layout hasn't fully won me over yet, though it might grow on me.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We could probably squeeze in one more slide, but the deck already feels long.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's unclear to me whether the refund was processed or is still pending.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I might be jumping ahead, but should we start drafting the follow-up email?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "To some extent, I think the delay is on us, though I'd want to check the log.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Someone should probably verify whether the backup actually ran last night, since I'm not confident it did.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We should maybe sanity-check the totals before sending this to the board.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "How the client will react is really anyone's guess, though I lean toward them pushing back a little.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Roughly sixty percent done is my best guess for where the project actually stands right now, though that number is really just a guess based on the last few standups.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The new tool looks nicer, though I couldn't tell you for sure whether it's actually faster.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "There's some doubt in my mind about whether the samples were stored correctly.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'd rather not promise a date until I've heard back from the lab.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We might have missed a step somewhere, though I can't pinpoint exactly where.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm guessing the delay has to do with weather, but I haven't confirmed that.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The survey link may have expired before everyone got a chance to respond.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm still a bit uneasy about signing off on this without another review.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We may want to double-check the measurements before ordering the material.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "There's some doubt in my mind about whether current staffing can handle the surge.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The class may have been moved to room two-fourteen, though nobody's told me for certain.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Still torn between the two proposals, honestly.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It might be worth asking IT before we assume the issue is on our end.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Whether the discount code still applies after the price change isn't entirely clear to me.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The estimated delivery date could be off by a day or two either way.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I think, though I wouldn't swear to it, that the warranty just expired.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The numbers may have been entered twice somewhere, so a recount might be worth doing.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "This decision is moving fast enough that I'm not entirely at ease with it.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Could the mix-up have started with the order form, or am I overthinking it?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "A nagging feeling tells me we forgot to notify the neighbors about the upcoming construction noise before it started this week, but honestly I could be wrong about that.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Full runway for a redesign before the deadline seems doubtful, though I haven't run the numbers.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm uncertain whether the committee needs to approve this or just be informed.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's a bit murky to me whether shipping is included in that quote.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I suppose we could try the smaller venue, though I'm not sold on it yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Something in the checkout flow might have broken with yesterday's update, though I haven't had time to trace it back to a specific change yet, so it's still just a hunch.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The estimate might be short on the extra room, though I'd want the contractor to double-check.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We could wait another day, though I worry that might push the launch too far.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm inclined to say the pilot went well, but the sample size feels small.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Did they really say the merger closes next quarter, or did I mishear that?", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Recommending this supplier without more history makes me a little hesitant, honestly.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We might want a fallback plan in case the guest speaker cancels last minute.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm not entirely confident in the projection, since it relies on a lot of assumptions.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "There's some chance the paperwork got lost in the transfer between offices.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I guess it depends on the weather whether the outdoor session goes ahead.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The estimate might be a touch optimistic, I hope that turns out not to be the case.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Trimming the budget is probably possible, though I couldn't say by how much yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's not entirely clear to me who owns this task now that Priya has left.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm somewhat doubtful the current draft will pass legal without changes.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Maybe the best move is to wait for feedback before we commit further.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Comparing those two stores might not be fair, since they serve pretty different areas.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The batch may have been mislabeled during packing, but I honestly can't confirm it either way.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'd lean toward rescheduling, but I know that's not ideal for everyone.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "We should probably check twice, but I think the totals already include tax.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm a little torn on whether this counts as a critical bug or not.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The feedback form was maybe never linked from the homepage \u2014 worth checking.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Let's verify the migration before we proceed, since I can't say for sure it finished cleanly.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The pattern resembles a memory leak, but the root cause is still anyone's guess at this point.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I suspect there's a simpler explanation, though nothing comes to mind right now.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "There's a fair bit of uncertainty around whether the grant will be renewed.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Calling the redesign finished feels premature to me without another round of testing.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "A permit might be missing here, though the contractor hasn't flagged anything so far.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm mildly concerned the timeline is too tight, but I could be wrong.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Saturday or Sunday for the move is a toss-up in my mind right now.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The numbers might not reconcile cleanly, so I'd hold off on presenting them just yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "There's a small chance the ferry schedule changed for the winter season.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I have a vague sense that the policy was updated, but I haven't read it closely.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "A smaller pilot first might make sense, though I'm not certain it's strictly necessary.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I'm hesitant to promise anything until the vendor confirms the parts are in stock.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It's possible the meeting minutes were never sent out to the whole team.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Whether the new rule applies retroactively is still a bit foggy to me, honestly.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Revisiting the pricing might be necessary, though I'd rather see more data before deciding.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The sample size feels too limited to draw firm conclusions from, at least to me.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I still have a real question in my mind about whether the site can handle the extra traffic.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Something about the translation feels off, though I can't say for certain it misses the tone.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Being underprepared for the audit is a real possibility, though it's hard to know without checking.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Whether the refund policy covers digital purchases is something I'm genuinely unsure about.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "It might turn out that the delay was avoidable, but I can't say for certain yet.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Staffing through peak season worries me a little, but I could be overestimating the risk.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The recipe measurements could be off, since I halved the quantities from memory.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "I lean toward thinking the client will push back, though I hope I'm wrong.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Odds are the delay is on the supplier's side, though that's just a guess on my part.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "Come to think of it, maybe we never actually confirmed the caterer for Saturday.", "signal": "confidence", "expected": "hesitant", "source": "claude-synthetic"}
+{"sentence": "The bakery on Elm Street sells sourdough on Tuesdays and Fridays.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Our garden has six tomato plants and two rows of carrots this year.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "She works as a radiologist at the county hospital three days a week.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "He drives a delivery van for the regional distribution center.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "They moved into the apartment on Maple Avenue in early spring.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The museum's new wing houses artifacts from the Bronze Age.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Our team split the audit work between two analysts and a reviewer.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The city council approved funding for a new bike lane on Fifth Street.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "A new pediatric clinic opened near the elementary school last month.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Both teams wore red jerseys for the tournament final.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Each department submits its expense report on the first of the month.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The river rises noticeably after heavy rain in the mountains.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The factory runs two shifts, morning and night, six days a week.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bridge over the canal was rebuilt using steel girders.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lecture covered photosynthesis and cellular respiration.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The exam has forty multiple-choice questions and two essays.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The match ended in a draw after extra time.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The season starts in October and runs through March.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Today's forecast calls for scattered showers in the afternoon.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Yesterday's shipment included two hundred boxes of ceramic tiles.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "This year's harvest was smaller than last year's due to drought.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Last month's electricity bill came to just under two hundred dollars.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Next week's schedule has three site visits planned.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The committee reviews grant applications on a rolling basis.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The council meets on the second Thursday of every month.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The board consists of seven members, four of whom are new.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The staff rotates weekend shifts among the twelve nurses.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The volunteers planted three hundred trees along the riverbank.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The crew laid new asphalt on the northbound lane overnight.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The driver checks tire pressure before every long-haul trip.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The nurse recorded the patient's temperature at two-hour intervals.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The teacher assigns homework on Mondays and collects it on Fridays.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The manager approved three new hires for the warehouse team.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The contractor poured the foundation on a Tuesday in June.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The plumber replaced the corroded pipe under the kitchen sink.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The electrician rewired the garage before the inspection.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "My sister teaches piano lessons out of her home studio.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "My cousin works part time at the aquarium gift shop.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Her flight connects through Frankfurt before landing in Nairobi.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "His car has just over eighty thousand kilometers on it.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Their house sits on a half-acre lot near the reservoir.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Its engine displaces two liters and produces around two hundred horsepower.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Two of the interns transferred to the marketing team in June.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Three students in the class speak Portuguese at home.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Ten employees signed up for the first aid certification course.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Twenty guests attended the retirement dinner on Saturday.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "An old oak tree stands at the entrance to the park.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Every room in the hotel has a view of the harbor.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The device ships with a charging cable and a carrying case.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The vendor delivers produce to the restaurant every Tuesday morning.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lease runs through the end of next August.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The album was recorded over three weeks in a converted barn.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The director cut fifteen minutes from the original edit before release.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The article summarizes findings from a decade of climate data.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The paper was published in a peer-reviewed journal last spring.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The recipe uses buttermilk instead of regular milk.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The account was created in 2021 and has never been renamed.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The server handles roughly ten thousand requests per minute at peak.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The budget for the renovation is set at eighty thousand euros.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The survey questions covered scheduling, workload, and remote work preferences.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The garden shed holds the mower, the hose, and spare pots.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Water boils at a lower temperature at higher altitudes.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Copper conducts electricity fairly well.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The reference desk is staffed from ten until four on weekdays.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The airport terminal has three gates and one lounge.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The clinic accepts walk-ins between nine and eleven each morning.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bakery switches to weekend hours starting in October.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Pallets move through the warehouse on a conveyor system installed last year.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The company hired six engineers and two designers this spring.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The school added a second gym to the east wing.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The hospital opened a new maternity ward last November.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The dog was rescued from a shelter two towns over.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The printer in the copy room takes both A4 and letter paper.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "I moved my desk closer to the window last week.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "I read two chapters of the manual before the training session.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "We planted the seedlings a week earlier than usual this spring.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "We hired two movers for the afternoon and finished before dark.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "You can reach the front desk by dialing zero from any room.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "You submit the form through the online portal, not by email.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The coast road winds along the cliffs for nearly thirty kilometers.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "It rained for most of the weekend, so the match was postponed.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The train from Lyon to Geneva stops twice along the way.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bus route was extended to cover the new housing development.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The road connecting the two villages was widened last year.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The trail climbs about three hundred meters over six kilometers.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lake freezes over most winters by early January.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The forest covers most of the county.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The harbor handles cargo ships as well as fishing boats.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The village hall hosts a craft fair every autumn.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The town hall was built in the eighteen nineties.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The stadium holds forty thousand fans.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The orchestra performs twice a month at the concert hall.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The choir practices on Wednesday evenings in the church hall.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The pharmacy on Baker Street stays open until midnight.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The gym added two new spin classes to the weekly schedule.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The pool's filtration system was replaced during the winter shutdown.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The farmers market sets up in the town square every Saturday.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The vineyard's oldest vines were planted more than sixty years ago.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bakery uses flour milled at a local farm.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The orchard grows apples, pears, and a small stand of cherries planted by the previous owner, along with a few rows of quince that rarely get picked before the frost sets in.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The dairy delivers fresh milk to households twice a week.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The port processes about two hundred containers a day.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The refinery operates around the clock, staffed in three shifts.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The mine ships ore to the coast by rail twice a week.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The wind farm, built on reclaimed farmland outside the city, now supplies power to nearly ten thousand homes across three neighboring districts, according to the regional utility's latest annual report.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The solar array covers about twelve acres of former farmland.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The reservoir supplies drinking water to three neighboring towns.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The treatment plant processes wastewater from the entire district.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The fire station added a second engine to its fleet.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The police precinct covers roughly six square kilometers.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The courthouse hears civil cases on Tuesdays and Thursdays.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The consulate now issues passports on Tuesdays and Thursdays only.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The post office moved to a smaller location on Church Street.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The credit union opened a second branch downtown.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The insurance policy covers water damage but not flooding.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The mortgage has a fixed rate for the first five years.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The invoice lists labor and materials as separate line items.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The spreadsheet tracks expenses by category and by month.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The migration to the new database took place over a single weekend.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The app was updated to version three point two last week.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The software runs on both Windows and macOS.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The keyboard has a numeric pad and backlit keys.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The camera captures video at up to sixty frames per second.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The battery lasts roughly nine hours under normal use.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The thermostat was installed alongside the new furnace last winter.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The washing machine has a quick-wash cycle of thirty minutes.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The oven preheats to two hundred degrees in about ten minutes.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The refrigerator has a separate compartment for vegetables.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The heater in the workshop runs on propane.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The ceiling fan has three speed settings.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The workshop stores tools on a pegboard along the back wall.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The classroom has twenty-four desks arranged in four rows.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The playground surface was resurfaced with rubber matting last spring.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The daycare accepts children from six months to five years.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The kindergarten class takes a nature walk every Friday.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The university offers the course in both fall and spring terms.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The dormitory's laundry room reopened after new machines were installed.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The cafeteria serves lunch between eleven thirty and one thirty.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lab requires safety goggles and closed-toe shoes at all times.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The clinic's waiting room has seating for about twenty patients.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The dentist schedules cleanings every six months.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The optometrist checks vision and eye pressure during the visit.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The physiotherapist sees patients by appointment only on weekdays.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The veterinarian examined the cat and updated its vaccination record.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The shelter currently houses fourteen dogs and nine cats.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The zoo feeds the elephants twice a day, morning and evening.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The aquarium's largest tank holds about four hundred thousand liters.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The greenhouse keeps a steady temperature of around twenty degrees.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The orchard's harvest this year came in slightly above average.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bee colony, one of six kept behind the community garden, produced roughly thirty kilograms of honey this season, slightly more than the average of the past five years combined.", "signal": "confidence", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Ship the update tonight; we've tested it enough.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Close the deal by Friday; the buyer already agreed to the terms.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Cut the marketing budget by twenty percent this quarter.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Hire two more nurses before the ward reopens.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Sign the lease today, the terms won't get better.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Pull the product from shelves immediately.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Reject the second draft outright, it misses the brief entirely.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Promote her to team lead, she's earned it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Move the launch to next Tuesday, the tests are done.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Finish the wiring before the inspector arrives tomorrow morning.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Double the order, demand is only going up.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Replace the vendor now, they've missed three deadlines.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Lock the pricing in before the board meeting starts.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Freeze new spending until the audit is complete.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Train every new hire on the safety protocol first thing.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Renegotiate the contract, the current terms favor them too much.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Publish the results as soon as the final check clears.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Terminate the trial early, the data already makes the case.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Back the smaller vendor, their proposal is stronger on every count.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I am confident this hire will outperform expectations within a year.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I have no reservations about signing off on this design.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I stand firmly behind the decision to delay the merger.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I trust this team completely to deliver on schedule.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Nothing gets built until the safety inspection clears, and that's non-negotiable.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I refuse to sign this without the revised terms in writing.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I expect this project to finish under budget, and it will.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I back this candidate without hesitation.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I guarantee the fix resolves the crash on every device we tested.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I've made up my mind: we're switching suppliers next month.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Submit the form before noon tomorrow; late entries will not be reviewed.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "You must wear protective gear on the factory floor at all times.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "You will report directly to the operations manager starting Monday.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "She led the negotiation flawlessly and closed the contract in a day.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "He built the prototype in a week and it works exactly as planned.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "They outperformed every competitor in the region last quarter.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Our engineers solved the bottleneck; throughput is up forty percent.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Our results speak for themselves, this strategy is working.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "This design is objectively better than the previous version.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Every other option has already fallen through; this is what we're doing.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "That decision was correct then and it's correct now.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Nothing about this plan needs revising before we ship it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Nobody disputes that the new process is faster.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Every test we ran confirmed the same result.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Both audits reached the identical conclusion: the books are clean.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "After three independent lab tests, two field inspections, and a full review of the maintenance logs, the evidence leaves absolutely no room for doubt about what caused the failure.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The numbers settle this argument once and for all.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The board approved the merger unanimously and it moves forward now.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The panel reached a unanimous verdict, and construction resumes tomorrow.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Management has decided; the office relocates in March.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Legal cleared the contract, so we're proceeding as planned.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Engineering confirmed the fix, and it ships with tomorrow's build.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Sales closed the biggest deal of the year on Tuesday.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Finance approved the extra headcount for next quarter.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Security flagged the vulnerability, and we patched it within the hour.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Quality control rejected the batch; it does not leave the warehouse.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Operations will handle the rollout, marketing owns the messaging.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We're doubling down on this market, the data supports it fully.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We rejected the offer; it undervalued the company significantly.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We already decided, and we're not revisiting it again.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We're going with plan A, plan B is off the table.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We won the bid outright, no other firm came close.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We fixed the root cause, not just the symptom.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We will deliver every unit by the fifteenth, without fail.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We're confident this rollout will go smoothly based on the pilot results.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Do the math again if you want, the answer won't change.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Trust the process; it has worked every single time so far.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Hold the line on pricing; competitors will follow eventually.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Push the release, the regression tests all passed clean.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Skip the extra review round, the design is finished.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Take the promotion, you're more than ready for it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Call the client today and confirm the new terms.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Cancel the backup meeting, the first one covers everything.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Drop the feature, it adds complexity without real value.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Keep the current supplier, switching now would be a mistake.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Set the deadline for Thursday and hold everyone to it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "There is zero chance this deadline slips again.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "This outcome was never in doubt, given the preparation.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "This quarter is the moment to push into the region, and we're taking it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "It's settled: production moves to the new facility in May.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "It is beyond question that the redesign improved conversion rates.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I made the call, and I'm not walking it back now.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "My team can handle the extra workload without additional hires.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Her analysis is airtight; the projections hold up under scrutiny.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "His argument is correct, and the committee should adopt it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Their proposal wins on cost, speed, and quality alike.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Its performance under load settled the debate completely.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Two independent reviews confirmed the same finding.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Three separate tests ruled out mechanical failure entirely.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Twelve of the fourteen stores hit their targets, and the other two will next month.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "A single glance at the ledger tells you the answer.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Every engineer on the team signed off on the release.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Every region ships its numbers by Friday, and that's final.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Neither vendor met the bar, so we're building it in-house.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Either option works, but the first is clearly stronger.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Sign off on the budget now; the figures have already been triple-checked.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Deploy the patch tonight; waiting only increases the risk.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Commit to the roadmap we agreed on last week.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Extend the warranty to two years, customers will notice the difference.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Raise the price by ten percent, the market will bear it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Withdraw the bid, the terms no longer make sense for us.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Restart the negotiations from scratch if they won't move on price.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Insist on the original timeline; we've already given enough ground.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Split the workload evenly between the two teams starting Monday.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Merge the two departments; the overlap has been obvious for months.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Shut the pilot line down until the safety review is finished.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I know this recommendation is correct because we've tested every alternative.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The second candidate outperformed everyone else in the panel interview, and that settles it for me.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Given everything the pilot showed us over the last three months, I firmly believe this is the best possible use of the remaining budget, and I'll defend that in front of the board.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I will personally sign off on the release before it ships.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I intend to raise this at the board meeting regardless of pushback.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I've reviewed every version of this document and this one is final.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I can say with total confidence that the numbers hold up.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "I'm not backing down on the safety requirements, not even slightly.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We stand by every claim in this report.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We closed the round two weeks ahead of the target date.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "We're not renegotiating the delivery date under any circumstances.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Between the two pilot cities, four hundred thousand transactions, and zero major incidents, we proved the concept works at real scale, not only under lab conditions.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Given the test results, there is no case for delaying the launch.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Given how the pilot performed, expanding to three more cities is the obvious next step.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Once the contract is signed, there is no going back on these terms.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Since the audit found nothing, we're closing this investigation now.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "After three rounds of review, the design is locked.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Based on every metric we track, this campaign outperformed the last one.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Considering the risk, cancelling the trip is the right call.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "As agreed, the wire transfer goes out at nine sharp on Monday.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Make the call now, the window for a good deal closes tonight.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Send the confirmation immediately; the client is waiting on it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Draft the response today; a slow reply here costs us the account.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Assign the case to the senior team, this one needs experience.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Order the replacement parts now, the line can't wait until next week.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Book the venue today, not tomorrow.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "File the complaint this week; the deadline for action is closing fast.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Confirm the booking in writing so there's no ambiguity later.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "No amount of pushback changes the fact that this is the right call.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Absolutely nothing about the plan needs to change before Monday.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The verdict on this rollout is clear: full speed ahead.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The client will sign by Friday, the terms already match what they asked for.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The lab confirmed the results twice, so we're moving forward.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The inspector approved the site, construction starts Monday as scheduled.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The panel ruled in our favor, and the case is closed.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The surgeon confirmed the procedure is safe to proceed.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The pilot program exceeded every target we set for it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The prototype passed every stress test without a single failure.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The coach is certain this lineup wins the championship.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "The captain gave the order, and the crew executed it without hesitation.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Increase production now, the warehouse is nearly empty.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Recall the batch today, no matter what it costs us.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Fire the underperforming contractor immediately.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Green-light the expansion, every projection supports it.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Lock in the vendor contract before the price increase hits next week.", "signal": "confidence", "expected": "assertive", "source": "claude-synthetic"}
+{"sentence": "Insert the batteries with the positive terminal facing up.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Attendees: Marcus, Priya, Oleg, and two guests from the vendor.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Action items were assigned to each department lead before adjourning.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Grease the tin and dust it lightly with flour before pouring in the batter.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The parking garage entrance is around the back, off the side street.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The manual lists three troubleshooting steps for a flashing power light.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Attach bracket A to the wall using the two longer screws provided.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The agenda covered budgeting, staffing, and the upcoming office move.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Fold the paper in half, then in half again before cutting.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The train departs platform four at 8:15 and arrives at 9:40.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Class starts at nine and covers chapters four through six today.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Remove the packaging and let the unit sit for ten minutes before use.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The invoice number appears in the top right corner of the page.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Set the parking brake before attempting to change the tire.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The shipment includes four crates of glassware and two pallets of tiles.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Weigh the flour before adding it to the mixing bowl.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The building's east entrance is closed for repairs until next Tuesday.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Enter your employee ID, then select the department from the dropdown.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The report lists revenue by region for the first two quarters.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Chapter three introduces the formula for calculating compound interest.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bus stop moved south last week.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Label each box with the room number before loading the truck.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The warranty card must be returned within thirty days of purchase.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Staple the receipt to the back of the expense form.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Guided tours of the sculpture hall run on the hour, every hour.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Connect the blue wire to terminal two and the red wire to terminal one.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The spreadsheet has one tab per month and a summary tab at the end.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Twelve boxes arrived this morning and six were placed in storage.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The itinerary lists a layover of ninety minutes in Doha.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Sand the surface lightly before applying the second coat of paint.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The minutes note that the vote passed with eight in favor and one abstention.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The form requires a signature on page two and page four.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Swap the filter once it turns from white to gray.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lecture hall seats one hundred twenty and has two entrances.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Check the oil level before starting the engine each morning.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The policy document is divided into six sections and an appendix.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Mix one part concentrate with four parts water before applying.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The delivery window is between noon and four in the afternoon.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Section 4.2 of the manual explains the reset procedure.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The classroom schedule alternates between math and science each Tuesday.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Place the tray on the middle rack for even cooking.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The catalog lists sizes from extra small through triple extra large.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Confirm the appointment by replying to the automated text message.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Housed in a converted wing of the old courthouse, the archive holds municipal records dating back to the early nineteen hundreds, including tax ledgers, land surveys, and correspondence between successive town clerks.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Loosen the four corner bolts before removing the panel.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The quarterly report totals expenses across five categories.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The map shows three hiking trails of varying difficulty.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Sign in at the front desk and clip on a visitor badge.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The recipe yields twelve muffins using a standard tin.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The contract runs for two years with an option to renew.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Row 3 in the spreadsheet lists the vendor's contact information.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The device pairs with a phone over Bluetooth within thirty seconds.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The syllabus outlines four assignments and one final exam.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Plug the cable into the port labeled HDMI 2.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The hallway lights turn off automatically after fifteen minutes.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The passport must be valid for six months beyond the travel date.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Slide the cover off and press the reset button for five seconds.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The order confirmation lists a delivery date of the twelfth.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The presentation has eighteen slides and runs about twenty minutes.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The room can be booked in one-hour blocks through the online calendar.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The technician replaced the belt and checked the alignment.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The floor plan shows two exits on the north side of the building.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Enter the code printed on the back of the receipt to activate the warranty.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The checklist has nine items to complete before closing the store.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The results are grouped by age range and then by region.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Tighten each bolt in a crisscross pattern to distribute pressure evenly.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lesson plan covers verb conjugation for the first half of class.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The device requires a firmware update before first use.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Storage lockers are located on the ground floor near the stairwell.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The form asks for a mailing address and a billing address separately.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The schedule shows two trains per hour during peak times.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Cut along the dotted line and fold the flap inward.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The audit covered inventory, payroll, and vendor contracts.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The parking permit is valid for the calendar year only.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Set the timer for twenty-five minutes and take a short break after.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The tour begins in the lobby and ends on the rooftop terrace.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lab notebook entry from Tuesday is missing a signature.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Fold the chopped walnuts and dried cranberries into the batter last.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Move the cursor to the top menu and select export as PDF.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bin collection alternates between recycling and general waste each week.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The user guide includes a diagram for each assembly step.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The instructor returns graded assignments during the following week's session.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The elevator services floors one through twelve.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The workshop handout lists five discussion questions for small groups.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The receipt shows a subtotal, tax, and a final total.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The package includes a charger, two cables, and a user guide.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The route map includes elevation gain for each of the four legs.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The spreadsheet formula multiplies quantity by unit price in column D.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The safety briefing covers exits, assembly points, and fire extinguisher locations.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The template includes placeholders for the date, name, and reference number.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The seating chart places new hires near their team leads.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The wall clock in the lobby runs two minutes fast.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The delivery driver scans each package before leaving it at the door.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The employee handbook was updated to include the new leave policy.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The thermostat display shows both the current and target temperature.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The inventory count found three fewer units than the system recorded.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The checklist requires two signatures before the shipment can leave the dock.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Onboarding runs about two hours total.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The dashboard refreshes every five minutes with the latest figures.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The handbook explains how to file an expense claim online.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Weather today: partly cloudy, high of nineteen degrees, light wind from the west.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Rainfall this month totaled forty millimeters, slightly below the seasonal average.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Low tide hits at 6:12 today.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Sunrise is at 6:48, sunset at 7:32.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Humidity levels stayed above eighty percent for most of the afternoon.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The forecast for the weekend shows clear skies and mild temperatures.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Snowfall accumulated to about ten centimeters overnight in the northern districts.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Wind speeds reached forty kilometers per hour along the coast.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The barometer reading dropped two points between noon and evening.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Air quality was rated moderate across the metropolitan area today.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The garden log notes the tomatoes were staked on the fourteenth.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Seedlings were transplanted into the raised beds this weekend.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The compost bin was turned and mixed with fresh leaves.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Watering is scheduled for early morning three times a week.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The irrigation timer runs for fifteen minutes at six a.m.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Fertilizer was applied to the front lawn on Saturday.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The hedge along the driveway was trimmed to waist height.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Mulch was spread across the flower beds before the frost.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The greenhouse thermometer read twenty-two degrees at midday.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Bulbs were planted along the walkway in early autumn.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The recipe card lists cumin, coriander, and paprika as the base spices.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Dice the onions finely and set them aside in a small bowl.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Simmer the sauce for twenty minutes, stirring occasionally.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bread needs to proof for about an hour before baking.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Whisk the eggs and sugar until the mixture turns pale.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The stew serves six and keeps well in the refrigerator for three days.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Marinate the chicken for at least two hours before grilling.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The pantry list includes flour, rice, lentils, and canned tomatoes.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Slice the bread into even pieces before toasting.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The soup thickens as it cools, so add water if needed.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The grocery list includes milk, eggs, spinach, and two loaves of bread.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Pack the cooler with ice before loading the sandwiches and drinks.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Two friends offered to help load the boxes into the van.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Label the kitchen boxes separately from the bedroom boxes.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The new address takes effect on the first of next month.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Utilities were transferred to the new tenant on the fifteenth.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lease agreement includes a clause about pet deposits.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The apartment listing includes a floor plan and six photos.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Viewing appointments are scheduled every thirty minutes on Saturday.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The property tax bill is mailed out each spring.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The inspection report noted minor wear on the front steps.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The itinerary includes two nights in Lisbon before continuing to Porto.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Check-in begins at three in the afternoon and checkout is at eleven.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The rental car reservation includes unlimited mileage.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Luggage allowance is one carry-on and one checked bag per passenger.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The ferry has two crossings a day, one before noon and one after dinner.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Currency exchange counters are located near gate twelve.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The travel insurance policy covers trip cancellation and lost baggage.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The visa application, updated after the embassy revised its requirements in the spring, now asks for two passport photos, a recent bank statement, and a signed letter confirming the purpose and length of the visit.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Boarding begins thirty minutes before scheduled departure.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The hotel offers a shuttle to the airport every hour.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lab results were filed under the patient's record number.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The prescription is valid for three refills over six months.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The clinic requires a referral for specialist appointments.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Blood pressure was recorded at each of the three visits.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The vaccination schedule lists doses at two, four, and six months.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The physical therapy plan includes exercises twice a week for six weeks.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The pharmacy is open until nine on weekdays and six on weekends.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The dosage instructions specify one tablet every eight hours.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The x-ray showed no fractures in either wrist.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The intake form asks for allergies and current medications.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The syllabus lists the textbook edition required for the course.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Office hours are held on Tuesdays and Thursdays from two to four.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Late assignments lose ten percent of the grade for each day past the due date.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The rubric allocates points for structure, evidence, and clarity.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The reading list includes three novels and two essay collections.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The lab report must include a hypothesis, method, and results section.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Group projects are assigned in teams of four.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The final exam covers material from weeks one through ten.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The library extended borrowing periods to three weeks this semester.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Attendance is recorded at the start of each session.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The scholarship application deadline is the last Friday of March.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The bank statement lists transactions in chronological order.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The loan agreement specifies a fixed interest rate over ten years.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The invoice was split into two payments of equal size.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The budget spreadsheet tracks spending across eight categories.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Direct deposit is processed on the last business day of the month.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The tax form requires figures from both the previous and current year.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The savings account earns interest compounded monthly.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The insurance premium is billed quarterly rather than annually.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The receipt confirms payment of the outstanding balance in full.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The annual report includes a summary of revenue by product line.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The committee minutes note the next meeting is scheduled for April.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The project plan lists five milestones across three months.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The status update lists tasks as complete, in progress, or blocked.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The team retrospective covered what went well and what to change.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The onboarding checklist includes setting up email and building access.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The org chart shows four teams reporting to the same director.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The change log lists updates made in the latest software release.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The release notes mention two bug fixes and one new feature.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The ticket was assigned to the engineering queue this morning.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The backlog contains fourteen items ranked by priority.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Following the team's move to a new project tracker in January, the sprint now runs for two weeks starting on a Monday, with planning on day one and a retrospective on the final Friday.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The standup covers three questions: yesterday, today, and blockers.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The design document outlines the database schema for the new module.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The test plan lists twelve scenarios to verify before release.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The deployment window is scheduled for Saturday night to minimize impact.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The server logs recorded a spike in traffic around noon.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The API documentation, rewritten last quarter after several support tickets flagged inconsistencies, lists each endpoint alongside its expected parameters, default values, and a short example request for common use cases.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The code review checklist includes tests, documentation, and style guidelines.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Press and hold the power button for three seconds to restart the device.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Before its first assembly at the community center in 2019, the volunteer committee spent six weeks drafting a maintenance manual that later became the template every branch office adopted for its own equipment logs.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Screws B and C secure the bottom panel to the frame.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The remote requires two AAA batteries, sold separately.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Align the notches on the lid with the marks on the base.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The assembly takes about twenty minutes with the included tools.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Store the device away from direct sunlight and moisture.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The product ships in a box measuring thirty by twenty centimeters.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Warranty coverage begins on the date of purchase, not delivery.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The instructions recommend two coats of primer before painting.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The toolkit includes a hex wrench, a screwdriver, and spare bolts.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Return the item in its original packaging within fourteen days for a refund.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The model number is printed on a sticker inside the battery compartment.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The cable length is two meters, extendable with an adapter.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The unit automatically powers down after twenty minutes of inactivity.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Registration can be completed online using the serial number on the box.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The city council posted the agenda for next week's session online.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Public comment is limited to three minutes per speaker.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The zoning proposal covers three blocks along the riverfront.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Voter registration closes thirty days before the election.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The town's recycling program accepts glass, paper, and plastic.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Road closures are scheduled between eight in the evening and six in the morning.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The library card is valid at all branches within the county.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Permit applications are processed within ten business days.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The community center offers free classes on Tuesday evenings.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The census form asks about household size and housing type.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The court clerk files transcripts within five business days of a hearing.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The jury was seated after two days of selection.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The filing deadline for the appeal is the end of next month.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The notary verified the signatures on both copies of the deed.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The contract includes a clause covering early termination fees.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The witness statement was recorded and filed with the clerk.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The zoning board approved the variance by a vote of five to two.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The meeting was called to order at ten past nine.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Minutes from the previous session were approved without amendment.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The treasurer presented the quarterly financial summary.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "New business included a proposal to update the bylaws.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The vote was tabled until the next scheduled meeting.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Members were reminded to submit reimbursement forms by Friday.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The chair closed the meeting at eleven fifteen.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The newsletter goes out on the first Monday of each month.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Membership renewal notices were mailed out last week.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The volunteer schedule covers weekday and weekend shifts.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The donation drive collected canned goods and winter coats.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The nonprofit's annual report, compiled by the finance committee over three months, breaks down program spending by category, compares it against the previous year's budget, and includes a short letter from the outgoing board chair.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "New volunteers complete an orientation session before their first shift.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The food bank distributes packages every Wednesday afternoon.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The shelter's intake form records arrival date and length of stay.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The fundraiser raised enough to cover three months of operating costs.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The charity's board meets quarterly to review the budget.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Sheet music for the spring concert was handed out this week.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The recital program lists eight pieces across two intermissions.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The gallery's current exhibit features work from local sculptors.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The exhibit closes at season's end.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Tickets for the matinee are sold at half price.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The orchestra tunes to the oboe's A before each performance.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The festival schedule lists performances on three separate stages.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The book club picks a new title after every third gathering.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The screening starts at seven with a short introduction beforehand.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The gallery closes an hour earlier on holidays.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The league standings are updated after each round of matches.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The tournament bracket was posted on the notice board this morning.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Practice moved from the outdoor field to the gym due to rain.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The coach swapped the starting goalkeeper before kickoff.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The scoreboard shows the home team leading by six points.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Tryouts are held on two consecutive Saturdays in August.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Four minutes of stoppage time were added.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The relay team finished with a combined time of just under four minutes.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Equipment checks happen before every home game.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "A second Wednesday spin class was added.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The trail map marks water stations every five kilometers.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The car's service record shows the last oil change at forty thousand kilometers.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Tire pressure should be checked when the tires are cold.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The dashboard warning light indicates the fuel filter needs replacing.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The manual lists the recommended tire size for this model.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The mechanic replaced both brake pads and rotated the tires.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The recall notice, issued after an audit found a wiring fault in the rear brake assembly, covers two model years and asks owners to book a free inspection at any authorized dealership.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The odometer was logged first.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The registration renewal is due within thirty days of the expiration date.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Following a change in the county's vehicle safety code last year, the garage now schedules inspections every six months instead of annually, and sends a reminder postcard two weeks before each due date.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The insurance claim form asks for photos of the damage.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The classroom projector connects via both HDMI and USB-C.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The router resets to factory settings after holding the button for ten seconds.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The spreadsheet macro runs automatically when the file opens.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "Three jobs sit in the print queue.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The software license covers up to five installations.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The backup runs nightly at two in the morning.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The firewall log lists blocked connection attempts by time and source.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The update installs automatically the next time the device restarts.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The onboarding video walks through account setup in under ten minutes.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The subscription renews annually unless cancelled thirty days in advance.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The customer support line switches to a callback system after hours.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The return label is included in the original shipping box.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The store's opening hours changed to ten through eight for the holidays.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The cashier scans each item before bagging it.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The receipt printer is out of paper on register three.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The inventory system flags items below the minimum stock level.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The delivery truck makes two rounds through the district each day.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The loading dock closes for deliveries between noon and one.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}
+{"sentence": "The forklift operator completed the annual certification renewal.", "signal": "emotion", "expected": "neutral", "source": "claude-synthetic"}

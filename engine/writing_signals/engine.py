@@ -30,10 +30,9 @@ def _signal(answer: Dict[str, Any], question: Dict[str, Any]) -> Dict[str, Any]:
 class SignalEngine:
     """Scores English sentences for every catalogue signal, batched in one Laya call."""
 
-    device = "cpu"
-
-    def __init__(self, agent: Agent = None):
-        self.agent = agent or Agent(CHECKPOINT, device=self.device)
+    def __init__(self, checkpoint: str = CHECKPOINT, device: str = "cpu"):
+        self.device = device
+        self.agent = Agent(checkpoint, device=device)
 
     def score(self, sentences: List[str]) -> List[Dict[str, Any]]:
         if not sentences:

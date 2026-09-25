@@ -1,0 +1,500 @@
+{"sentence": "The list of items on the receipt look wrong to me.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1}
+{"sentence": "The list of items on the receipt looks wrong to me.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1}
+{"sentence": "My sister and her roommate is coming to the party tonight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 2}
+{"sentence": "My sister and her roommate are coming to the party tonight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 2}
+{"sentence": "One of the printers in the office are jammed again.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 3}
+{"sentence": "One of the printers in the office is jammed again.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 3}
+{"sentence": "The instructions on the box was confusing for everyone.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 4}
+{"sentence": "The instructions on the box were confusing for everyone.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 4}
+{"sentence": "Everybody in the group chat agree that we should reschedule.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 5}
+{"sentence": "Everybody in the group chat agrees that we should reschedule.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 5}
+{"sentence": "The committee meet every Thursday to review new proposals.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 6}
+{"sentence": "The committee meets every Thursday to review new proposals.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 6}
+{"sentence": "Either of the shirts fit you better than the blue one.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 7}
+{"sentence": "Either of the shirts fits you better than the blue one.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 7}
+{"sentence": "My parents don't likes when I stay out past midnight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 8}
+{"sentence": "My parents don't like when I stay out past midnight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 8}
+{"sentence": "The team of volunteers were sorting donations all weekend.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 9}
+{"sentence": "The team of volunteers was sorting donations all weekend.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 9}
+{"sentence": "This kind of decisions require input from the whole staff.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 10}
+{"sentence": "This kind of decision requires input from the whole staff.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 10}
+{"sentence": "The dog, along with the two cats, sleep on my bed every night.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 11}
+{"sentence": "The dog, along with the two cats, sleeps on my bed every night.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 11}
+{"sentence": "Ten dollars are not enough to cover the parking fee.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 12}
+{"sentence": "Ten dollars is not enough to cover the parking fee.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 12}
+{"sentence": "Both of my brothers works at the same hospital downtown.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 13}
+{"sentence": "Both of my brothers work at the same hospital downtown.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 13}
+{"sentence": "The number of applicants have grown a lot since last year.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 14}
+{"sentence": "The number of applicants has grown a lot since last year.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 14}
+{"sentence": "Everyone on the bus were staring at the broken window.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 15}
+{"sentence": "Everyone on the bus was staring at the broken window.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 15}
+{"sentence": "The manager, not the interns, are responsible for locking up.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 16}
+{"sentence": "The manager, not the interns, is responsible for locking up.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 16}
+{"sentence": "A bunch of my old textbooks needs to go in storage.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 17}
+{"sentence": "A bunch of my old textbooks need to go in storage.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 17}
+{"sentence": "The rules in this building changes depending on the season.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 18}
+{"sentence": "The rules in this building change depending on the season.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 18}
+{"sentence": "My grandmother and my mom cooks dinner together every Sunday.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 19}
+{"sentence": "My grandmother and my mom cook dinner together every Sunday.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 19}
+{"sentence": "None of the emails in my inbox needs a reply today.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 20}
+{"sentence": "None of the emails in my inbox need a reply today.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 20}
+{"sentence": "The price of these tickets keep going up every week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 21}
+{"sentence": "The price of these tickets keeps going up every week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 21}
+{"sentence": "I finish my report last night before going to bed.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 22}
+{"sentence": "I finished my report last night before going to bed.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 22}
+{"sentence": "She work at the bakery for three years before she quit.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 23}
+{"sentence": "She worked at the bakery for three years before she quit.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 23}
+{"sentence": "We are meeting them yesterday to talk about the wedding plans.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 24}
+{"sentence": "We met them yesterday to talk about the wedding plans.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 24}
+{"sentence": "By next Friday, I finish all my exams for the semester.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 25}
+{"sentence": "By next Friday, I will have finished all my exams for the semester.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 25}
+{"sentence": "He is living in that apartment since he moved to the city.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 26}
+{"sentence": "He has been living in that apartment since he moved to the city.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 26}
+{"sentence": "Last summer we travel to Portugal and stayed for two weeks.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 27}
+{"sentence": "Last summer we traveled to Portugal and stayed for two weeks.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 27}
+{"sentence": "I am waiting for you outside the mall an hour ago.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 28}
+{"sentence": "I was waiting for you outside the mall an hour ago.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 28}
+{"sentence": "She already left when I arrive at the station this morning.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 29}
+{"sentence": "She had already left when I arrived at the station this morning.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 29}
+{"sentence": "They plan the trip for months before they finally book the flights.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 30}
+{"sentence": "They had planned the trip for months before they finally booked the flights.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 30}
+{"sentence": "I text him twice yesterday but he never answer.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 31}
+{"sentence": "I texted him twice yesterday but he never answered.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 31}
+{"sentence": "We watch that movie last weekend and loved every minute of it.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 32}
+{"sentence": "We watched that movie last weekend and loved every minute of it.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 32}
+{"sentence": "My parents live in that house since before I was born.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 33}
+{"sentence": "My parents have lived in that house since before I was born.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 33}
+{"sentence": "Right now she cooks dinner, so call her back later tonight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 34}
+{"sentence": "Right now she is cooking dinner, so call her back later tonight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 34}
+{"sentence": "Next week, we celebrated her birthday at the new restaurant downtown.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 35}
+{"sentence": "Next week, we will celebrate her birthday at the new restaurant downtown.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 35}
+{"sentence": "When she calls yesterday, I was still asleep on the couch.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 36}
+{"sentence": "When she called yesterday, I was still asleep on the couch.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 36}
+{"sentence": "He study every night last week to prepare for the final exam.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 37}
+{"sentence": "He studied every night last week to prepare for the final exam.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 37}
+{"sentence": "I am checking my email right before the meeting started an hour ago.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 38}
+{"sentence": "I checked my email right before the meeting started an hour ago.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 38}
+{"sentence": "She will finished the project by tomorrow if nothing goes wrong.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 39}
+{"sentence": "She will finish the project by tomorrow if nothing goes wrong.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 39}
+{"sentence": "Tomorrow morning I cleaned the whole apartment before guests arrive.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 40}
+{"sentence": "Tomorrow morning I will clean the whole apartment before guests arrive.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 40}
+{"sentence": "By the time you read this, I already left for the airport.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 41}
+{"sentence": "By the time you read this, I will have already left for the airport.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 41}
+{"sentence": "We lived in Chicago for six years before we move to Denver last spring.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 42}
+{"sentence": "We had lived in Chicago for six years before we moved to Denver last spring.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 42}
+{"sentence": "I have wrote three emails already and still no reply.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 43}
+{"sentence": "I have written three emails already and still no reply.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 43}
+{"sentence": "She has took the last bus home every night this week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 44}
+{"sentence": "She has taken the last bus home every night this week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 44}
+{"sentence": "We have ate at that new diner twice this month.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 45}
+{"sentence": "We have eaten at that new diner twice this month.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 45}
+{"sentence": "He has broke his phone screen for the third time this year.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 46}
+{"sentence": "He has broken his phone screen for the third time this year.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 46}
+{"sentence": "They have began the renovations on the kitchen already.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 47}
+{"sentence": "They have begun the renovations on the kitchen already.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 47}
+{"sentence": "I have drove past that construction site every day this week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 48}
+{"sentence": "I have driven past that construction site every day this week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 48}
+{"sentence": "She has spoke to the landlord about the leaking roof.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 49}
+{"sentence": "She has spoken to the landlord about the leaking roof.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 49}
+{"sentence": "We have swam in that lake since we were kids.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 50}
+{"sentence": "We have swum in that lake since we were kids.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 50}
+{"sentence": "He had went to bed before I even got home last night.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 51}
+{"sentence": "He had gone to bed before I even got home last night.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 51}
+{"sentence": "I could have wrote back sooner, but my phone died.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 52}
+{"sentence": "I could have written back sooner, but my phone died.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 52}
+{"sentence": "The window was broke when we came back from vacation.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 53}
+{"sentence": "The window was broken when we came back from vacation.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 53}
+{"sentence": "She should have chose the other option for the project.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 54}
+{"sentence": "She should have chosen the other option for the project.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 54}
+{"sentence": "They had did all the paperwork before the deadline hit.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 55}
+{"sentence": "They had done all the paperwork before the deadline hit.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 55}
+{"sentence": "I seen him at the store earlier but didn't say hi.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 56}
+{"sentence": "I saw him at the store earlier but didn't say hi.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 56}
+{"sentence": "We had ran out of milk before the storm even started.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 57}
+{"sentence": "We had run out of milk before the storm even started.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 57}
+{"sentence": "He has forgot his password again and needs a reset.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 58}
+{"sentence": "He has forgotten his password again and needs a reset.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 58}
+{"sentence": "She has rang the doorbell three times with no answer.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 59}
+{"sentence": "She has rung the doorbell three times with no answer.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 59}
+{"sentence": "I have already gave him the tickets for tonight's show.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 60}
+{"sentence": "I have already given him the tickets for tonight's show.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 60}
+{"sentence": "They have knew each other since middle school, I think.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 61}
+{"sentence": "They have known each other since middle school, I think.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 61}
+{"sentence": "The milk has froze solid at the back of the freezer.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 62}
+{"sentence": "The milk has frozen solid at the back of the freezer.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 62}
+{"sentence": "We have flew to Chicago for work twice this quarter.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 63}
+{"sentence": "We have flown to Chicago for work twice this quarter.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 63}
+{"sentence": "I need to print out document before the meeting starts.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 64}
+{"sentence": "I need to print out a document before the meeting starts.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 64}
+{"sentence": "She's studying to become nurse at the community college.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 65}
+{"sentence": "She's studying to become a nurse at the community college.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 65}
+{"sentence": "We stayed at nice hotel near the beach last weekend.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 66}
+{"sentence": "We stayed at a nice hotel near the beach last weekend.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 66}
+{"sentence": "Can you grab umbrella from the closet before we leave?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 67}
+{"sentence": "Can you grab an umbrella from the closet before we leave?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 67}
+{"sentence": "He's the best player on team this whole season.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 68}
+{"sentence": "He's the best player on the team this whole season.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 68}
+{"sentence": "I saw a movie last night, but movie was too long.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 69}
+{"sentence": "I saw a movie last night, but the movie was too long.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 69}
+{"sentence": "My brother is engineer who works at a startup downtown.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 70}
+{"sentence": "My brother is an engineer who works at a startup downtown.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 70}
+{"sentence": "Could you send me a invoice for last month's order?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 71}
+{"sentence": "Could you send me an invoice for last month's order?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 71}
+{"sentence": "We need to fix roof before the rainy season starts.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 72}
+{"sentence": "We need to fix the roof before the rainy season starts.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 72}
+{"sentence": "She gave presentation yesterday that impressed the whole board.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 73}
+{"sentence": "She gave a presentation yesterday that impressed the whole board.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 73}
+{"sentence": "I left charger at your place last time I visited.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 74}
+{"sentence": "I left the charger at your place last time I visited.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 74}
+{"sentence": "He wants to open bakery in the old part of town.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 75}
+{"sentence": "He wants to open a bakery in the old part of town.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 75}
+{"sentence": "The kids found a stray cat and named cat Whiskers.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 76}
+{"sentence": "The kids found a stray cat and named the cat Whiskers.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 76}
+{"sentence": "It took hour to get through the security line at the airport.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 77}
+{"sentence": "It took an hour to get through the security line at the airport.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 77}
+{"sentence": "We watched sunset from the rooftop bar downtown last night.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 78}
+{"sentence": "We watched the sunset from the rooftop bar downtown last night.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 78}
+{"sentence": "This is best coffee shop I have found in the whole neighborhood.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 79}
+{"sentence": "This is the best coffee shop I have found in the whole neighborhood.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 79}
+{"sentence": "I need new pair of shoes before the marathon next month.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 80}
+{"sentence": "I need a new pair of shoes before the marathon next month.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 80}
+{"sentence": "We adopted dog from the shelter last spring and love him.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 81}
+{"sentence": "We adopted a dog from the shelter last spring and love him.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 81}
+{"sentence": "Please close door when you leave the conference room tonight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 82}
+{"sentence": "Please close the door when you leave the conference room tonight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 82}
+{"sentence": "He gave me ride to the airport early this morning.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 83}
+{"sentence": "He gave me a ride to the airport early this morning.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 83}
+{"sentence": "Could you email me update on the shipment before Friday?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 84}
+{"sentence": "Could you email me an update on the shipment before Friday?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 84}
+{"sentence": "He apologized about being late to the client meeting this morning.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 85}
+{"sentence": "He apologized for being late to the client meeting this morning.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 85}
+{"sentence": "I'm not interested on joining the committee this semester.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 86}
+{"sentence": "I'm not interested in joining the committee this semester.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 86}
+{"sentence": "She's good in math but struggles with science homework.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 87}
+{"sentence": "She's good at math but struggles with science homework.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 87}
+{"sentence": "Can we meet on Monday at 3pm on the coffee shop?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 88}
+{"sentence": "Can we meet on Monday at 3pm at the coffee shop?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 88}
+{"sentence": "He's responsible of ordering supplies for the whole office.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 89}
+{"sentence": "He's responsible for ordering supplies for the whole office.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 89}
+{"sentence": "She's been waiting since two hours for her prescription to be ready.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 90}
+{"sentence": "She's been waiting for two hours for her prescription to be ready.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 90}
+{"sentence": "We're thinking to move to a bigger apartment next year.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 91}
+{"sentence": "We're thinking of moving to a bigger apartment next year.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 91}
+{"sentence": "I'm allergic on cats, so we can't keep the kitten.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 92}
+{"sentence": "I'm allergic to cats, so we can't keep the kitten.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 92}
+{"sentence": "She graduated in college last spring with a degree in nursing.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 93}
+{"sentence": "She graduated from college last spring with a degree in nursing.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 93}
+{"sentence": "We depend of this contract to make payroll next month.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 94}
+{"sentence": "We depend on this contract to make payroll next month.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 94}
+{"sentence": "He's afraid from spiders, so please don't mention the one in the garage.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 95}
+{"sentence": "He's afraid of spiders, so please don't mention the one in the garage.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 95}
+{"sentence": "I'll pick you up in the morning, around 8 on the entrance.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 96}
+{"sentence": "I'll pick you up in the morning, around 8 at the entrance.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 96}
+{"sentence": "She insisted for paying the bill even though it was my turn.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 97}
+{"sentence": "She insisted on paying the bill even though it was my turn.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 97}
+{"sentence": "We're capable to finish this project without any extra help.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 98}
+{"sentence": "We're capable of finishing this project without any extra help.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 98}
+{"sentence": "He congratulated me for the promotion at dinner last night.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 99}
+{"sentence": "He congratulated me on the promotion at dinner last night.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 99}
+{"sentence": "The kids are scared for the dark, so we leave a light on.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 100}
+{"sentence": "The kids are scared of the dark, so we leave a light on.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 100}
+{"sentence": "I applied to three jobs but haven't heard back on any of them.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 101}
+{"sentence": "I applied to three jobs but haven't heard back from any of them.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 101}
+{"sentence": "She's married since ten years and still acts like a newlywed.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 102}
+{"sentence": "She's been married for ten years and still acts like a newlywed.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 102}
+{"sentence": "We're planning on go camping this weekend if the weather holds.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 103}
+{"sentence": "We're planning on going camping this weekend if the weather holds.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 103}
+{"sentence": "He blamed the delay to the courier instead of admitting his mistake.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 104}
+{"sentence": "He blamed the delay on the courier instead of admitting his mistake.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 104}
+{"sentence": "I'm proud for how far the team has come this quarter.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 105}
+{"sentence": "I'm proud of how far the team has come this quarter.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 105}
+{"sentence": "Can you send me some informations about the new policy?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 106}
+{"sentence": "Can you send me some information about the new policy?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 106}
+{"sentence": "I bought two new furnitures for the living room last week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 107}
+{"sentence": "I bought two new pieces of furniture for the living room last week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 107}
+{"sentence": "We need more advices before making a final decision on this.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 108}
+{"sentence": "We need more advice before making a final decision on this.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 108}
+{"sentence": "She gave me a lot of good feedbacks on my essay draft.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 109}
+{"sentence": "She gave me a lot of good feedback on my essay draft.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 109}
+{"sentence": "There were three sheeps grazing in the field behind the barn.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 110}
+{"sentence": "There were three sheep grazing in the field behind the barn.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 110}
+{"sentence": "I saw a few deers crossing the road on my drive home.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 111}
+{"sentence": "I saw a few deer crossing the road on my drive home.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 111}
+{"sentence": "He has a lot of luggages for such a short trip.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 112}
+{"sentence": "He has a lot of luggage for such a short trip.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 112}
+{"sentence": "We need three new equipments before the training session starts.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 113}
+{"sentence": "We need three new pieces of equipment before the training session starts.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 113}
+{"sentence": "The teacher gave us a lot of homeworks over the break.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 114}
+{"sentence": "The teacher gave us a lot of homework over the break.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 114}
+{"sentence": "I bought two breads at the bakery this morning for breakfast.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 115}
+{"sentence": "I bought two loaves of bread at the bakery this morning for breakfast.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 115}
+{"sentence": "There are too many traffics on the highway this time of day.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 116}
+{"sentence": "There is too much traffic on the highway this time of day.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 116}
+{"sentence": "He shared some useful knowledges about investing at the seminar.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 117}
+{"sentence": "He shared some useful knowledge about investing at the seminar.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 117}
+{"sentence": "We found two fishs in the pond behind the old barn.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 118}
+{"sentence": "We found two fish in the pond behind the old barn.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 118}
+{"sentence": "I need to buy some new stationaries for the office supply closet.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 119}
+{"sentence": "I need to buy some new stationery for the office supply closet.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 119}
+{"sentence": "There weren't enough chairs, so a few peoples had to stand.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 120}
+{"sentence": "There weren't enough chairs, so a few people had to stand.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 120}
+{"sentence": "I don't have much dollars left until payday next week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 121}
+{"sentence": "I don't have much money left until payday next week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 121}
+{"sentence": "The company released two new softwares this quarter for internal use.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 122}
+{"sentence": "The company released two new software programs this quarter for internal use.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 122}
+{"sentence": "I need to buy a scissor for the craft project tonight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 123}
+{"sentence": "I need to buy a pair of scissors for the craft project tonight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 123}
+{"sentence": "There is too many people waiting in line at the pharmacy.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 124}
+{"sentence": "There are too many people waiting in line at the pharmacy.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 124}
+{"sentence": "He gave me some good advice, but I needed more informations too.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 125}
+{"sentence": "He gave me some good advice, but I needed more information too.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 125}
+{"sentence": "The kids found several species of butterfly, but only one specie was rare.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 126}
+{"sentence": "The kids found several species of butterfly, but only one species was rare.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 126}
+{"sentence": "Her and me are planning a road trip for spring break.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 127}
+{"sentence": "She and I are planning a road trip for spring break.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 127}
+{"sentence": "The teacher asked my friend and I to stay after class.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 128}
+{"sentence": "The teacher asked my friend and me to stay after class.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 128}
+{"sentence": "Him and his brother are coming over for dinner tonight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 129}
+{"sentence": "He and his brother are coming over for dinner tonight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 129}
+{"sentence": "This stays strictly between him and I, so don't repeat it.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 130}
+{"sentence": "This stays strictly between him and me, so don't repeat it.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 130}
+{"sentence": "My parents took my sister and I out for dinner last night.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 131}
+{"sentence": "My parents took my sister and me out for dinner last night.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 131}
+{"sentence": "Us neighbors decided to throw a block party this summer.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 132}
+{"sentence": "We neighbors decided to throw a block party this summer.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 132}
+{"sentence": "The prize was split evenly between Jake and I after we won.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 133}
+{"sentence": "The prize was split evenly between Jake and me after we won.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 133}
+{"sentence": "Me and my roommate are splitting the rent starting next month.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 134}
+{"sentence": "My roommate and I are splitting the rent starting next month.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 134}
+{"sentence": "She invited my cousin and I to her graduation party.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 135}
+{"sentence": "She invited my cousin and me to her graduation party.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 135}
+{"sentence": "Him and I used to work at the same coffee shop downtown.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 136}
+{"sentence": "He and I used to work at the same coffee shop downtown.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 136}
+{"sentence": "The manager thanked my colleague and I for finishing the report early.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 137}
+{"sentence": "The manager thanked my colleague and me for finishing the report early.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 137}
+{"sentence": "Us fans waited outside the stadium for hours before the game.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 138}
+{"sentence": "We fans waited outside the stadium for hours before the game.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 138}
+{"sentence": "Her and her husband bought a house near the lake last fall.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 139}
+{"sentence": "She and her husband bought a house near the lake last fall.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 139}
+{"sentence": "This decision affects you just as much as it affects I.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 140}
+{"sentence": "This decision affects you just as much as it affects me.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 140}
+{"sentence": "The coach picked him and I for the tournament this weekend.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 141}
+{"sentence": "The coach picked him and me for the tournament this weekend.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 141}
+{"sentence": "Me and her have been best friends since elementary school.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 142}
+{"sentence": "She and I have been best friends since elementary school.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 142}
+{"sentence": "The invitation was addressed to my husband and I, oddly enough.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 143}
+{"sentence": "The invitation was addressed to my husband and me, oddly enough.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 143}
+{"sentence": "Her and I are meeting for coffee before the conference starts.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 144}
+{"sentence": "She and I are meeting for coffee before the conference starts.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 144}
+{"sentence": "They gave the extra tickets to my brother and I last minute.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 145}
+{"sentence": "They gave the extra tickets to my brother and me last minute.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 145}
+{"sentence": "My grandfather taught my brother and I how to fish as kids.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 146}
+{"sentence": "My grandfather taught my brother and me how to fish as kids.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 146}
+{"sentence": "Just so you know, the decision is really up to him and I.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 147}
+{"sentence": "Just so you know, the decision is really up to him and me.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 147}
+{"sentence": "I always am tired after working a double shift at the restaurant.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 148}
+{"sentence": "I am always tired after working a double shift at the restaurant.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 148}
+{"sentence": "She told me what time was the meeting starting tomorrow.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 149}
+{"sentence": "She told me what time the meeting was starting tomorrow.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 149}
+{"sentence": "Never I have seen such a mess in the break room.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 150}
+{"sentence": "I have never seen such a mess in the break room.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 150}
+{"sentence": "I don't know where is the nearest pharmacy from here.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 151}
+{"sentence": "I don't know where the nearest pharmacy is from here.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 151}
+{"sentence": "Quickly she grabbed her keys and ran out the door.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 152}
+{"sentence": "She quickly grabbed her keys and ran out the door.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 152}
+{"sentence": "Can you tell me what is the password for the guest wifi?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 153}
+{"sentence": "Can you tell me what the password is for the guest wifi?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 153}
+{"sentence": "Only after dinner we can watch the rest of the movie.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 154}
+{"sentence": "We can only watch the rest of the movie after dinner.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 154}
+{"sentence": "He asked me did I finish the assignment before the deadline.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 155}
+{"sentence": "He asked me if I had finished the assignment before the deadline.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 155}
+{"sentence": "Really I appreciate everything you did to help us move.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 156}
+{"sentence": "I really appreciate everything you did to help us move.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 156}
+{"sentence": "She wondered why was the store closed so early on a Sunday.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 157}
+{"sentence": "She wondered why the store was closed so early on a Sunday.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 157}
+{"sentence": "Rarely he complains about anything, even when things go wrong.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 158}
+{"sentence": "He rarely complains about anything, even when things go wrong.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 158}
+{"sentence": "I bought a blue small bag for the trip next week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 159}
+{"sentence": "I bought a small blue bag for the trip next week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 159}
+{"sentence": "Every morning early I wake up to walk the dog before work.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 160}
+{"sentence": "Every morning I wake up early to walk the dog before work.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 160}
+{"sentence": "She asked him could he pick up milk on his way home.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 161}
+{"sentence": "She asked him if he could pick up milk on his way home.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 161}
+{"sentence": "I have a leather old jacket that still fits me perfectly.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 162}
+{"sentence": "I have an old leather jacket that still fits me perfectly.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 162}
+{"sentence": "Nobody knows why did the server crash during the presentation.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 163}
+{"sentence": "Nobody knows why the server crashed during the presentation.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 163}
+{"sentence": "Always we eat dinner together on Sunday nights as a family.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 164}
+{"sentence": "We always eat dinner together on Sunday nights as a family.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 164}
+{"sentence": "I bought a wooden round table for the new dining room.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 165}
+{"sentence": "I bought a round wooden table for the new dining room.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 165}
+{"sentence": "She couldn't remember where did she leave her car keys.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 166}
+{"sentence": "She couldn't remember where she had left her car keys.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 166}
+{"sentence": "I asked the waiter could we get separate checks for the table.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 167}
+{"sentence": "I asked the waiter if we could get separate checks for the table.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 167}
+{"sentence": "Hardly ever she misses a deadline, even during busy weeks.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 168}
+{"sentence": "She hardly ever misses a deadline, even during busy weeks.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 168}
+{"sentence": "I can't hardly see anything without my glasses in this light.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 169}
+{"sentence": "I can hardly see anything without my glasses in this light.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 169}
+{"sentence": "We didn't get no response from the landlord about the repair.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 170}
+{"sentence": "We didn't get any response from the landlord about the repair.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 170}
+{"sentence": "She never brings nothing to the potluck, not even napkins.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 171}
+{"sentence": "She never brings anything to the potluck, not even napkins.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 171}
+{"sentence": "He doesn't want no help moving the couch this weekend.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 172}
+{"sentence": "He doesn't want any help moving the couch this weekend.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 172}
+{"sentence": "I couldn't find no parking near the stadium before the game.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 173}
+{"sentence": "I couldn't find any parking near the stadium before the game.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 173}
+{"sentence": "They don't never answer the phone during business hours anymore.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 174}
+{"sentence": "They never answer the phone during business hours anymore.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 174}
+{"sentence": "We can't get no signal out here in the mountains.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 175}
+{"sentence": "We can't get any signal out here in the mountains.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 175}
+{"sentence": "She won't tell nobody about what happened at the party.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 176}
+{"sentence": "She won't tell anybody about what happened at the party.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 176}
+{"sentence": "He didn't bring no snacks even though he promised he would.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 177}
+{"sentence": "He didn't bring any snacks even though he promised he would.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 177}
+{"sentence": "I ain't got no clue why the printer keeps jamming today.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 178}
+{"sentence": "I don't have any clue why the printer keeps jamming today.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 178}
+{"sentence": "We couldn't hardly hear the announcement over the crowd noise.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 179}
+{"sentence": "We could hardly hear the announcement over the crowd noise.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 179}
+{"sentence": "There wasn't nothing left in the fridge by the time I got home.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 180}
+{"sentence": "There was nothing left in the fridge by the time I got home.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 180}
+{"sentence": "She doesn't trust nobody after what happened at her last job.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 181}
+{"sentence": "She doesn't trust anybody after what happened at her last job.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 181}
+{"sentence": "We didn't see no signs pointing toward the trailhead.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 182}
+{"sentence": "We didn't see any signs pointing toward the trailhead.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 182}
+{"sentence": "He can't never remember where he put his keys.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 183}
+{"sentence": "He can never remember where he put his keys.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 183}
+{"sentence": "I don't want none of that leftover pizza, thanks anyway.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 184}
+{"sentence": "I don't want any of that leftover pizza, thanks anyway.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 184}
+{"sentence": "They haven't done nothing about the broken elevator all month.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 185}
+{"sentence": "They haven't done anything about the broken elevator all month.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 185}
+{"sentence": "She isn't never late, so I'm worried something happened.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 186}
+{"sentence": "She is never late, so I'm worried something happened.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 186}
+{"sentence": "We didn't have no idea the store closed early on holidays.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 187}
+{"sentence": "We didn't have any idea the store closed early on holidays.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 187}
+{"sentence": "He doesn't listen to nobody, not even his own manager.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 188}
+{"sentence": "He doesn't listen to anybody, not even his own manager.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 188}
+{"sentence": "I haven't got no idea what time the bus leaves tomorrow.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 189}
+{"sentence": "I haven't got any idea what time the bus leaves tomorrow.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 189}
+{"sentence": "This laptop is more faster than the one I had before.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 190}
+{"sentence": "This laptop is faster than the one I had before.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 190}
+{"sentence": "She is the most smartest person I know in our whole class.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 191}
+{"sentence": "She is the smartest person I know in our whole class.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 191}
+{"sentence": "Today's weather is more worse than yesterday's, unfortunately.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 192}
+{"sentence": "Today's weather is worse than yesterday's, unfortunately.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 192}
+{"sentence": "This is the most best restaurant we've tried in the city.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 193}
+{"sentence": "This is the best restaurant we've tried in the city.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 193}
+{"sentence": "He runs more faster now than he did before the injury.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 194}
+{"sentence": "He runs faster now than he did before the injury.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 194}
+{"sentence": "That was the most worst customer service I've ever experienced.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 195}
+{"sentence": "That was the worst customer service I've ever experienced.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 195}
+{"sentence": "This route is more shorter than the one we usually take.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 196}
+{"sentence": "This route is shorter than the one we usually take.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 196}
+{"sentence": "Of the two options, this one is more better for our budget.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 197}
+{"sentence": "Of the two options, this one is better for our budget.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 197}
+{"sentence": "She's the more talented singer out of everyone in the choir.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 198}
+{"sentence": "She's the most talented singer out of everyone in the choir.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 198}
+{"sentence": "This phone is gooder than the one I bought last year.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 199}
+{"sentence": "This phone is better than the one I bought last year.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 199}
+{"sentence": "That's the baddest storm we've had in the last decade.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 200}
+{"sentence": "That's the worst storm we've had in the last decade.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 200}
+{"sentence": "My new apartment is more bigger than my old one downtown.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 201}
+{"sentence": "My new apartment is bigger than my old one downtown.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 201}
+{"sentence": "He's the most youngest player on the entire team this season.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 202}
+{"sentence": "He's the youngest player on the entire team this season.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 202}
+{"sentence": "This recipe is more easier to follow than the last one.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 203}
+{"sentence": "This recipe is easier to follow than the last one.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 203}
+{"sentence": "Traffic today was more heavier than usual because of the accident.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 204}
+{"sentence": "Traffic today was heavier than usual because of the accident.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 204}
+{"sentence": "She writes more clearer than most people in the department.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 205}
+{"sentence": "She writes more clearly than most people in the department.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 205}
+{"sentence": "This is the most funniest video I've watched all week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 206}
+{"sentence": "This is the funniest video I've watched all week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 206}
+{"sentence": "The new printer works gooder than the old one we had.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 207}
+{"sentence": "The new printer works better than the old one we had.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 207}
+{"sentence": "He felt badder after eating that leftover sushi from lunch.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 208}
+{"sentence": "He felt worse after eating that leftover sushi from lunch.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 208}
+{"sentence": "This year's turnout was more bigger than last year's event.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 209}
+{"sentence": "This year's turnout was bigger than last year's event.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 209}
+{"sentence": "She is more older than her sister by almost five years.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 210}
+{"sentence": "She is older than her sister by almost five years.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 210}
+{"sentence": "The woman which called earlier left her number on the machine.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 211}
+{"sentence": "The woman who called earlier left her number on the machine.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 211}
+{"sentence": "This is the house who my grandparents built in the 1950s.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 212}
+{"sentence": "This is the house that my grandparents built in the 1950s.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 212}
+{"sentence": "The man whom lives next door just adopted a puppy.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 213}
+{"sentence": "The man who lives next door just adopted a puppy.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 213}
+{"sentence": "I finally met the coworker which you were telling me about.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 214}
+{"sentence": "I finally met the coworker whom you were telling me about.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 214}
+{"sentence": "That's the book what I was talking about at dinner.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 215}
+{"sentence": "That's the book that I was talking about at dinner.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 215}
+{"sentence": "She's the teacher which helped me get into college.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 216}
+{"sentence": "She's the teacher who helped me get into college.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 216}
+{"sentence": "The car which tires are worn needs to go to the shop.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 217}
+{"sentence": "The car whose tires are worn needs to go to the shop.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 217}
+{"sentence": "He's the guy who's car got towed outside our building.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 218}
+{"sentence": "He's the guy whose car got towed outside our building.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 218}
+{"sentence": "The neighbor which dog keeps barking finally apologized to us.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 219}
+{"sentence": "The neighbor whose dog keeps barking finally apologized to us.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 219}
+{"sentence": "That's the restaurant what we went to for your birthday last year.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 220}
+{"sentence": "That's the restaurant that we went to for your birthday last year.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 220}
+{"sentence": "The clients whom called this morning want a refund on the order.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 221}
+{"sentence": "The clients who called this morning want a refund on the order.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 221}
+{"sentence": "I still have the jacket what you left at my place.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 222}
+{"sentence": "I still have the jacket that you left at my place.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 222}
+{"sentence": "The nurse whom took my blood pressure was really friendly.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 223}
+{"sentence": "The nurse who took my blood pressure was really friendly.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 223}
+{"sentence": "This is the friend who's advice I always trust the most.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 224}
+{"sentence": "This is the friend whose advice I always trust the most.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 224}
+{"sentence": "The kids which broke the window still haven't apologized to anyone.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 225}
+{"sentence": "The kids who broke the window still haven't apologized to anyone.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 225}
+{"sentence": "He's the mechanic which fixed our car last month.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 226}
+{"sentence": "He's the mechanic who fixed our car last month.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 226}
+{"sentence": "The dog who's leash snapped ran straight into the street.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 227}
+{"sentence": "The dog whose leash snapped ran straight into the street.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 227}
+{"sentence": "That's the professor whom teaches the intro economics class.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 228}
+{"sentence": "That's the professor who teaches the intro economics class.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 228}
+{"sentence": "The store what sells cheap furniture just closed down for good.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 229}
+{"sentence": "The store that sells cheap furniture just closed down for good.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 229}
+{"sentence": "She's the friend who's number I lost when my phone broke.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 230}
+{"sentence": "She's the friend whose number I lost when my phone broke.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 230}
+{"sentence": "If I would have known about the meeting, I'd have come earlier.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 231}
+{"sentence": "If I had known about the meeting, I'd have come earlier.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 231}
+{"sentence": "If she studies harder, she would have passed the exam.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 232}
+{"sentence": "If she had studied harder, she would have passed the exam.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 232}
+{"sentence": "If it rains tomorrow, we would cancel the picnic.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 233}
+{"sentence": "If it rains tomorrow, we will cancel the picnic.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 233}
+{"sentence": "If you would ask me nicely, I might have helped you move.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 234}
+{"sentence": "If you had asked me nicely, I might have helped you move.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 234}
+{"sentence": "If we leave now, we would still make the early train.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 235}
+{"sentence": "If we leave now, we will still make the early train.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 235}
+{"sentence": "I would have called you if I would have had your number.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 236}
+{"sentence": "I would have called you if I had had your number.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 236}
+{"sentence": "If he would have listened, he wouldn't have missed the flight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 237}
+{"sentence": "If he had listened, he wouldn't have missed the flight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 237}
+{"sentence": "If the store was open, we would grab dinner there tonight.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 238}
+{"sentence": "If the store were open, we would grab dinner there tonight.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 238}
+{"sentence": "If I was you, I would just apologize and move on.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 239}
+{"sentence": "If I were you, I would just apologize and move on.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 239}
+{"sentence": "If they would finish early, they'll come meet us for coffee.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 240}
+{"sentence": "If they finish early, they'll come meet us for coffee.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 240}
+{"sentence": "If you will be free this weekend, we could grab lunch.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 241}
+{"sentence": "If you are free this weekend, we could grab lunch.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 241}
+{"sentence": "We wouldn't have missed the bus if we would have left sooner.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 242}
+{"sentence": "We wouldn't have missed the bus if we had left sooner.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 242}
+{"sentence": "If she would apologize, I think he'd forgive her right away.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 243}
+{"sentence": "If she apologized, I think he'd forgive her right away.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 243}
+{"sentence": "If it would rain later, we should bring umbrellas just in case.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 244}
+{"sentence": "If it rains later, we should bring umbrellas just in case.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 244}
+{"sentence": "If he was here right now, he'd know exactly what to do.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 245}
+{"sentence": "If he were here right now, he'd know exactly what to do.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 245}
+{"sentence": "If you would have told me sooner, we could have fixed it.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 246}
+{"sentence": "If you had told me sooner, we could have fixed it.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 246}
+{"sentence": "If the printer works, we would finish the flyers before noon.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 247}
+{"sentence": "If the printer works, we will finish the flyers before noon.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 247}
+{"sentence": "If I would win the lottery, I'd quit my job immediately.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 248}
+{"sentence": "If I won the lottery, I'd quit my job immediately.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 248}
+{"sentence": "She would have come to the party if she would have felt better.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 249}
+{"sentence": "She would have come to the party if she had felt better.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 249}
+{"sentence": "If we would leave by six, we'd beat the rush hour traffic.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 250}
+{"sentence": "If we left by six, we'd beat the rush hour traffic.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 250}
