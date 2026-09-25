@@ -55,7 +55,7 @@ struct SignalEditor: NSViewRepresentable {
         text.string = initialText
         text.isEditable = noteID != nil
         analyzer.update(text: initialText)
-        text.window?.makeFirstResponder(text)
+        DispatchQueue.main.async { text.window?.makeFirstResponder(text) }
     }
 
     @MainActor
@@ -202,6 +202,15 @@ final class SignalTextView: NSTextView {
     private var hovered: AnalyzedSentence?
     private var lastPoint: NSPoint?
     private var closeTimer: Timer?
+
+    /// Take the cursor as soon as the editor is on screen, so typing works without a click.
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        if isEditable { DispatchQueue.main.async { [weak self] in
+            guard let self, let window = self.window else { return }
+            window.makeFirstResponder(self)
+        } }
+    }
 
     override func updateTrackingAreas() {
         super.updateTrackingAreas()

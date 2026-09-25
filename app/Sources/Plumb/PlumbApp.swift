@@ -10,8 +10,10 @@ struct PlumbApp: App {
         // Launched from `swift run` there is no bundle, so ask to be a regular foreground app.
         NSApplication.shared.setActivationPolicy(.regular)
         NSApplication.shared.activate()
-        // A packaged .app gets its icon from Info.plist; `swift run` needs it set here.
-        if let url = Bundle.module.url(forResource: "AppIcon", withExtension: "icns") {
+        // A packaged .app gets its icon from Info.plist; `swift run` has no bundle, so set it here.
+        // (Bundle.module is only touched outside an .app, where it exists.)
+        if !Bundle.main.bundlePath.hasSuffix(".app"),
+           let url = Bundle.module.url(forResource: "AppIcon", withExtension: "icns") {
             NSApplication.shared.applicationIconImage = NSImage(contentsOf: url)
         }
         (UserDefaults.standard.string(forKey: "appearance").flatMap(Appearance.init(rawValue:)) ?? .system).apply()
@@ -54,6 +56,13 @@ struct SettingsView: View {
             }
             .pickerStyle(.segmented)
             .labelsHidden()
+            Divider().padding(.vertical, 4)
+            Button {
+                NSWorkspace.shared.activateFileViewerSelecting([WorkerLocation.notesFolder])
+            } label: {
+                Label("Show notes in Finder", systemImage: "folder")
+            }
+            .buttonStyle(.link)
         }
         .padding(20)
         .frame(width: 300)
@@ -96,8 +105,18 @@ final class AppModel {
         let (events, sink) = AsyncStream.makeStream(of: WorkerEvent.self)
         worker = WorkerClient(executable: WorkerLocation.python) { sink.yield($0) }
         analyzer = NoteAnalyzer(client: worker)
+        let notesFolder = WorkerLocation.notesFolder
+        var moved: [(from: URL, to: URL)] = []
+        if let old = WorkerLocation.legacyNotes(), !FileManager.default.fileExists(atPath: notesFolder.path) {
+            try? FileManager.default.createDirectory(at: notesFolder.deletingLastPathComponent(), withIntermediateDirectories: true)
+            if (try? FileManager.default.moveItem(at: old, to: notesFolder)) != nil {
+                let files = (try? FileManager.default.contentsOfDirectory(atPath: notesFolder.path)) ?? []
+                moved = files.map { (old.appendingPathComponent($0), notesFolder.appendingPathComponent($0)) }
+            }
+        }
+        for (from, to) in moved { try? progress.renamed(from, to: to) }
         do {
-            store = try NoteStore(folder: WorkerLocation.notesFolder)
+            store = try NoteStore(folder: notesFolder)
         } catch {
             store = nil
             self.error = "Could not open your notes folder: \(error.localizedDescription)"
@@ -107,7 +126,8 @@ final class AppModel {
         }
         startBackfill()
         do { try worker.start() } catch { phase = .down("Could not start the signal worker: \(error.localizedDescription)") }
-        open(store?.notes.first)
+        // First launch: open a note straight away, so the user can just start typing.
+        if store?.notes.isEmpty == true { newNote() } else { open(store?.notes.first) }
     }
 
     var statusLine: String {
@@ -244,8 +264,12 @@ final class AppModel {
 }
 
 enum WorkerLocation {
-    /// `WRITING_SIGNALS_PYTHON` wins; otherwise the repo's dev venv.
+    /// The Python shipped inside Plumb.app; else `WRITING_SIGNALS_PYTHON`; else the repo's dev venv.
     static var python: URL {
+        if let bundled = Bundle.main.resourceURL?.appendingPathComponent("python/bin/python3"),
+           FileManager.default.isExecutableFile(atPath: bundled.path) {
+            return bundled
+        }
         if let path = ProcessInfo.processInfo.environment["WRITING_SIGNALS_PYTHON"] {
             return URL(fileURLWithPath: path)
         }
@@ -255,15 +279,18 @@ enum WorkerLocation {
             .appendingPathComponent(".venv/bin/python")
     }
 
+    /// Plumb's own folder, which needs no permission prompt (unlike ~/Documents).
     static var notesFolder: URL {
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Plumb/Notes", isDirectory: true)
+    }
+
+    /// Notes from before Plumb kept them in its own folder, and where they are now. Only the dev
+    /// build looks: in the packaged app, merely checking ~/Documents would trigger a permission prompt.
+    static func legacyNotes() -> URL? {
+        guard !Bundle.main.bundlePath.hasSuffix(".app") else { return nil }
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let folder = documents.appendingPathComponent("Plumb", isDirectory: true)
-        // Notes written before the app was named Plumb move over once.
-        let old = documents.appendingPathComponent("Writing Signals", isDirectory: true)
-        let files = FileManager.default
-        if !files.fileExists(atPath: folder.path), files.fileExists(atPath: old.path) {
-            try? files.moveItem(at: old, to: folder)
-        }
-        return folder
+        return ["Plumb", "Writing Signals"].map { documents.appendingPathComponent($0, isDirectory: true) }
+            .first { FileManager.default.fileExists(atPath: $0.path) }
     }
 }
