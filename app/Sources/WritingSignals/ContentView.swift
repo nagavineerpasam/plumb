@@ -3,7 +3,7 @@ import WritingSignalsCore
 
 struct ContentView: View {
     @Bindable var model: AppModel
-    @AppStorage("appearance") private var appearance = Appearance.system
+    @State private var showSettings = false
     @State private var confirmDelete: Note?
     @State private var renaming: Note?
 
@@ -21,6 +21,18 @@ struct ContentView: View {
                             Button("Delete…", role: .destructive) { confirmDelete = note }
                         }
                 }
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                HStack {
+                    Button { showSettings.toggle() } label: {
+                        Label("Settings", systemImage: "gearshape")
+                    }
+                    .buttonStyle(.borderless)
+                    .popover(isPresented: $showSettings, arrowEdge: .top) { SettingsView() }
+                    Spacer()
+                }
+                .padding(.horizontal, 14).padding(.vertical, 10)
+                .overlay(alignment: .top) { Divider() }
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 220)
             .toolbar {
@@ -47,16 +59,6 @@ struct ContentView: View {
                           pending: model.analyzer.sentences.filter { $0.signals == nil }.count)
                     .inspectorColumnWidth(min: 300, ideal: 340, max: 420)
                     .toolbar {
-                        Menu {
-                            Picker("Appearance", selection: $appearance) {
-                                ForEach(Appearance.allCases) { Text($0.rawValue).tag($0) }
-                            }
-                            .pickerStyle(.inline)
-                        } label: {
-                            Label("Appearance", systemImage: "circle.lefthalf.filled")
-                        }
-                        .help("Light, dark or match the system")
-                        .onChange(of: appearance) { _, value in value.apply() }
                         Button { model.showDashboard.toggle() } label: { Label("Signals", systemImage: "chart.bar.xaxis") }
                             .help("Show or hide signals")
                     }

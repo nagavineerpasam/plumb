@@ -43,14 +43,16 @@ struct SettingsView: View {
     @AppStorage("appearance") private var appearance = Appearance.system
 
     var body: some View {
-        Form {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Appearance").font(.headline)
             Picker("Appearance", selection: $appearance) {
                 ForEach(Appearance.allCases) { Text($0.rawValue).tag($0) }
             }
             .pickerStyle(.segmented)
+            .labelsHidden()
         }
-        .padding(24)
-        .frame(width: 380)
+        .padding(20)
+        .frame(width: 300)
         .onChange(of: appearance, initial: true) { _, value in value.apply() }
     }
 }
