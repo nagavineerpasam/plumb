@@ -36,7 +36,6 @@ cat > "$APP/Contents/Info.plist" <<PLIST
   <key>LSApplicationCategoryType</key><string>public.app-category.productivity</string>
   <key>NSHighResolutionCapable</key><true/>
   <key>NSMicrophoneUsageDescription</key><string>Plumb listens only while you click Speak, to type what you say into your note. Everything stays on your Mac.</string>
-  <key>NSSpeechRecognitionUsageDescription</key><string>Plumb turns your speech into text on your Mac, without sending it anywhere.</string>
 </dict>
 </plist>
 PLIST

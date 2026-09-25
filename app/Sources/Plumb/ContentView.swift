@@ -98,7 +98,7 @@ struct ContentView: View {
                 HStack {
                     TitleField(title: model.selection?.title ?? "") { model.renameSelection(to: $0) }
                     Spacer()
-                    if Dictation.isAvailable { MicButton(dictation: model.dictation) }
+                    MicButton(dictation: model.dictation)
                     Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
                         Image(systemName: "sidebar.right")
                     }
@@ -241,12 +241,20 @@ struct TitleField: View {
 
 /// A small rounded "Speak" pill by the title. Click (or ⌥⌘D) to speak into the note at the
 /// cursor; click again to stop. While listening it turns accent-coloured and glows with the level.
+/// The first time, it shows the voice model downloading and getting ready.
 struct MicButton: View {
     @Bindable var dictation: Dictation
 
+    private var title: String {
+        if let preparing = dictation.preparing {
+            return preparing < 1 ? "Getting voice ready… \(Int(preparing * 100))%" : "Getting voice ready…"
+        }
+        return dictation.isListening ? "Stop" : "Speak"
+    }
+
     var body: some View {
         Button { dictation.toggle() } label: {
-            Label(dictation.isListening ? "Stop" : "Speak", systemImage: dictation.isListening ? "mic.fill" : "mic")
+            Label(title, systemImage: dictation.isListening ? "mic.fill" : "mic")
                 .font(.callout.weight(.medium))
                 .foregroundStyle(dictation.isListening ? Color.white : Color.secondary)
                 .padding(.horizontal, 12).padding(.vertical, 6)
@@ -258,6 +266,7 @@ struct MicButton: View {
                 .animation(.easeOut(duration: 0.12), value: dictation.level)
         }
         .buttonStyle(.plain)
+        .disabled(dictation.preparing != nil)
         .pointingHand()
         .keyboardShortcut("d", modifiers: [.option, .command])
         .help(dictation.isListening ? "Stop listening (⌥⌘D)" : "Speak into your note (⌥⌘D)")
