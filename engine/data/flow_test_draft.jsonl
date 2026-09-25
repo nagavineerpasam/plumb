@@ -1,0 +1,200 @@
+{"previous": "The team lost the championship game.", "sentence": "Still, the coach was named athlete of the year.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Our team finished the quarterly report early.", "sentence": "The extra time went toward double-checking every number.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She finally finished painting the fence.", "sentence": "So the yard finally looks finished for the party.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We watched a documentary about the ocean.", "sentence": "A trip to go scuba diving suddenly sounds appealing.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She practiced the piano for two hours after dinner.", "sentence": "As a result, her recital piece finally sounds polished.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She wrote a thank-you card to her mentor.", "sentence": "Consequently, she mailed it before catching her flight.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We watched the sunset from the rooftop.", "sentence": "The quarterly taxes are due next Monday.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We need to reschedule the dentist appointment.", "sentence": "The new bakery downtown sells amazing croissants.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The flight was delayed by four hours.", "sentence": "However, we somehow landed ahead of schedule.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The battery is fully charged.", "sentence": "The battery is completely dead.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The store raised its prices last month.", "sentence": "We're already noticing fewer regular customers.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I have never been to Paris.", "sentence": "A trip there has always been on my list.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He broke his leg last week.", "sentence": "It still hasn't healed enough for him to walk without crutches.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The weather has been unusually warm this week.", "sentence": "She decided to cancel the whole event.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Her presentation went perfectly without a single hitch.", "sentence": "The whole team congratulated her afterward.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The bridge is completely safe to cross.", "sentence": "The inspection just wrapped up last month.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The flight landed early this afternoon.", "sentence": "The flight was cancelled before takeoff.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We missed the deadline by two days.", "sentence": "We're hoping the client will still grant an extension.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We paid the invoice last week.", "sentence": "The invoice is still unpaid.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He spent the whole evening fixing the leaky faucet.", "sentence": "Basketball season starts again in October.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The water in the pool is warm today.", "sentence": "A perfect day for a swim, honestly.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The soup needs more salt and a bit of pepper.", "sentence": "Our neighbor just installed solar panels on their roof.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The restaurant was fully booked tonight.", "sentence": "The restaurant was completely empty tonight.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "She studied all night for the exam.", "sentence": "She still felt a little nervous walking into the room.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The chef prepared a new pasta dish.", "sentence": "The regulars have already started asking for the recipe.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The store is open until nine tonight.", "sentence": "Our whole shopping list can wait until after dinner.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The water in the pool is warm today.", "sentence": "The pool has been closed and drained all week.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I switched to a new toothpaste brand last month.", "sentence": "So my dentist actually noticed the difference at my checkup.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I finally learned how to parallel park last week.", "sentence": "Volcanoes can remain dormant for centuries.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The bakery closes early on Sundays.", "sentence": "A quick stop before noon was the plan.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The milk is still fresh in the fridge.", "sentence": "The milk expired last week.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I finally beat that level in the video game.", "sentence": "Because of this, I finally unlocked the next chapter.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The car needs an oil change soon.", "sentence": "My favorite podcast released a new episode today.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Our budget has plenty of room left.", "sentence": "We are completely out of money.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He is the tallest player on the team.", "sentence": "Coaches often put him near the basket.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She forgot her umbrella at home.", "sentence": "As a result, she stayed completely dry all day.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I finished reading the mystery novel last night.", "sentence": "The ending completely caught me by surprise.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He always remembers to lock the door.", "sentence": "He forgot to lock the door again.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The kids played outside until dinner.", "sentence": "The whole yard was covered in mud and grass by the end.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The team won every game this season.", "sentence": "The fans are already talking about the championship.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The server crashed twice this week.", "sentence": "So customer satisfaction hit an all-time high.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I switched to a new toothpaste brand last month.", "sentence": "The city council approved the downtown parking garage.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Ticket prices went up this season.", "sentence": "She still renewed her season pass anyway.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He passed the exam with the highest score.", "sentence": "His parents took him out to celebrate.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The invoice arrived a few days late.", "sentence": "He apologized and sent the payment the same afternoon.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The kids built a sandcastle at the beach.", "sentence": "But the tide came in and washed it away by evening.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The garden hasn't been watered in weeks.", "sentence": "However, the flowers are blooming brighter than ever.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We watched the sunset from the rooftop.", "sentence": "Because of this, we stayed up there until well after dark.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I finally learned how to parallel park last week.", "sentence": "However, I still need more practice on steep hills.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We cleaned out the garage over the weekend.", "sentence": "They never found it again.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He spent the whole evening fixing the leaky faucet.", "sentence": "Consequently, the kitchen sink finally stopped dripping.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The bridge was closed for repairs.", "sentence": "They expect it to reopen by the end of the month.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We signed the contract this morning.", "sentence": "We refused to sign the contract.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The report is due Friday afternoon.", "sentence": "My cat loves tuna more than any other food.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The company is hiring dozens of new employees.", "sentence": "The job listings go up every single week.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The team submitted the proposal on time.", "sentence": "Now everyone is just waiting to hear back.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I read three chapters of the novel last night.", "sentence": "The gym added new treadmills this week.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The bakery closes early on Sundays.", "sentence": "We're still waiting to hear back from them.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We need to reschedule the dentist appointment.", "sentence": "As a result, we're looking at times next Tuesday instead.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She is allergic to peanuts.", "sentence": "She eats peanut butter sandwiches every day.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The battery is fully charged.", "sentence": "The trip should be no problem on one charge.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The office moved to a new building downtown.", "sentence": "The commute is a little longer these days.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She forgot her umbrella at home.", "sentence": "It's pouring rain by the time she reached the bus stop.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The team submitted the proposal on time.", "sentence": "It broke down twice on the way home.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The soup needs more salt and a bit of pepper.", "sentence": "But otherwise it's ready to serve.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He trimmed the hedges along the driveway.", "sentence": "The museum is hosting a photography exhibit next month.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He finally organized his closet over the weekend.", "sentence": "The bridge downtown will be closed for repairs.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I finally fixed the squeaky door hinge.", "sentence": "A bit of oil and a screwdriver did the trick.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She lost her phone on the train.", "sentence": "It turned up in the lost and found the next day.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Our neighbors hosted a barbecue last weekend.", "sentence": "The whole street showed up with side dishes.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He skipped breakfast this morning.", "sentence": "But he felt more energetic than he had all week.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The conference room was booked all afternoon.", "sentence": "It was returned to the shelf unopened.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "She loves spicy food more than anything.", "sentence": "Every dish she orders comes with extra chili.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Her presentation went perfectly without a single hitch.", "sentence": "Her presentation was a complete disaster.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The meeting has been moved to the third floor.", "sentence": "Because of this, everyone needs their badge to get upstairs.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We watched a documentary about the ocean.", "sentence": "It's still sitting unopened on the porch.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He broke his leg last week.", "sentence": "Because of this, he signed up for the marathon.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The new intern started on Monday morning.", "sentence": "A quick tour of the filing system got her up to speed fast.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We planted tomatoes in the backyard this spring.", "sentence": "It's already sold out at the garden center.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We repainted the living room a soft blue.", "sentence": "Therefore the room finally matches the new curtains.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Our flight got delayed by three hours.", "sentence": "Therefore we ended up having dinner at the gate.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Traffic was terrible on the highway.", "sentence": "They ended up taking the back roads instead.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The bakery ran out of flour.", "sentence": "We're already restocked and back to full production.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The meeting was cancelled this morning.", "sentence": "The meeting ran two hours longer than planned.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We repainted the living room a soft blue.", "sentence": "The train station is getting a new ticket machine.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The team lost the championship game.", "sentence": "It still stings, even a few days later.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We adopted a rescue dog last spring.", "sentence": "However, he's still nervous around strangers.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We planted tomatoes in the backyard this spring.", "sentence": "Our first harvest should be ready by August.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The dog chewed up the couch cushions.", "sentence": "Because of this, we gave him a small promotion.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Our flight landed safely in Denver.", "sentence": "They said it needed new batteries.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The company's profits fell sharply this quarter.", "sentence": "We're already cutting costs to prepare for next year.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The report is due Friday afternoon.", "sentence": "Therefore I've cleared my whole afternoon to finish it.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We signed the contract this morning.", "sentence": "Our next step is ordering the equipment.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She lost her phone on the train.", "sentence": "Because of this, she got three new job offers.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Everyone agreed with the new policy.", "sentence": "Nobody supported the new policy at all.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The movie theater added two new screens.", "sentence": "The lineup of showtimes has doubled since then.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The car needs an oil change soon.", "sentence": "Consequently, we're booking the garage for this weekend.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The invoice arrived several days late.", "sentence": "So the client gave the whole team a bonus.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The conference room was booked all afternoon.", "sentence": "A smaller room down the hall worked just fine instead.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The meeting has been moved to the third floor conference room.", "sentence": "My sister just adopted a golden retriever puppy.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "She loves spicy food more than anything.", "sentence": "She can't stand even a little spice.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I updated the spreadsheet with the new numbers.", "sentence": "The whole team got a copy right afterward.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I charged my phone overnight.", "sentence": "He said it still wouldn't turn on.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The library extended its weekend hours.", "sentence": "We're still hearing it wasn't worth the trip.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The recipe called for less sugar.", "sentence": "He followed it exactly and the cake still turned out great.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The kids finished their homework before dinner.", "sentence": "But they still have to practice piano before bed.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He signed up for a pottery class downtown.", "sentence": "A lopsided first bowl didn't stop him from loving it.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The server crashed twice this week.", "sentence": "It finally seems stable after the latest patch.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The choir practiced for the spring concert.", "sentence": "The whole group finally sounds ready for opening night.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The coffee machine broke again this morning.", "sentence": "As a result, the whole office is running on instant coffee.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I have never been to Paris.", "sentence": "I lived in Paris for five years.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He passed the exam with the highest score.", "sentence": "He failed the exam completely.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The meeting was cancelled this morning.", "sentence": "The whole thing got rescheduled for Thursday.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The flight was delayed by four hours.", "sentence": "She spent the extra time browsing the airport shops.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Our budget has plenty of room left.", "sentence": "He suggested we use it to hire one more designer.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The printer ran out of ink.", "sentence": "She had to run to the store for a replacement cartridge.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The car ran out of gas.", "sentence": "They had to walk half a mile to the nearest station.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She wrote a thank-you card to her mentor.", "sentence": "The farmers market moves to a new location in June.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I finished reading the mystery novel last night.", "sentence": "He left it on the kitchen counter.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I bought groceries for the week.", "sentence": "They never replied to the email.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Our flight got delayed by three hours.", "sentence": "The library added a new section for graphic novels.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The kids played outside until dinner.", "sentence": "She apologized for being late.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The package arrived on time yesterday.", "sentence": "The signature was collected right at the door.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He trimmed the hedges along the driveway.", "sentence": "So the whole front yard looks a lot tidier now.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Our neighbors hosted a barbecue last weekend.", "sentence": "They decided to sell it next month.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The bakery ran out of flour.", "sentence": "Therefore they baked twice as many loaves as usual.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The car ran out of gas.", "sentence": "Consequently, we arrived twenty minutes ahead of schedule.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The class finished the chapter on fractions.", "sentence": "It was already broken by the time we checked.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The movie theater added two new screens.", "sentence": "She said it was out of order.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He is the tallest player on the team.", "sentence": "He is the shortest player on the team.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I updated the spreadsheet with the new numbers.", "sentence": "He insisted it was still inaccurate.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I read three chapters of the novel last night.", "sentence": "Still, I'm nowhere close to finishing it by the weekend.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The company launched its new app yesterday.", "sentence": "The early reviews have been mostly positive.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The flight landed early this afternoon.", "sentence": "The extra time let us catch an earlier train home.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I finished the draft last night.", "sentence": "I haven't started the draft yet.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The class finished the chapter on fractions.", "sentence": "A short quiz followed the very next day.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The garden hasn't been watered in weeks.", "sentence": "It's looking pretty wilted as a result.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The company's profits fell sharply this quarter.", "sentence": "But they gave every single employee a bonus.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The printer ran out of ink.", "sentence": "Meanwhile, the report printed out in full color.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The road is completely clear of snow.", "sentence": "The plows must have come through early this morning.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The baby took her first steps yesterday.", "sentence": "Interest rates rose again this quarter.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The company is hiring dozens of new employees.", "sentence": "The company just laid off half its staff.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The store restocked all the winter jackets.", "sentence": "We're still hearing they forgot to lock it.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We finished cleaning the kitchen before noon.", "sentence": "He said he would call back later.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The internet went down for an hour.", "sentence": "It's back up now, thankfully.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The coffee machine broke again this morning.", "sentence": "Our school is planning a field trip to the aquarium.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The chef prepared a new pasta dish.", "sentence": "It never made it through customs.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The bridge is completely safe to cross.", "sentence": "The bridge collapsed years ago.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The dog chewed up the couch cushions.", "sentence": "He got a sturdier set of chew toys as an apology gift.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The baby took her first steps yesterday.", "sentence": "Meanwhile, she's already trying to climb onto the couch.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "She practiced the piano for two hours after dinner.", "sentence": "The printer in the office keeps jamming.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The internet went down for an hour.", "sentence": "Meanwhile, we finished the video call early.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The choir practiced for the spring concert.", "sentence": "She forgot to pack it for the trip.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We repainted the fence a bright white.", "sentence": "It's been sitting in storage for repairs.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The kids finished their homework before dinner.", "sentence": "There's a sale on winter coats at the mall.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Our team finished the quarterly report early.", "sentence": "It's already been sold to someone else.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The store restocked all the winter jackets.", "sentence": "The shoppers lined up early to grab their size.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The weather has been unusually warm this week.", "sentence": "Evenings on the patio have become the new normal.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The office moved to a new building downtown.", "sentence": "We're still hearing it needs repairs.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We repainted the fence a bright white.", "sentence": "Our whole yard looks brighter because of it.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The project is finished and ready to ship.", "sentence": "The project hasn't even started yet.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He always remembers to lock the door.", "sentence": "Old habits like that die hard, apparently.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I finally fixed the squeaky door hinge.", "sentence": "He said it was too expensive.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We cleaned out the garage over the weekend.", "sentence": "Both cars finally fit inside again.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The road is completely clear of snow.", "sentence": "The road is buried under two feet of snow.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "She finally finished painting the fence this weekend.", "sentence": "The stock market dropped sharply on Tuesday morning.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The bridge was closed for repairs.", "sentence": "Consequently, traffic flowed faster than it ever had.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The milk is still fresh in the fridge.", "sentence": "The expiration date is still a few days out.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "He finally organized his closet over the weekend.", "sentence": "However, he still can't find his winter coat.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We missed the deadline by two days.", "sentence": "But the client doubled our budget the same afternoon.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Grandma is teaching me how to knit a scarf.", "sentence": "Still, we only manage a few rows each Sunday.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I bought groceries for the week.", "sentence": "The fridge finally looks properly stocked again.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "We paid the invoice last week.", "sentence": "The vendor confirmed the payment went through fine.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "It rained heavily all day long.", "sentence": "Therefore we had a sunny picnic by the lake.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The thermostat broke over the weekend.", "sentence": "He came out Monday morning to fix it.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The city repaved the road outside our house.", "sentence": "The potholes are finally gone, thankfully.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The restaurant was fully booked tonight.", "sentence": "The waitlist stretched out the door by seven.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The power went out during the storm.", "sentence": "It's finally back on after almost three hours.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Traffic was terrible on the highway.", "sentence": "Therefore we reached the airport a full hour early.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The power went out during the storm.", "sentence": "However, the lights somehow got brighter than ever.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "We adopted a rescue dog last spring.", "sentence": "The conference has been rescheduled to next quarter.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Grandma is teaching me how to knit a scarf.", "sentence": "The airport announced a new security checkpoint.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The garden needs watering twice a day in summer.", "sentence": "He just bought tickets to a jazz concert.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The garden needs watering twice a day in summer.", "sentence": "Meanwhile, the tomatoes are finally starting to ripen.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The project is finished and ready to ship.", "sentence": "The client just needs to give final approval.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "I finally beat that level in the video game.", "sentence": "The plumber said the pipes need replacing soon.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "He skipped breakfast this morning.", "sentence": "They joked that he'd regret it by lunchtime.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "Our flight landed safely in Denver.", "sentence": "Our bags were already waiting by the time we got there.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The store is open until nine tonight.", "sentence": "The store closed an hour ago.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The library extended its weekend hours.", "sentence": "More students have been studying there on Saturdays.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The team won every game this season.", "sentence": "The team lost every single game this season.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The recipe called for less sugar.", "sentence": "Still, the cake turned out far saltier than usual.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The store raised its prices last month.", "sentence": "Consequently, sales tripled among the budget shoppers.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Ticket prices went up this season.", "sentence": "As a result, attendance doubled at every single game.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "I charged my phone overnight.", "sentence": "The battery was completely full by morning.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The kids built a sandcastle at the beach.", "sentence": "Our internet bill went up by ten dollars this month.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "The package arrived on time yesterday.", "sentence": "The package still hasn't shipped.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
+{"previous": "Everyone agreed with the new policy.", "sentence": "The change takes effect starting next month.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The vet adjusted my cat's diet last month.", "sentence": "Consequently, she has lost almost two pounds since then.", "language": "en", "signal": "flow", "expected": "no", "source": "claude-draft"}
+{"previous": "The museum extended its hours for the weekend exhibit.", "sentence": "Therefore, the stock market closed early on Friday.", "language": "en", "signal": "flow", "expected": "yes", "source": "claude-draft"}
