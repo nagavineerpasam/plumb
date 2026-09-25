@@ -15,18 +15,29 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
 public final class NoteAnalyzer {
     public private(set) var sentences: [AnalyzedSentence] = []
 
+    public var summary: NoteSummary { NoteSummary(sentences.compactMap(\.signals)) }
+
     private let client: SignalClient
     private let debounce: Duration
+    private let retryDelay: Duration
     private var pending: Task<Void, Never>?
     private var nextID = 0
 
-    public init(client: SignalClient, debounce: Duration = .milliseconds(300)) {
+    public init(client: SignalClient, debounce: Duration = .milliseconds(300),
+                retryDelay: Duration = .seconds(1)) {
         self.client = client
         self.debounce = debounce
+        self.retryDelay = retryDelay
     }
 
     public func update(text: String) {
+        // Unchanged sentences keep their id and signals, so only edited ones are re-scored.
+        var previous = Dictionary(grouping: sentences, by: \.text)
         sentences = Self.split(text).map { text, range in
+            if let kept = previous[text]?.first {
+                previous[text]?.removeFirst()
+                return AnalyzedSentence(id: kept.id, text: text, range: range, signals: kept.signals)
+            }
             nextID += 1
             return AnalyzedSentence(id: "s\(nextID)", text: text, range: range, signals: nil)
         }
@@ -43,18 +54,32 @@ public final class NoteAnalyzer {
         await pending?.value
     }
 
+    /// Scores every sentence still without signals. If the worker is down (crashed and
+    /// restarting), keeps retrying until it answers or a newer edit takes over.
     private func scoreUnscored() async {
-        let requests = sentences.filter { $0.signals == nil }
-            .map { SentenceRequest(id: $0.id, text: $0.text) }
-        guard !requests.isEmpty, let results = try? await client.score(requests) else { return }
-        for i in sentences.indices {
-            if let signals = results[sentences[i].id] { sentences[i].signals = signals }
+        while !Task.isCancelled {
+            let requests = sentences.filter { $0.signals == nil }
+                .map { SentenceRequest(id: $0.id, text: $0.text) }
+            guard !requests.isEmpty else { return }
+            do {
+                let results = try await client.score(requests)
+                for i in sentences.indices {
+                    if let signals = results[sentences[i].id] { sentences[i].signals = signals }
+                }
+                return
+            } catch {
+                try? await Task.sleep(for: retryDelay)
+            }
         }
     }
 
     static func split(_ text: String) -> [(String, NSRange)] {
         let tokenizer = NLTokenizer(unit: .sentence)
         tokenizer.string = text
+        // Knowing the language lets it keep abbreviations like "z. B." inside a sentence.
+        if let language = NLLanguageRecognizer.dominantLanguage(for: text) {
+            tokenizer.setLanguage(language)
+        }
         return tokenizer.tokens(for: text.startIndex..<text.endIndex).compactMap { range in
             let trimmed = text[range].trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmed.isEmpty else { return nil }

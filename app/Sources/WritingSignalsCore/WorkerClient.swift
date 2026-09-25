@@ -14,7 +14,8 @@ public enum WorkerError: Error, Equatable {
 }
 
 /// Runs the Python signal worker as a child process and speaks its JSON-lines protocol
-/// over stdin/stdout. No network port is opened.
+/// over stdin/stdout. No network port is opened. If the worker dies unexpectedly it is
+/// restarted, backing off from 1 s up to 30 s while it keeps failing.
 public final class WorkerClient: SignalClient, @unchecked Sendable {
     private let executable: URL
     private let arguments: [String]
@@ -27,6 +28,8 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
     private var buffer = Data()
     private var waiting: [String: CheckedContinuation<[String: SentenceSignals], Error>] = [:]
     private var nextID = 0
+    private var stopping = false
+    private var restartDelay: Duration = .seconds(1)
 
     public init(executable: URL,
                 arguments: [String] = ["-m", "writing_signals.worker"],
@@ -53,13 +56,17 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
         process.terminationHandler = { [weak self] _ in self?.terminated() }
         try process.run()
         lock.withLock {
+            self.stopping = false
             self.process = process
             self.input = stdin.fileHandleForWriting
         }
     }
 
     public func stop() {
-        let (process, input) = lock.withLock { (self.process, self.input) }
+        let (process, input) = lock.withLock {
+            stopping = true
+            return (self.process, self.input)
+        }
         try? input?.write(contentsOf: Data("{\"type\":\"shutdown\"}\n".utf8))
         process?.waitUntilExit()
     }
@@ -105,6 +112,7 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
     private func handle(_ message: Incoming) {
         switch message.type {
         case "ready":
+            lock.withLock { restartDelay = .seconds(1) }
             onEvent(.ready(catalogueVersion: message.catalogue_version ?? ""))
         case "progress":
             onEvent(.progress(downloaded: message.downloaded ?? 0, total: message.total ?? 0))
@@ -125,13 +133,21 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
     }
 
     private func terminated() {
-        lock.withLock {
+        let (restart, delay): (Bool, Duration) = lock.withLock {
             process = nil
             input = nil
             buffer.removeAll()
+            defer { restartDelay = min(restartDelay * 2, .seconds(30)) }
+            return (!stopping, restartDelay)
         }
         fail(all: .exited)
         onEvent(.exited)
+        guard restart else { return }
+        Task {
+            try? await Task.sleep(for: delay)
+            guard !lock.withLock({ stopping }) else { return }
+            do { try start() } catch { onEvent(.failed("Could not restart the signal worker: \(error)")) }
+        }
     }
 
     private func fail(all error: WorkerError) {
