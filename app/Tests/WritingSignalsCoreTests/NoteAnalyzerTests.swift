@@ -118,11 +118,11 @@ final class NoteAnalyzerTests: XCTestCase {
         await analyzer.idle()
 
         XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.map(\.kind) }, [
-            [.lowercaseStart],
+            [.lowercaseStart, .missingComma],
             [.lowercaseI],
             [.missingEndPunctuation],
         ])
-        XCTAssertEqual(analyzer.summary.mechanicsIssues, 3)
+        XCTAssertEqual(analyzer.summary.mechanicsIssues, 4)
     }
 
     func testMechanicsCatchesRepeatedWordsAndExtraSpaces() async {
@@ -171,5 +171,40 @@ final class NoteAnalyzerTests: XCTestCase {
         XCTAssertEqual(spelling.map(\.word), ["seperate", "untill"])
         let text = analyzer.sentences[0].text as NSString
         XCTAssertEqual(spelling.compactMap(\.range).map { text.substring(with: $0) }, ["seperate", "untill"])
+    }
+
+    func testGreetingWithoutACommaIsFlagged() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "hello how are you? Hi, all good. Thanks for the notes.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.map(\.kind) },
+                       [[.lowercaseStart, .missingComma], [], []])
+    }
+
+    func testIssuesNameTheWordsInvolved() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "hello how are you? We saw the the lake.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.summary.mechanics.map(\.issue.message), [
+            "“hello” should start with a capital letter",
+            "Missing comma after “hello”",
+            "“the the” repeats a word",
+        ])
+        XCTAssertEqual(analyzer.summary.mechanics.first?.sentence, "hello how are you?")
+    }
+
+    func testSummaryListsSentencesFlaggedForGrammar() async {
+        let client = FakeSignalClient()
+        client.grammarMistake = ["He go home."]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "He go home. She went home.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.summary.grammarFlagged, ["He go home."])
     }
 }

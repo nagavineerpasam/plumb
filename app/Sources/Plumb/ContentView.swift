@@ -50,6 +50,8 @@ struct ContentView: View {
                 }
                 SignalEditor(analyzer: model.analyzer, noteID: model.selection?.url,
                              initialText: model.openedText, onChange: model.edited)
+                    .frame(maxWidth: 760)
+                    .frame(maxWidth: .infinity)
                     .opacity(model.selection == nil ? 0 : 1)
             }
             .navigationTitle(model.selection?.title ?? "Plumb")

@@ -1,3 +1,9 @@
+/// One mechanics mistake and the sentence it was found in.
+public struct MechanicsFinding: Sendable, Equatable {
+    public let sentence: String
+    public let issue: MechanicsIssue
+}
+
 /// The whole note at a glance, over sentences that have been scored.
 public struct NoteSummary: Sendable, Equatable {
     public var scoredSentences = 0
@@ -10,11 +16,15 @@ public struct NoteSummary: Sendable, Equatable {
     public var confidence: Double?
     public var clarity: Double?
     public var formality: Double?
-    /// Capitalization and punctuation slips across the note.
-    public var mechanicsIssues = 0
+    /// Every spelling, capitalization and punctuation mistake, in reading order.
+    public var mechanics: [MechanicsFinding] = []
+    public var mechanicsIssues: Int { mechanics.count }
+    /// Sentences the grammar signal marks as likely containing a mistake.
+    public var grammarFlagged: [String] = []
 
     init(_ sentences: [AnalyzedSentence]) {
-        mechanicsIssues = sentences.reduce(0) { $0 + ($1.mechanics?.count ?? 0) }
+        mechanics = sentences.flatMap { s in (s.mechanics ?? []).map { MechanicsFinding(sentence: s.text, issue: $0) } }
+        grammarFlagged = sentences.filter { $0.signals?.signals["grammar"]?.value == "yes" }.map(\.text)
         let scored = sentences.compactMap(\.signals)
         guard !scored.isEmpty else { return }
         let n = Double(scored.count)

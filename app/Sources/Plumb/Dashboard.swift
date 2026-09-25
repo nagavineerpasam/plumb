@@ -1,107 +1,108 @@
 import SwiftUI
 import WritingSignalsCore
 
-/// The whole note at a glance, updated live as the writer types.
+/// The whole note at a glance, updated live as the writer types. Every mistake is listed.
 struct Dashboard: View {
     let summary: NoteSummary
     let pending: Int
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                header
-                if summary.scoredSentences == 0 {
-                    ContentUnavailableView("Start writing",
-                        systemImage: "text.cursor",
-                        description: Text("Signals appear for each sentence as soon as you pause."))
+            VStack(alignment: .leading, spacing: 12) {
+                if pending > 0 {
+                    HStack(spacing: 6) {
+                        ProgressView().controlSize(.small)
+                        Text("Analysing \(pending) \(pending == 1 ? "sentence" : "sentences")…")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                    .padding(.horizontal, 4)
+                }
+                if summary.scoredSentences == 0 && summary.mechanics.isEmpty {
+                    ContentUnavailableView("Start writing", systemImage: "text.cursor",
+                        description: Text("Each sentence is checked as soon as you pause."))
                         .padding(.top, 40)
                 } else {
-                    grammar
-                    tile("Mechanics") { mechanics }
-                    tile("Emotion mix") { mix(summary.emotion, colors: Palette.emotions) }
-                    tile("Tone") { mix(summary.tone, colors: Palette.tones) }
-                    tile("Voice") {
-                        VStack(spacing: 14) {
-                            ForEach(["confidence", "clarity", "formality"], id: \.self) { name in
-                                if let value = score(name), let (low, high) = Palette.scales[name] {
-                                    VStack(alignment: .leading, spacing: 6) {
-                                        HStack {
-                                            Text(Palette.titles[name] ?? name).font(.subheadline.weight(.medium))
-                                            Spacer()
-                                            Text(Palette.word(for: name, at: value))
-                                                .font(.subheadline).foregroundStyle(.secondary)
-                                        }
-                                        ScaleBar(value: value, low: low, high: high)
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    section("Grammar") { grammar }
+                    section("Spelling & punctuation") { mechanics }
+                    if !summary.emotion.isEmpty { section("Emotion") { mix(summary.emotion, colors: Palette.emotions) } }
+                    if !summary.tone.isEmpty { section("Tone") { mix(summary.tone, colors: Palette.tones) } }
+                    if summary.confidence != nil { section("Voice") { voice } }
                 }
             }
-            .padding(.horizontal, 18).padding(.vertical, 6)
+            .padding(14)
             .animation(.smooth, value: summary)
         }
     }
 
-    /// Only visible while sentences are being analysed; the mockup has no panel title.
-    @ViewBuilder
-    private var header: some View {
-        if pending > 0 {
-            HStack(spacing: 6) {
-                ProgressView().controlSize(.small)
-                Text("Analysing \(pending) \(pending == 1 ? "sentence" : "sentences")…")
-                    .font(.caption).foregroundStyle(.secondary)
-            }
-        }
-    }
+    // MARK: Sections
 
     private var grammar: some View {
-        let correct = 1 - (summary.grammarErrorRate ?? 0)
-        return tile("Grammar") {
-            HStack(spacing: 18) {
-                Gauge(value: correct) {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 12) {
+                Gauge(value: Double(correctCount), in: 0...Double(max(summary.scoredSentences, 1))) {
                     EmptyView()
                 } currentValueLabel: {
-                    Text("\(correctCount)/\(summary.scoredSentences)").font(.headline).monospacedDigit()
+                    Text("\(correctCount)/\(summary.scoredSentences)").font(.caption.weight(.semibold)).monospacedDigit()
                 }
                 .gaugeStyle(.accessoryCircularCapacity)
-                .tint(.green)
-                .scaleEffect(1.25)
-                .frame(width: 68, height: 68)
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("\(correctCount) of \(summary.scoredSentences) \(summary.scoredSentences == 1 ? "sentence looks" : "sentences look") correct").font(.subheadline)
-                    let wrong = Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())
-                    Text(wrong == 0 ? "No likely mistakes" : "\(wrong) likely \(wrong == 1 ? "mistake" : "mistakes") underlined in red")
+                .tint(summary.grammarFlagged.isEmpty ? .green : .orange)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("\(correctCount) of \(summary.scoredSentences) \(summary.scoredSentences == 1 ? "sentence looks" : "sentences look") correct")
+                        .font(.callout.weight(.medium))
+                    Text(summary.grammarFlagged.isEmpty ? "No likely grammar mistakes" : "Underlined in red in your note")
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
+            ForEach(Array(summary.grammarFlagged.enumerated()), id: \.offset) { _, sentence in
+                finding(color: .red, title: "Likely a grammar mistake", detail: sentence)
+            }
         }
     }
 
-    private var correctCount: Int {
-        summary.scoredSentences - Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())
-    }
-
+    @ViewBuilder
     private var mechanics: some View {
-        HStack(spacing: 10) {
-            Image(systemName: summary.mechanicsIssues == 0 ? "checkmark.circle" : "exclamationmark.circle")
-                .font(.title3).foregroundStyle(summary.mechanicsIssues == 0 ? Color.green : Color.orange)
-            Text(summary.mechanicsIssues == 0 ? "Spelling, capitals and punctuation look fine"
-                 : "\(summary.mechanicsIssues) spelling or punctuation \(summary.mechanicsIssues == 1 ? "slip" : "slips") underlined in amber")
-                .font(.subheadline)
+        if summary.mechanics.isEmpty {
+            Label("No mistakes found", systemImage: "checkmark.circle.fill")
+                .font(.callout).foregroundStyle(.green)
+        } else {
+            VStack(alignment: .leading, spacing: 10) {
+                ForEach(Array(summary.mechanics.enumerated()), id: \.offset) { _, found in
+                    finding(color: .orange, title: found.issue.message, detail: found.sentence)
+                }
+            }
         }
     }
 
-    private func score(_ name: String) -> Double? {
-        switch name {
-        case "confidence": summary.confidence
-        case "clarity": summary.clarity
-        default: summary.formality
+    private var voice: some View {
+        VStack(spacing: 14) {
+            ForEach(["confidence", "clarity", "formality"], id: \.self) { name in
+                if let value = score(name), let (low, high) = Palette.scales[name] {
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack {
+                            Text(Palette.titles[name] ?? name).font(.callout)
+                            Spacer()
+                            Text(Palette.word(for: name, at: value)).font(.callout).foregroundStyle(.secondary)
+                        }
+                        ScaleBar(value: value, low: low, high: high)
+                    }
+                }
+            }
         }
     }
 
-    /// Shares as one segmented bar with a legend underneath.
+    // MARK: Pieces
+
+    private func finding(color: Color, title: String, detail: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Circle().fill(color).frame(width: 7, height: 7).alignmentGuide(.firstTextBaseline) { $0[.bottom] - 1 }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.callout)
+                Text(detail).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+            }
+        }
+    }
+
+    /// Shares as one segmented bar, with sentence counts underneath.
     private func mix(_ shares: [String: Double], colors: [String: Color]) -> some View {
         let items = shares.sorted { $0.value > $1.value }
         return VStack(alignment: .leading, spacing: 10) {
@@ -115,26 +116,55 @@ struct Dashboard: View {
             }
             .frame(height: 8)
             .clipShape(Capsule())
-            HStack(spacing: 12) {
-                ForEach(items, id: \.key) { label, share in
-                    HStack(spacing: 5) {
-                        RoundedRectangle(cornerRadius: 2).fill(colors[label] ?? .gray).frame(width: 8, height: 8)
-                        let count = Int((share * Double(summary.scoredSentences)).rounded())
-                        Text("\(label.capitalized) · \(count) of \(summary.scoredSentences)")
-                    }
-                }
-            }
-            .font(.caption).foregroundStyle(.secondary)
+            FlowLegend(items: items.map { label, share in
+                (label.capitalized, colors[label] ?? .gray, Int((share * Double(summary.scoredSentences)).rounded()))
+            }, total: summary.scoredSentences)
         }
     }
 
-    private func tile<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+    private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(title.uppercased()).font(.caption2.weight(.semibold)).tracking(0.8).foregroundStyle(.secondary)
+            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
             content()
         }
-        .padding(.vertical, 14)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .overlay(alignment: .bottom) { Divider() }
+        .background(Color(nsColor: .controlBackgroundColor), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 14, style: .continuous).strokeBorder(Color(nsColor: .separatorColor).opacity(0.5)))
+    }
+
+    private var correctCount: Int {
+        summary.scoredSentences - Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())
+    }
+
+    private func score(_ name: String) -> Double? {
+        switch name {
+        case "confidence": summary.confidence
+        case "clarity": summary.clarity
+        default: summary.formality
+        }
+    }
+}
+
+/// Legend entries that wrap onto new lines instead of running off the panel.
+private struct FlowLegend: View {
+    let items: [(String, Color, Int)]
+    let total: Int
+
+    var body: some View {
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 12) { entries }
+            VStack(alignment: .leading, spacing: 4) { entries }
+        }
+        .font(.caption).foregroundStyle(.secondary)
+    }
+
+    @ViewBuilder private var entries: some View {
+        ForEach(items, id: \.0) { label, color, count in
+            HStack(spacing: 5) {
+                RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 8, height: 8)
+                Text("\(label) · \(count) of \(total)")
+            }
+        }
     }
 }

@@ -24,7 +24,7 @@ struct SignalEditor: NSViewRepresentable {
         text.allowsUndo = true
         text.isAutomaticQuoteSubstitutionEnabled = false
         text.drawsBackground = false
-        text.textContainerInset = NSSize(width: 52, height: 44)
+        text.textContainerInset = NSSize(width: 40, height: 56)
         text.isVerticallyResizable = true
         text.autoresizingMask = [.width]
         text.textContainer?.widthTracksTextView = true
@@ -32,7 +32,7 @@ struct SignalEditor: NSViewRepresentable {
         paragraph.lineHeightMultiple = 1.5
         paragraph.paragraphSpacing = 10
         text.defaultParagraphStyle = paragraph
-        text.font = .systemFont(ofSize: 17)
+        text.font = .systemFont(ofSize: 19, weight: .medium)
         text.typingAttributes[.paragraphStyle] = paragraph
 
         let scroll = NSScrollView()
@@ -116,14 +116,14 @@ struct SignalEditor: NSViewRepresentable {
             }
             // Mechanics: amber dots under a misspelled word, or under the sentence for other slips.
             let amber = NSColor.systemOrange
-            let dotted = NSUnderlineStyle([.single, .patternDot]).rawValue
+            let dotted = NSUnderlineStyle([.thick, .patternDot]).rawValue
             for sentence in sentences {
                 for issue in sentence.mechanics ?? [] {
                     let local = issue.range ?? NSRange(location: 0, length: sentence.range.length)
                     let absolute = NSRange(location: sentence.range.location + local.location, length: local.length)
                     guard let range = textRange(absolute, content, whole) else { continue }
                     if issue.kind == .spelling || sentence.signals?.signals["grammar"]?.value != "yes" {
-                        layout.addRenderingAttribute(.underlineStyle, value: NSUnderlineStyle.thick.rawValue | dotted, for: range)
+                        layout.addRenderingAttribute(.underlineStyle, value: dotted, for: range)
                         layout.addRenderingAttribute(.underlineColor, value: amber, for: range)
                     }
                 }
