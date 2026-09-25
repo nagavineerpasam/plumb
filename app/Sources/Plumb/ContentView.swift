@@ -1,6 +1,8 @@
 import SwiftUI
 import WritingSignalsCore
 
+/// "Soft": one calm canvas with three columns (notes, the page on a white sheet, signal tiles)
+/// and no title bar, only the window buttons floating top left.
 struct ContentView: View {
     @Bindable var model: AppModel
     @State private var showSettings = false
@@ -8,83 +10,21 @@ struct ContentView: View {
     @State private var renaming: Note?
 
     var body: some View {
-        NavigationSplitView {
-            List(selection: Binding(get: { model.selection }, set: { model.open($0) })) {
-                ForEach(model.store?.notes ?? []) { note in
-                    NoteRow(note: note, status: model.status(of: note), isSelected: note == model.selection,
-                            isRenaming: Binding(get: { renaming == note }, set: { renaming = $0 ? note : nil }),
-                            open: { model.open(note) },
-                            rename: { model.rename(note, to: $0) })
-                        .tag(note)
-                        .contextMenu {
-                            Button("Rename") { renaming = note }
-                            Button("Delete…", role: .destructive) { confirmDelete = note }
-                        }
-                }
+        HStack(alignment: .top, spacing: 12) {
+            sidebar.frame(width: 220)
+            page
+            if model.showDashboard {
+                Dashboard(summary: model.analyzer.summary,
+                          pending: model.analyzer.sentences.filter { $0.signals == nil }.count)
+                    .frame(width: 280)
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
             }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                HStack {
-                    Button { showSettings.toggle() } label: {
-                        Label("Settings", systemImage: "gearshape")
-                    }
-                    .buttonStyle(.borderless)
-                    .popover(isPresented: $showSettings, arrowEdge: .top) { SettingsView() }
-                    Spacer()
-                }
-                .padding(.horizontal, 14).padding(.vertical, 10)
-                .overlay(alignment: .top) { Divider() }
-            }
-            .scrollContentBackground(.hidden)
-            .background(Palette.canvas)
-            .navigationSplitViewColumnWidth(min: 190, ideal: 220)
-            .toolbar {
-                Button { model.newNote() } label: { Label("New Note", systemImage: "square.and.pencil") }
-                    .keyboardShortcut("n")
-            }
-        } detail: {
-            // "Soft": the page on a white rounded sheet, the signals as tiles beside it.
-            HStack(alignment: .top, spacing: 12) {
-                ZStack {
-                    if model.selection == nil {
-                        ContentUnavailableView {
-                            Label("No note open", systemImage: "note.text")
-                        } actions: {
-                            Button("New Note") { model.newNote() }.buttonStyle(.borderedProminent)
-                        }
-                    }
-                    VStack(alignment: .leading, spacing: 0) {
-                        Text(model.selection?.title ?? "")
-                            .font(.system(size: 26, weight: .semibold))
-                            .padding(.horizontal, 52).padding(.top, 40)
-                        SignalEditor(analyzer: model.analyzer, noteID: model.selection?.url,
-                                     initialText: model.openedText, onChange: model.edited)
-                    }
-                    .opacity(model.selection == nil ? 0 : 1)
-                }
-                .frame(maxWidth: 820, maxHeight: .infinity)
-                .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-                .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
-                .frame(maxWidth: .infinity)
-
-                if model.showDashboard {
-                    Dashboard(summary: model.analyzer.summary,
-                              pending: model.analyzer.sentences.filter { $0.signals == nil }.count)
-                        .frame(width: 280)
-                        .transition(.move(edge: .trailing).combined(with: .opacity))
-                }
-            }
-            .padding(.horizontal, 12).padding(.bottom, 12).padding(.top, 4)
-            .background(Palette.canvas)
-            .navigationTitle(model.selection?.title ?? "Plumb")
-            .navigationSubtitle(model.statusLine)
-            .toolbar {
-                Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
-                    Label("Signals", systemImage: "sidebar.right")
-                }
-                .help("Show or hide signals")
-            }
-            .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
         }
+        .padding(.horizontal, 12).padding(.bottom, 12)
+        .padding(.top, 44)  // room for the window buttons
+        .background(Palette.canvas)
+        .ignoresSafeArea()
+        .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
         .overlay {
             if case let .downloading(done, total, problem) = model.phase {
                 Onboarding(downloaded: done, total: total, problem: problem).transition(.opacity)
@@ -96,10 +36,79 @@ struct ContentView: View {
             Button("Move to Trash", role: .destructive) { confirmDelete.map(model.delete) }
         }
     }
+
+    // MARK: Columns
+
+    private var sidebar: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(model.store?.notes ?? []) { note in
+                        NoteRow(note: note, status: model.status(of: note), isSelected: note == model.selection,
+                                isRenaming: Binding(get: { renaming == note }, set: { renaming = $0 ? note : nil }),
+                                open: { model.open(note) },
+                                rename: { model.rename(note, to: $0) })
+                            .contextMenu {
+                                Button("Rename") { renaming = note }
+                                Button("Delete…", role: .destructive) { confirmDelete = note }
+                            }
+                    }
+                }
+            }
+            .scrollIndicators(.never)
+            Spacer(minLength: 8)
+            sidebarButton("New note", systemImage: "plus") { model.newNote() }
+                .keyboardShortcut("n")
+            sidebarButton("Settings", systemImage: "gearshape") { showSettings.toggle() }
+                .popover(isPresented: $showSettings, arrowEdge: .trailing) { SettingsView() }
+        }
+    }
+
+    private var page: some View {
+        ZStack {
+            if model.selection == nil {
+                ContentUnavailableView {
+                    Label("No note open", systemImage: "note.text")
+                } actions: {
+                    Button("New note") { model.newNote() }.buttonStyle(.borderedProminent)
+                }
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Text(model.selection?.title ?? "")
+                        .font(.system(size: 24, weight: .semibold))
+                    Spacer()
+                    Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
+                        Image(systemName: "sidebar.right")
+                    }
+                    .buttonStyle(.borderless).foregroundStyle(.tertiary)
+                    .help(model.showDashboard ? "Hide signals" : "Show signals")
+                }
+                .padding(.horizontal, 52).padding(.top, 40)
+                SignalEditor(analyzer: model.analyzer, noteID: model.selection?.url,
+                             initialText: model.openedText, onChange: model.edited)
+            }
+            .opacity(model.selection == nil ? 0 : 1)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
+    }
+
+    private func sidebarButton(_ title: String, systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label(title, systemImage: systemImage)
+                .font(.callout).foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 12).padding(.vertical, 7)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
 }
 
-/// A note in the sidebar. Click the selected note's title (or double-click any note) to rename it
-/// in place; Return saves, Esc cancels.
+/// A note in the sidebar: status dot, title, when it was last changed. The open note sits on a
+/// white pill. Click the open note's title (or double-click any note) to rename it in place.
 struct NoteRow: View {
     let note: Note
     let status: NoteStatus
@@ -124,14 +133,22 @@ struct NoteRow: View {
                     .onAppear { draft = note.title; focused = true }
             } else {
                 Text(note.title).lineLimit(1)
-                    .onTapGesture(count: 2) { open(); isRenaming = true }
-                    .onTapGesture { isSelected ? (isRenaming = true) : open() }
             }
             Spacer()
             Text(note.modified, format: .relative(presentation: .named, unitsStyle: .narrow))
                 .font(.caption).foregroundStyle(.tertiary).monospacedDigit()
         }
+        .font(.system(size: 14, weight: isSelected ? .medium : .regular))
+        .padding(.horizontal, 12).padding(.vertical, 9)
+        .background {
+            if isSelected {
+                RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Palette.card)
+                    .shadow(color: .black.opacity(0.06), radius: 1, y: 1)
+            }
+        }
         .contentShape(Rectangle())
+        .onTapGesture(count: 2) { open(); isRenaming = true }
+        .onTapGesture { isSelected ? (isRenaming = true) : open() }
     }
 
     private func commit() {

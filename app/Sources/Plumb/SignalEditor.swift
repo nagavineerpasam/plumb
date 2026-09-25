@@ -29,10 +29,10 @@ struct SignalEditor: NSViewRepresentable {
         text.autoresizingMask = [.width]
         text.textContainer?.widthTracksTextView = true
         let paragraph = NSMutableParagraphStyle()
-        paragraph.lineHeightMultiple = 1.5
+        paragraph.lineHeightMultiple = 1.6
         paragraph.paragraphSpacing = 10
         text.defaultParagraphStyle = paragraph
-        text.font = .systemFont(ofSize: 19, weight: .medium)
+        text.font = .systemFont(ofSize: 17, weight: .medium)
         text.typingAttributes[.paragraphStyle] = paragraph
 
         let scroll = NSScrollView()

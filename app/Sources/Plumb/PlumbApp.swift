@@ -22,7 +22,7 @@ struct PlumbApp: App {
             ContentView(model: model)
                 .frame(minWidth: 960, minHeight: 600)
         }
-        .windowToolbarStyle(.unified)
+        .windowStyle(.hiddenTitleBar)
 
         Settings {
             SettingsView()

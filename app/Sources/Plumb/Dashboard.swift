@@ -23,7 +23,13 @@ struct Dashboard: View {
                             .font(.callout).foregroundStyle(.secondary)
                     }
                 } else {
-                    if Palette.grammarReady {
+                    if !Palette.grammarReady {
+                        tile("Correct") {
+                            Label("The grammar check is training. It switches on once it passes its accuracy test.",
+                                  systemImage: "hourglass")
+                                .font(.callout).foregroundStyle(.secondary)
+                        }
+                    } else {
                         tile("Correct") {
                             HStack(alignment: .firstTextBaseline, spacing: 6) {
                                 Text("\(correctCount)/\(summary.scoredSentences)")
@@ -43,10 +49,6 @@ struct Dashboard: View {
                                 }
                             }
                         }
-                    }
-                    if !Palette.grammarReady {
-                        Label("Grammar checks arrive after training. Until then Plumb doesn't guess.", systemImage: "hourglass")
-                            .font(.caption).foregroundStyle(.tertiary).padding(.horizontal, 6)
                     }
                 }
             }
