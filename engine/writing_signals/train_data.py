@@ -142,6 +142,7 @@ def main():
     # The notebook runs this exact engine for the same accuracy check after training.
     with zipfile.ZipFile(os.path.join(KAGGLE_DIR, "engine.zip"), "w", zipfile.ZIP_DEFLATED) as z:
         for path in ["pyproject.toml", "data/README.md", "data/english_draft.jsonl",
+                     "data/sense_test_draft.jsonl", "data/flow_test_draft.jsonl",
                      *glob.glob("writing_signals/**/*.py", root_dir=ENGINE_DIR, recursive=True)]:
             z.write(os.path.join(ENGINE_DIR, path), os.path.join("engine", path))
     with open(os.path.join(TRAIN_DIR, "spot_check.md"), "w", encoding="utf-8") as f:
