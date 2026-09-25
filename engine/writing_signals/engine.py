@@ -1,8 +1,13 @@
 from typing import Any, Dict, List
 
-from laya import Router
+from laya import Agent
 
 from .catalogue import QUESTIONS
+
+# English only, on the CPU: 2.0 GB and ~0.5 s per sentence on an M1, which fits 8 GB Macs.
+# The Apple GPU path costs ~4 GB for the same model.
+CHECKPOINT = "convaiinnovations/laya"
+MODEL = "english"
 
 
 def _signal(answer: Dict[str, Any], question: Dict[str, Any]) -> Dict[str, Any]:
@@ -23,21 +28,20 @@ def _signal(answer: Dict[str, Any], question: Dict[str, Any]) -> Dict[str, Any]:
 
 
 class SignalEngine:
-    """Scores sentences for every catalogue signal, one Laya pass per sentence."""
+    """Scores English sentences for every catalogue signal, batched in one Laya call."""
 
-    def __init__(self, router: Router = None):
-        # One checkpoint in memory at a time keeps 8 GB Macs viable.
-        self.router = router or Router(max_loaded=1)
+    device = "cpu"
+
+    def __init__(self, agent: Agent = None):
+        self.agent = agent or Agent(CHECKPOINT, device=self.device)
 
     def score(self, sentences: List[str]) -> List[Dict[str, Any]]:
         if not sentences:
             return []
-        outputs = self.router.predict_batch(
-            [{"state": text, "questions": QUESTIONS} for text in sentences]
-        )
+        outputs = self.agent.predict_batch(sentences, QUESTIONS)
         return [
             {
-                "model": out["routing"]["model"],
+                "model": MODEL,
                 "signals": {
                     name: _signal(out["answers"][name], QUESTIONS[name]) for name in QUESTIONS
                 },

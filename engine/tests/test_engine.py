@@ -19,14 +19,11 @@ def test_scores_every_signal_for_each_sentence(engine):
         assert sum(signal["distribution"].values()) == pytest.approx(1.0, abs=1e-3), name
 
 
-def test_routes_by_language(engine):
-    results = engine.score([
-        "Please send me the report by Friday.",
-        "Bitte schicken Sie mir den Bericht bis Freitag.",
-        "कृपया शुक्रवार तक मुझे रिपोर्ट भेजें।",
-    ])
+def test_uses_the_english_checkpoint_on_cpu(engine):
+    results = engine.score(["Please send me the report by Friday."])
 
-    assert [r["model"] for r in results] == ["english", "multilingual", "multilingual"]
+    assert results[0]["model"] == "english"
+    assert engine.device == "cpu"
 
 
 def test_catalogue_is_versioned():

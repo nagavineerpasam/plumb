@@ -14,37 +14,122 @@ struct WritingSignalsApp: App {
 
     var body: some Scene {
         WindowGroup("Writing Signals") {
-            SignalEditor(analyzer: model.analyzer)
-                .frame(minWidth: 640, minHeight: 420)
-                .overlay(alignment: .bottomTrailing) {
-                    Text(model.status).font(.caption).foregroundStyle(.secondary).padding(8)
-                }
+            ContentView(model: model)
+                .frame(minWidth: 960, minHeight: 600)
         }
+        .windowToolbarStyle(.unified)
     }
 }
 
 @MainActor @Observable
 final class AppModel {
+    enum Phase: Equatable {
+        case starting
+        case downloading(Int64, Int64, problem: String?)
+        case ready
+        case down(String)
+    }
+
     let analyzer: NoteAnalyzer
-    private(set) var status = "Starting…"
+    let store: NoteStore?
+    private(set) var phase = Phase.starting
+    private(set) var selection: Note?
+    private(set) var openedText = ""
+    var showDashboard = true
+    var error: String?
+
     private let worker: WorkerClient
+    private var unsaved: (Note, String)?
+    private var saveTask: Task<Void, Never>?
 
     init() {
         let (events, sink) = AsyncStream.makeStream(of: WorkerEvent.self)
         worker = WorkerClient(executable: WorkerLocation.python) { sink.yield($0) }
         analyzer = NoteAnalyzer(client: worker)
+        do {
+            store = try NoteStore(folder: WorkerLocation.notesFolder)
+        } catch {
+            store = nil
+            self.error = "Could not open your notes folder: \(error.localizedDescription)"
+        }
         Task { [weak self] in
             for await event in events { self?.handle(event) }
         }
-        do { try worker.start() } catch { status = "Could not start the signal worker: \(error)" }
+        do { try worker.start() } catch { phase = .down("Could not start the signal worker: \(error.localizedDescription)") }
+        open(store?.notes.first)
+    }
+
+    var statusLine: String {
+        switch phase {
+        case .starting: "Loading language models…"
+        case .downloading: "Downloading language models…"
+        case .ready: "Signals on · runs on this Mac"
+        case let .down(message): message
+        }
+    }
+
+    func open(_ note: Note?) {
+        guard note != selection else { return }
+        flush()
+        selection = note
+        openedText = (try? note.map { try store?.text(of: $0) ?? "" }) ?? ""
+    }
+
+    func edited(_ text: String) {
+        guard let note = selection else { return }
+        unsaved = (note, text)
+        saveTask?.cancel()
+        saveTask = Task {
+            try? await Task.sleep(for: .milliseconds(600))
+            guard !Task.isCancelled else { return }
+            self.flush()
+        }
+    }
+
+    func newNote() {
+        perform { if let note = try store?.create() { open(note) } }
+    }
+
+    func rename(_ note: Note, to title: String) {
+        flush()
+        perform {
+            guard let renamed = try store?.rename(note, to: title) else { return }
+            if selection == note { selection = renamed }
+        }
+    }
+
+    func delete(_ note: Note) {
+        if selection == note { flush(); selection = nil; openedText = "" }
+        perform { try store?.delete(note) }
+    }
+
+    private func flush() {
+        guard let (note, text) = unsaved else { return }
+        unsaved = nil
+        perform { try store?.save(text, to: note) }
+    }
+
+    private func perform(_ action: () throws -> Void) {
+        do { try action() } catch { self.error = error.localizedDescription }
     }
 
     private func handle(_ event: WorkerEvent) {
-        switch event {
-        case .ready: status = "Ready"
-        case let .progress(done, total): status = "Downloading models \(done * 100 / max(total, 1))%"
-        case let .failed(message): status = message
-        case .exited: status = "Signal worker stopped"
+        withAnimation(.smooth) {
+            switch event {
+            case .ready:
+                phase = .ready
+            case let .progress(done, total):
+                if done < total { phase = .downloading(done, total, problem: nil) }
+            case let .failed(message):
+                if case let .downloading(done, total, _) = phase {
+                    phase = .downloading(done, total, problem: message)
+                } else {
+                    phase = .down(message)
+                }
+            case .exited:
+                if case .downloading = phase { return }
+                phase = .down("Signal worker restarting…")
+            }
         }
     }
 }
@@ -59,5 +144,10 @@ enum WorkerLocation {
             .deletingLastPathComponent().deletingLastPathComponent()
             .deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent(".venv/bin/python")
+    }
+
+    static var notesFolder: URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Writing Signals", isDirectory: true)
     }
 }

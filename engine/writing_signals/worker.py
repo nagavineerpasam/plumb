@@ -14,24 +14,25 @@ from typing import Callable, Dict, List
 from .catalogue import CATALOGUE_VERSION
 
 BUNDLE_REPO = "convaiinnovations/laya"
-SKIP_PATTERNS = ["typed-decisions/*", "*.md", ".gitattributes"]
+# Only what the English checkpoint needs; the bundle repo also holds other models and images.
+MODEL_FILES = ["model.safetensors", "rl_agent_config.json", "encoder/*", "tokenizer/*"]
 
 
 def ensure_models(emit: Callable[[dict], None]) -> None:
-    """Fetch the English and multilingual checkpoints once, reporting bytes as they arrive."""
+    """Fetch the English checkpoint once, reporting bytes as they arrive."""
     from huggingface_hub import HfApi, hf_hub_download
     from huggingface_hub.utils import filter_repo_objects
 
     try:  # Already cached: no network needed, so later launches work offline.
         from huggingface_hub import snapshot_download
-        snapshot_download(BUNDLE_REPO, ignore_patterns=SKIP_PATTERNS, local_files_only=True)
+        snapshot_download(BUNDLE_REPO, allow_patterns=MODEL_FILES, local_files_only=True)
         return
     except Exception:
         pass
 
     info = HfApi().model_info(BUNDLE_REPO, files_metadata=True)
     files = {s.rfilename: s.size or 0 for s in info.siblings}
-    wanted = list(filter_repo_objects(files, ignore_patterns=SKIP_PATTERNS))
+    wanted = list(filter_repo_objects(files, allow_patterns=MODEL_FILES))
     total = sum(files[f] for f in wanted)
     done = 0
     stop = threading.Event()

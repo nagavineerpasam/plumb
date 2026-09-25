@@ -43,4 +43,24 @@ final class RealWorkerTests: XCTestCase {
         }
         XCTAssertNotNil(result?["b"])
     }
+
+    @MainActor
+    func testFastTypingOfANoteEndsFullyScored() async throws {
+        let client = WorkerClient(executable: try devPython())
+        try client.start()
+        defer { client.stop() }
+        let analyzer = NoteAnalyzer(client: client, debounce: .milliseconds(300))
+        let note = "They is happy. We are thrilled to announce our new office! The meeting is tomorrow at ten."
+
+        var typed = ""
+        for character in note {
+            typed.append(character)
+            analyzer.update(text: typed)
+            try await Task.sleep(for: .milliseconds(Int.random(in: 5...400)))
+        }
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.count, 3)
+        XCTAssertEqual(analyzer.sentences.filter { $0.signals == nil }.map(\.text), [])
+    }
 }
