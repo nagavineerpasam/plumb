@@ -4,17 +4,60 @@
 
 <h1 align="center">Plumb</h1>
 
-<p align="center">A private notes app that shows you, sentence by sentence, how well you write English.<br>
-Grammar, sense, spelling, tone and confidence, live as you type or speak. Nothing leaves your Mac.<br>
-<b>Free and open source, forever.</b></p>
+<p align="center"><b>Write better English, and watch yourself get better.</b><br>
+A beautiful notes app for your Mac that checks your writing live, privately, with its own AI model.<br>
+Free and open source, forever.</p>
+
+<p align="center">
+  <a href="https://github.com/nagavineerpasam/plumb/releases/latest/download/Plumb.dmg"><b>⬇&nbsp;&nbsp;Download Plumb for Mac</b></a><br>
+  <sub>Apple Silicon (M1 or newer) · macOS 14 or newer · free</sub>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/dark-editor.png">
+    <img src="docs/screenshots/light-editor.png" alt="A note with grammar mistakes underlined in red, spelling in amber, and a side panel showing 45% correctness">
+  </picture>
+</p>
 
 ---
 
-## Install (Apple Silicon Mac, macOS 14 or newer)
+## Why Plumb
 
-1. **Download** `Plumb-0.1.0-arm64.dmg` from the [latest release](https://github.com/nagavineerpasam/plumb/releases/latest).
-2. **Open** the downloaded file and **drag Plumb onto Applications**.
-3. **Open Plumb** from Applications. The first time, macOS stops it because it isn't from the App Store:
+Most writing tools fix your text for you, so you never learn. Plumb does the opposite: it **shows** you what's off and leaves the fixing to you. Every note becomes practice, and the Progress chart shows you getting better week by week.
+
+- **Live checks as you type.** Grammar mistakes, sentences that don't read as real English, spelling, capitals and punctuation, all marked the moment you pause.
+- **A Correctness score for every note.** One number that tells you how clean your English is, with a short list of what needs a look.
+- **Your writing voice.** See the tone, emotion, confidence, clarity and formality of what you write, so an email to your manager doesn't sound like a text to a friend.
+- **Speak instead of type.** Click **Speak** and talk; your words land in the note and get checked like anything you type.
+- **Progress you can see.** Every note is scored and charted, so you can see yourself improving.
+- **Private by design.** The AI model runs on your Mac. No account, no cloud, no tracking. Your notes never leave your computer.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/dark-progress.png">
+    <img src="docs/screenshots/light-progress.png" alt="The Progress page: a line chart of each note's correctness over a month, trending upward">
+  </picture>
+</p>
+
+## What the marks mean
+
+| Mark | Meaning | Example |
+|---|---|---|
+| Red underline | Likely a grammar mistake | "The results **is** ready." |
+| Soft red highlight | Doesn't read as correct English | "…because of okay" |
+| Amber dots | Spelling, capitals or punctuation | "wensday", "hello how are you" |
+
+Hover any sentence for its Correctness and voice:
+
+<p align="center">
+  <img src="docs/screenshots/light-card.png" alt="Hovering a sentence shows its correctness, sense, tone, emotion, confidence, clarity and formality">
+</p>
+
+## Install
+
+1. **[Download Plumb.dmg](https://github.com/nagavineerpasam/plumb/releases/latest/download/Plumb.dmg)**, open it, and **drag Plumb onto Applications**.
+2. **Open Plumb.** The first time, macOS stops it because it isn't from the App Store:
    - click **Done** on the warning,
    - open **System Settings → Privacy & Security**,
    - scroll down to *"Plumb" was blocked* and click **Open Anyway**, then **Open**.
@@ -23,23 +66,9 @@ Grammar, sense, spelling, tone and confidence, live as you type or speak. Nothin
 
 On first launch Plumb downloads its writing model (about 800 MB) once, with a progress bar. After that it works completely offline.
 
-**Requirements:** an Apple Silicon Mac (M1 or newer), macOS 14 or newer, and about 2.5 GB of free disk space. Speaking into notes needs macOS 26.
+**Requirements:** an Apple Silicon Mac (M1 or newer), macOS 14 or newer, and about 2.5 GB of free disk space. Speaking into notes currently needs macOS 26.
 
-## What it does
-
-As you write, Plumb checks each sentence the moment you pause:
-
-| Mark | Meaning |
-|---|---|
-| Red underline | Likely a grammar mistake ("tech people **is** dumb") |
-| Soft red highlight | Doesn't read as correct English ("…because of okay") |
-| Amber dots | Spelling, capitals or punctuation ("wensday", "hello how are you") |
-
-Hover any sentence to see its **Correctness %**, tone, emotion, confidence, clarity and formality. The side panel shows the whole note's Correctness, everything that needs a look, and your writing voice. Plumb never rewrites your text: it shows what's wrong so you learn to fix it yourself.
-
-- **Speak instead of type:** click **Speak** by the note title (or press ⌥⌘D). Your words appear at the cursor and are checked like typed text. Recognition runs on your Mac.
-- **Progress:** the Progress page charts each note's Correctness over time, so you can see yourself improving.
-- **Your notes are plain files** in `~/Documents/Plumb`, one Markdown file per note.
+Your notes are plain Markdown files in `~/Library/Application Support/Plumb/Notes` (Settings → Show notes in Finder).
 
 ## Privacy
 
@@ -47,7 +76,7 @@ Everything runs on your Mac: the writing model, speech recognition, your notes. 
 
 ## How it works
 
-Plumb is built on [Laya](https://github.com/NandhaKishorM/laya), an open-source model that answers typed questions about text in a single pass instead of generating text. Plumb fine-tunes Laya's English checkpoint to judge writing, and asks it about each sentence:
+Plumb is built on [Laya](https://github.com/NandhaKishorM/laya), an open-source model that answers typed questions about text in a single pass instead of generating text. That makes it fast enough to run on a laptop CPU. Plumb fine-tunes Laya's English checkpoint to judge writing and asks it about what you write:
 
 - does it contain a grammar mistake?
 - does it make sense?
@@ -74,7 +103,7 @@ python3.12 -m venv .venv && .venv/bin/pip install -e "engine[test]"   # the sign
 cd app && swift run                                                   # the app (uses the venv above)
 ```
 
-- **Release build:** `app/scripts/build-release.sh 0.1.0` builds `dist/Plumb.app` and `dist/Plumb-0.1.0-arm64.dmg` with Python and the engine inside.
+- **Release build:** `app/scripts/build-release.sh 0.1.0` builds `dist/Plumb.app` and `dist/Plumb.dmg` with Python and the engine inside.
 - **Tests:** `swift test` in `app/`, and `pytest` in `engine/`.
 - **Retraining:** the model is fine-tuned on Kaggle with `engine/notebooks/writing_signals_finetune_kaggle.ipynb`.
 
