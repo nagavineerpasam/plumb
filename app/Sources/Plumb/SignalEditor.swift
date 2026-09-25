@@ -5,12 +5,13 @@ import WritingSignalsCore
 /// TextKit 2 editor. Signals are drawn as rendering attributes, which never touch the text.
 struct SignalEditor: NSViewRepresentable {
     let analyzer: NoteAnalyzer
+    let dictation: Dictation
     /// Changes whenever a different note is opened, so its text replaces the editor's.
     let noteID: URL?
     let initialText: String
     let onChange: (String) -> Void
 
-    func makeCoordinator() -> Coordinator { Coordinator(analyzer: analyzer) }
+    func makeCoordinator() -> Coordinator { Coordinator(analyzer: analyzer, dictation: dictation) }
 
     func makeNSView(context: Context) -> NSScrollView {
         let text = SignalTextView(usingTextLayoutManager: true)
@@ -40,6 +41,7 @@ struct SignalEditor: NSViewRepresentable {
         scroll.hasVerticalScroller = true
         scroll.drawsBackground = false
         context.coordinator.textView = text
+        dictation.textView = text
         context.coordinator.observe()
         return scroll
     }
@@ -58,11 +60,20 @@ struct SignalEditor: NSViewRepresentable {
     @MainActor
     final class Coordinator: NSObject, NSTextViewDelegate {
         let analyzer: NoteAnalyzer
+        let dictation: Dictation
         weak var textView: SignalTextView?
         var noteID: URL?
         var onChange: (String) -> Void = { _ in }
 
-        init(analyzer: NoteAnalyzer) { self.analyzer = analyzer }
+        init(analyzer: NoteAnalyzer, dictation: Dictation) {
+            self.analyzer = analyzer
+            self.dictation = dictation
+        }
+
+        func textView(_ textView: NSTextView, shouldChangeTextIn range: NSRange, replacementString: String?) -> Bool {
+            dictation.userEdited(range, replacementLength: (replacementString as NSString?)?.length ?? 0)
+            return true
+        }
 
         func textDidChange(_ notification: Notification) {
             guard let text = textView else { return }
@@ -73,7 +84,7 @@ struct SignalEditor: NSViewRepresentable {
         /// Re-draws highlights every time the analyzer's sentences change.
         func observe() {
             withObservationTracking {
-                apply(analyzer.sentences)
+                apply(analyzer.sentences, grey: dictation.grey, hints: dictation.hints)
             } onChange: { [weak self] in
                 Task { @MainActor in self?.observe() }
             }
@@ -107,11 +118,16 @@ struct SignalEditor: NSViewRepresentable {
 
         /// TextKit 2 rendering attributes draw background colours but ignore underlines, so the
         /// underlines are drawn by SignalTextView itself from `marks`.
-        private func apply(_ sentences: [AnalyzedSentence]) {
+        private func apply(_ sentences: [AnalyzedSentence], grey: NSRange?, hints: [NSRange]) {
             guard let text = textView, let layout = text.textLayoutManager,
                   let content = layout.textContentManager else { return }
             let whole = layout.documentRange
             layout.removeRenderingAttribute(.backgroundColor, for: whole)
+            layout.removeRenderingAttribute(.foregroundColor, for: whole)
+            if let grey, let range = textRange(grey, content, whole) {
+                // Words still being recognised: light grey until they settle.
+                layout.addRenderingAttribute(.foregroundColor, value: NSColor.tertiaryLabelColor, for: range)
+            }
             var marks: [SignalTextView.Mark] = []
             for sentence in sentences {
                 guard let signals = sentence.signals else { continue }  // still being checked: no mark
@@ -134,6 +150,8 @@ struct SignalEditor: NSViewRepresentable {
                                        color: .systemOrange, dotted: true))
                 }
             }
+            // "Say this more clearly": a faint grey dotted line under words the recognizer was unsure of.
+            marks += hints.map { .init(range: $0, color: .tertiaryLabelColor, dotted: true) }
             text.marks = marks
             text.refreshHover()
         }

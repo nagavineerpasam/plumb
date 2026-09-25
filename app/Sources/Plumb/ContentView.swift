@@ -80,6 +80,7 @@ struct ContentView: View {
                 HStack {
                     TitleField(title: model.selection?.title ?? "") { model.renameSelection(to: $0) }
                     Spacer()
+                    if Dictation.isAvailable { MicButton(dictation: model.dictation) }
                     Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
                         Image(systemName: "sidebar.right")
                     }
@@ -87,7 +88,7 @@ struct ContentView: View {
                     .help(model.showDashboard ? "Hide signals" : "Show signals")
                 }
                 .padding(.horizontal, 52).padding(.top, 40)
-                SignalEditor(analyzer: model.analyzer, noteID: model.selection?.url,
+                SignalEditor(analyzer: model.analyzer, dictation: model.dictation, noteID: model.selection?.url,
                              initialText: model.openedText, onChange: model.edited)
             }
             .opacity(model.selection == nil ? 0 : 1)
@@ -198,5 +199,31 @@ struct TitleField: View {
     private func commit() {
         let clean = draft.trimmingCharacters(in: .whitespacesAndNewlines)
         if clean.isEmpty || clean == title { draft = title } else { rename(clean) }
+    }
+}
+
+/// Click (or ⌥⌘D) to speak into the note at the cursor; click again to stop. Glows with the
+/// microphone level while listening.
+struct MicButton: View {
+    @Bindable var dictation: Dictation
+
+    var body: some View {
+        Button { dictation.toggle() } label: {
+            Image(systemName: dictation.isListening ? "mic.fill" : "mic")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(dictation.isListening ? Color.white : Color.secondary)
+                .frame(width: 30, height: 30)
+                .background {
+                    Circle().fill(dictation.isListening ? Color.accentColor : Color.clear)
+                        .shadow(color: .accentColor.opacity(dictation.isListening ? 0.25 + dictation.level * 0.6 : 0),
+                                radius: 4 + dictation.level * 10)
+                }
+                .animation(.easeOut(duration: 0.12), value: dictation.level)
+        }
+        .buttonStyle(.plain)
+        .keyboardShortcut("d", modifiers: [.option, .command])
+        .help(dictation.isListening ? "Stop listening (⌥⌘D)" : "Speak into your note (⌥⌘D)")
+        .alert(dictation.problem ?? "", isPresented: Binding(get: { dictation.problem != nil },
+                                                             set: { if !$0 { dictation.problem = nil } })) {}
     }
 }

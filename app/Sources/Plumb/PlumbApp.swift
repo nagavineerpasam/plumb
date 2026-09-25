@@ -71,6 +71,7 @@ final class AppModel {
     }
 
     let analyzer: NoteAnalyzer
+    let dictation = Dictation()
     let store: NoteStore?
     private(set) var phase = Phase.starting
     private(set) var selection: Note?
