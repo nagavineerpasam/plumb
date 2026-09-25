@@ -148,12 +148,29 @@ final class Dictation {
         let node = engine.inputNode
         let micFormat = node.outputFormat(forBus: 0)
         let converter = AVAudioConverter(from: micFormat, to: format)
-        node.installTap(onBus: 0, bufferSize: 1024, format: micFormat) { [weak self] buffer, _ in
-            let rms = Self.rms(buffer)
+        let onLevel: @Sendable (Double) -> Void = { [weak self] rms in
             Task { @MainActor in
                 self?.level = min(1, rms * 12)
                 if rms > 0.01 { self?.lastSound = Date() }
             }
+        }
+        node.installTap(onBus: 0, bufferSize: 1024, format: micFormat,
+                        block: Self.tap(converter: converter, to: format, from: micFormat,
+                                        continuation: continuation, onLevel: onLevel))
+        engine.prepare()
+        try engine.start()
+        self.engine = engine
+    }
+
+    /// The audio callback runs on the audio thread, so it is built outside the main actor:
+    /// it converts each buffer for the recognizer and reports the level back to the main thread.
+    @available(macOS 26, *)
+    nonisolated private static func tap(converter: AVAudioConverter?, to format: AVAudioFormat,
+                                        from micFormat: AVAudioFormat,
+                                        continuation: AsyncStream<AnalyzerInput>.Continuation,
+                                        onLevel: @escaping @Sendable (Double) -> Void) -> AVAudioNodeTapBlock {
+        { buffer, _ in
+            onLevel(rms(buffer))
             guard let converter else { return }
             let ratio = format.sampleRate / micFormat.sampleRate
             let capacity = AVAudioFrameCount(Double(buffer.frameLength) * ratio) + 1024
@@ -167,9 +184,6 @@ final class Dictation {
             }
             continuation.yield(AnalyzerInput(buffer: out))
         }
-        engine.prepare()
-        try engine.start()
-        self.engine = engine
     }
 
     private func startSilenceWatch() {

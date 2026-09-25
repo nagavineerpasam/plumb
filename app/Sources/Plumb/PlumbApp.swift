@@ -34,7 +34,7 @@ enum Appearance: String, CaseIterable, Identifiable {
     case system = "System", light = "Light", dark = "Dark"
     var id: String { rawValue }
 
-    func apply() {
+    @MainActor func apply() {
         NSApplication.shared.appearance = switch self {
         case .system: nil
         case .light: NSAppearance(named: .aqua)
@@ -72,6 +72,15 @@ final class AppModel {
 
     let analyzer: NoteAnalyzer
     let dictation = Dictation()
+    /// Each note's latest Correctness over time, for the Progress page.
+    let progress = ProgressStore(file: FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        .appendingPathComponent("Plumb/progress.json"))
+    /// Bumped whenever a score is recorded, so the Progress page redraws.
+    private(set) var progressVersion = 0
+    var showingProgress = false
+    private var lastEdit = Date()
+    private var unscorable: Set<URL> = []
+    private var backfill: Task<Void, Never>?
     let store: NoteStore?
     private(set) var phase = Phase.starting
     private(set) var selection: Note?
@@ -96,6 +105,7 @@ final class AppModel {
         Task { [weak self] in
             for await event in events { self?.handle(event) }
         }
+        startBackfill()
         do { try worker.start() } catch { phase = .down("Could not start the signal worker: \(error.localizedDescription)") }
         open(store?.notes.first)
     }
@@ -120,9 +130,41 @@ final class AppModel {
         statuses[url] = grammar ? .attention
             : summary.mechanicsIssues > 0 ? .mechanics
             : summary.scoredSentences > 0 ? .clean : .unchecked
+        // Once every sentence is checked, the note's score becomes its point on the Progress chart.
+        if analyzer.sentences.allSatisfy({ $0.signals != nil }), let score = summary.correctness {
+            let edited = store?.notes.first { $0.url == url }?.modified ?? Date()
+            try? progress.record(url, correctness: score, at: edited)
+            progressVersion += 1
+        }
+    }
+
+    /// Scores notes that have no Progress point yet, one at a time, only after 30 s without typing.
+    func startBackfill() {
+        backfill?.cancel()
+        backfill = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(30))
+                guard let self, Date().timeIntervalSince(self.lastEdit) > 30,
+                      !self.dictation.isListening,
+                      let note = self.store?.notes.first(where: {
+                          $0 != self.selection && !self.progress.hasScore($0.url) && !self.unscorable.contains($0.url)
+                      }),
+                      let text = try? self.store?.text(of: note) else { continue }
+                let scorer = NoteAnalyzer(client: self.worker, debounce: .zero, retryDelay: .seconds(5))
+                scorer.update(text: text)
+                await scorer.idle()
+                if let score = scorer.summary.correctness {
+                    try? self.progress.record(note.url, correctness: score, at: note.modified)
+                    self.progressVersion += 1
+                } else {
+                    self.unscorable.insert(note.url)  // empty note: nothing to score
+                }
+            }
+        }
     }
 
     func open(_ note: Note?) {
+        showingProgress = false
         guard note != selection else { return }
         flush()
         selection = note
@@ -131,6 +173,7 @@ final class AppModel {
 
     func edited(_ text: String) {
         guard let note = selection else { return }
+        lastEdit = Date()
         unsaved = (note, text)
         saveTask?.cancel()
         saveTask = Task {
@@ -148,6 +191,7 @@ final class AppModel {
         flush()
         perform {
             guard let renamed = try store?.rename(note, to: title) else { return }
+            try? progress.renamed(note.url, to: renamed.url)
             if selection == note {
                 // The editor reloads when the file changes; give it the text just saved, not the
                 // text from when the note was opened.
@@ -164,6 +208,8 @@ final class AppModel {
     func delete(_ note: Note) {
         if selection == note { flush(); selection = nil; openedText = "" }
         perform { try store?.delete(note) }
+        try? progress.deleted(note.url)
+        progressVersion += 1
     }
 
     private func flush() {

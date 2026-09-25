@@ -13,7 +13,7 @@ struct ContentView: View {
         HStack(alignment: .top, spacing: 12) {
             sidebar.frame(width: 220)
             page
-            if model.showDashboard {
+            if model.showDashboard && !model.showingProgress {
                 Dashboard(summary: model.analyzer.summary,
                           pending: model.analyzer.sentences.filter { $0.signals == nil }.count,
                           hasText: !model.analyzer.sentences.isEmpty,
@@ -61,13 +61,30 @@ struct ContentView: View {
             .scrollIndicators(.never)
             Spacer(minLength: 8)
             sidebarButton("New note", systemImage: "plus") { model.newNote() }
+            sidebarButton("Progress", systemImage: "chart.line.uptrend.xyaxis") {
+                withAnimation(.smooth) { model.showingProgress.toggle() }
+            }
                 .keyboardShortcut("n")
             sidebarButton("Settings", systemImage: "gearshape") { showSettings.toggle() }
                 .popover(isPresented: $showSettings, arrowEdge: .trailing) { SettingsView() }
         }
     }
 
+    @ViewBuilder
     private var page: some View {
+        if model.showingProgress {
+            ProgressPage(progress: model.progress, version: model.progressVersion,
+                         notes: model.store?.notes ?? [], open: { model.open($0) })
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
+                .transition(.opacity)
+        } else {
+            notePage
+        }
+    }
+
+    private var notePage: some View {
         ZStack {
             if model.selection == nil {
                 ContentUnavailableView {
