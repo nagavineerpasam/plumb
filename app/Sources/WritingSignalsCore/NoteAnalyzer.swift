@@ -16,12 +16,16 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
     var flowPreviousID: String?
 
     /// How well this sentence is written, 0...1, once checked: 100% minus the likelihood of a
-    /// grammar mistake when one is judged likely (p >= 0.5; the trained model puts correct
-    /// sentences near 0.3), minus 10 points per spelling or punctuation slip. The note's
-    /// Correctness is the average of these.
+    /// grammar mistake or of not making sense, whichever is judged likely and larger (p >= 0.5;
+    /// the trained model puts correct sentences near 0.3), minus 10 points per spelling or
+    /// punctuation slip. The note's Correctness is the average of these.
     public var correctness: Double? {
-        guard let p = signals?.signals["grammar"]?.distribution["yes"] else { return nil }
-        return max(0, 1 - (p >= 0.5 ? p : 0) - 0.1 * Double(mechanics?.count ?? 0))
+        guard let grammar = signals?.signals["grammar"]?.distribution["yes"] else { return nil }
+        let sense = signals?.signals["sense"]?.distribution["yes"] ?? 0
+        // Only a judged problem (p >= 0.5) costs points, and one sentence isn't charged twice:
+        // the larger of a grammar mistake and not making sense counts.
+        let problem = max(grammar >= 0.5 ? grammar : 0, sense >= 0.5 ? sense : 0)
+        return max(0, 1 - problem - 0.1 * Double(mechanics?.count ?? 0))
     }
 }
 

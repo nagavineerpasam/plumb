@@ -21,9 +21,11 @@ enum Palette {
     /// On since the fine-tuned model passed its bar (CoLA 0.789 vs 0.75; 25 of 30 everyday
     /// mistakes caught with no false alarms). The base model flagged 0 of 30.
     static let grammarReady = true
-    /// Off until a fine-tuned model passes the sense accuracy bar (tickets 15 and 17).
-    static let senseReady = false
-    /// Off until a fine-tuned model passes the flow accuracy bar (tickets 16 and 17).
+    /// On since training run 2 (0.94 on its test set; locally 0 of 4 good sentences flagged, but
+    /// nonsense "because" clauses like "because of okay" are still missed).
+    static let senseReady = true
+    /// Off: run 2 passed its bar (0.885) but flagged natural continuations locally (2 of 3), so
+    /// it waits for a run 3 with better "follows naturally" examples.
     static let flowReady = false
 
     static var order: [String] {

@@ -307,6 +307,27 @@ final class NoteAnalyzerTests: XCTestCase {
         XCTAssertEqual(analyzer.sentences.map { $0.correctness ?? -1 }, [0.1, 0.9].map { $0 }, accuracy: 0.001)
         XCTAssertEqual(analyzer.summary.correctness ?? -1, 0.5, accuracy: 0.001)
     }
+
+    func testASentenceThatDoesntMakeSenseLosesCorrectnessLikeAGrammarMistake() async {
+        let client = FakeSignalClient()
+        client.script = [
+            "I love cats because of okay.": [
+                "grammar": Signal(value: "no", distribution: ["yes": 0.3, "no": 0.7]),
+                "sense": Signal(value: "yes", distribution: ["yes": 0.8, "no": 0.2]),
+            ],
+            "He go home because of okay.": [
+                "grammar": Signal(value: "yes", distribution: ["yes": 0.9, "no": 0.1]),
+                "sense": Signal(value: "yes", distribution: ["yes": 0.8, "no": 0.2]),
+            ],
+        ]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "I love cats because of okay. He go home because of okay.")
+        await analyzer.idle()
+
+        // Sense alone costs its likelihood (0.8); with both problems only the larger one counts (0.9).
+        XCTAssertEqual(analyzer.sentences.map { $0.correctness ?? -1 }, [0.2, 0.1], accuracy: 0.001)
+    }
 }
 
 private func XCTAssertEqual(_ a: [Double], _ b: [Double], accuracy: Double, file: StaticString = #filePath, line: UInt = #line) {
