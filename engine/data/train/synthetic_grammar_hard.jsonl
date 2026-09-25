@@ -1,0 +1,120 @@
+{"sentence": "We was stuck in traffic for an hour.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1001}
+{"sentence": "We were stuck in traffic for an hour.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1001}
+{"sentence": "You was right about the deadline.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1002}
+{"sentence": "You were right about the deadline.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1002}
+{"sentence": "They was already gone when I arrived.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1003}
+{"sentence": "They were already gone when I arrived.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1003}
+{"sentence": "The kids was asleep by nine.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1004}
+{"sentence": "The kids were asleep by nine.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1004}
+{"sentence": "My parents was happy with the news.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1005}
+{"sentence": "My parents were happy with the news.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1005}
+{"sentence": "Both tickets was sold out online.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1006}
+{"sentence": "Both tickets were sold out online.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1006}
+{"sentence": "We wasn't told about the change.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1007}
+{"sentence": "We weren't told about the change.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1007}
+{"sentence": "Were he at the party last night?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1008}
+{"sentence": "Was he at the party last night?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1008}
+{"sentence": "The results was better than expected.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1009}
+{"sentence": "The results were better than expected.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1009}
+{"sentence": "Our neighbours was very kind to us.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1010}
+{"sentence": "Our neighbours were very kind to us.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1010}
+{"sentence": "Was they coming with us?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1011}
+{"sentence": "Were they coming with us?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1011}
+{"sentence": "The windows was open all night.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1012}
+{"sentence": "The windows were open all night.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1012}
+{"sentence": "The list of items are on the table.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1013}
+{"sentence": "The list of items is on the table.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1013}
+{"sentence": "The box of chocolates were a gift.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1014}
+{"sentence": "The box of chocolates was a gift.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1014}
+{"sentence": "One of my friends live in Paris.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1015}
+{"sentence": "One of my friends lives in Paris.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1015}
+{"sentence": "The quality of the photos are poor.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1016}
+{"sentence": "The quality of the photos is poor.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1016}
+{"sentence": "Each of the students have a laptop.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1017}
+{"sentence": "Each of the students has a laptop.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1017}
+{"sentence": "The price of these shoes are too high.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1018}
+{"sentence": "The price of these shoes is too high.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1018}
+{"sentence": "A group of volunteers are cleaning the park.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1019}
+{"sentence": "A group of volunteers is cleaning the park.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1019}
+{"sentence": "The number of complaints have dropped.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1020}
+{"sentence": "The number of complaints has dropped.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1020}
+{"sentence": "The main reason for the delays are staffing.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1021}
+{"sentence": "The main reason for the delays is staffing.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1021}
+{"sentence": "Neither of the answers are correct.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1022}
+{"sentence": "Neither of the answers is correct.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1022}
+{"sentence": "The colour of the walls make the room darker.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1023}
+{"sentence": "The colour of the walls makes the room darker.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1023}
+{"sentence": "Every one of the rooms have a balcony.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1024}
+{"sentence": "Every one of the rooms has a balcony.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1024}
+{"sentence": "She suggested me to leave early.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1025}
+{"sentence": "She suggested that I leave early.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1025}
+{"sentence": "My doctor recommended me to rest.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1026}
+{"sentence": "My doctor recommended that I rest.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1026}
+{"sentence": "He explained me how the app works.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1027}
+{"sentence": "He explained to me how the app works.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1027}
+{"sentence": "Can you explain me the plan?", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1028}
+{"sentence": "Can you explain the plan to me?", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1028}
+{"sentence": "I want that you call me tomorrow.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1029}
+{"sentence": "I want you to call me tomorrow.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1029}
+{"sentence": "They let us to use the kitchen.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1030}
+{"sentence": "They let us use the kitchen.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1030}
+{"sentence": "She made me to wait outside.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1031}
+{"sentence": "She made me wait outside.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1031}
+{"sentence": "I suggest you to book early.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1032}
+{"sentence": "I suggest that you book early.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1032}
+{"sentence": "He asked me that I send the file.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1033}
+{"sentence": "He asked me to send the file.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1033}
+{"sentence": "Please describe me the problem.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1034}
+{"sentence": "Please describe the problem to me.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1034}
+{"sentence": "My boss wants that I work late.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1035}
+{"sentence": "My boss wants me to work late.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1035}
+{"sentence": "We discussed about the budget yesterday.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1036}
+{"sentence": "We discussed the budget yesterday.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1036}
+{"sentence": "I look forward to see you next week.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1037}
+{"sentence": "I look forward to seeing you next week.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1037}
+{"sentence": "We are looking forward to meet the team.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1038}
+{"sentence": "We are looking forward to meeting the team.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1038}
+{"sentence": "I'm used to wake up early.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1039}
+{"sentence": "I'm used to waking up early.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1039}
+{"sentence": "She objected to pay the extra fee.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1040}
+{"sentence": "She objected to paying the extra fee.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1040}
+{"sentence": "He is committed to improve the service.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1041}
+{"sentence": "He is committed to improving the service.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1041}
+{"sentence": "I look forward to hear from you.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1042}
+{"sentence": "I look forward to hearing from you.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1042}
+{"sentence": "They got used to work from home.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1043}
+{"sentence": "They got used to working from home.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1043}
+{"sentence": "Thank you for help me yesterday.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1044}
+{"sentence": "Thank you for helping me yesterday.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1044}
+{"sentence": "I'm interested in join the club.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1045}
+{"sentence": "I'm interested in joining the club.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1045}
+{"sentence": "She is good at explain things.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1046}
+{"sentence": "She is good at explaining things.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1046}
+{"sentence": "We are thinking about move to Leeds.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1047}
+{"sentence": "We are thinking about moving to Leeds.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1047}
+{"sentence": "Before leave, please lock the door.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1048}
+{"sentence": "Before leaving, please lock the door.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1048}
+{"sentence": "I don't know nothing about the new policy.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1049}
+{"sentence": "I don't know anything about the new policy.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1049}
+{"sentence": "We didn't see nobody at the office.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1050}
+{"sentence": "We didn't see anybody at the office.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1050}
+{"sentence": "She never says nothing in meetings.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1051}
+{"sentence": "She never says anything in meetings.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1051}
+{"sentence": "I can't find my keys nowhere.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1052}
+{"sentence": "I can't find my keys anywhere.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1052}
+{"sentence": "He doesn't want no help with it.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1053}
+{"sentence": "He doesn't want any help with it.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1053}
+{"sentence": "There isn't no milk left in the fridge.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1054}
+{"sentence": "There isn't any milk left in the fridge.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1054}
+{"sentence": "They didn't tell me nothing about it.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1055}
+{"sentence": "They didn't tell me anything about it.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1055}
+{"sentence": "I haven't got no time for this today.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1056}
+{"sentence": "I haven't got any time for this today.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1056}
+{"sentence": "Nobody didn't call while I was out.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1057}
+{"sentence": "Nobody called while I was out.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1057}
+{"sentence": "We don't need no extra chairs.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1058}
+{"sentence": "We don't need any extra chairs.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1058}
+{"sentence": "She hardly never eats breakfast.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1059}
+{"sentence": "She hardly ever eats breakfast.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1059}
+{"sentence": "I won't tell nobody your secret.", "signal": "grammar", "expected": "yes", "source": "claude-synthetic", "pair": 1060}
+{"sentence": "I won't tell anybody your secret.", "signal": "grammar", "expected": "no", "source": "claude-synthetic", "pair": 1060}
