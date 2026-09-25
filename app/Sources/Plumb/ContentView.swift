@@ -11,7 +11,7 @@ struct ContentView: View {
         NavigationSplitView {
             List(selection: Binding(get: { model.selection }, set: { model.open($0) })) {
                 ForEach(model.store?.notes ?? []) { note in
-                    NoteRow(note: note, isSelected: note == model.selection,
+                    NoteRow(note: note, status: model.status(of: note), isSelected: note == model.selection,
                             isRenaming: Binding(get: { renaming == note }, set: { renaming = $0 ? note : nil }),
                             open: { model.open(note) },
                             rename: { model.rename(note, to: $0) })
@@ -34,37 +34,56 @@ struct ContentView: View {
                 .padding(.horizontal, 14).padding(.vertical, 10)
                 .overlay(alignment: .top) { Divider() }
             }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 220)
+            .scrollContentBackground(.hidden)
+            .background(Palette.canvas)
+            .navigationSplitViewColumnWidth(min: 190, ideal: 220)
             .toolbar {
                 Button { model.newNote() } label: { Label("New Note", systemImage: "square.and.pencil") }
                     .keyboardShortcut("n")
             }
         } detail: {
-            ZStack {
-                if model.selection == nil {
-                    ContentUnavailableView {
-                        Label("No note open", systemImage: "note.text")
-                    } actions: {
-                        Button("New Note") { model.newNote() }.buttonStyle(.borderedProminent)
+            // "Soft": the page on a white rounded sheet, the signals as tiles beside it.
+            HStack(alignment: .top, spacing: 12) {
+                ZStack {
+                    if model.selection == nil {
+                        ContentUnavailableView {
+                            Label("No note open", systemImage: "note.text")
+                        } actions: {
+                            Button("New Note") { model.newNote() }.buttonStyle(.borderedProminent)
+                        }
                     }
-                }
-                SignalEditor(analyzer: model.analyzer, noteID: model.selection?.url,
-                             initialText: model.openedText, onChange: model.edited)
-                    .frame(maxWidth: 760)
-                    .frame(maxWidth: .infinity)
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(model.selection?.title ?? "")
+                            .font(.system(size: 26, weight: .semibold))
+                            .padding(.horizontal, 52).padding(.top, 40)
+                        SignalEditor(analyzer: model.analyzer, noteID: model.selection?.url,
+                                     initialText: model.openedText, onChange: model.edited)
+                    }
                     .opacity(model.selection == nil ? 0 : 1)
+                }
+                .frame(maxWidth: 820, maxHeight: .infinity)
+                .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
+                .frame(maxWidth: .infinity)
+
+                if model.showDashboard {
+                    Dashboard(summary: model.analyzer.summary,
+                              pending: model.analyzer.sentences.filter { $0.signals == nil }.count)
+                        .frame(width: 280)
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                }
             }
+            .padding(.horizontal, 12).padding(.bottom, 12).padding(.top, 4)
+            .background(Palette.canvas)
             .navigationTitle(model.selection?.title ?? "Plumb")
             .navigationSubtitle(model.statusLine)
-            .inspector(isPresented: $model.showDashboard) {
-                Dashboard(summary: model.analyzer.summary,
-                          pending: model.analyzer.sentences.filter { $0.signals == nil }.count)
-                    .inspectorColumnWidth(min: 300, ideal: 340, max: 420)
-                    .toolbar {
-                        Button { model.showDashboard.toggle() } label: { Label("Signals", systemImage: "chart.bar.xaxis") }
-                            .help("Show or hide signals")
-                    }
+            .toolbar {
+                Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
+                    Label("Signals", systemImage: "sidebar.right")
+                }
+                .help("Show or hide signals")
             }
+            .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
         }
         .overlay {
             if case let .downloading(done, total, problem) = model.phase {
@@ -83,6 +102,7 @@ struct ContentView: View {
 /// in place; Return saves, Esc cancels.
 struct NoteRow: View {
     let note: Note
+    let status: NoteStatus
     let isSelected: Bool
     @Binding var isRenaming: Bool
     let open: () -> Void
@@ -92,7 +112,8 @@ struct NoteRow: View {
     @FocusState private var focused: Bool
 
     var body: some View {
-        HStack {
+        HStack(spacing: 10) {
+            Circle().fill(status.color).frame(width: 8, height: 8)
             if isRenaming {
                 TextField("Title", text: $draft)
                     .textFieldStyle(.plain)
@@ -118,5 +139,19 @@ struct NoteRow: View {
         isRenaming = false
         let title = draft.trimmingCharacters(in: .whitespacesAndNewlines)
         if !title.isEmpty, title != note.title { rename(title) }
+    }
+}
+
+/// How a note looked the last time it was checked in this session.
+enum NoteStatus {
+    case unchecked, clean, mechanics, attention
+
+    var color: Color {
+        switch self {
+        case .unchecked: Color.secondary.opacity(0.35)
+        case .clean: .green
+        case .mechanics: .orange
+        case .attention: .red
+        }
     }
 }

@@ -1,7 +1,23 @@
+import AppKit
 import SwiftUI
 
 /// How each signal is named, ordered and coloured across the editor, cards and dashboard.
+/// A colour with separate light and dark values, resolved by the system appearance.
+func adaptive(light: UInt32, dark: UInt32) -> Color {
+    func ns(_ hex: UInt32) -> NSColor {
+        NSColor(srgbRed: CGFloat(hex >> 16 & 0xff) / 255, green: CGFloat(hex >> 8 & 0xff) / 255,
+                blue: CGFloat(hex & 0xff) / 255, alpha: 1)
+    }
+    return Color(nsColor: NSColor(name: nil) { appearance in
+        appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua ? ns(dark) : ns(light)
+    })
+}
+
 enum Palette {
+    /// "Soft": a light grey canvas with white rounded cards (dark: charcoal on near-black).
+    static let canvas = adaptive(light: 0xf6f7f9, dark: 0x191b20)
+    static let card = adaptive(light: 0xffffff, dark: 0x23262c)
+
     /// Off until a fine-tuned model passes the grammar accuracy bar (ticket 05). The base model
     /// flagged 0 of 30 broken test sentences, so showing its verdict would teach wrong things.
     static let grammarReady = false

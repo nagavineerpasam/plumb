@@ -24,7 +24,7 @@ struct SignalEditor: NSViewRepresentable {
         text.allowsUndo = true
         text.isAutomaticQuoteSubstitutionEnabled = false
         text.drawsBackground = false
-        text.textContainerInset = NSSize(width: 40, height: 56)
+        text.textContainerInset = NSSize(width: 47, height: 14)
         text.isVerticallyResizable = true
         text.autoresizingMask = [.width]
         text.textContainer?.widthTracksTextView = true

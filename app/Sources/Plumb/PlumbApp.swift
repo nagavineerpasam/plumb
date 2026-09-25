@@ -108,6 +108,19 @@ final class AppModel {
         }
     }
 
+    private var statuses: [URL: NoteStatus] = [:]
+
+    func status(of note: Note) -> NoteStatus { statuses[note.url] ?? .unchecked }
+
+    /// Remembers the open note's state for its sidebar dot.
+    func record(_ summary: NoteSummary) {
+        guard let url = selection?.url else { return }
+        let grammar = Palette.grammarReady && !summary.grammarFlagged.isEmpty
+        statuses[url] = grammar ? .attention
+            : summary.mechanicsIssues > 0 ? .mechanics
+            : summary.scoredSentences > 0 ? .clean : .unchecked
+    }
+
     func open(_ note: Note?) {
         guard note != selection else { return }
         flush()
