@@ -65,6 +65,9 @@ FLOW_QUESTION = {
 }
 
 
+# How a sentence pair is shown to the model. Training uses exactly the same format.
+FLOW_STATE_FORMAT = "First sentence: {previous}\nSecond sentence: {sentence}"
+
+
 def flow_state(previous: str, sentence: str) -> str:
-    """How a sentence pair is shown to the model. Training uses exactly the same format."""
-    return f"First sentence: {previous}\nSecond sentence: {sentence}"
+    return FLOW_STATE_FORMAT.format(previous=previous, sentence=sentence)

@@ -13,8 +13,8 @@ import zipfile
 from collections import Counter, defaultdict
 from typing import Dict, Iterable, List
 
-from .catalogue import CATALOGUE_VERSION, QUESTIONS
-from .eval.datasets import DAIR_TO_CATALOGUE, DATA_DIR, load_cola, load_dair, load_drafted
+from .catalogue import CATALOGUE_VERSION, FLOW_QUESTION, FLOW_STATE_FORMAT, QUESTIONS
+from .eval.datasets import DAIR_TO_CATALOGUE, DATA_DIR, load_cola, load_dair, load_drafted, load_flow
 
 TRAIN_DIR = os.path.join(DATA_DIR, "train")
 KAGGLE_DIR = os.path.join(DATA_DIR, "kaggle")
@@ -25,7 +25,7 @@ Row = Dict[str, str]
 
 
 def labels(signal: str) -> List[str]:
-    question = QUESTIONS[signal]
+    question = FLOW_QUESTION if signal == "flow" else QUESTIONS[signal]
     if question["type"] == "noul":
         return ["no", "yes"]
     return list(question["criteria"])
@@ -35,17 +35,27 @@ def _key(sentence: str) -> str:
     return re.sub(r"\s+", " ", sentence).strip().lower()
 
 
-def build(training: Iterable[Row], test_sentences: Iterable[str]) -> List[Row]:
-    """Drops rows that overlap a test sentence, repeat an earlier row, or carry a label the
-    catalogue doesn't have."""
+def build(training: Iterable[Row], test_sentences: Iterable[str],
+          test_pairs: Iterable[tuple] = ()) -> List[Row]:
+    """Drops rows that overlap a test sentence (or, for flow, a test pair), repeat an earlier
+    row, or carry a label the catalogue doesn't have."""
     banned = {_key(s) for s in test_sentences}
+    banned_pairs = {(_key(p), _key(s)) for p, s in test_pairs}
     seen = set()
     rows = []
     for r in training:
         key = _key(r["sentence"])
-        if not key or key in banned or (key, r["signal"]) in seen:
+        if r.get("signal") == "flow":
+            key = (_key(r.get("previous", "")), key)
+            if not key[1] or key in banned_pairs:
+                continue
+        elif not key or key in banned:
             continue
-        if r["signal"] not in QUESTIONS or r["expected"] not in labels(r["signal"]):
+        if (key, r["signal"]) in seen:
+            continue
+        if r["signal"] not in QUESTIONS and r["signal"] != "flow":
+            continue
+        if r["expected"] not in labels(r["signal"]):
             continue
         seen.add((key, r["signal"]))
         rows.append({**r, "sentence": r["sentence"].strip()})
@@ -103,6 +113,10 @@ def test_sentences() -> List[str]:
     return [e["sentence"] for e in load_cola() + load_dair() + load_drafted()]
 
 
+def test_pairs() -> List[tuple]:
+    return [(e["previous"], e["sentence"]) for e in load_flow()]
+
+
 def _spot_check(rows: List[Row], rng: random.Random, n: int = 50) -> str:
     synthetic = [r for r in rows if r["source"] == "claude-synthetic"]
     sample = sorted(rng.sample(synthetic, min(n, len(synthetic))), key=lambda r: (r["signal"], r["expected"]))
@@ -116,14 +130,15 @@ def _spot_check(rows: List[Row], rng: random.Random, n: int = 50) -> str:
 
 def main():
     rng = random.Random(20260925)
-    rows = build(load_public(rng) + load_synthetic(), test_sentences())
+    rows = build(load_public(rng) + load_synthetic(), test_sentences(), test_pairs())
     rng.shuffle(rows)
 
     os.makedirs(KAGGLE_DIR, exist_ok=True)
     with open(os.path.join(KAGGLE_DIR, "train.jsonl"), "w", encoding="utf-8") as f:
         f.writelines(json.dumps(r, ensure_ascii=False) + "\n" for r in rows)
     with open(os.path.join(KAGGLE_DIR, "catalogue.json"), "w", encoding="utf-8") as f:
-        json.dump({"version": CATALOGUE_VERSION, "questions": QUESTIONS}, f, indent=2)
+        json.dump({"version": CATALOGUE_VERSION, "questions": QUESTIONS, "flow_question": FLOW_QUESTION,
+                   "flow_state_format": FLOW_STATE_FORMAT}, f, indent=2)
     # The notebook runs this exact engine for the same accuracy check after training.
     with zipfile.ZipFile(os.path.join(KAGGLE_DIR, "engine.zip"), "w", zipfile.ZIP_DEFLATED) as z:
         for path in ["pyproject.toml", "data/README.md", "data/english_draft.jsonl",

@@ -21,3 +21,13 @@ def test_rows_with_labels_outside_the_catalogue_are_rejected():
     rows = build([row("Hi there!", expected="sarcastic"), row("Hi there, friend!", expected="friendly")], [])
 
     assert [r["expected"] for r in rows] == ["friendly"]
+
+
+def test_flow_pairs_are_kept_and_guarded_by_pair():
+    pair = {"previous": "The report is due.", "sentence": "My cat loves tuna.", "signal": "flow",
+            "expected": "yes", "source": "claude-synthetic"}
+    same_second_sentence = {**pair, "previous": "It rained all day."}
+
+    rows = build([pair, same_second_sentence], test_sentences=[], test_pairs=[("The report is due.", "My cat loves tuna.")])
+
+    assert rows == [same_second_sentence]
