@@ -295,4 +295,21 @@ final class NoteAnalyzerTests: XCTestCase {
 
         XCTAssertNotNil(analyzer.sentences[2].flow)  // "Three." still follows "Two, edited."
     }
+
+    func testEachSentenceHasItsOwnCorrectnessMatchingTheNoteScore() async {
+        let client = FakeSignalClient()
+        client.grammarMistake = ["He go home."]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "He go home. She went home")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.correctness ?? -1 }, [0.1, 0.9].map { $0 }, accuracy: 0.001)
+        XCTAssertEqual(analyzer.summary.correctness ?? -1, 0.5, accuracy: 0.001)
+    }
+}
+
+private func XCTAssertEqual(_ a: [Double], _ b: [Double], accuracy: Double, file: StaticString = #filePath, line: UInt = #line) {
+    XCTAssertEqual(a.count, b.count, file: file, line: line)
+    for (x, y) in zip(a, b) { XCTAssertEqual(x, y, accuracy: accuracy, file: file, line: line) }
 }

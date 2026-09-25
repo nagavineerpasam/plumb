@@ -14,6 +14,15 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
     public var flow: Signal?
     /// The sentence this flow result was judged against; a different neighbour voids it.
     var flowPreviousID: String?
+
+    /// How well this sentence is written, 0...1, once checked: 100% minus the likelihood of a
+    /// grammar mistake when one is judged likely (p >= 0.5; the trained model puts correct
+    /// sentences near 0.3), minus 10 points per spelling or punctuation slip. The note's
+    /// Correctness is the average of these.
+    public var correctness: Double? {
+        guard let p = signals?.signals["grammar"]?.distribution["yes"] else { return nil }
+        return max(0, 1 - (p >= 0.5 ? p : 0) - 0.1 * Double(mechanics?.count ?? 0))
+    }
 }
 
 /// Keeps a note's per-sentence signals current as the user types.

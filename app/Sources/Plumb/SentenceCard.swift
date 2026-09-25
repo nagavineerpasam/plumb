@@ -22,7 +22,17 @@ struct SentenceCard: View {
                     .font(.callout).foregroundStyle(.red)
             }
             if let signals = sentence.signals?.signals {
-                ForEach(Palette.order, id: \.self) { name in
+                if Palette.grammarReady, let score = sentence.correctness {
+                    HStack {
+                        Text("Correctness").foregroundStyle(.secondary)
+                        Spacer()
+                        Text("\(Int((score * 100).rounded()))%")
+                            .fontWeight(.semibold).monospacedDigit()
+                            .foregroundStyle(Palette.band(score))
+                    }
+                    .font(.callout)
+                }
+                ForEach(Palette.order.filter { $0 != "grammar" }, id: \.self) { name in
                     if let signal = signals[name] { row(name, signal) }
                 }
             } else {

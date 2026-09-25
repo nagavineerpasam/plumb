@@ -65,6 +65,9 @@ enum Palette {
         "formal": .indigo, "neutral": .gray, "casual": .teal, "friendly": .pink,
     ]
 
+    /// Green 85%+, orange 60-84%, red below: shared by the panel and the hover card.
+    static func band(_ score: Double) -> Color { score >= 0.85 ? .green : score >= 0.6 ? .orange : .red }
+
     static func color(signal: String, value: String) -> Color {
         switch signal {
         case "emotion": emotions[value] ?? .gray

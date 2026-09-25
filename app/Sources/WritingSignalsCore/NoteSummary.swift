@@ -25,9 +25,7 @@ public struct NoteSummary: Sendable, Equatable {
     public var senseFlagged: [String] = []
     /// Sentences that don't follow from the one before them (after a flow check).
     public var flowFlagged: [String] = []
-    /// How well the note is written, 0...1: each sentence starts at 100%, loses the likelihood of a
-    /// grammar mistake when one is judged likely, and 10 points per spelling or punctuation slip;
-    /// the note is the average.
+    /// How well the note is written, 0...1: the average of each checked sentence's correctness.
     public var correctness: Double?
 
     init(_ sentences: [AnalyzedSentence]) {
@@ -35,13 +33,7 @@ public struct NoteSummary: Sendable, Equatable {
         grammarFlagged = sentences.filter { $0.signals?.signals["grammar"]?.value == "yes" }.map(\.text)
         senseFlagged = sentences.filter { $0.signals?.signals["sense"]?.value == "yes" }.map(\.text)
         flowFlagged = sentences.filter { $0.flow?.value == "yes" }.map(\.text)
-        let judged = sentences.compactMap { s -> Double? in
-            guard let p = s.signals?.signals["grammar"]?.distribution["yes"] else { return nil }
-            // Only a judged mistake (p >= 0.5) costs points: the trained model puts correct
-            // sentences around 0.3, which should still count as fully correct.
-            let mistake = p >= 0.5 ? p : 0
-            return max(0, 1 - mistake - 0.1 * Double(s.mechanics?.count ?? 0))
-        }
+        let judged = sentences.compactMap(\.correctness)
         if !judged.isEmpty { correctness = judged.reduce(0, +) / Double(judged.count) }
         let scored = sentences.compactMap(\.signals)
         guard !scored.isEmpty else { return }
