@@ -22,8 +22,11 @@ final class Dictation {
         if #available(macOS 26, *) { return true } else { return false }
     }
 
-    /// Confidence below this marks a word as unsure. Chosen from real recognizer output (ticket 20).
-    static let unsureBelow = 0.5
+    /// Confidence below this marks a word as unsure (ticket 20). Measured on 8 clearly spoken test
+    /// sentences: ungrammatical words score low even when said clearly ("sings" 0.49,
+    /// "Informations" 0.42) and first words run 0.49-0.60, while a mishearing ("Him" → "Kim") can
+    /// score 0.81. 0.35 flags none of the clear words, so hints mean unclear audio, not bad grammar.
+    static let unsureBelow = 0.35
     private static let silenceTimeout: TimeInterval = 10
 
     weak var textView: NSTextView?
@@ -45,7 +48,7 @@ final class Dictation {
         guard !isListening, let textView else { return }
         guard #available(macOS 26, *) else { return }
         problem = nil
-        buffer = DictationBuffer(selection: textView.selectedRange(), in: textView.string)
+        buffer = DictationBuffer(selection: textView.selectedRange(), in: textView.string, keeping: hints)
         isListening = true
         session = Task { await self.run() }
     }
@@ -61,6 +64,12 @@ final class Dictation {
         finishInput?()
         finishInput = nil
         level = 0
+    }
+
+    /// A different note opened: its text has no hints.
+    func reset() {
+        stop()
+        buffer = nil
     }
 
     /// The user typed while dictating: keep hint ranges and the insertion point in step.

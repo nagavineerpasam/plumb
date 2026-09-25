@@ -60,4 +60,14 @@ final class DictationBufferTests: XCTestCase {
         buffer.userEdited(NSRange(location: 10, length: 3), replacementLength: 3)
         XCTAssertTrue(buffer.hints.isEmpty)
     }
+
+    func testHintsFromAnEarlierSessionCarryOver() {
+        var text = "Kim is here."
+        var buffer = DictationBuffer(selection: NSRange(location: 12, length: 0), in: text,
+                                     keeping: [NSRange(location: 0, length: 3)])
+
+        run(&text, buffer.final("Bye.", unsure: []))
+
+        XCTAssertEqual(buffer.hints.map { (text as NSString).substring(with: $0) }, ["Kim"])
+    }
 }

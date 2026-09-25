@@ -22,7 +22,9 @@ public struct DictationBuffer: Sendable {
     /// Words the recognizer was unsure of, in note coordinates.
     public private(set) var hints: [NSRange] = []
 
-    public init(selection: NSRange, in text: String) {
+    /// `keeping` carries hints from an earlier dictation in the same note.
+    public init(selection: NSRange, in text: String, keeping hints: [NSRange] = []) {
+        self.hints = hints
         anchor = selection.location
         pendingSelection = selection.length
         let before = selection.location > 0

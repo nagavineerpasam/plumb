@@ -4,9 +4,15 @@ import WritingSignalsCore
 /// Every signal for one sentence, shown when hovering it. Words only, one row per signal.
 struct SentenceCard: View {
     let sentence: AnalyzedSentence
+    /// A word the recognizer was unsure of, when the pointer is on one.
+    var unsureWord: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+            if let unsureWord {
+                Label("Plumb wasn't sure it heard “\(unsureWord)”. Try saying it more clearly.", systemImage: "waveform")
+                    .font(.callout).foregroundStyle(.secondary)
+            }
             ForEach(Array((sentence.mechanics ?? []).enumerated()), id: \.offset) { _, issue in
                 Label(issue.message, systemImage: "exclamationmark.circle")
                     .font(.callout).foregroundStyle(.orange)

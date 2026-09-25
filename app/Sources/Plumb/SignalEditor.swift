@@ -51,6 +51,7 @@ struct SignalEditor: NSViewRepresentable {
         coordinator.onChange = onChange
         guard coordinator.noteID != noteID, let text = coordinator.textView else { return }
         coordinator.noteID = noteID
+        dictation.reset()
         text.string = initialText
         text.isEditable = noteID != nil
         analyzer.update(text: initialText)
@@ -153,6 +154,7 @@ struct SignalEditor: NSViewRepresentable {
             // "Say this more clearly": a faint grey dotted line under words the recognizer was unsure of.
             marks += hints.map { .init(range: $0, color: .tertiaryLabelColor, dotted: true) }
             text.marks = marks
+            text.hints = hints
             text.refreshHover()
         }
     }
@@ -171,6 +173,8 @@ final class SignalTextView: NSTextView {
         didSet { if marks != oldValue { needsDisplay = true } }
     }
     var sentenceAt: (Int) -> AnalyzedSentence? = { _ in nil }
+    /// Words the recognizer was unsure of; hovering one adds a "say it more clearly" line.
+    var hints: [NSRange] = []
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
@@ -233,7 +237,8 @@ final class SignalTextView: NSTextView {
         closeTimer = nil
         if sentence == hovered, popover.isShown { return }
         hovered = sentence
-        let host = NSHostingController(rootView: SentenceCard(sentence: sentence))
+        let unsure = hints.first { NSLocationInRange(index, $0) }.map { (string as NSString).substring(with: $0) }
+        let host = NSHostingController(rootView: SentenceCard(sentence: sentence, unsureWord: unsure))
         host.sizingOptions = .preferredContentSize
         popover.contentViewController = host
         popover.behavior = .semitransient
