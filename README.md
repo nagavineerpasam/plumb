@@ -64,6 +64,14 @@ Hover any sentence for its Correctness and voice:
 
    You only do this once. (Plumb isn't signed with a paid Apple developer certificate yet.)
 
+**Comfortable with Terminal?** Install (or update) with one command instead. It skips the macOS warning, because apps fetched with `curl` aren't marked as downloaded from the internet:
+
+```bash
+curl -fsSL https://plumbapp.vercel.app/install.sh | bash
+```
+
+The script ([`install.sh`](install.sh)) checks your Mac, downloads the latest `Plumb.dmg` from the releases page, copies Plumb into Applications and opens it. Your notes are left untouched.
+
 On first launch Plumb downloads its writing model (about 800 MB) once, with a progress bar. The first time you click **Speak**, it also downloads its voice model (about 130 MB). After that it works completely offline.
 
 **Requirements:** an Apple Silicon Mac (M1 or newer), macOS 14 or newer, and about 2.7 GB of free disk space.
