@@ -20,31 +20,37 @@ struct Dashboard: View {
                 if summary.scoredSentences == 0 && summary.mechanics.isEmpty {
                     tile("Plumb") {
                         Text("Start writing. Each sentence is checked as soon as you pause.")
-                            .font(.callout).foregroundStyle(.secondary)
+                            .font(.body).foregroundStyle(.secondary)
                     }
                 } else {
-                    if !Palette.grammarReady {
-                        tile("Correct") {
-                            Label("The grammar check is training. It switches on once it passes its accuracy test.",
-                                  systemImage: "hourglass")
-                                .font(.callout).foregroundStyle(.secondary)
-                        }
-                    } else {
-                        tile("Correct") {
-                            HStack(alignment: .firstTextBaseline, spacing: 6) {
-                                Text("\(correctCount)/\(summary.scoredSentences)")
-                                    .font(.system(size: 30, weight: .semibold)).monospacedDigit()
-                                Text("sentences").font(.callout).foregroundStyle(.secondary)
+                    tile("Correctness") {
+                        if Palette.grammarReady, let score = summary.correctness {
+                            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                                Text(score, format: .percent.precision(.fractionLength(0)))
+                                    .font(.system(size: 34, weight: .semibold)).monospacedDigit()
+                                    .foregroundStyle(band(score))
+                                Text(verdict(score)).font(.body).foregroundStyle(.secondary)
                             }
+                            GeometryReader { geo in
+                                ZStack(alignment: .leading) {
+                                    Capsule().fill(.quaternary)
+                                    Capsule().fill(band(score)).frame(width: max(6, geo.size.width * score))
+                                }
+                            }
+                            .frame(height: 6)
+                        } else {
+                            Label("The grammar check is training. Your score appears once it passes its accuracy test.",
+                                  systemImage: "hourglass")
+                                .font(.body).foregroundStyle(.secondary)
                         }
                     }
                     tile("Needs a look") { issues }
                     if !voice.isEmpty {
                         tile("Voice") {
-                            WrapLayout(spacing: 6) {
+                            WrapLayout(spacing: 8) {
                                 ForEach(voice, id: \.self) { word in
-                                    Text(word).font(.caption.weight(.medium))
-                                        .padding(.horizontal, 10).padding(.vertical, 5)
+                                    Text(word).font(.callout.weight(.medium))
+                                        .padding(.horizontal, 12).padding(.vertical, 6)
                                         .background(Palette.canvas, in: Capsule())
                                 }
                             }
@@ -57,32 +63,52 @@ struct Dashboard: View {
         .scrollIndicators(.never)
     }
 
+    /// Issues grouped under the sentence they belong to, in reading order.
     @ViewBuilder
     private var issues: some View {
-        let grammar = Palette.grammarReady ? summary.grammarFlagged : []
-        if grammar.isEmpty && summary.mechanics.isEmpty {
+        let groups = issueGroups
+        if groups.isEmpty {
             Label("Nothing to fix", systemImage: "checkmark.circle.fill")
-                .font(.callout).foregroundStyle(.green)
+                .font(.body).foregroundStyle(.green)
         } else {
-            VStack(alignment: .leading, spacing: 10) {
-                ForEach(Array(grammar.enumerated()), id: \.offset) { _, sentence in
-                    row(.red, "Grammar: “\(sentence)”")
-                }
-                ForEach(Array(summary.mechanics.enumerated()), id: \.offset) { _, found in
-                    row(.orange, found.issue.message, detail: found.sentence)
+            VStack(alignment: .leading, spacing: 14) {
+                ForEach(Array(groups.enumerated()), id: \.offset) { _, group in
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(group.sentence).font(.callout).foregroundStyle(.secondary).lineLimit(2)
+                        ForEach(Array(group.items.enumerated()), id: \.offset) { _, item in
+                            row(item.color, item.text)
+                        }
+                    }
                 }
             }
         }
     }
 
-    private func row(_ color: Color, _ title: String, detail: String? = nil) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Circle().fill(color).frame(width: 7, height: 7).alignmentGuide(.firstTextBaseline) { $0[.bottom] - 1 }
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title).font(.callout).lineLimit(3)
-                if let detail { Text(detail).font(.caption).foregroundStyle(.secondary).lineLimit(2) }
+    private var issueGroups: [(sentence: String, items: [(color: Color, text: String)])] {
+        var groups: [(sentence: String, items: [(color: Color, text: String)])] = []
+        func add(_ sentence: String, _ color: Color, _ text: String) {
+            if let i = groups.firstIndex(where: { $0.sentence == sentence }) {
+                groups[i].items.append((color, text))
+            } else {
+                groups.append((sentence, [(color, text)]))
             }
         }
+        if Palette.grammarReady { summary.grammarFlagged.forEach { add($0, .red, "Likely a grammar mistake") } }
+        summary.mechanics.forEach { add($0.sentence, .orange, $0.issue.message) }
+        return groups
+    }
+
+    private func row(_ color: Color, _ title: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Circle().fill(color).frame(width: 8, height: 8).alignmentGuide(.firstTextBaseline) { $0[.bottom] - 1 }
+            Text(title).font(.body).lineLimit(3)
+        }
+    }
+
+    private func band(_ score: Double) -> Color { score >= 0.85 ? .green : score >= 0.6 ? .orange : .red }
+
+    private func verdict(_ score: Double) -> String {
+        score >= 0.85 ? "Well written" : score >= 0.6 ? "A few things to fix" : "Needs work"
     }
 
     /// The note's voice in a few words: most common tone and emotion, and the three scales.
@@ -100,18 +126,15 @@ struct Dashboard: View {
 
     private func tile<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(title).font(.caption.weight(.semibold)).foregroundStyle(.secondary)
+            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
             content()
         }
-        .padding(16)
+        .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Palette.card, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .shadow(color: .black.opacity(0.05), radius: 1, y: 1)
     }
 
-    private var correctCount: Int {
-        summary.scoredSentences - Int(((summary.grammarErrorRate ?? 0) * Double(summary.scoredSentences)).rounded())
-    }
 }
 
 /// Lays children out left to right, wrapping onto new lines.

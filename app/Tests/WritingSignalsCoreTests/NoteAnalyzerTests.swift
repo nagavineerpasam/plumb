@@ -207,4 +207,27 @@ final class NoteAnalyzerTests: XCTestCase {
 
         XCTAssertEqual(analyzer.summary.grammarFlagged, ["He go home."])
     }
+
+    func testCorrectnessIsTheAverageSentenceScore() async {
+        let client = FakeSignalClient()
+        client.grammarMistake = ["He go home."]  // grammar mistake probability 0.9; clean sentences get 0.1
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "He go home. She went home")
+        await analyzer.idle()
+
+        // "He go home." = 100 × (1 − 0.9) = 10; "She went home" = 100 × (1 − 0.1) − 10 for the missing full stop = 80.
+        XCTAssertEqual(analyzer.summary.correctness ?? -1, 0.45, accuracy: 0.001)
+    }
+
+    func testCorrectnessNeverGoesBelowZero() async {
+        let client = FakeSignalClient()
+        client.grammarMistake = ["i has went to the the store"]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "i has went to the the store")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.summary.correctness, 0)
+    }
 }

@@ -16,7 +16,7 @@ struct ContentView: View {
             if model.showDashboard {
                 Dashboard(summary: model.analyzer.summary,
                           pending: model.analyzer.sentences.filter { $0.signals == nil }.count)
-                    .frame(width: 280)
+                    .frame(width: 320)
                     .transition(.move(edge: .trailing).combined(with: .opacity))
             }
         }
