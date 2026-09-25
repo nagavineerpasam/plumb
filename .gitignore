@@ -5,3 +5,4 @@ __pycache__/
 .swiftpm/
 dist/
 engine/data/kaggle/
+build/
