@@ -7,8 +7,8 @@ import random
 import time
 
 from .. import CATALOGUE_VERSION, SignalEngine
-from .check import measure_latency, predict, summarise
-from .datasets import DATA_DIR, load_cola, load_dair, load_drafted
+from .check import flow_accuracy, measure_latency, predict, summarise
+from .datasets import DATA_DIR, load_cola, load_dair, load_drafted, load_flow
 
 
 def _checkpoint():
@@ -29,15 +29,17 @@ def _markdown(report) -> str:
              "| signal | judged on | n | accuracy | bar | majority baseline | result |",
              "|---|---|---|---|---|---|---|"]
     for name, s in report["signals"].items():
+        baseline = f"{s['majority_baseline']:.3f}" if "majority_baseline" in s else "–"
         lines.append(f"| {name} | {s['bar_source']} | {s['n']} | {s['accuracy']:.3f} | {s['bar']:.2f} | "
-                     f"{s['majority_baseline']:.3f} | {'PASS' if s['pass'] else 'FAIL'} |")
+                     f"{baseline} | {'PASS' if s['pass'] else 'FAIL'} |")
     g = report["signals"]["grammar"].get("best_threshold")
     if g:
         lines += ["", f"Grammar, informational: best yes-probability threshold on CoLA is {g['threshold']:.2f} "
                       f"→ accuracy {g['accuracy']:.3f} (tuned on the same set, so optimistic)."]
     lines += ["", "## Per source", ""]
     for name, s in report["signals"].items():
-        lines.append(f"- {name}: " + ", ".join(f"{src} {v['accuracy']:.3f} (n={v['n']})" for src, v in s["by_source"].items()))
+        if "by_source" in s:
+            lines.append(f"- {name}: " + ", ".join(f"{src} {v['accuracy']:.3f} (n={v['n']})" for src, v in s["by_source"].items()))
     lat = report["latency"]
     lines += ["", f"## Latency (one call per sentence, all six signals, {report['device']})", "",
               f"- calls: {lat['calls']}, p50 {lat['p50_ms']:.0f} ms, p95 {lat['p95_ms']:.0f} ms",
@@ -69,6 +71,9 @@ def main():
     started = time.time()
     rows = predict(engine, cola + dair + drafted)
     signals = summarise(rows)
+    flow_pairs = load_flow()
+    if flow_pairs:
+        signals["flow"] = flow_accuracy(engine, flow_pairs)
     latency = measure_latency(engine, [e["sentence"] for e in random.Random(13).sample(drafted, min(40, len(drafted)))])
 
     stamp = time.strftime("%Y%m%d-%H%M%S")

@@ -33,6 +33,15 @@ def load_dair() -> List[Example]:
 
 
 SENSE_PATH = os.path.join(DATA_DIR, "sense_test_draft.jsonl")
+FLOW_PATH = os.path.join(DATA_DIR, "flow_test_draft.jsonl")
+
+
+def load_flow(path: str = FLOW_PATH) -> List[Example]:
+    """Claude-drafted sentence pairs for the flow check (DRAFT until reviewed)."""
+    if not os.path.exists(path):
+        return []
+    with open(path, encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
 
 
 def load_drafted(path: str = DRAFT_PATH) -> List[Example]:

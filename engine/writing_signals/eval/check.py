@@ -75,6 +75,21 @@ def summarise(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
     return signals
 
 
+FLOW_BAR = 0.75
+
+
+def flow_accuracy(engine, pairs: List[Dict[str, str]], batch_size: int = 32) -> Dict[str, Any]:
+    """Flow is judged on sentence pairs (previous, sentence) against its own bar."""
+    right = 0
+    for start in range(0, len(pairs), batch_size):
+        chunk = pairs[start:start + batch_size]
+        for pair, signal in zip(chunk, engine.flow([(p["previous"], p["sentence"]) for p in chunk])):
+            right += signal["value"] == pair["expected"]
+    accuracy = right / len(pairs) if pairs else 0.0
+    return {"bar_source": "claude-draft", "bar": FLOW_BAR, "n": len(pairs), "accuracy": accuracy,
+            "pass": bool(pairs) and accuracy >= FLOW_BAR}
+
+
 def measure_latency(engine, sentences: List[str]) -> Dict[str, Any]:
     """One call per sentence, all six signals, as the app sends an edited sentence."""
     times = []

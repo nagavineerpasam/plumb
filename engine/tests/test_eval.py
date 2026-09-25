@@ -1,4 +1,4 @@
-from writing_signals.eval.check import measure_latency, predict, summarise
+from writing_signals.eval.check import flow_accuracy, measure_latency, predict, summarise
 
 
 class StubEngine:
@@ -68,3 +68,21 @@ def test_latency_reports_per_call_percentiles():
 
     assert latency["calls"] == 3
     assert 0 <= latency["p50_ms"] <= latency["p95_ms"]
+
+
+def test_flow_is_judged_on_pairs_against_its_bar():
+    class FlowStub:
+        def flow(self, pairs):
+            return [{"value": "yes" if "tuna" in s else "no", "distribution": {}} for _, s in pairs]
+
+    pairs = [
+        {"previous": "The report is due.", "sentence": "My cat loves tuna.", "expected": "yes"},
+        {"previous": "The report is due.", "sentence": "I will send it Thursday.", "expected": "no"},
+        {"previous": "It rained.", "sentence": "So we stayed in.", "expected": "no"},
+        {"previous": "It rained.", "sentence": "Therefore it was sunny.", "expected": "yes"},
+    ]
+
+    flow = flow_accuracy(FlowStub(), pairs)
+
+    assert flow["n"] == 4 and flow["accuracy"] == 0.75
+    assert flow["pass"] is True  # bar is 0.75

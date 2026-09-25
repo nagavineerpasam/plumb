@@ -1,200 +1,200 @@
-{"sentence": "Sofia finished, um, the shipment, the, the garden center, kind of Tuesday-ish before the meeting.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Can the students bring the ticket to the garden center by Friday?", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "My parents agreed to disagree with the proposal about the sound of Wednesday over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Our neighbors explained the proposal until it stopped meaning a sideways hallway.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Amara needs the proposal signed next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Maria always never finishes the ticket over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Alex forgot the invoice at the warehouse yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The budget is bigger than a folded silence but also smaller than the conference room.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The students texted about the proposal over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ethan explained the schedule until it stopped meaning the shape of a rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The report at the library began to turned into a quiet rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The guest list tasted extremely squeaky at the garden center.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grace is completely certain but also not sure at all about the guest list over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The budget is bigger than a sideways hallway but also smaller than the warehouse.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The students always never finishes the guest list by Friday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Hassan called about the shipment yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma updated the budget before sending it tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ravi agreed to disagree with the invoice about the sound of Wednesday over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Alex printed the playlist before leaving the downtown branch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Maria finished, um, the proposal, the, the train station, kind of Tuesday-ish tonight.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Zoe walked to the conference room to drop off the schedule.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ethan loves the ticket and hates the ticket because of the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The recipe is bigger than the smell of Thursday but also smaller than the warehouse.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "My parents picked up the shipment from the garden center during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Amara confirmed the order for the proposal this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma was late to the downtown branch during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma bring the report to the office every day.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma finished the report this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ethan totally definitely maybe finished the playlist by Friday, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Hassan yesterday decided the invoice the conference room the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Priya asked about the invoice this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "You will review the report next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Omar is completely certain but also not sure at all about the budget over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The proposal at the train station began to whisper Tuesdays.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "You are waiting on the budget from the conference room.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The proposal tasted extremely squeaky at the train station.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Sofia is waiting on the recipe from the conference room.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Our neighbors bring the shipment to the clinic every day.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma is waiting on the invoice from the clinic.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "They sent the invoice, and then the train station began to whisper Tuesdays.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "You dropped off the playlist at the library this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Priya picked up the playlist from the train station yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grace finished, um, the budget, the, the library, kind of Tuesday-ish yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Jordan is planning to fix the recipe over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Please send the proposal to the garden center this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Jordan picked up the shipment from the library during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The proposal was very blue next week.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "My parents totally definitely maybe finished the shipment over the weekend, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Can Hassan bring the proposal to the conference room before the meeting?", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ingrid never always avoids the ticket next week on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The new hire is completely certain but also not sure at all about the schedule over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grandma wanted to send the ticket but the office because of okay.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Jordan finished the shipment during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Amara confirmed the order for the playlist this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma over the weekend the invoice the send before wanted meeting the.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The guest list was very loud this morning.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "They were late to the downtown branch this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "You finished the shipment as loud as a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The schedule tasted extremely squeaky at the conference room.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Priya confirmed the order for the schedule by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "You agreed to disagree with the invoice about the number seven's mood by Friday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Alex sent the shipment, and then the office turned into a quiet rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Sofia totally definitely maybe finished the invoice this morning, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Ingrid always never finishes the schedule before the meeting.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "You bring the budget to the warehouse every day.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Amara asked about the shipment this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The new hire explained the proposal until it stopped meaning a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Omar printed the shipment before leaving the garden center.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Jordan finished the schedule as loud as a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The ticket whispered the warehouse into during lunch, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Sofia is planning to fix the invoice during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma by Friday decided the proposal the clinic the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Amara approved the budget this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "We rescheduled the visit to the office for over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma need the playlist this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "My cousin agreed to disagree with the proposal about a folded silence before the meeting.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "They need the invoice signed this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Hassan mentioned the invoice during the call by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Omar over the weekend decided the budget the office the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Let's go over the budget at the library tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Alex left the ticket at the office yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The ticket was very crunchy tonight.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "We walked to the conference room to drop off the guest list.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma agreed to disagree with the ticket about purple Tuesday during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Noah called about the shipment yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "David loves the recipe and hates the recipe because of a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Ravi needs the playlist signed over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grace finished the proposal as loud as a sideways hallway.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Zoe double-checked the ticket by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Sofia is planning to fix the schedule next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Hassan mentioned the ticket during the call before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The invoice is bigger than a sideways hallway but also smaller than the clinic.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The students walked to the garden center to drop off the invoice.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Jordan finish the budget tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Alex is bringing the budget to the downtown branch next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Alex is completely certain but also not sure at all about the playlist yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The new hire next week the proposal the send before wanted meeting the.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The new hire need the guest list this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Let's go over the report at the clinic over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The new hire asked about the recipe during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Liam never always avoids the guest list next week on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Ingrid printed the budget before leaving the train station.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Let's go over the proposal at the train station over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grace approved the invoice over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Noah needs the playlist signed during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The schedule was very squeaky over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "You explained the schedule until it stopped meaning the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Sofia explained the ticket until it stopped meaning the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Zoe double-checked the report yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Please send the budget to the conference room next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "You confirmed the order for the playlist tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Jordan sent the recipe, and then the conference room started folding itself into Thursday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The office smelled like yesterday near the ticket.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "David walked to the clinic to drop off the schedule.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Noah left the conference room because of the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "You agreed to disagree with the report about the color of yesterday next week.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Maria walked to the clinic to drop off the playlist.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "My cousin sent the schedule, and then the downtown branch began to whisper Tuesdays.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Sofia never always avoids the shipment this morning on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Can Zoe bring the invoice to the warehouse during lunch?", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Priya wanted to send the report but the library because of okay.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Our neighbors booked the warehouse for over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Amara mentioned the budget during the call over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "David don't have the invoice ready before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The budget tasted extremely squeaky at the library.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grandma is meeting the team at the clinic next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The invoice whispered the clinic into over the weekend, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The library smelled like yesterday near the budget.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The shipment whispered the downtown branch into this morning, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The shipment tasted extremely squeaky at the library.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Noah sent the ticket to the conference room by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grace explained the shipment until it stopped meaning a sideways hallway.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Lucia tonight decided the budget the conference room the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The ticket whispered the garden center into by Friday, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "My parents texted about the shipment tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Priya totally definitely maybe finished the ticket next week, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The guest list is bigger than the color of yesterday but also smaller than the office.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Omar always never finishes the ticket during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Our neighbors printed the playlist before leaving the conference room.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "David is completely certain but also not sure at all about the proposal this morning.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "My cousin is meeting the team at the conference room over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grace wanted to send the playlist but the warehouse because of okay.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grace yesterday the guest list the send before wanted meeting the.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Amara finished, um, the proposal, the, the garden center, kind of Tuesday-ish yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "David needs the invoice signed this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The new hire finish the playlist by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Our neighbors over the weekend the proposal the send before wanted meeting the.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The invoice whispered the office into tonight, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grandma bring the invoice to the library every day.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Lucia closed the schedule out tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "My cousin finished the proposal by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ravi tonight decided the recipe the library the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Maria don't have the budget ready before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The report tasted extremely delicious at the clinic.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Zoe never always avoids the playlist by Friday on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Please send the proposal to the library during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "They rescheduled the visit to the clinic for during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Can they bring the guest list to the warehouse next week?", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Maria booked the library for before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Alex yesterday decided the schedule the conference room the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Priya left the downtown branch because of the shape of a rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The playlist is bigger than purple Tuesday but also smaller than the train station.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Liam finished, um, the recipe, the, the office, kind of Tuesday-ish during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Ingrid this morning the schedule the send before wanted meeting the.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The recipe is bigger than the smell of Thursday but also smaller than the train station.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grandma finish the recipe during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "You finished, um, the proposal, the, the warehouse, kind of Tuesday-ish before the meeting.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grandma finished the invoice as loud as the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Liam have already sent the schedule yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "My parents dropped off the recipe at the warehouse before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "They totally definitely maybe finished the guest list yesterday, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Liam left the train station because of a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Noah printed the report before leaving the office.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "You are waiting on the ticket from the clinic.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "They finished the budget as heavy as a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Alex approved the budget yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
 {"sentence": "Sofia finished the budget tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Zoe forgot the proposal at the train station during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Priya updated the ticket before sending it by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ravi updated the ticket before sending it over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Grandma explained the invoice until it stopped meaning the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grace during lunch decided the report the garden center the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "You mentioned the invoice during the call before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "David printed the proposal before leaving the office.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "My parents never always avoids the recipe during lunch on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Ingrid was late to the office before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ravi never always avoids the guest list yesterday on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The schedule was very damp yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Grandma is bringing the invoice to the library by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "The playlist at the conference room began to turned into a quiet rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Liam need the recipe by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Our neighbors always never finishes the invoice this morning.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "The shipment is bigger than the color of yesterday but also smaller than the train station.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "David forgot the playlist at the library before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Jordan before the meeting decided the recipe the warehouse the walked around itself.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Alex have already sent the guest list this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ethan is waiting on the guest list from the train station.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Amara is bringing the playlist to the library this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You printed the budget before leaving the conference room.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Alex needs the recipe signed this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Ingrid never always avoids the playlist tonight on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Sofia is completely certain but also not sure at all about the guest list by Friday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "David printed the schedule before leaving the clinic.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "David booked the warehouse for before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grace is completely certain but also not sure at all about the recipe over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Noah walked to the office to drop off the report.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Amara booked the train station for this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Ravi finish the recipe this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Amara booked the conference room for this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "We finished the guest list as quiet as the smell of Thursday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Omar explained the budget until it stopped meaning the smell of Thursday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ethan never always avoids the playlist by Friday on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Alex printed the playlist before leaving the downtown branch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Priya explained the report until it stopped meaning the shape of a rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Sofia is bringing the invoice to the train station during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma always forget the playlist when she leave the office.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Priya never always avoids the ticket next week on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Jordan is planning to fix the shipment during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma explained the ticket until it stopped meaning a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Zoe is bringing the schedule to the garden center before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Ethan explained the report until it stopped meaning purple Tuesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Zoe finished the schedule as tall as purple Tuesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "They approved the shipment during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The schedule was very delicious this morning.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Alex explained the schedule until it stopped meaning the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Priya booked the library for this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "My cousin finished the proposal as quiet as a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Omar never always avoids the playlist over the weekend on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Lucia explained the budget until it stopped meaning the sound of Wednesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The train station smelled like over the weekend near the proposal.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "You always never finishes the playlist tonight.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Maria loves the budget and hates the budget because of a sideways hallway.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Please send the playlist to the library this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grace booked the office for over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Ravi is meeting the team at the train station over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Sofia totally definitely maybe finished the ticket before the meeting, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The new hire walked to the office to drop off the invoice.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Lucia finished the invoice as quiet as the shape of a rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "My cousin booked the conference room for over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "My parents always never finishes the proposal yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Omar always never finishes the ticket during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Sofia loves the guest list and hates the guest list because of the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The guest list was very damp over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Grandma is completely certain but also not sure at all about the playlist tonight.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Liam finished the guest list as loud as the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Sofia is bringing the schedule to the office next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The garden center smelled like before the meeting near the shipment.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The clinic smelled like yesterday near the shipment.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Maria never always avoids the shipment before the meeting on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Noah was late to the conference room during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You didn't wanted the budget changed before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The guest list was very loud yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ravi was late to the clinic over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Amara walked to the garden center to drop off the budget.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The proposal was very crunchy over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Our neighbors left the recipe at the warehouse over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Zoe printed the schedule before leaving the conference room.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Liam always forget the schedule when she leave the library.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "David loves the budget and hates the budget because of a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Our neighbors are meeting the team at the conference room tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Hassan is completely certain but also not sure at all about the schedule this morning.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The ticket whispered the train station into over the weekend, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ethan totally definitely maybe finished the schedule next week, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ingrid is completely certain but also not sure at all about the invoice before the meeting.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "David loves the recipe and hates the recipe because of the smell of Thursday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The students approved the playlist this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The new hire loves the recipe and hates the recipe because of the smell of Thursday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The recipe whispered the warehouse into this morning, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Alex always forget the guest list when she leave the office.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Alex always never finishes the invoice yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "You picked up the report from the train station yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You are bringing the playlist to the office tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Lucia approved the budget yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Hassan is bringing the shipment to the office during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The playlist was very blue tonight.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Please send the proposal to the train station over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Amara is bringing the proposal to the office this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The schedule was very crunchy before the meeting.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The shipment whispered the conference room into tonight, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ingrid finished the playlist as quiet as a sideways hallway.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Amara loves the shipment and hates the shipment because of the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Amara is planning to fix the budget over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You walked to the clinic to drop off the ticket.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma picked up the invoice from the downtown branch during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The new hire printed the playlist before leaving the warehouse.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Sofia is meeting the team at the library this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma totally definitely maybe finished the invoice yesterday, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The library smelled like next week near the budget.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The conference room smelled like tonight near the recipe.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Grandma printed the invoice before leaving the clinic.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Jordan explained the recipe until it stopped meaning the shape of a rumor.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Amara totally definitely maybe finished the shipment this morning, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The budget was very damp during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "My parents were late to the office yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The students always never finishes the guest list by Friday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Grandma didn't wanted the report changed this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "David closed the playlist out before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Alex was at the train station yesterday but forgot the recipe.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Amara closed the playlist out yesterday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "My cousin explained the recipe until it stopped meaning the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The garden center smelled like before the meeting near the guest list.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Please send the shipment to the garden center tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grace never always avoids the guest list over the weekend on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "They approved the proposal during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Lucia is bringing the playlist to the downtown branch by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Omar left the ticket at the clinic before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The new hire totally definitely maybe finished the schedule tonight, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Zoe approved the proposal during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Jordan totally definitely maybe finished the invoice tonight, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Our neighbors printed the playlist before leaving the conference room.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You never always avoids the ticket during lunch on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We approved the proposal over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Zoe totally definitely maybe finished the invoice this morning, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "They finished the proposal as loud as the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Let's go over the shipment at the library tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "My cousin always never finishes the schedule tonight.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The proposal whispered the downtown branch into this morning, sort of, I guess.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The office smelled like this morning near the budget.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The shipment was very loud during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "My parents picked up the schedule from the library during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Maria was at the conference room during lunch but forgot the budget.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Liam always forget the recipe when she leave the downtown branch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The library smelled like yesterday near the budget.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Grandma explained the proposal until it stopped meaning the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Jordan printed the proposal before leaving the office.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Alex is completely certain but also not sure at all about the shipment during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "They picked up the budget from the downtown branch this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Zoe is meeting the team at the office by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The library smelled like tonight near the proposal.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "You explained the recipe until it stopped meaning purple Tuesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Zoe needs the report signed next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Alex is meeting the team at the office next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "My cousin was late to the downtown branch by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Hassan loves the shipment and hates the shipment because of the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "We printed the guest list before leaving the conference room.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma have already sent the recipe by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You finished the recipe during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "They never always avoids the recipe before the meeting on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "My parents have already sent the guest list over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Zoe closed the proposal out during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The new hire booked the downtown branch for during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The conference room smelled like by Friday near the budget.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Zoe is bringing the budget to the downtown branch before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Jordan is completely certain but also not sure at all about the recipe by Friday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The conference room smelled like next week near the schedule.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "David walked to the office to drop off the proposal.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma finish the recipe over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Omar never always avoids the budget over the weekend on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ingrid picked up the schedule from the office before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Maria always never finishes the ticket over the weekend.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ethan totally definitely maybe finished the schedule before the meeting, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Priya is planning to fix the playlist next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma needs the guest list signed next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "My parents loves the ticket and hates the ticket because of the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Liam is bringing the ticket to the downtown branch by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You loves the report and hates the report because of the sound of Wednesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ravi loves the invoice and hates the invoice because of the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Sofia approved the report over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma closed the invoice out by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Priya loves the recipe and hates the recipe because of the smell of Thursday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Hassan finished the proposal as heavy as the sound of Wednesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Grandma is meeting the team at the library tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Priya is meeting the team at the warehouse by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Hassan is planning to fix the ticket before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "David was at the warehouse before the meeting but forgot the invoice.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Ravi always never finishes the budget during lunch.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ravi totally definitely maybe finished the ticket during lunch, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Grace totally definitely maybe finished the shipment by Friday, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The students were late to the warehouse over the weekend.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Ingrid finished the schedule as loud as a sideways hallway.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Priya loves the guest list and hates the guest list because of the color of yesterday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The new hire never always avoids the schedule before the meeting on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The students finished the guest list tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Alex booked the office for next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "They were late to the office this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma finished the report this morning.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Let's go over the ticket at the garden center by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Alex never always avoids the ticket before the meeting on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Ingrid walked to the train station to drop off the budget.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Ravi totally definitely maybe finished the report during lunch, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
 {"sentence": "Zoe always never finishes the report tonight.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
-{"sentence": "Jordan is waiting on the proposal from the office.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
-{"sentence": "Ravi finish the recipe before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Priya totally definitely maybe finished the proposal next week, not really though yes.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Grandma loves the proposal and hates the proposal because of the sound of Wednesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "The proposal was very loud by Friday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Jordan finished the shipment during lunch.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Omar loves the invoice and hates the invoice because of a folded silence.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Jordan finish the budget tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Grandma didn't wanted the invoice changed before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "My cousin is meeting the team at the office tonight.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Let's go over the guest list at the warehouse next week.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "You are planning to fix the invoice before the meeting.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "Zoe needs the ticket signed by Friday.", "language": "en", "signal": "sense", "expected": "no", "source": "claude-draft"}
+{"sentence": "The invoice was very blue before the meeting.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Our neighbors loves the guest list and hates the guest list because of the number seven's mood.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Alex never always avoids the playlist yesterday on purpose by accident.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
+{"sentence": "Omar finished the ticket as tall as the sound of Wednesday.", "language": "en", "signal": "sense", "expected": "yes", "source": "claude-draft"}
