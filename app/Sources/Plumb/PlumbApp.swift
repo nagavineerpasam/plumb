@@ -87,8 +87,7 @@ final class AppModel {
     let analyzer: NoteAnalyzer
     let dictation = Dictation()
     /// Each note's latest Correctness over time, for the Progress page.
-    let progress = ProgressStore(file: FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-        .appendingPathComponent("Plumb/progress.json"))
+    let progress = ProgressStore(file: WorkerLocation.dataFolder.appendingPathComponent("progress.json"))
     /// Bumped whenever a score is recorded, so the Progress page redraws.
     private(set) var progressVersion = 0
     var showingProgress = false
@@ -153,7 +152,14 @@ final class AppModel {
 
     private var statuses: [URL: NoteStatus] = [:]
 
-    func status(of note: Note) -> NoteStatus { statuses[note.url] ?? .unchecked }
+    /// This session's check of the note, else its last saved score, so every scored note has a dot.
+    func status(of note: Note) -> NoteStatus {
+        if let status = statuses[note.url] { return status }
+        _ = progressVersion
+        guard let score = progress.points(since: .distantPast).first(where: { $0.note == note.url })?.correctness
+        else { return .unchecked }
+        return score >= 0.85 ? .clean : score >= 0.6 ? .mechanics : .attention
+    }
 
     /// Remembers the open note's state for its sidebar dot.
     func record(_ summary: NoteSummary) {
@@ -293,16 +299,23 @@ enum WorkerLocation {
             .appendingPathComponent(".venv/bin/python")
     }
 
-    /// Plumb's own folder, which needs no permission prompt (unlike ~/Documents).
-    static var notesFolder: URL {
-        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("Plumb/Notes", isDirectory: true)
+    /// Plumb's own data folder (notes and progress), which needs no permission prompt, unlike
+    /// ~/Documents. `PLUMB_DATA_DIR` points it elsewhere, e.g. demo data for screenshots.
+    static var dataFolder: URL {
+        if let path = ProcessInfo.processInfo.environment["PLUMB_DATA_DIR"] {
+            return URL(fileURLWithPath: path, isDirectory: true)
+        }
+        return FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Plumb", isDirectory: true)
     }
+
+    static var notesFolder: URL { dataFolder.appendingPathComponent("Notes", isDirectory: true) }
 
     /// Notes from before Plumb kept them in its own folder, and where they are now. Only the dev
     /// build looks: in the packaged app, merely checking ~/Documents would trigger a permission prompt.
     static func legacyNotes() -> URL? {
-        guard !Bundle.main.bundlePath.hasSuffix(".app") else { return nil }
+        guard !Bundle.main.bundlePath.hasSuffix(".app"),
+              ProcessInfo.processInfo.environment["PLUMB_DATA_DIR"] == nil else { return nil }
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return ["Plumb", "Writing Signals"].map { documents.appendingPathComponent($0, isDirectory: true) }
             .first { FileManager.default.fileExists(atPath: $0.path) }
