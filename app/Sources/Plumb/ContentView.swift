@@ -75,8 +75,7 @@ struct ContentView: View {
             }
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
-                    Text(model.selection?.title ?? "")
-                        .font(.system(size: 24, weight: .semibold))
+                    TitleField(title: model.selection?.title ?? "") { model.renameSelection(to: $0) }
                     Spacer()
                     Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
                         Image(systemName: "sidebar.right")
@@ -170,5 +169,31 @@ enum NoteStatus {
         case .mechanics: .orange
         case .attention: .red
         }
+    }
+}
+
+/// The page heading. Click it to rename the note in place; Return or clicking away saves,
+/// Esc cancels. The sidebar shows the new name straight away.
+struct TitleField: View {
+    let title: String
+    let rename: (String) -> Void
+
+    @State private var draft = ""
+    @FocusState private var focused: Bool
+
+    var body: some View {
+        TextField("Untitled", text: $draft)
+            .textFieldStyle(.plain)
+            .font(.system(size: 24, weight: .semibold))
+            .focused($focused)
+            .onSubmit { focused = false }
+            .onExitCommand { draft = title; focused = false }
+            .onChange(of: focused) { _, now in if !now { commit() } }
+            .onChange(of: title, initial: true) { _, new in draft = new }
+    }
+
+    private func commit() {
+        let clean = draft.trimmingCharacters(in: .whitespacesAndNewlines)
+        if clean.isEmpty || clean == title { draft = title } else { rename(clean) }
     }
 }

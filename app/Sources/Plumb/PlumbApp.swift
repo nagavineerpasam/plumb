@@ -156,6 +156,10 @@ final class AppModel {
         }
     }
 
+    func renameSelection(to title: String) {
+        if let note = selection { rename(note, to: title) }
+    }
+
     func delete(_ note: Note) {
         if selection == note { flush(); selection = nil; openedText = "" }
         perform { try store?.delete(note) }

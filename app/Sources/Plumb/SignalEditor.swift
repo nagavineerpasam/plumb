@@ -137,6 +137,7 @@ final class SignalTextView: NSTextView {
     private let popover = NSPopover()
     private var hovered: AnalyzedSentence?
     private var lastPoint: NSPoint?
+    private var closeTimer: Timer?
 
     override func updateTrackingAreas() {
         super.updateTrackingAreas()
@@ -158,17 +159,18 @@ final class SignalTextView: NSTextView {
     }
 
     override func keyDown(with event: NSEvent) {
-        popover.performClose(nil)  // typing hides the card
-        hovered = nil
+        closeNow()  // typing hides the card
         super.keyDown(with: event)
     }
 
     func refreshHover() {
-        guard let point = lastPoint, (textStorage?.length ?? 0) > 0 else { return close() }
+        guard let point = lastPoint, (textStorage?.length ?? 0) > 0 else { return closeSoon() }
         let index = characterIndexForInsertion(at: point)
         guard let sentence = sentenceAt(index), let rect = rect(of: sentence.range), rect.contains(point) || rect.insetBy(dx: 0, dy: -4).contains(point) else {
-            return close()
+            return closeSoon()
         }
+        closeTimer?.invalidate()
+        closeTimer = nil
         if sentence == hovered, popover.isShown { return }
         hovered = sentence
         let host = NSHostingController(rootView: SentenceCard(sentence: sentence))
@@ -179,7 +181,23 @@ final class SignalTextView: NSTextView {
         popover.show(relativeTo: NSRect(x: point.x, y: rect.minY, width: 1, height: rect.height), of: self, preferredEdge: .maxY)
     }
 
-    private func close() {
+    /// Leaving a sentence doesn't close the card at once, so the pointer can travel onto it.
+    /// It stays open while the pointer is over the card and closes shortly after it leaves both.
+    private func closeSoon() {
+        guard popover.isShown, closeTimer == nil else { return }
+        closeTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: true) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                if let card = self.popover.contentViewController?.view.window,
+                   card.frame.insetBy(dx: -6, dy: -6).contains(NSEvent.mouseLocation) { return }
+                self.closeNow()
+            }
+        }
+    }
+
+    private func closeNow() {
+        closeTimer?.invalidate()
+        closeTimer = nil
         hovered = nil
         if popover.isShown { popover.performClose(nil) }
     }
