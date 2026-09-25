@@ -44,15 +44,13 @@ struct Dashboard: View {
         }
     }
 
+    /// Only visible while sentences are being analysed; the mockup has no panel title.
+    @ViewBuilder
     private var header: some View {
-        HStack(alignment: .firstTextBaseline) {
-            Text("Signals").font(.title2.weight(.semibold))
-            Spacer()
-            if pending > 0 {
+        if pending > 0 {
+            HStack(spacing: 6) {
                 ProgressView().controlSize(.small)
-                Text("\(pending) analysing").font(.caption).foregroundStyle(.secondary)
-            } else {
-                Text(summary.scoredSentences == 1 ? "1 sentence" : "\(summary.scoredSentences) sentences")
+                Text("Analysing \(pending) \(pending == 1 ? "sentence" : "sentences")…")
                     .font(.caption).foregroundStyle(.secondary)
             }
         }

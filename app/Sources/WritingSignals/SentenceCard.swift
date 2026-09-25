@@ -1,66 +1,47 @@
 import SwiftUI
 import WritingSignalsCore
 
-/// Every signal for one sentence, with its probabilities. Shown when hovering a sentence.
+/// Every signal for one sentence, shown when hovering it. Words only, one row per signal.
 struct SentenceCard: View {
     let sentence: AnalyzedSentence
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text(sentence.text)
-                .font(.callout)
-                .lineLimit(3)
-                .foregroundStyle(.secondary)
-            if let issues = sentence.mechanics, !issues.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Mechanics").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-                    ForEach(Array(issues.enumerated()), id: \.offset) { _, issue in
-                        Label(issue.message, systemImage: "exclamationmark.circle")
-                            .font(.caption).foregroundStyle(.orange)
-                    }
-                }
+        VStack(alignment: .leading, spacing: 10) {
+            ForEach(Array((sentence.mechanics ?? []).enumerated()), id: \.offset) { _, issue in
+                Label(issue.message, systemImage: "exclamationmark.circle")
+                    .font(.callout).foregroundStyle(.orange)
             }
             if let signals = sentence.signals?.signals {
                 ForEach(Palette.order, id: \.self) { name in
                     if let signal = signals[name] { row(name, signal) }
                 }
             } else {
-                Label("Analysing…", systemImage: "ellipsis").foregroundStyle(.secondary)
+                Label("Analysing…", systemImage: "ellipsis").font(.callout).foregroundStyle(.secondary)
             }
         }
-        .padding(18)
-        .frame(width: 320)
+        .padding(.horizontal, 18).padding(.vertical, 14)
+        .frame(width: 300)
     }
 
-    @ViewBuilder
     private func row(_ name: String, _ signal: Signal) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Text(Palette.titles[name] ?? name).font(.caption.weight(.semibold)).foregroundStyle(.secondary)
-                Spacer()
+        let mistake = name == "grammar" && signal.value == "yes"
+        return HStack {
+            Text(Palette.titles[name] ?? name).foregroundStyle(.secondary)
+            Spacer()
+            if signal.score != nil {
                 Text(headline(name, signal))
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(name == "grammar" && signal.value == "yes" ? Color.red : Color.primary)
-                    .padding(.horizontal, 8).padding(.vertical, 2)
-                    .background((name == "grammar" && signal.value == "yes" ? Color.red : Color.secondary).opacity(0.14), in: Capsule())
-            }
-            if let (low, high) = Palette.scales[name], let score = signal.score {
-                ScaleBar(value: score, low: low, high: high)
-            } else if name != "grammar" {
-                // These bars are the model's certainty for this one sentence.
-                ForEach(signal.distribution.sorted { $0.value > $1.value }.prefix(3), id: \.key) { label, p in
-                    HStack(spacing: 8) {
-                        Text(label.capitalized).font(.caption2).frame(width: 64, alignment: .leading)
-                        ProgressView(value: p).tint(Palette.color(signal: name, value: label))
-                        Text(p, format: .percent.precision(.fractionLength(0))).font(.caption2.monospacedDigit())
-                            .frame(width: 34, alignment: .trailing)
-                    }
-                }
+            } else {
+                Text(headline(name, signal))
+                    .fontWeight(.medium)
+                    .foregroundStyle(mistake ? Color.red : Color.primary)
+                    .padding(.horizontal, 9).padding(.vertical, 3)
+                    .background((mistake ? Color.red : Color.secondary).opacity(mistake ? 0.14 : 0.12), in: Capsule())
             }
         }
+        .font(.callout)
     }
 
-    /// Words only: scales name their position, choices name the top label or say "unsure".
+    /// Scales name their position, choices name the top label or say "unsure".
     private func headline(_ name: String, _ signal: Signal) -> String {
         if name == "grammar" {
             let p = signal.distribution["yes"] ?? 0
