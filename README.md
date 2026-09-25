@@ -4,9 +4,9 @@
 
 <h1 align="center">Plumb</h1>
 
-<p align="center"><b>Write better English, and watch yourself get better.</b><br>
-A beautiful notes app for your Mac that checks your writing live, privately, with its own AI model.<br>
-Free and open source, forever.</p>
+<p align="center"><b>Just speak. See your mistakes. Get better at English.</b><br>
+A private AI English coach for your Mac: talk or type, and Plumb catches your mistakes live, on your Mac.<br>
+Free and open source, forever. · <a href="https://plumbapp.vercel.app">plumbapp.vercel.app</a></p>
 
 <p align="center">
   <a href="https://github.com/nagavineerpasam/plumb/releases/latest/download/Plumb.dmg"><b>⬇&nbsp;&nbsp;Download Plumb for Mac</b></a><br>
@@ -24,12 +24,12 @@ Free and open source, forever.</p>
 
 ## Why Plumb
 
-Most writing tools fix your text for you, so you never learn. Plumb does the opposite: it **shows** you what's off and leaves the fixing to you. Every note becomes practice, and the Progress chart shows you getting better week by week.
+Most tools fix your English for you, so you never learn. Plumb does the opposite: it **shows** you what's off and leaves the fixing to you. Every note becomes practice, and the Progress chart shows you getting better week by week.
 
-- **Live checks as you type.** Grammar mistakes, sentences that don't read as real English, spelling, capitals and punctuation, all marked the moment you pause.
+- **Just speak.** Click **Speak** and talk naturally. Plumb writes down what you say and checks it, so it even catches the grammar mistakes you make out loud.
+- **Or type, and it checks as you go.** Grammar mistakes, sentences that don't read as real English, spelling, capitals and punctuation, all marked the moment you pause.
 - **A Correctness score for every note.** One number that tells you how clean your English is, with a short list of what needs a look.
 - **Your writing voice.** See the tone, emotion, confidence, clarity and formality of what you write, so an email to your manager doesn't sound like a text to a friend.
-- **Speak instead of type.** Click **Speak** and talk; your words land in the note and get checked like anything you type.
 - **Progress you can see.** Every note is scored and charted, so you can see yourself improving.
 - **Private by design.** The AI model runs on your Mac. No account, no cloud, no tracking. Your notes never leave your computer.
 
