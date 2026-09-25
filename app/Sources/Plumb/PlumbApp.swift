@@ -177,6 +177,10 @@ final class AppModel {
         nudgeTask?.cancel()
         nudgeTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(3))
+            // Still speaking: wait until Speak stops, then show it (stopping may not edit the text).
+            while let self, self.dictation.isListening, !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(1))
+            }
             guard let self, !Task.isCancelled else { return }
             self.nudge = self.currentNudge()
         }
@@ -283,7 +287,7 @@ final class AppModel {
     }
 
     func delete(_ note: Note) {
-        if selection == note { flush(); selection = nil; openedText = "" }
+        if selection == note { flush(); selection = nil; openedText = ""; settleNudge() }
         perform { try store?.delete(note) }
         try? progress.deleted(note.url)
         progressVersion += 1

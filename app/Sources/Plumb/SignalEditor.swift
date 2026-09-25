@@ -135,9 +135,9 @@ struct SignalEditor: NSViewRepresentable {
             for sentence in sentences {
                 guard let signals = sentence.signals else { continue }  // still being checked: no mark
                 let range = sentence.range
-                if (Palette.flowReady && sentence.flow?.value == "yes")
-                    || (Palette.senseReady && signals.signals["sense"]?.value == "yes"),
-                   let wash = textRange(range, content, whole) {
+                let doesntRead = (Palette.flowReady && sentence.flow?.value == "yes")
+                    || (Palette.senseReady && signals.signals["sense"]?.value == "yes")
+                if doesntRead, let wash = textRange(range, content, whole) {
                     // Doesn't make sense, or doesn't follow on: a soft red wash over the sentence.
                     layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.14), for: wash)
                 }
@@ -146,7 +146,7 @@ struct SignalEditor: NSViewRepresentable {
                         // We know the word: underline just it, and wash the sentence faintly.
                         marks.append(.init(range: NSRange(location: range.location + detail.range.location, length: detail.range.length),
                                            color: .systemRed, dotted: false))
-                        if let wash = textRange(range, content, whole) {
+                        if !doesntRead, let wash = textRange(range, content, whole) {  // never weaken the stronger wash
                             layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.07), for: wash)
                         }
                     } else {
