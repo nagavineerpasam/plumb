@@ -25,6 +25,11 @@ struct PlumbApp: App {
                 .frame(minWidth: 960, minHeight: 600)
         }
         .windowStyle(.hiddenTitleBar)
+        .commands {
+            CommandGroup(replacing: .newItem) {
+                Button("New Note") { model.newNote() }.keyboardShortcut("n")
+            }
+        }
 
         Settings {
             SettingsView()
@@ -107,11 +112,18 @@ final class AppModel {
         analyzer = NoteAnalyzer(client: worker)
         let notesFolder = WorkerLocation.notesFolder
         var moved: [(from: URL, to: URL)] = []
-        if let old = WorkerLocation.legacyNotes(), !FileManager.default.fileExists(atPath: notesFolder.path) {
-            try? FileManager.default.createDirectory(at: notesFolder.deletingLastPathComponent(), withIntermediateDirectories: true)
-            if (try? FileManager.default.moveItem(at: old, to: notesFolder)) != nil {
-                let files = (try? FileManager.default.contentsOfDirectory(atPath: notesFolder.path)) ?? []
-                moved = files.map { (old.appendingPathComponent($0), notesFolder.appendingPathComponent($0)) }
+        // Bring notes over from the old ~/Documents location one by one, never overwriting.
+        if let old = WorkerLocation.legacyNotes() {
+            let files = FileManager.default
+            try? files.createDirectory(at: notesFolder, withIntermediateDirectories: true)
+            for name in (try? files.contentsOfDirectory(atPath: old.path)) ?? [] where name.hasSuffix(".md") {
+                let from = old.appendingPathComponent(name), to = notesFolder.appendingPathComponent(name)
+                if !files.fileExists(atPath: to.path), (try? files.moveItem(at: from, to: to)) != nil {
+                    moved.append((from, to))
+                }
+            }
+            if ((try? files.contentsOfDirectory(atPath: old.path)) ?? ["x"]).allSatisfy({ $0 == ".DS_Store" }) {
+                try? files.removeItem(at: old)
             }
         }
         for (from, to) in moved { try? progress.renamed(from, to: to) }
@@ -247,6 +259,8 @@ final class AppModel {
             switch event {
             case .ready:
                 phase = .ready
+                // The setup screen held focus; give the cursor back to the note.
+                if let text = dictation.textView { text.window?.makeFirstResponder(text) }
             case let .progress(done, total):
                 if done < total { phase = .downloading(done, total, problem: nil) }
             case let .failed(message):

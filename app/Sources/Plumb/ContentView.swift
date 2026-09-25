@@ -64,7 +64,6 @@ struct ContentView: View {
             sidebarButton("Progress", systemImage: "chart.line.uptrend.xyaxis") {
                 withAnimation(.smooth) { model.showingProgress.toggle() }
             }
-                .keyboardShortcut("n")
             sidebarButton("Settings", systemImage: "gearshape") { showSettings.toggle() }
                 .popover(isPresented: $showSettings, arrowEdge: .trailing) { SettingsView() }
         }
@@ -139,6 +138,7 @@ struct ContentView: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .focusable(false)  // typing must never "press" a sidebar button
     }
 }
 
