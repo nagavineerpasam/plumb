@@ -138,6 +138,8 @@ def _valid_locate(message) -> bool:
 def _valid(message) -> bool:
     return (isinstance(message, dict) and message.get("type") == "score"
             and isinstance(message.get("id"), str) and isinstance(message.get("sentences"), list)
+            and (message.get("signals") is None or (isinstance(message["signals"], list)
+                                                     and all(isinstance(s, str) for s in message["signals"])))
             and all(isinstance(s, dict) and isinstance(s.get("id"), str) and isinstance(s.get("text"), str)
                     for s in message["sentences"]))
 
@@ -214,9 +216,15 @@ def main() -> int:
         batch = [m for m in batch if m is not None and m["type"] == "score"]
         if batch:
             owned = _plan(batch)
-            flat = [s for sentences in owned for s in sentences]
             try:
-                scored = dict(zip((s["id"] for s in flat), engine.score([s["text"] for s in flat])))
+                # Requests may ask for different signals (grammar + sense first, the rest later):
+                # each set is scored in one pass over its sentences.
+                scored = {}
+                groups: Dict[tuple, List[dict]] = {}
+                for request, sentences in zip(batch, owned):
+                    groups.setdefault(tuple(request.get("signals") or ()), []).extend(sentences)
+                for signals, flat in groups.items():
+                    scored.update(zip((s["id"] for s in flat), engine.score([s["text"] for s in flat], list(signals) or None)))
             except Exception as exc:
                 for request in batch:
                     emit({"type": "error", "id": request["id"], "message": str(exc)})

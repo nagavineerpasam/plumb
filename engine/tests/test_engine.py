@@ -82,3 +82,8 @@ def test_locate_gives_a_type_only_when_the_model_knows_types(engine):
         assert found["type"] is not None
     else:
         assert found["type"] is None and found["type_probability"] is None
+
+
+def test_scoring_can_be_limited_to_some_signals(engine):
+    [only] = engine.score(["We are happy."], signals=["grammar", "sense"])
+    assert set(only["signals"]) == {"grammar", "sense"}

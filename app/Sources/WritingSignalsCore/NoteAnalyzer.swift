@@ -51,13 +51,17 @@ public final class NoteAnalyzer {
     /// Results already worked out this session, by sentence text, so reopening a note shows its
     /// signals at once instead of checking unchanged sentences again.
     private var known: [String: (signals: SentenceSignals?, mechanics: [MechanicsIssue]?)] = [:]
+    /// Sentences that came from the latest edit (just typed or spoken): checked first.
+    private var recent: Set<String> = []
+    /// Sentence texts whose detail signals have been asked for, so they're asked once.
+    private var detailed: Set<String> = []
     /// "Which word?" answers already worked out this session, by sentence text.
     private var knownPointers: [String: WordPointer?] = [:]
     /// Below this, the pointer isn't shown and the card gives its general hint. Set on 606 held-out
     /// learner-essay sentences (run 3): at 0.86, shown pointers were on the examiner's corrected
     /// word 88% of the time.
     public static let pointerThreshold = 0.86
-    /// Below this, the kind of mistake isn't named and the card just says "Check “word”."
+    /// Below this, the kind of mistake isn't named and the card just says "“word” has a mistake here."
     public static let typeThreshold = 0.5
 
     public init(client: SignalClient, debounce: Duration = .milliseconds(300),
@@ -70,6 +74,7 @@ public final class NoteAnalyzer {
     public func update(text: String) {
         // Unchanged sentences keep their id and signals, so only edited ones are re-scored.
         var previous = Dictionary(grouping: sentences, by: \.text)
+        let firstNew = nextID
         sentences = Self.split(text).map { text, range in
             if let kept = previous[text]?.first {
                 previous[text]?.removeFirst()
@@ -82,6 +87,7 @@ public final class NoteAnalyzer {
                                     signals: known[text]?.signals, mechanics: known[text]?.mechanics,
                                     pointer: knownPointers[text] ?? nil, pointerChecked: knownPointers[text] != nil)
         }
+        recent = Set(sentences.filter { Int($0.id.dropFirst()) ?? 0 > firstNew }.map(\.id))
         // Whether a line is a heading depends on what follows it, so it's worked out on every edit
         // and applied to the rules' cached results.
         for (i, heading) in Self.headings(sentences, in: text).enumerated() {
@@ -102,6 +108,7 @@ public final class NoteAnalyzer {
             self.checkMechanics()
             await self.scoreUnscored()
             await self.locateFlagged()
+            await self.scoreDetails()
         }
     }
 
@@ -136,24 +143,50 @@ public final class NoteAnalyzer {
         }
     }
 
-    /// Scores every sentence still without signals. If the worker is down (crashed and
-    /// restarting), keeps retrying until it answers or a newer edit takes over.
+    /// What the underline and the Score need, asked first: each signal is its own pass over a
+    /// sentence, so these two alone are about 4x faster than all seven.
+    public static let quickSignals = ["grammar", "sense"]
+    /// The panel's and card's other signals, filled in afterwards.
+    public static let detailSignals = ["tone", "formality", "emotion", "confidence", "clarity"]
+    /// Sentences per request: each chunk is shown as soon as it's checked.
+    static let chunk = 4
+
+    /// Checks every sentence still without signals: grammar and sense first, the sentences just
+    /// written or spoken before the rest, a few at a time so results appear as they come. If the
+    /// worker is down (crashed and restarting), keeps retrying until it answers or a newer edit
+    /// takes over.
     private func scoreUnscored() async {
         while !Task.isCancelled {
-            let requests = sentences.filter { $0.signals == nil }
-                .map { SentenceRequest(id: $0.id, text: $0.text) }
-            guard !requests.isEmpty else { return }
+            let waiting = sentences.filter { $0.signals == nil }
+            let next = (waiting.filter { recent.contains($0.id) } + waiting.filter { !recent.contains($0.id) }).prefix(Self.chunk)
+            guard !next.isEmpty else { return }
             do {
-                let results = try await client.score(requests)
+                let results = try await client.score(next.map { SentenceRequest(id: $0.id, text: $0.text) }, signals: Self.quickSignals)
                 for i in sentences.indices {
                     if let signals = results[sentences[i].id] {
                         sentences[i].signals = signals
                         known[sentences[i].text, default: (nil, nil)].signals = signals
                     }
                 }
-                return
+                if results.isEmpty { return }  // superseded: a newer edit will ask again
             } catch {
                 try? await Task.sleep(for: retryDelay)
+            }
+        }
+    }
+
+    /// Fills in tone, emotion, confidence, clarity and formality once the quick check is done.
+    private func scoreDetails() async {
+        while !Task.isCancelled {
+            let next = sentences.filter { $0.signals != nil && !detailed.contains($0.text) }.prefix(Self.chunk)
+            guard !next.isEmpty, let results = try? await client.score(next.map { SentenceRequest(id: $0.id, text: $0.text) },
+                                                                       signals: Self.detailSignals) else { return }
+            for s in next { detailed.insert(s.text) }
+            for i in sentences.indices {
+                guard let extra = results[sentences[i].id], var signals = sentences[i].signals else { continue }
+                signals.signals.merge(extra.signals) { _, new in new }
+                sentences[i].signals = signals
+                known[sentences[i].text, default: (nil, nil)].signals = signals
             }
         }
     }

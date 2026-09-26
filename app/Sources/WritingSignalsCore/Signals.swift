@@ -73,8 +73,9 @@ public struct WordPointer: Codable, Sendable, Equatable {
 
 /// Scores sentences. The real one talks to the signal worker; tests use a fake.
 public protocol SignalClient: Sendable {
-    /// Returns signals keyed by sentence id. Sentences superseded by a newer request may be missing.
-    func score(_ sentences: [SentenceRequest]) async throws -> [String: SentenceSignals]
+    /// Returns signals keyed by sentence id: only `signals` when given, else all. Sentences
+    /// superseded by a newer request may be missing.
+    func score(_ sentences: [SentenceRequest], signals: [String]?) async throws -> [String: SentenceSignals]
     /// Returns, keyed by sentence id, whether each sentence fails to follow the one before it.
     func flow(_ pairs: [FlowRequest]) async throws -> [String: Signal]
     /// Returns, keyed by sentence id, the word most likely to be wrong (nil when the sentence is

@@ -30,9 +30,10 @@ final class GrammarHintTests: XCTestCase {
 
     func testItSaysLessInsteadOfGuessing() {
         let s = "They was there."
-        XCTAssertEqual(GrammarHint.line(for: s, pointer: pointer("was", in: s, type: nil)), "Check “was”.")
-        XCTAssertEqual(GrammarHint.short(for: s, pointer: pointer("was", in: s, type: nil)), "Check “was”")
-        XCTAssertEqual(GrammarHint.line(for: s, pointer: nil), GrammarHint.general)
+        XCTAssertEqual(GrammarHint.line(for: s, pointer: pointer("was", in: s, type: nil)), "“was” has a mistake here. Try changing it.")
+        XCTAssertEqual(GrammarHint.short(for: s, pointer: pointer("was", in: s, type: nil)), "“was” has a mistake")
+        // About the learner's sentence, never sounding like Plumb itself went wrong.
+        XCTAssertEqual(GrammarHint.line(for: s, pointer: nil), "This sentence has a mistake. Read it again and try changing it.")
         XCTAssertEqual(GrammarHint.short(for: s, pointer: nil), "Grammar mistake")
     }
 }

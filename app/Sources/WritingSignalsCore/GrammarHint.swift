@@ -4,7 +4,7 @@ import Foundation
 /// kind of mistake it is, in the learner's own words, and never gives the answer. When the model
 /// isn't sure it says less rather than guess.
 public enum GrammarHint {
-    public static let general = "Something in this sentence isn’t right. Try reading it aloud."
+    public static let general = "This sentence has a mistake. Read it again and try changing it."
 
     /// The learner-facing name of each mistake type, for the "Needs a look" list.
     public static let names: [String: String] = [
@@ -15,7 +15,7 @@ public enum GrammarHint {
     public static func line(for sentence: String, pointer: WordPointer?) -> String {
         guard let pointer else { return general }
         let w = "“\(pointer.text)”"
-        guard let type = pointer.type else { return "Check \(w)." }
+        guard let type = pointer.type else { return "\(w) has a mistake here. Try changing it." }
         switch type {
         case "verb":
             return "Verb: check the tense and form of \(w). Which form fits here?" + (timeWord(in: sentence).map { " “\($0)” tells you when." } ?? "")
@@ -26,14 +26,14 @@ public enum GrammarHint {
         case "word_order": return "Word order: the words around \(w) are in an unusual order. Read it aloud to hear it."
         case "word_missing": return "Missing word: something is missing before \(w)."
         case "word_extra": return "Extra word: does \(w) need to be here?"
-        default: return "Check \(w)."
+        default: return "\(w) has a mistake here. Try changing it."
         }
     }
 
     /// The short version for the "Needs a look" list.
     public static func short(for sentence: String, pointer: WordPointer?) -> String {
         guard let pointer else { return "Grammar mistake" }
-        guard let name = pointer.type.flatMap({ names[$0] }) else { return "Check “\(pointer.text)”" }
+        guard let name = pointer.type.flatMap({ names[$0] }) else { return "“\(pointer.text)” has a mistake" }
         return "“\(pointer.text)” · \(name)"
     }
 

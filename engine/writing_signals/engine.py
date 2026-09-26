@@ -58,16 +58,19 @@ class SignalEngine:
         self.agent = Agent(self.checkpoint, device=device)
         self.knows_types = model_run(self.checkpoint) >= TYPES_FROM_RUN
 
-    def score(self, sentences: List[str]) -> List[Dict[str, Any]]:
+    def score(self, sentences: List[str], signals: List[str] = None) -> List[Dict[str, Any]]:
+        """Every catalogue signal for each sentence, or only `signals`. Each signal is its own pass
+        over the sentence, so asking for grammar and sense alone is about 4x faster."""
         if not sentences:
             return []
+        questions = {k: QUESTIONS[k] for k in signals if k in QUESTIONS} if signals else QUESTIONS
         # Runs of spaces are the rules' job; the model sees each sentence with single spaces.
-        outputs = self.agent.predict_batch([" ".join(s.split()) for s in sentences], QUESTIONS)
+        outputs = self.agent.predict_batch([" ".join(s.split()) for s in sentences], questions)
         return [
             {
                 "model": self.model,
                 "signals": {
-                    name: _signal(out["answers"][name], QUESTIONS[name]) for name in QUESTIONS
+                    name: _signal(out["answers"][name], QUESTIONS[name]) for name in questions
                 },
             }
             for out in outputs

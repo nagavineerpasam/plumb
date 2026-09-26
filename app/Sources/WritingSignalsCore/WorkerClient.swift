@@ -75,8 +75,8 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
 
     public var isRunning: Bool { lock.withLock { process?.isRunning ?? false } }
 
-    public func score(_ sentences: [SentenceRequest]) async throws -> [String: SentenceSignals] {
-        try await send { id in ScoreRequest(id: id, sentences: sentences) }.sentences ?? [:]
+    public func score(_ sentences: [SentenceRequest], signals: [String]? = nil) async throws -> [String: SentenceSignals] {
+        try await send { id in ScoreRequest(id: id, sentences: sentences, signals: signals) }.sentences ?? [:]
     }
 
     public func flow(_ pairs: [FlowRequest]) async throws -> [String: Signal] {
@@ -180,6 +180,7 @@ private struct ScoreRequest: Encodable {
     let type = "score"
     let id: String
     let sentences: [SentenceRequest]
+    let signals: [String]?
 }
 
 private struct LocateMessage: Encodable {

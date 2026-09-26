@@ -110,7 +110,7 @@ final class NoteAnalyzerTests: XCTestCase {
         analyzer.update(text: "Still here.")
         await analyzer.idle()
 
-        XCTAssertEqual(client.requests.count, 3)
+        XCTAssertEqual(client.requestedSignals.filter { $0 == NoteAnalyzer.quickSignals }.count, 3, "two crashes, then it answers")
         XCTAssertNotNil(analyzer.sentences.first?.signals)
     }
 
@@ -153,6 +153,38 @@ final class NoteAnalyzerTests: XCTestCase {
 
         XCTAssertEqual(analyzer.sentences.first?.pointer?.text, "go")
         XCTAssertNil(analyzer.sentences.first?.pointer?.type, "never guess the kind of mistake")
+    }
+
+    func testGrammarAndSenseComeFirstInSmallChunksThenTheRest() async {
+        let client = FakeSignalClient()
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+        let text = (1...10).map { "This is sentence number \($0)." }.joined(separator: " ")
+
+        analyzer.update(text: text)
+        await analyzer.idle()
+
+        let first = client.requestedSignals.prefix { $0 == ["grammar", "sense"] }
+        XCTAssertEqual(first.count, 3, "10 sentences in chunks of 4: shown as each chunk is ready")
+        XCTAssertTrue(client.requests.prefix(3).allSatisfy { $0.count <= 4 })
+        XCTAssertEqual(client.requests.first?.first, "This is sentence number 1.", "a pasted note reads top to bottom")
+        XCTAssertTrue(client.requestedSignals.dropFirst(3).allSatisfy { $0 == NoteAnalyzer.detailSignals })
+        XCTAssertTrue(analyzer.sentences.allSatisfy { $0.signals?.signals["tone"] != nil }, "the other signals follow")
+    }
+
+    func testTheSentenceJustSpokenIsCheckedBeforeTheRest() async {
+        let client = FakeSignalClient()
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+        let text = (1...10).map { "This is sentence number \($0)." }.joined(separator: " ")
+        analyzer.update(text: text)
+        await analyzer.idle()
+        client.gate = nil
+
+        // A sentence just spoken at the end is checked on its own, straight away.
+        analyzer.update(text: text + " Yesterday I goes home.")
+        await analyzer.idle()
+
+        let quick = zip(client.requests, client.requestedSignals).filter { $0.1 == ["grammar", "sense"] }.map(\.0)
+        XCTAssertEqual(quick.last, ["Yesterday I goes home."])
     }
 
     func testALineBreakAlwaysEndsASentence() {

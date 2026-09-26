@@ -14,8 +14,12 @@ final class FakeSignalClient: SignalClient, @unchecked Sendable {
     var flowBreaks: Set<String> = []
     private(set) var flowRequests: [[FlowRequest]] = []
 
-    func score(_ sentences: [SentenceRequest]) async throws -> [String: SentenceSignals] {
+    /// Which signals each score call asked for (nil = all).
+    private(set) var requestedSignals: [[String]?] = []
+
+    func score(_ sentences: [SentenceRequest], signals: [String]?) async throws -> [String: SentenceSignals] {
         requests.append(sentences.map(\.text))
+        requestedSignals.append(signals)
         if failures > 0 {
             failures -= 1
             throw WorkerError.exited
@@ -27,10 +31,12 @@ final class FakeSignalClient: SignalClient, @unchecked Sendable {
         var out: [String: SentenceSignals] = [:]
         for s in sentences {
             let wrong = grammarMistake.contains(s.text)
-            out[s.id] = SentenceSignals(model: "english", signals: script[s.text] ?? [
+            let all = script[s.text] ?? [
                 "grammar": Signal(value: wrong ? "yes" : "no",
                                   distribution: ["yes": wrong ? 0.9 : 0.1, "no": wrong ? 0.1 : 0.9]),
-            ])
+                "tone": Signal(value: "neutral", distribution: ["neutral": 1]),
+            ]
+            out[s.id] = SentenceSignals(model: "english", signals: signals.map { names in all.filter { names.contains($0.key) } } ?? all)
         }
         return out
     }

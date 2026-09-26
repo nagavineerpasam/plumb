@@ -67,6 +67,16 @@ def test_scores_sentences_by_id(worker):
     assert "grammar" in result["sentences"]["s1"]["signals"]
 
 
+def test_a_score_request_can_ask_for_just_some_signals(worker):
+    # Grammar and sense first (what the underline and Score need), the rest later: 4x faster.
+    worker.send({"type": "score", "id": "r1", "signals": ["grammar", "sense"],
+                 "sentences": [{"id": "s1", "text": "We are happy."}]})
+
+    result = worker.next("result")
+
+    assert set(result["sentences"]["s1"]["signals"]) == {"grammar", "sense"}
+
+
 def test_malformed_input_is_an_error_not_a_crash(worker):
     worker.send("this is not json\n", {"type": "score", "id": "r2"})
 
