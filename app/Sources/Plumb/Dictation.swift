@@ -30,6 +30,8 @@ final class Dictation {
     /// spoken words score 0.8+ (a test sentence: "I" 0.81, "goes" 0.83, the rest 0.9+).
     static let unsureBelow = 0.35
     private static let silenceTimeout: TimeInterval = 10
+    /// Whisper's own "probably no speech" score above which a result is ignored.
+    private static let noSpeechAbove: Float = 0.6
     private static let rate = 16_000  // Whisper's sample rate
     /// A pause this long settles the words spoken before it.
     private static let pauseToSettle = rate * 7 / 10
@@ -160,8 +162,9 @@ final class Dictation {
                 lastPreview = count
                 let text = try await transcribe(audio.samples(start..<count), words: false).text
                 if isListening { apply(&stream, settled, unconfirmed: text) }
-            } else if !spoke {
-                start = count  // nothing said since the last settle: skip the silence
+            } else if !spoke, count > Self.rate {
+                start = count  // nothing said since the last settle: skip the silence (after the first
+                               // second, whose audio is kept in case speech started straight away)
             }
             if stopping { return }
         }
@@ -172,10 +175,9 @@ final class Dictation {
         let edits = stream.update(confirmed: settled, unconfirmed: unconfirmed, buffer: &buffer)
         self.buffer = buffer
         for edit in edits { apply(edit) }
-        if !edits.isEmpty {
-            heardSomething = true
-            lastSound = Date()
-        }
+        if !edits.isEmpty { lastSound = Date() }
+        // The centred "Listening" stays until real words are showing (not a phantom that vanished).
+        heardSomething = buffer.showsWords
     }
 
     private func transcribe(_ samples: [Float], words: Bool) async throws -> (text: String, words: [HeardWord]) {
@@ -183,8 +185,10 @@ final class Dictation {
         let options = DecodingOptions(task: .transcribe, language: "en", temperature: 0, skipSpecialTokens: true,
                                       withoutTimestamps: !words, wordTimestamps: words, suppressBlank: true)
         let results = try await kit.transcribe(audioArray: samples, decodeOptions: options)
-        let text = results.map(\.text).joined(separator: " ").trimmingCharacters(in: .whitespaces)
-        var heard = results.flatMap(\.segments).flatMap { $0.words ?? [] }
+        // Whisper "hears" words like "you" in near-silence; drop what it thinks is probably no speech.
+        let segments = results.flatMap(\.segments).filter { $0.noSpeechProb < Self.noSpeechAbove }
+        let text = segments.map(\.text).joined(separator: " ").trimmingCharacters(in: .whitespaces)
+        var heard = segments.flatMap { $0.words ?? [] }
             .map { HeardWord(text: $0.word, probability: Double($0.probability)) }
         if heard.isEmpty, !text.isEmpty { heard = [HeardWord(text: text, probability: 1)] }
         return (text, heard)

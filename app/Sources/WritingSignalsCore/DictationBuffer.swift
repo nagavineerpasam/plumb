@@ -19,6 +19,9 @@ public struct DictationBuffer: Sendable {
     private var needsSpaceBefore: Bool
     /// In-progress words, shown grey. Nil when nothing is in progress.
     public private(set) var grey: NSRange?
+    /// Whether any dictated words are in the note right now, settled or still grey.
+    public var showsWords: Bool { settledLength > 0 || volatileLength > 0 }
+    private var settledLength = 0
     /// Words the recognizer was unsure of, in note coordinates.
     public private(set) var hints: [NSRange] = []
 
@@ -48,6 +51,7 @@ public struct DictationBuffer: Sendable {
         let lead = edit.replacement.hasPrefix(" ") ? 1 : 0
         hints += unsure.map { NSRange(location: anchor + lead + $0.location, length: $0.length) }
         anchor += inserted
+        settledLength += inserted
         volatileLength = 0
         grey = nil
         needsSpaceBefore = !(edit.replacement.last?.isWhitespace ?? true)

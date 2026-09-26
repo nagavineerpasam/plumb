@@ -40,9 +40,20 @@ final class VoiceActivityTests: XCTestCase {
         let speech = (0..<150).map { $0 % 10 < 7 ? 0.012 : 0.003 }
         let heard = speech.map { detector.hears($0) }
 
-        XCTAssertTrue(heard.prefix(5).allSatisfy { $0 }, "the first words aren't swallowed while the room is measured")
+        XCTAssertFalse(heard.prefix(25).contains(true), "while the room is measured only clearly loud sound counts (the audio itself is kept)")
         let syllables = zip(speech, heard).dropFirst(50).filter { $0.0 == 0.012 }
         XCTAssertTrue(syllables.allSatisfy { $0.1 }, "the floor settles on the gaps, not on the voice")
+    }
+
+    func testBackgroundNoiseWhileMeasuringIsNotVoice() {
+        var detector = VoiceActivity()
+        // A normal room is louder than a silent studio: its hum must not count as speech at the start.
+        XCTAssertFalse(feed(&detector, 0.007, seconds: 2).contains(true))
+    }
+
+    func testClearlyLoudSpeechCountsEvenWhileMeasuring() {
+        var detector = VoiceActivity()
+        XCTAssertTrue(detector.hears(0.05))
     }
 
     func testSilenceAfterSpeechIsNotVoice() {

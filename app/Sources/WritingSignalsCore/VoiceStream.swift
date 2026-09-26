@@ -30,17 +30,33 @@ public struct VoiceStream: Sendable {
         var edits: [DictationBuffer.Edit] = []
         for segment in confirmed.dropFirst(delivered) {
             delivered += 1
-            let (phrase, unsure) = phrase(from: segment)
+            let (phrase, unsure) = phrase(from: Self.spoken(segment))
             guard !phrase.isEmpty else { continue }
             edits.append(buffer.final(phrase, unsure: unsure))  // replaces the grey words
             shown = ""
         }
-        let words = unconfirmed.trimmingCharacters(in: .whitespaces)
+        let words = Self.withoutTags(unconfirmed).trimmingCharacters(in: .whitespaces)
         if words != shown {
             edits.append(buffer.volatile(words))
             shown = words
         }
         return edits
+    }
+
+    /// Whisper marks silence and noise with tags such as "[BLANK_AUDIO]", "[ Silence ]" or "(music)",
+    /// sometimes split over several words. Those aren't speech, so they never reach the note.
+    static func spoken(_ words: [HeardWord]) -> [HeardWord] {
+        var inTag = false
+        return words.filter { word in
+            let text = word.text.trimmingCharacters(in: .whitespaces)
+            if text.hasPrefix("[") || text.hasPrefix("(") { inTag = true }
+            defer { if text.hasSuffix("]") || text.hasSuffix(")") { inTag = false } }
+            return !inTag && !(text.hasSuffix("]") || text.hasSuffix(")"))
+        }
+    }
+
+    static func withoutTags(_ text: String) -> String {
+        text.replacingOccurrences(of: #"\s*[\[(][^\])]*[\])]"#, with: "", options: .regularExpression)
     }
 
     /// The segment as one phrase, and where its low-confidence words sit within it.

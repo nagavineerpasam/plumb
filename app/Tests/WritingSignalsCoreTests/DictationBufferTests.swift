@@ -24,6 +24,21 @@ final class DictationBufferTests: XCTestCase {
         XCTAssertNil(buffer.grey)
     }
 
+    func testKnowsWhetherAnyDictatedWordsAreShowing() {
+        var text = ""
+        var buffer = DictationBuffer(selection: NSRange(location: 0, length: 0), in: text)
+        XCTAssertFalse(buffer.showsWords)
+
+        run(&text, buffer.volatile("you"))       // a phantom word in near-silence...
+        run(&text, buffer.volatile(""))          // ...that disappears again
+        XCTAssertFalse(buffer.showsWords, "nothing was said after all")
+
+        run(&text, buffer.volatile("We met"))
+        XCTAssertTrue(buffer.showsWords)
+        run(&text, buffer.final("We met at noon.", unsure: []))
+        XCTAssertTrue(buffer.showsWords)
+    }
+
     func testNextPhraseContinuesAfterTheLastOne() {
         var text = ""
         var buffer = DictationBuffer(selection: NSRange(location: 0, length: 0), in: text)

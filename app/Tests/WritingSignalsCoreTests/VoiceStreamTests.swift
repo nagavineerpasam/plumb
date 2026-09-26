@@ -61,6 +61,23 @@ final class VoiceStreamTests: XCTestCase {
         XCTAssertEqual(buffer.hints.map { (text as NSString).substring(with: $0) }, ["Siobhan"])
     }
 
+    func testWhispersSoundTagsNeverReachTheNote() {
+        var text = ""
+        var buffer = DictationBuffer(selection: NSRange(location: 0, length: 0), in: text)
+        var stream = VoiceStream(unsureBelow: 0.35)
+
+        // Silence and noise come back as tags, sometimes split into several "words".
+        XCTAssertEqual(feed(&stream, &buffer, &text, confirmed: [[HeardWord(text: " [BLANK_AUDIO]", probability: 0.9)]], unconfirmed: " [ Silence ]"), 0)
+        _ = feed(&stream, &buffer, &text,
+                 confirmed: [[HeardWord(text: " [BLANK_AUDIO]", probability: 0.9)],
+                             [HeardWord(text: " [", probability: 0.9), HeardWord(text: "Silence", probability: 0.9),
+                              HeardWord(text: " ]", probability: 0.9)] + words("I checked the numbers.")],
+                 unconfirmed: " (music) The results")
+
+        XCTAssertEqual(text, "I checked the numbers. The results")
+        XCTAssertEqual((text as NSString).substring(with: buffer.grey!), "The results")
+    }
+
     func testNothingNewMeansNoEdit() {
         var text = ""
         var buffer = DictationBuffer(selection: NSRange(location: 0, length: 0), in: text)

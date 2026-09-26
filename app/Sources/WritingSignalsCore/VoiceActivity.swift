@@ -10,6 +10,9 @@ public struct VoiceActivity: Sendable {
     static let minimum = 0.0015
     /// A quiet laptop microphone: the background assumed while the room is first measured.
     static let quietRoom = 0.002
+    /// While the room is being measured, only sound this loud counts as speech, so a room's hum never
+    /// does. Nothing is lost: listening keeps the first second of audio until speech is confirmed.
+    static let clearlyLoud = 0.02
     /// Buffers (about half a second) spent measuring the room after Speak is clicked.
     static let measuring = 25
 
@@ -23,11 +26,11 @@ public struct VoiceActivity: Sendable {
     public mutating func hears(_ level: Double) -> Bool {
         if heard < Self.measuring {
             // The user may start talking at once, so the room's level is the quietest moment of
-            // the first half second (the gaps between words), and speech meanwhile still counts.
+            // the first half second (the gaps between words).
             heard += 1
             quietest = min(quietest, level)
             if heard == Self.measuring { floor = quietest }
-            return level > max(Self.minimum, Self.quietRoom * Self.ratio)
+            return level > Self.clearlyLoud
         }
         let voice = level > max(Self.minimum, floor * Self.ratio)
         // The background follows quieter sounds quickly and louder ones slowly, and barely moves
