@@ -108,7 +108,7 @@ struct UpdateSettings: View {
             HStack {
                 Spacer()
                 Button("Check for updates") { Task { await updater.check(userAsked: true) } }
-                    .disabled(!Updater.canUpdate || updater.state == .checking)
+                    .disabled(!Updater.canUpdate || updater.state == .checking || updater.isUpdating)
             }
             Toggle("Check for updates when Plumb opens", isOn: $automatic)
                 .onChange(of: automatic) { _, on in updater.checkAutomatically = on }

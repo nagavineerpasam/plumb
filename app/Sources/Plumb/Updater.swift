@@ -45,11 +45,18 @@ final class Updater {
 
     /// Asks GitHub for the latest release. `userAsked` (Settings → Check for updates) always shows
     /// the card; the launch check respects "Later".
+    /// True while an update is downloading or installing: nothing may start a second one.
+    var isUpdating: Bool {
+        switch state { case .downloading, .installing: true; default: false }
+    }
+
     func check(userAsked: Bool) async {
+        guard !isUpdating else { return }
         state = .checking
         var request = URLRequest(url: Self.latestRelease, timeoutInterval: 15)
         request.setValue("application/vnd.github+json", forHTTPHeaderField: "Accept")
-        guard let (data, _) = try? await URLSession.shared.data(for: request),
+        guard let (data, response) = try? await URLSession.shared.data(for: request),
+              (response as? HTTPURLResponse)?.statusCode == 200,
               let release = ReleaseInfo.parse(data), let current = Self.current else {
             state = userAsked ? .failed("Couldn't reach GitHub to check for updates. Try again later.") : .idle
             return
@@ -70,25 +77,29 @@ final class Updater {
     func update() {
         guard case .available(let release) = state else { return }
         showCard = true
+        let work = FileManager.default.temporaryDirectory.appendingPathComponent("plumb-update-\(UUID().uuidString)")
+        state = .downloading(release, 0)  // set at once, so a second click can't start another update
         Task {
-            do { try await install(release) } catch {
+            do { try await install(release, in: work) } catch {
+                try? FileManager.default.removeItem(at: work)  // don't leave the download behind
                 state = .failed("The update didn't finish: \(error.localizedDescription) Your current Plumb is unchanged.")
             }
         }
     }
 
-    private func install(_ release: ReleaseInfo) async throws {
-        let work = FileManager.default.temporaryDirectory.appendingPathComponent("plumb-update-\(UUID().uuidString)")
+    private func install(_ release: ReleaseInfo, in work: URL) async throws {
         try FileManager.default.createDirectory(at: work, withIntermediateDirectories: true)
         let dmg = work.appendingPathComponent("Plumb.dmg")
         let base = "\(Self.downloads)/\(release.tag)"
 
-        state = .downloading(release, 0)
         try await Self.download(URL(string: "\(base)/Plumb.dmg")!, to: dmg) { [weak self] fraction in
             Task { @MainActor in if case .downloading = self?.state { self?.state = .downloading(release, fraction) } }
         }
-        let (published, _) = try await URLSession.shared.data(from: URL(string: "\(base)/Plumb.dmg.sha256")!)
-        guard Fingerprint.matches(dmg, published: String(decoding: published, as: UTF8.self)) else {
+        let (published, response) = try await URLSession.shared.data(from: URL(string: "\(base)/Plumb.dmg.sha256")!)
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw UpdateError("the update's fingerprint couldn't be downloaded.") }
+        let text = String(decoding: published, as: UTF8.self)
+        let matches = await Task.detached { Fingerprint.matches(dmg, published: text) }.value  // hashing takes a moment
+        guard matches else {
             throw UpdateError("the download doesn't match its published fingerprint.")
         }
 
@@ -116,10 +127,15 @@ final class Updater {
         while kill -0 "$1" 2>/dev/null; do sleep 0.2; done
         target="$3"; previous="$3.previous"
         rm -rf "$previous"
-        if mv "$target" "$previous"; then
-          if ditto "$2" "$target"; then rm -rf "$previous"; echo "updated"
-          else echo "copy failed: restoring"; rm -rf "$target"; mv "$previous" "$target"; fi
-        else echo "could not move the old app aside"; fi
+        incoming="$3.incoming"
+        rm -rf "$incoming"
+        # Copy (slow) while the old app is still in place, then swap with two instant renames, so
+        # there's never a moment without a working Plumb.
+        if ditto "$2" "$incoming" && mv "$target" "$previous"; then
+          if mv "$incoming" "$target"; then rm -rf "$previous"; echo "updated"
+          else echo "swap failed: restoring"; mv "$previous" "$target"; fi
+        else echo "could not stage the new app: keeping the current one"; fi
+        rm -rf "$incoming"
         open "$target"
         rm -rf "$4"
         """.write(to: helper, atomically: true, encoding: .utf8)
