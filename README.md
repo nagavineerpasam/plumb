@@ -119,8 +119,9 @@ cd app && swift run                                                   # the app 
 - [Laya](https://github.com/NandhaKishorM/laya) by Nanda Kishor M (Apache-2.0).
 - [Whisper](https://github.com/openai/whisper) by OpenAI (MIT), run with [WhisperKit](https://github.com/argmaxinc/WhisperKit) by Argmax (MIT).
 - Trained with [CoLA](https://nyu-mll.github.io/CoLA/), [DAIR Emotion](https://huggingface.co/datasets/dair-ai/emotion) and [Pavlick formality scores](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores) (CC BY 3.0), plus hand-drafted English sets in `engine/data`.
+- Also trained and tested with the [Cambridge Learner Corpus FCE dataset](https://www.cl.cam.ac.uk/research/nl/bea2019st/) (non-commercial research and education use): Yannakoudakis, Helen and Briscoe, Ted and Medlock, Ben, *A New Dataset and Method for Automatically Grading ESOL Texts*, Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies, 2011. Also [BLiMP](https://github.com/alexwarstadt/blimp) (CC BY 4.0) and [JFLEG](https://github.com/keisks/jfleg) (CC BY-NC-SA 4.0, testing only). None of these datasets is included in this repository.
 
 ## License
 
 - **Code:** Apache-2.0. See [LICENSE](LICENSE).
-- **The writing model** (`plumb-model.zip` on the releases page) is free for **non-commercial use**. It was fine-tuned from Laya on data that includes research-and-education-only datasets (CoLA, DAIR Emotion) and sentences drafted with the help of an AI assistant. It's meant for personal learning, not for building paid products. If you fork Plumb to sell it, retrain the model on data you're licensed to use commercially.
+- **The writing model** (`plumb-model.zip` on the releases page) is free for **non-commercial use**. It was fine-tuned from Laya on data that includes research-and-education-only datasets (CoLA, DAIR Emotion, Cambridge FCE) and sentences drafted with the help of an AI assistant. It's meant for personal learning, not for building paid products. If you fork Plumb to sell it, retrain the model on data you're licensed to use commercially.

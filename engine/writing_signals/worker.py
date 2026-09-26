@@ -15,21 +15,45 @@ from .catalogue import CATALOGUE_VERSION
 
 from .engine import TRAINED_DIR
 
-# Plumb's fine-tuned model, attached to the latest GitHub release. Overridable for testing.
+# Plumb's fine-tuned model, on its own GitHub release. Overridable for testing.
 MODEL_URL = os.environ.get(
-    "PLUMB_MODEL_URL", "https://github.com/nagavineerpasam/plumb/releases/download/models-v1/plumb-model.zip")
+    "PLUMB_MODEL_URL", "https://github.com/nagavineerpasam/plumb/releases/download/models-v2/plumb-model.zip")
 MODEL_DIR = TRAINED_DIR
+# The training run this app needs: run 3 added the "which word" pointer. An older installed model
+# is replaced, and kept working if the new one can't be downloaded.
+MODEL_RUN = 3
+
+
+def _installed_run() -> int:
+    if not os.path.exists(os.path.join(MODEL_DIR, "model.safetensors")):
+        return 0
+    try:
+        with open(os.path.join(MODEL_DIR, "plumb_model.json")) as f:
+            return int(json.load(f).get("run", 2))
+    except (OSError, ValueError):
+        return 2  # models before run 3 carried no marker
 
 
 def ensure_models(emit: Callable[[dict], None]) -> None:
-    """On first launch, download Plumb's model (resuming a partial download) and unpack it.
-    Reports bytes as they arrive; does nothing once the model is installed."""
+    """On first launch, or when the installed model is older than this app needs, download Plumb's
+    model (resuming a partial download) and unpack it. Reports bytes as they arrive; does nothing
+    once the current model is installed."""
+    installed = _installed_run()
+    if installed >= MODEL_RUN:
+        return
+    try:
+        _fetch(emit)
+    except Exception as exc:
+        if not installed:
+            raise
+        # An upgrade that couldn't finish (offline, say): keep using the model we have.
+        print(f"model upgrade failed, keeping the installed model: {exc}", file=sys.stderr)
+
+
+def _fetch(emit: Callable[[dict], None]) -> None:
     import shutil
     import urllib.request
     import zipfile
-
-    if os.path.exists(os.path.join(MODEL_DIR, "model.safetensors")):
-        return
     parent = os.path.dirname(MODEL_DIR)
     os.makedirs(parent, exist_ok=True)
     part = os.path.join(parent, "plumb-model.zip.part")
