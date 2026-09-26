@@ -17,11 +17,11 @@ from .engine import TRAINED_DIR
 
 # Plumb's fine-tuned model, on its own GitHub release. Overridable for testing.
 MODEL_URL = os.environ.get(
-    "PLUMB_MODEL_URL", "https://github.com/nagavineerpasam/plumb/releases/download/models-v2/plumb-model.zip")
+    "PLUMB_MODEL_URL", "https://github.com/nagavineerpasam/plumb/releases/download/models-v3/plumb-model.zip")
 MODEL_DIR = TRAINED_DIR
-# The training run this app needs: run 3 added the "which word" pointer. An older installed model
+# The training run this app needs: run 4 added mistake types (run 3 the "which word" pointer). An older installed model
 # is replaced, and kept working if the new one can't be downloaded.
-MODEL_RUN = 3
+MODEL_RUN = 4
 
 
 def _installed_run() -> int:

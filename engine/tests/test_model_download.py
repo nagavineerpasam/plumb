@@ -8,7 +8,7 @@ from writing_signals import worker
 
 def make_model_zip(path):
     with zipfile.ZipFile(path, "w") as z:
-        z.writestr("plumb_model.json", '{"catalogue": "3", "run": 3}')
+        z.writestr("plumb_model.json", '{"catalogue": "4", "run": 4}')
         z.writestr("model.safetensors", b"x" * 50_000)
         z.writestr("rl_agent_config.json", "{}")
         z.writestr("tokenizer/tokenizer.json", "{}")
@@ -54,7 +54,7 @@ def test_nothing_is_downloaded_when_the_model_is_installed(tmp_path, monkeypatch
     target = tmp_path / "model"
     target.mkdir()
     (target / "model.safetensors").write_bytes(b"x")
-    (target / "plumb_model.json").write_text('{"catalogue": "3", "run": 3}')
+    (target / "plumb_model.json").write_text('{"catalogue": "4", "run": 4}')
     monkeypatch.setattr(worker, "MODEL_DIR", str(target))
     monkeypatch.setattr(worker, "MODEL_URL", "https://invalid.example/never")
     events = []
@@ -77,6 +77,21 @@ def test_an_older_model_is_replaced_by_the_current_one(tmp_path, monkeypatch):
 
     assert (target / "model.safetensors").stat().st_size == 50_000
     assert (target / "plumb_model.json").exists()
+
+
+def test_a_run_3_model_is_upgraded_to_run_4(tmp_path, monkeypatch):
+    source = tmp_path / "plumb-model.zip"
+    make_model_zip(source)
+    target = tmp_path / "support" / "model"
+    target.mkdir(parents=True)
+    (target / "model.safetensors").write_bytes(b"run3")
+    (target / "plumb_model.json").write_text('{"catalogue": "3", "run": 3}')
+    monkeypatch.setattr(worker, "MODEL_DIR", str(target))
+    monkeypatch.setattr(worker, "MODEL_URL", source.as_uri())
+
+    worker.ensure_models(lambda e: None)
+
+    assert '"run": 4' in (target / "plumb_model.json").read_text()
 
 
 def test_if_the_upgrade_cant_download_the_older_model_keeps_working(tmp_path, monkeypatch):
