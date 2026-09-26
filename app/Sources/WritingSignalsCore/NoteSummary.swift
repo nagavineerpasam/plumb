@@ -23,6 +23,8 @@ public struct NoteSummary: Sendable, Equatable {
     public var grammarFlagged: [String] = []
     /// Sentences the sense signal marks as not making sense as natural English.
     public var senseFlagged: [String] = []
+    /// The word the model points at in grammar-flagged sentences, by sentence text.
+    public var pointers: [String: WordPointer] = [:]
     /// Sentences that don't follow from the one before them (after a flow check).
     public var flowFlagged: [String] = []
     /// How well the note is written, 0...1: the average of each checked sentence's correctness.
@@ -32,6 +34,7 @@ public struct NoteSummary: Sendable, Equatable {
         mechanics = sentences.flatMap { s in (s.mechanics ?? []).map { MechanicsFinding(sentence: s.text, issue: $0) } }
         grammarFlagged = sentences.filter { $0.signals?.signals["grammar"]?.value == "yes" }.map(\.text)
         senseFlagged = sentences.filter { $0.signals?.signals["sense"]?.value == "yes" }.map(\.text)
+        pointers = Dictionary(sentences.compactMap { s in s.pointer.map { (s.text, $0) } }, uniquingKeysWith: { a, _ in a })
         flowFlagged = sentences.filter { $0.flow?.value == "yes" }.map(\.text)
         let judged = sentences.compactMap(\.correctness)
         if !judged.isEmpty { correctness = judged.reduce(0, +) / Double(judged.count) }

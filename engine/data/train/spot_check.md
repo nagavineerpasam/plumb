@@ -4,53 +4,53 @@ Mark any label you disagree with. Rules: data/README.md → Labelling rules.
 
 | # | signal | label | sentence | OK? |
 |---|---|---|---|---|
-| 1 | clarity | clear | Submit the college application before 11:59 p.m. on January 15th. | |
-| 2 | clarity | confusing | The plumber said the leak was fixed, then mentioned a follow-up might be needed depending on how the pipe behaves over the next few days. | |
-| 3 | clarity | confusing | The lease clause about subletting contradicts itself two paragraphs later, allowing and then disallowing the same thing under similar conditions. | |
-| 4 | clarity | confusing | Not to disagree, but also not to agree, the position taken is more of a non-position that isn't quite neither. | |
-| 5 | clarity | somewhat clear | Our landlord mentioned some repairs happening soon, though he didn't say when exactly. | |
-| 6 | clarity | somewhat clear | Costs for the trip stayed close to what we planned, mostly. | |
-| 7 | confidence | assertive | We're going with plan A, plan B is off the table. | |
-| 8 | confidence | assertive | They outperformed every competitor in the region last quarter. | |
-| 9 | confidence | neutral | We planted the seedlings a week earlier than usual this spring. | |
-| 10 | confidence | neutral | It rained for most of the weekend, so the match was postponed. | |
-| 11 | emotion | neutral | Align the notches on the lid with the marks on the base. | |
-| 12 | emotion | neutral | The chair closed the meeting at eleven fifteen. | |
-| 13 | emotion | neutral | The lecture hall seats one hundred twenty and has two entrances. | |
-| 14 | emotion | neutral | The hotel offers a shuttle to the airport every hour. | |
-| 15 | flow | no | It somehow found a tiny gap near the door. | |
-| 16 | flow | no | A dozen shooting stars were counted that night. | |
-| 17 | flow | no | It is the biggest turnout they've had in years. | |
-| 18 | flow | no | My energy has been noticeably steadier throughout the day. | |
-| 19 | flow | no | The new platform was picked up pretty quickly. | |
-| 20 | flow | no | As a result, most people say it's helped with communication. | |
-| 21 | flow | no | They are already chasing the dog around the living room. | |
-| 22 | flow | no | The crowds gathered along the waterfront hours early. | |
-| 23 | flow | yes | The team's new strategy backfired immediately. | |
-| 24 | flow | yes | She said it was always too crowded. | |
-| 25 | flow | yes | The Wi-Fi doesn't reach any room in the house. | |
-| 26 | flow | yes | But the players' footwork improved dramatically. | |
-| 27 | flow | yes | She thought it looked completely out of place. | |
-| 28 | flow | yes | As a result, the project finished three weeks ahead of schedule. | |
-| 29 | flow | yes | The heater is completely broken. | |
-| 30 | flow | yes | We're hearing no birds ever came near it. | |
-| 31 | flow | yes | He never called back about it. | |
-| 32 | flow | yes | Our team missed every milestone this quarter. | |
-| 33 | grammar | no | We were stuck in traffic for an hour. | |
-| 34 | grammar | no | He has broken his phone screen for the third time this year. | |
-| 35 | grammar | no | We had lived in Chicago for six years before we moved to Denver last spring. | |
-| 36 | grammar | no | She hardly ever eats breakfast. | |
-| 37 | grammar | yes | He's the mechanic which fixed our car last month. | |
-| 38 | grammar | yes | By next Friday, I finish all my exams for the semester. | |
-| 39 | sense | no | Saoirse mentioned the printer needs a new cartridge. | |
-| 40 | sense | no | Finally the paperwork came through after three weeks. | |
-| 41 | sense | no | His roommate covered the deposit until payday. | |
-| 42 | sense | no | Callum walked to work since his bike had a flat. | |
-| 43 | sense | no | My accountant needs the receipts scanned by Friday. | |
-| 44 | sense | yes | Shipment late the arrived warehouse before it the left. | |
-| 45 | sense | yes | Branwen tried to summarize the meeting and then forgot what a meeting is. | |
-| 46 | sense | yes | Priscilla's photographer confirmed the shoot while canceling it at once. | |
-| 47 | tone | formal | The airport authority advises passengers to arrive no later than two hours before departure. | |
-| 48 | tone | formal | The estate agent confirms that the offer has been formally accepted by the vendor. | |
-| 49 | tone | friendly | Touched that you thought of us while you were traveling. | |
-| 50 | tone | neutral | The garden produced more tomatoes than we could use. | |
+| 1 | clarity | clear | The passport renewal took eleven weeks with standard processing. | |
+| 2 | clarity | clear | I dropped off three boxes of clothes at the donation center on Saturday. | |
+| 3 | clarity | clear | Cleaning fees for the rental are 75 dollars, charged after checkout. | |
+| 4 | clarity | clear | Orders placed before 2 p.m. ship the same day. | |
+| 5 | clarity | clear | Funding from the grant covers 70% of the project's total cost. | |
+| 6 | clarity | somewhat clear | Registration for the youth league opened, numbers so far look decent but it's early. | |
+| 7 | clarity | somewhat clear | His grades improved a bit this term, still room to grow. | |
+| 8 | clarity | somewhat clear | Interest in the workshop has been decent, a bit lower than hoped. | |
+| 9 | confidence | hesitant | It's possible the numbers in column three are outdated, but I haven't checked. | |
+| 10 | confidence | hesitant | I'm mildly concerned the timeline is too tight, but I could be wrong. | |
+| 11 | confidence | neutral | The migration to the new database took place over a single weekend. | |
+| 12 | confidence | neutral | The orchard's harvest this year came in slightly above average. | |
+| 13 | confidence | neutral | The train from Lyon to Geneva stops twice along the way. | |
+| 14 | emotion | neutral | The lab notebook entry from Tuesday is missing a signature. | |
+| 15 | emotion | neutral | The library card is valid at all branches within the county. | |
+| 16 | emotion | neutral | The cashier scans each item before bagging it. | |
+| 17 | emotion | neutral | The syllabus lists the textbook edition required for the course. | |
+| 18 | flow | no | However, most of the feedback was really encouraging. | |
+| 19 | flow | yes | Still every page came out crisp and clear. | |
+| 20 | flow | yes | The volunteers are still far from finishing the build. | |
+| 21 | flow | yes | The company's new hire training was a total failure. | |
+| 22 | grammar | no | I couldn't find any parking near the stadium before the game. | |
+| 23 | grammar | no | She is the smartest person I know in our whole class. | |
+| 24 | grammar | no | He's the mechanic who fixed our car last month. | |
+| 25 | grammar | no | I have never seen such a mess in the break room. | |
+| 26 | grammar | yes | I bought two new furnitures for the living room last week. | |
+| 27 | sense | no | Down the street, a new bakery just opened. | |
+| 28 | sense | no | Seems like the update fixed the login issue. | |
+| 29 | sense | no | You owe the babysitter for last Saturday still. | |
+| 30 | sense | no | Esteban left a voicemail about the missed delivery. | |
+| 31 | sense | no | Cosima swapped desks to be closer to the window. | |
+| 32 | sense | no | Sales pushed the demo to Thursday afternoon. | |
+| 33 | sense | no | Still, the report needs one more pass before Friday. | |
+| 34 | sense | yes | Sadia's out-of-office reply arrived while she was standing right there. | |
+| 35 | sense | yes | Eshan's memory of the meeting is vivid, mostly involving a different meeting. | |
+| 36 | sense | yes | Basically the plan depends on a weather forecast for the wrong planet. | |
+| 37 | sense | yes | Yevgenia mailed the contract back to an office that mailed it first. | |
+| 38 | sense | yes | Keiko organized the files into a pile that reorganized itself immediately. | |
+| 39 | sense | yes | Kwame reset the router, and the internet got slower on purpose. | |
+| 40 | sense | yes | According to the tracker, the package left before it was packed. | |
+| 41 | sense | yes | Baldwin's plan requires zero people, twelve of whom already signed up. | |
+| 42 | sense | yes | Cassius's shipment rerouted through a port that closed decades ago. | |
+| 43 | tone | casual | Gonna skip the party, just not feeling social tonight. | |
+| 44 | tone | casual | Kinda glad the meeting got cancelled honestly. | |
+| 45 | tone | casual | My cousin's visiting next week, gotta clean the guest room. | |
+| 46 | tone | formal | Prospective members must complete the attached form and submit it with the applicable fee. | |
+| 47 | tone | formal | Policyholders are required to notify the insurer of any change in circumstances without delay. | |
+| 48 | tone | friendly | Hope the move went smoothly, let me know if you still need boxes. | |
+| 49 | tone | friendly | Full of gratitude for everything you did to make the wedding perfect. | |
+| 50 | tone | neutral | I usually pack lunch on weekdays to save money. | |

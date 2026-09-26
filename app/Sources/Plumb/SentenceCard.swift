@@ -14,7 +14,7 @@ struct SentenceCard: View {
                     .font(.callout).foregroundStyle(.secondary)
             }
             if Palette.grammarReady, sentence.signals?.signals["grammar"]?.value == "yes" {
-                Label(Explanations.grammar(for: sentence.text), systemImage: "exclamationmark.circle.fill")
+                Label(Explanations.grammar(for: sentence), systemImage: "exclamationmark.circle.fill")
                     .font(.callout).foregroundStyle(.red)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -124,19 +124,18 @@ enum Explanations {
         return found
     }
 
-    /// The card's line, e.g. “is” doesn’t agree with the rest of the sentence. Try “are”.
-    static func grammar(for sentence: String) -> String {
-        guard let detail = detail(for: sentence) else {
-            return "Something in this sentence isn’t quite right. Try reading it aloud, and check the verb forms and word order."
-        }
-        guard let fix = detail.fixes.first else { return detail.message }
-        return detail.message + " Try “\(fix)”."
+    /// The card's line, e.g. “goes” looks wrong here. Try “went”.
+    static func grammar(for sentence: AnalyzedSentence) -> String {
+        GrammarHint.line(for: sentence.text, pointer: sentence.pointer, macOS: detail(for: sentence.text))
     }
 
     /// The short version for the "Needs a look" list.
-    static func short(for sentence: String) -> String {
-        guard let detail = detail(for: sentence) else { return "Grammar mistake" }
-        let word = (sentence as NSString).substring(with: detail.range)
-        return detail.fixes.first.map { "“\(word)” → “\($0)”" } ?? "Check “\(word)”"
+    static func short(for sentence: String, pointer: WordPointer?) -> String {
+        GrammarHint.short(for: sentence, pointer: pointer, macOS: detail(for: sentence))
+    }
+
+    /// Where to underline within the sentence: the model's word, else macOS's.
+    static func wordRange(for sentence: AnalyzedSentence) -> NSRange? {
+        sentence.pointer?.range ?? detail(for: sentence.text)?.range
     }
 }

@@ -100,7 +100,7 @@ struct Dashboard: View {
                 groups.append((sentence, [(color, text)]))
             }
         }
-        if Palette.grammarReady { shown.grammarFlagged.forEach { add($0, .red, Explanations.short(for: $0)) } }
+        if Palette.grammarReady { shown.grammarFlagged.forEach { add($0, .red, Explanations.short(for: $0, pointer: shown.pointers[$0])) } }
         if Palette.senseReady { shown.senseFlagged.forEach { add($0, .red, "Doesn't make sense") } }
         if Palette.flowReady { shown.flowFlagged.forEach { add($0, .red, "Doesn't follow on") } }
         shown.mechanics.forEach { add($0.sentence, .orange, $0.issue.message) }

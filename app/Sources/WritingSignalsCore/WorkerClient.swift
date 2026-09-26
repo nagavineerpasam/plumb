@@ -83,6 +83,10 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
         try await send { id in FlowMessage(id: id, pairs: pairs) }.flowSentences ?? [:]
     }
 
+    public func locate(_ sentences: [SentenceRequest]) async throws -> [String: WordPointer?] {
+        try await send { id in LocateMessage(id: id, sentences: sentences) }.locateSentences ?? [:]
+    }
+
     /// Writes one request line and waits for the worker's answer to that request id.
     private func send(_ make: @escaping (String) -> some Encodable) async throws -> Incoming {
         try await withCheckedThrowingContinuation { continuation in
@@ -129,7 +133,7 @@ public final class WorkerClient: SignalClient, @unchecked Sendable {
             onEvent(.progress(downloaded: message.downloaded ?? 0, total: message.total ?? 0))
         case "stage":
             onEvent(.stage(message.stage ?? ""))
-        case "result", "flow_result":
+        case "result", "flow_result", "locate_result":
             if let id = message.id, let continuation = lock.withLock({ waiting.removeValue(forKey: id) }) {
                 continuation.resume(returning: message)
             }
@@ -178,6 +182,12 @@ private struct ScoreRequest: Encodable {
     let sentences: [SentenceRequest]
 }
 
+private struct LocateMessage: Encodable {
+    let type = "locate"
+    let id: String
+    let sentences: [SentenceRequest]
+}
+
 private struct FlowMessage: Encodable {
     let type = "flow"
     let id: String
@@ -196,6 +206,7 @@ private struct Incoming: Decodable, Sendable {
     let message: String?
     let sentences: [String: SentenceSignals]?
     let flowSentences: [String: Signal]?
+    let locateSentences: [String: WordPointer?]?
 
     enum CodingKeys: String, CodingKey { case type, id, catalogue_version, downloaded, stage, total, message, sentences }
 
@@ -210,5 +221,6 @@ private struct Incoming: Decodable, Sendable {
         message = try c.decodeIfPresent(String.self, forKey: .message)
         sentences = type == "result" ? try c.decodeIfPresent([String: SentenceSignals].self, forKey: .sentences) : nil
         flowSentences = type == "flow_result" ? try c.decodeIfPresent([String: Signal].self, forKey: .sentences) : nil
+        locateSentences = type == "locate_result" ? try c.decodeIfPresent([String: WordPointer?].self, forKey: .sentences) : nil
     }
 }

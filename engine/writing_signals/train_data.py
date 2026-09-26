@@ -5,6 +5,7 @@ formality train) plus the Claude-written synthetic files in data/train/. No trai
 sentence may appear in any test set; `build` enforces that.
 """
 import glob
+import hashlib
 import json
 import os
 import random
@@ -13,7 +14,8 @@ import zipfile
 from collections import Counter, defaultdict
 from typing import Dict, Iterable, List
 
-from .catalogue import CATALOGUE_VERSION, FLOW_QUESTION, FLOW_STATE_FORMAT, QUESTIONS
+from .catalogue import (CATALOGUE_VERSION, FLOW_QUESTION, FLOW_STATE_FORMAT, LOCATE_MAX_WORDS, QUESTIONS,
+                        locate_question, locate_words)
 from .eval.datasets import DAIR_TO_CATALOGUE, DATA_DIR, load_cola, load_dair, load_drafted, load_flow
 
 TRAIN_DIR = os.path.join(DATA_DIR, "train")
@@ -35,11 +37,17 @@ def _key(sentence: str) -> str:
     return re.sub(r"\s+", " ", sentence).strip().lower()
 
 
+def sentence_hash(sentence: str) -> str:
+    """How validation sentences are banned without storing their text (FCE may not be shared)."""
+    return hashlib.sha1(_key(sentence).encode()).hexdigest()
+
+
 def build(training: Iterable[Row], test_sentences: Iterable[str],
-          test_pairs: Iterable[tuple] = ()) -> List[Row]:
-    """Drops rows that overlap a test sentence (or, for flow, a test pair), repeat an earlier
-    row, or carry a label the catalogue doesn't have."""
+          test_pairs: Iterable[tuple] = (), banned_hashes: Iterable[str] = ()) -> List[Row]:
+    """Drops rows that overlap a test sentence (or, for flow, a test pair) or a validation
+    sentence (by hash), repeat an earlier row, or carry a label the catalogue doesn't have."""
     banned = {_key(s) for s in test_sentences}
+    banned_hashes = set(banned_hashes)
     banned_pairs = {(_key(p), _key(s)) for p, s in test_pairs}
     seen = set()
     rows = []
@@ -49,13 +57,18 @@ def build(training: Iterable[Row], test_sentences: Iterable[str],
             key = (_key(r.get("previous", "")), key)
             if not key[1] or key in banned_pairs:
                 continue
-        elif not key or key in banned:
+        elif not key or key in banned or sentence_hash(r["sentence"]) in banned_hashes:
             continue
         if (key, r["signal"]) in seen:
             continue
-        if r["signal"] not in QUESTIONS and r["signal"] != "flow":
+        if r["signal"] == "locate":
+            # the pointer's options are the sentence's own words
+            if (len(locate_words(r["sentence"])) > LOCATE_MAX_WORDS
+                    or r["expected"] not in locate_question(r["sentence"])["criteria"]):
+                continue
+        elif r["signal"] not in QUESTIONS and r["signal"] != "flow":
             continue
-        if r["expected"] not in labels(r["signal"]):
+        elif r["expected"] not in labels(r["signal"]):
             continue
         seen.add((key, r["signal"]))
         rows.append({**r, "sentence": r["sentence"].strip()})
@@ -100,6 +113,102 @@ def load_public(rng: random.Random) -> List[Row]:
     return _cap(grammar, rng) + _cap(emotion, rng) + _cap(formality, rng)
 
 
+# FCE error types that are spelling or punctuation: the rules' job, not grammar.
+FCE_MECHANICS = {"S", "SA", "RP", "MP", "UP"}
+_SENTENCE = re.compile(r"\S.*?(?:[.!?]+(?=[\"')\]]*(?:\s|$))[\"')\]]*|$)")
+
+
+def split_sentences(text: str):
+    """(sentence, start, end) per sentence; a line break always ends one, as in the app."""
+    out, offset = [], 0
+    for line in text.split("\n"):
+        for m in _SENTENCE.finditer(line):
+            s = m.group().strip()
+            if len(s.split()) >= 2:
+                out.append((s, offset + m.start(), offset + m.start() + len(s)))
+        offset += len(line) + 1
+    return out
+
+
+def fce_rows(essays, holdout, rng_seed: int = 20260926) -> List[Row]:
+    """Rows from FCE training essays (never the report's dev/test essays; `holdout` essays are
+    kept for tuning). Per sentence: grammar yes/no from the examiners' corrections, a pointer at
+    the corrected word when there's exactly one grammar correction, and flow pairs: neighbours
+    follow, sentences from two different essays don't."""
+    rng = random.Random(rng_seed)
+    rows, used = [], [e for e in essays if e["id"] not in holdout]
+    per_essay = []
+    for e in used:
+        edits = [x for _, group in e["edits"] for x in group]
+        sentences = split_sentences(e["text"])
+        per_essay.append([s for s, _, _ in sentences])
+        for s, a, b in sentences:
+            hit = [x for x in edits if a <= x[0] < b or x[0] == x[1] == b or x[0] < a < x[1]]
+            grammar = [x for x in hit if x[3] not in FCE_MECHANICS]
+            if hit and not grammar:
+                continue  # only spelling or punctuation: not a grammar example either way
+            rows.append({"sentence": s, "signal": "grammar", "expected": "yes" if grammar else "no", "source": "fce-train"})
+            words = locate_words(s)
+            if len(grammar) == 1 and grammar[0][0] < grammar[0][1] and len(words) <= LOCATE_MAX_WORDS:
+                at = grammar[0][0] - a
+                i = next((i for i, (_, ws, we) in enumerate(words) if we > at), None)
+                if i is not None:
+                    rows.append({"sentence": s, "signal": "locate", "expected": f"w{i}", "source": "fce-train"})
+        for p, s in zip(per_essay[-1], per_essay[-1][1:]):
+            rows.append({"previous": p, "sentence": s, "signal": "flow", "expected": "no", "source": "fce-train"})
+    for i, sents in enumerate(per_essay):
+        others = [j for j in range(len(per_essay)) if j != i and per_essay[j]]
+        if sents and others:
+            rows.append({"previous": rng.choice(sents), "sentence": rng.choice(per_essay[rng.choice(others)]),
+                         "signal": "flow", "expected": "yes", "source": "fce-train"})
+    return rows
+
+
+def fce_holdout(essay_id: str) -> bool:
+    """About 10% of FCE's training essays are kept out of training, for tuning the pointer's
+    threshold and checking flow. Chosen by hash, so the evaluation finds the same ones."""
+    return int(hashlib.sha1(essay_id.encode()).hexdigest()[:2], 16) < 26
+
+
+def _take(rows: List[Row], signal: str, expected, n: int, rng: random.Random) -> List[Row]:
+    group = [r for r in rows if r["signal"] == signal and (expected is None or r["expected"] == expected)]
+    rng.shuffle(group)
+    return group[:n]
+
+
+def load_run3(raw_dir: str, rng: random.Random) -> List[Row]:
+    """Run 3's additions, from local copies of FCE v2.1 (research use, never committed) and BLiMP.
+    `raw_dir` holds fce/json/fce.train.json and blimp/*.jsonl (see data/README.md)."""
+    from .mistakes import because_nonsense, inject, known_misses
+
+    with open(os.path.join(raw_dir, "fce", "json", "fce.train.json"), encoding="utf-8") as f:
+        essays = [json.loads(line) for line in f]
+    holdout = {e["id"] for e in essays if fce_holdout(e["id"])}
+    fce = fce_rows(essays, holdout)
+    clean = [r["sentence"] for r in fce if r["signal"] == "grammar" and r["expected"] == "no"]
+    rows = (_take(fce, "grammar", "yes", 1200, rng) + _take(fce, "grammar", "no", 2400, rng)
+            + _take(fce, "locate", None, 2500, rng) + _take(fce, "flow", "no", 800, rng) + _take(fce, "flow", "yes", 800, rng))
+    rows += inject(rng.sample(clean, min(900, len(clean))))
+    rows += known_misses() + because_nonsense()
+
+    # BLiMP pairs the validation run didn't test (build drops any that match by hash): the right
+    # twin teaches that odd but grammatical sentences are fine.
+    banned = validation_hashes()
+    for path in sorted(glob.glob(os.path.join(raw_dir, "blimp", "*.jsonl"))):
+        with open(path, encoding="utf-8") as f:
+            pairs = [json.loads(line) for line in f]
+        pairs = [p for p in pairs if sentence_hash(p["sentence_good"]) not in banned and sentence_hash(p["sentence_bad"]) not in banned]
+        for p in rng.sample(pairs, min(15, len(pairs))):
+            rows.append({"sentence": p["sentence_good"], "signal": "grammar", "expected": "no", "source": "blimp-train"})
+            rows.append({"sentence": p["sentence_bad"], "signal": "grammar", "expected": "yes", "source": "blimp-train"})
+    return rows
+
+
+def validation_hashes() -> set:
+    with open(os.path.join(DATA_DIR, "validation_hashes.txt"), encoding="utf-8") as f:
+        return {line.strip() for line in f if line.strip() and not line.startswith("#")}
+
+
 def load_synthetic() -> List[Row]:
     rows = []
     for path in sorted(glob.glob(os.path.join(TRAIN_DIR, "synthetic_*.jsonl"))):
@@ -130,7 +239,11 @@ def _spot_check(rows: List[Row], rng: random.Random, n: int = 50) -> str:
 
 def main():
     rng = random.Random(20260925)
-    rows = build(load_public(rng) + load_synthetic(), test_sentences(), test_pairs())
+    raw_dir = os.environ.get("PLUMB_RAW_DATA")
+    if not raw_dir:
+        raise SystemExit("Set PLUMB_RAW_DATA to the folder holding fce/ and blimp/ (see data/README.md).")
+    rows = build(load_public(rng) + load_synthetic() + load_run3(raw_dir, rng), test_sentences(), test_pairs(),
+                 banned_hashes=validation_hashes())
     rng.shuffle(rows)
 
     os.makedirs(KAGGLE_DIR, exist_ok=True)

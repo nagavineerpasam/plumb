@@ -35,6 +35,15 @@ final class FakeSignalClient: SignalClient, @unchecked Sendable {
         return out
     }
 
+    /// The word each sentence's "which word?" answer points at, by sentence text.
+    var pointers: [String: WordPointer] = [:]
+    private(set) var locateRequests: [[String]] = []
+
+    func locate(_ sentences: [SentenceRequest]) async throws -> [String: WordPointer?] {
+        locateRequests.append(sentences.map(\.text))
+        return Dictionary(uniqueKeysWithValues: sentences.map { ($0.id, pointers[$0.text]) })
+    }
+
     func flow(_ pairs: [FlowRequest]) async throws -> [String: Signal] {
         flowRequests.append(pairs)
         var out: [String: Signal] = [:]

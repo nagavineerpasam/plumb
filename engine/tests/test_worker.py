@@ -98,3 +98,20 @@ def test_scores_flow_for_sentence_pairs(worker):
 
     assert result["id"] == "f1"
     assert set(result["sentences"]["s2"]["distribution"]) == {"yes", "no"}
+
+
+def test_points_at_the_wrong_word_with_utf16_offsets(worker):
+    # "🙂 " is two UTF-16 units wide in Swift but one character in Python: offsets are UTF-16.
+    text = "🙂 She go to school every day."
+    too_long = " ".join(["word"] * 40) + "."
+    worker.send({"type": "locate", "id": "l1", "sentences": [{"id": "s1", "text": text}, {"id": "s2", "text": too_long}]})
+
+    result = worker.next("locate_result")
+
+    assert result["id"] == "l1"
+    s1 = result["sentences"]["s1"]
+    assert s1["text"] in text.split() or s1["text"] == "go"
+    units = text.encode("utf-16-le")
+    assert units[2 * s1["start"]:2 * s1["end"]].decode("utf-16-le") == s1["text"]
+    assert 0 < s1["probability"] <= 1
+    assert result["sentences"]["s2"] is None  # too long to point in

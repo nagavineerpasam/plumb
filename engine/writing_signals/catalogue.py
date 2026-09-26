@@ -4,7 +4,9 @@ The accuracy check, the fine-tuning data builder and the worker all read this mo
 so what we measure is exactly what the app shows. Bump CATALOGUE_VERSION on any change.
 """
 
-CATALOGUE_VERSION = "2"
+import re
+
+CATALOGUE_VERSION = "3"
 
 QUESTIONS = {
     "grammar": {
@@ -71,3 +73,22 @@ FLOW_STATE_FORMAT = "First sentence: {previous}\nSecond sentence: {sentence}"
 
 def flow_state(previous: str, sentence: str) -> str:
     return FLOW_STATE_FORMAT.format(previous=previous, sentence=sentence)
+
+
+# "Which word is wrong?" is asked only about a sentence already flagged for grammar. Its options
+# are the sentence's own words, so the question is built per sentence; training uses this same
+# function. Long sentences get no pointer: too many options for the model to weigh well.
+LOCATE_INSTRUCTIONS = "Which single word in this sentence is grammatically wrong?"
+LOCATE_MAX_WORDS = 30
+_WORD = re.compile(r"[\w'’]+")
+
+
+def locate_words(sentence: str):
+    """The sentence's words as (word, start, end), character offsets into the sentence."""
+    return [(m.group(), m.start(), m.end()) for m in _WORD.finditer(sentence)]
+
+
+def locate_question(sentence: str) -> dict:
+    words = locate_words(sentence)
+    return {"type": "choice", "instructions": LOCATE_INSTRUCTIONS,
+            "criteria": {f"w{i}": f"“{w}” (word {i + 1})" for i, (w, _, _) in enumerate(words)}}

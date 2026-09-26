@@ -142,9 +142,9 @@ struct SignalEditor: NSViewRepresentable {
                     layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.14), for: wash)
                 }
                 if Palette.grammarReady, signals.signals["grammar"]?.value == "yes" {
-                    if let detail = Explanations.detail(for: sentence.text) {
+                    if let word = Explanations.wordRange(for: sentence) {
                         // We know the word: underline just it, and wash the sentence faintly.
-                        marks.append(.init(range: NSRange(location: range.location + detail.range.location, length: detail.range.length),
+                        marks.append(.init(range: NSRange(location: range.location + word.location, length: word.length),
                                            color: .systemRed, dotted: false))
                         if !doesntRead, let wash = textRange(range, content, whole) {  // never weaken the stronger wash
                             layout.addRenderingAttribute(.backgroundColor, value: NSColor.systemRed.withAlphaComponent(0.07), for: wash)

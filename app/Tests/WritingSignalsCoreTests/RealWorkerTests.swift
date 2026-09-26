@@ -64,6 +64,21 @@ final class RealWorkerTests: XCTestCase {
         XCTAssertEqual(analyzer.sentences.filter { $0.signals == nil }.map(\.text), [])
     }
 
+    func testRealWorkerPointsAtAWord() async throws {
+        let client = WorkerClient(executable: try devPython())
+        try client.start()
+        defer { client.stop() }
+        let text = "She go to school every day."
+
+        let results = try await client.locate([SentenceRequest(id: "s1", text: text),
+                                                SentenceRequest(id: "s2", text: String(repeating: "word ", count: 40) + ".")])
+
+        let pointer = try XCTUnwrap(results["s1"] ?? nil)
+        XCTAssertEqual((text as NSString).substring(with: pointer.range), pointer.text)
+        XCTAssertTrue(pointer.probability > 0 && pointer.probability <= 1)
+        XCTAssertEqual(results["s2"], .some(nil), "too long to point in")
+    }
+
     func testRealWorkerChecksFlow() async throws {
         let client = WorkerClient(executable: try devPython())
         try client.start()

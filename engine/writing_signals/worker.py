@@ -107,6 +107,13 @@ def _valid_flow(message) -> bool:
                     for p in message["pairs"]))
 
 
+def _valid_locate(message) -> bool:
+    return (isinstance(message, dict) and message.get("type") == "locate"
+            and isinstance(message.get("id"), str) and isinstance(message.get("sentences"), list)
+            and all(isinstance(s, dict) and isinstance(s.get("id"), str) and isinstance(s.get("text"), str)
+                    for s in message["sentences"]))
+
+
 def _valid(message) -> bool:
     return (isinstance(message, dict) and message.get("type") == "score"
             and isinstance(message.get("id"), str) and isinstance(message.get("sentences"), list)
@@ -137,9 +144,9 @@ def main() -> int:
                 continue
             if isinstance(message, dict) and message.get("type") == "shutdown":
                 break
-            if not (_valid(message) or _valid_flow(message)):
+            if not (_valid(message) or _valid_flow(message) or _valid_locate(message)):
                 request_id = message.get("id") if isinstance(message, dict) else None
-                emit({"type": "error", "id": request_id, "message": "expected a score request (id, sentences) or a flow request (id, pairs)"})
+                emit({"type": "error", "id": request_id, "message": "expected a score request (id, sentences), a flow request (id, pairs) or a locate request (id, sentences)"})
                 continue
             inbox.put(message)
         inbox.put(None)
@@ -174,6 +181,15 @@ def main() -> int:
             else:
                 emit({"type": "flow_result", "id": request["id"],
                       "sentences": {p["id"]: sig for p, sig in zip(request["pairs"], signals)}})
+        # "Which word?" is asked only for flagged sentences, answered as it comes, like flow.
+        for request in [m for m in batch if m is not None and m["type"] == "locate"]:
+            try:
+                found = engine.locate([s["text"] for s in request["sentences"]])
+            except Exception as exc:
+                emit({"type": "error", "id": request["id"], "message": str(exc)})
+            else:
+                emit({"type": "locate_result", "id": request["id"],
+                      "sentences": {s["id"]: f for s, f in zip(request["sentences"], found)}})
         batch = [m for m in batch if m is not None and m["type"] == "score"]
         if batch:
             owned = _plan(batch)

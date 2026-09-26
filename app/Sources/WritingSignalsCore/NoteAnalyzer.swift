@@ -17,6 +17,10 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
     /// A short line of its own with more text after it ("Dear Sir/Madam", "Introduction"): a
     /// heading or greeting, which needs no full stop.
     var heading = false
+    /// The word the model points at, kept only when it's confident; nil otherwise.
+    public var pointer: WordPointer?
+    /// Whether the "which word?" question has been asked for this sentence.
+    var pointerChecked = false
 
     /// How well this sentence is written, 0...1, once checked: 100% minus the likelihood of a
     /// grammar mistake or of not making sense, whichever is judged likely and larger (p >= 0.5;
@@ -47,6 +51,11 @@ public final class NoteAnalyzer {
     /// Results already worked out this session, by sentence text, so reopening a note shows its
     /// signals at once instead of checking unchanged sentences again.
     private var known: [String: (signals: SentenceSignals?, mechanics: [MechanicsIssue]?)] = [:]
+    /// "Which word?" answers already worked out this session, by sentence text.
+    private var knownPointers: [String: WordPointer?] = [:]
+    /// Below this, the pointer isn't shown and the card gives its general hint. Set on held-out
+    /// learner essays so that shown pointers are right at least 85% of the time.
+    public static let pointerThreshold = 0.5
 
     public init(client: SignalClient, debounce: Duration = .milliseconds(300),
                 retryDelay: Duration = .seconds(1)) {
@@ -62,11 +71,13 @@ public final class NoteAnalyzer {
             if let kept = previous[text]?.first {
                 previous[text]?.removeFirst()
                 return AnalyzedSentence(id: kept.id, text: text, range: range, signals: kept.signals,
-                                        mechanics: kept.mechanics, flow: kept.flow, flowPreviousID: kept.flowPreviousID)
+                                        mechanics: kept.mechanics, flow: kept.flow, flowPreviousID: kept.flowPreviousID,
+                                        pointer: kept.pointer, pointerChecked: kept.pointerChecked)
             }
             nextID += 1
             return AnalyzedSentence(id: "s\(nextID)", text: text, range: range,
-                                    signals: known[text]?.signals, mechanics: known[text]?.mechanics)
+                                    signals: known[text]?.signals, mechanics: known[text]?.mechanics,
+                                    pointer: knownPointers[text] ?? nil, pointerChecked: knownPointers[text] != nil)
         }
         // Whether a line is a heading depends on what follows it, so it's worked out on every edit
         // and applied to the rules' cached results.
@@ -87,6 +98,7 @@ public final class NoteAnalyzer {
             guard !Task.isCancelled else { return }
             self.checkMechanics()
             await self.scoreUnscored()
+            await self.locateFlagged()
         }
     }
 
@@ -140,6 +152,20 @@ public final class NoteAnalyzer {
             } catch {
                 try? await Task.sleep(for: retryDelay)
             }
+        }
+    }
+
+    /// Asks "which word is wrong?" for sentences flagged for grammar, once each.
+    private func locateFlagged() async {
+        let asks = sentences.filter { !$0.pointerChecked && $0.signals?.signals["grammar"]?.value == "yes" }
+            .map { SentenceRequest(id: $0.id, text: $0.text) }
+        guard !asks.isEmpty, !Task.isCancelled, let found = try? await client.locate(asks) else { return }
+        for i in sentences.indices {
+            guard let answer = found[sentences[i].id] else { continue }
+            let confident = answer.flatMap { $0.probability >= Self.pointerThreshold ? $0 : nil }
+            sentences[i].pointer = confident
+            sentences[i].pointerChecked = true
+            knownPointers[sentences[i].text] = .some(confident)
         }
     }
 

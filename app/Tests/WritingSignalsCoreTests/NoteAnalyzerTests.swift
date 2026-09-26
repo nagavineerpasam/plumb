@@ -127,6 +127,20 @@ final class NoteAnalyzerTests: XCTestCase {
         XCTAssertEqual(analyzer.sentences.map(\.text), ["मैं घर जा रहा हूँ।", "तुम कहाँ हो?"])
     }
 
+    func testAFlaggedSentenceGetsAConfidentPointerAndCleanOnesAreNeverAsked() async {
+        let client = FakeSignalClient()
+        client.grammarMistake = ["Yesterday I goes to the gym.", "They was there."]
+        client.pointers = ["Yesterday I goes to the gym.": WordPointer(text: "goes", start: 12, end: 16, probability: 0.9),
+                           "They was there.": WordPointer(text: "there", start: 9, end: 14, probability: 0.3)]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+
+        analyzer.update(text: "Yesterday I goes to the gym. They was there. It was fun.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map(\.pointer?.text), ["goes", nil, nil], "the unsure pointer is dropped")
+        XCTAssertEqual(client.locateRequests.flatMap { $0 }, ["Yesterday I goes to the gym.", "They was there."])
+    }
+
     func testALineBreakAlwaysEndsASentence() {
         let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
         let text = "Dear Sir/Madam\n\nThe Circle Theatre manager\nI am writing to complain. It was late."
