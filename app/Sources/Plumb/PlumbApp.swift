@@ -32,7 +32,7 @@ struct PlumbApp: App {
         }
 
         Settings {
-            SettingsView()
+            SettingsView(updater: model.updater)
         }
     }
 }
@@ -50,28 +50,71 @@ enum Appearance: String, CaseIterable, Identifiable {
     }
 }
 
+/// Plumb's Settings window (⌘,): one tab per area, so it can grow.
 struct SettingsView: View {
+    let updater: Updater
+
+    var body: some View {
+        TabView {
+            AppearanceSettings()
+                .tabItem { Label("Appearance", systemImage: "paintbrush") }
+            UpdateSettings(updater: updater)
+                .tabItem { Label("Updates", systemImage: "arrow.down.circle") }
+        }
+        .frame(width: 460)
+    }
+}
+
+struct AppearanceSettings: View {
     @AppStorage("appearance") private var appearance = Appearance.system
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Appearance").font(.headline)
+        Form {
             Picker("Appearance", selection: $appearance) {
                 ForEach(Appearance.allCases) { Text($0.rawValue).tag($0) }
             }
             .pickerStyle(.segmented)
-            .labelsHidden()
-            Divider().padding(.vertical, 4)
-            Button {
-                NSWorkspace.shared.activateFileViewerSelecting([WorkerLocation.notesFolder])
-            } label: {
-                Label("Show notes in Finder", systemImage: "folder")
+            LabeledContent("Your notes") {
+                Button("Show in Finder") {
+                    NSWorkspace.shared.activateFileViewerSelecting([WorkerLocation.notesFolder])
+                }
             }
-            .buttonStyle(.link)
         }
-        .padding(20)
-        .frame(width: 300)
+        .formStyle(.grouped)
         .onChange(of: appearance, initial: true) { _, value in value.apply() }
+    }
+}
+
+struct UpdateSettings: View {
+    @Bindable var updater: Updater
+    @State private var automatic = true
+
+    var body: some View {
+        Form {
+            LabeledContent("Plumb", value: Updater.current?.description ?? "–")
+            LabeledContent("Status") {
+                switch updater.state {
+                case .checking: ProgressView().controlSize(.small)
+                case .upToDate: Text("You’re up to date ✓").foregroundStyle(.secondary)
+                case .available(let release):
+                    Button("Update to \(release.version.description)") { updater.update() }
+                        .buttonStyle(.borderedProminent).tint(Palette.sunrise)
+                case .downloading(_, let fraction): Text("Downloading… \(Int(fraction * 100))%")
+                case .installing: Text("Installing…")
+                case .failed(let message): Text(message).foregroundStyle(.secondary).multilineTextAlignment(.trailing)
+                case .idle: Text("Not checked yet").foregroundStyle(.secondary)
+                }
+            }
+            HStack {
+                Spacer()
+                Button("Check for updates") { Task { await updater.check(userAsked: true) } }
+                    .disabled(!Updater.canUpdate || updater.state == .checking)
+            }
+            Toggle("Check for updates when Plumb opens", isOn: $automatic)
+                .onChange(of: automatic) { _, on in updater.checkAutomatically = on }
+        }
+        .formStyle(.grouped)
+        .onAppear { automatic = updater.checkAutomatically }
     }
 }
 
@@ -86,6 +129,7 @@ final class AppModel {
 
     let analyzer: NoteAnalyzer
     let dictation = Dictation()
+    let updater = Updater()
     /// Each note's latest Correctness over time, for the Progress page.
     let progress = ProgressStore(file: WorkerLocation.dataFolder.appendingPathComponent("progress.json"))
     /// Bumped whenever a score is recorded, so the Progress page redraws.

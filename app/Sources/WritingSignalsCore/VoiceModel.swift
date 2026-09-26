@@ -3,7 +3,7 @@ import Foundation
 /// The Whisper voice model on disk: downloaded once, the first time the user speaks, from the
 /// release's plumb-voice.zip. An interrupted download resumes; a bad one leaves nothing behind.
 public struct VoiceModel: Sendable {
-    public static let releaseURL = URL(string: "https://github.com/nagavineerpasam/plumb/releases/latest/download/plumb-voice.zip")!
+    public static let releaseURL = URL(string: "https://github.com/nagavineerpasam/plumb/releases/download/models-v1/plumb-voice.zip")!
     /// What a complete model folder must contain.
     static let required = ["AudioEncoder.mlmodelc", "TextDecoder.mlmodelc", "MelSpectrogram.mlmodelc",
                            "config.json", "tokenizer.json"]

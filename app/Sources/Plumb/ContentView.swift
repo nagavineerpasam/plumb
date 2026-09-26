@@ -5,7 +5,7 @@ import WritingSignalsCore
 /// and no title bar, only the window buttons floating top left.
 struct ContentView: View {
     @Bindable var model: AppModel
-    @State private var showSettings = false
+    @Environment(\.openSettings) private var openSettings
     @State private var confirmDelete: Note?
 
     var body: some View {
@@ -28,6 +28,15 @@ struct ContentView: View {
         .background(Palette.canvas)
         .ignoresSafeArea()
         .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
+        .overlay(alignment: .topTrailing) {
+            if model.updater.showCard {
+                UpdateCard(updater: model.updater)
+                    .padding(.top, 52).padding(.trailing, 20)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
+        }
+        .animation(.spring(duration: 0.45, bounce: 0.2), value: model.updater.showCard)
+        .task { model.updater.checkOnLaunch() }
         .overlay {
             if case let .downloading(done, total, problem) = model.phase {
                 Onboarding(step: model.setupStep, downloaded: done, total: total, problem: problem).transition(.opacity)
@@ -62,8 +71,7 @@ struct ContentView: View {
             sidebarButton("Progress", systemImage: "chart.line.uptrend.xyaxis") {
                 withAnimation(.smooth) { model.showingProgress.toggle() }
             }
-            sidebarButton("Settings", systemImage: "gearshape") { showSettings.toggle() }
-                .popover(isPresented: $showSettings, arrowEdge: .trailing) { SettingsView() }
+            sidebarButton("Settings", systemImage: "gearshape") { openSettings() }
         }
     }
 
@@ -395,5 +403,58 @@ struct ScoreNudgeBar: View {
         .background(Palette.sunriseWash, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
         .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous).strokeBorder(Palette.sunrise.opacity(0.28)))
         .shadow(color: .black.opacity(0.08), radius: 16, y: 6)
+    }
+}
+
+/// "A new version of Plumb is ready ✨": what's new, and a one-click update with progress.
+struct UpdateCard: View {
+    @Bindable var updater: Updater
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            switch updater.state {
+            case .available(let release):
+                Text("A new version of Plumb is ready ✨").font(.system(size: 15, weight: .semibold))
+                Text("Version \(release.version.description)").font(.caption).foregroundStyle(.secondary)
+                VStack(alignment: .leading, spacing: 5) {
+                    ForEach(release.highlights, id: \.self) { line in
+                        Label(line, systemImage: "checkmark").font(.callout).labelStyle(.titleAndIcon)
+                    }
+                }
+                HStack(spacing: 10) {
+                    Spacer()
+                    Button("Later") { updater.later() }.buttonStyle(.plain).foregroundStyle(.secondary).pointingHand()
+                    Button { updater.update() } label: {
+                        Text("Update now").font(.system(size: 13, weight: .semibold)).foregroundStyle(.white)
+                            .padding(.horizontal, 16).padding(.vertical, 7)
+                            .background(Palette.sunrise, in: Capsule())
+                    }
+                    .buttonStyle(.plain).pointingHand()
+                }
+            case .downloading(let release, let fraction):
+                Text("Updating to \(release.version.description)…").font(.system(size: 15, weight: .semibold))
+                ProgressView(value: fraction).tint(Palette.sunrise)
+                Text("\(Int(fraction * 100))%  ·  Plumb reopens by itself when it's done.").font(.caption).foregroundStyle(.secondary)
+            case .installing:
+                Text("Installing…").font(.system(size: 15, weight: .semibold))
+                ProgressView().progressViewStyle(.linear).tint(Palette.sunrise)
+                Text("Plumb reopens in a moment.").font(.caption).foregroundStyle(.secondary)
+            case .failed(let message):
+                Text("Update didn’t finish").font(.system(size: 15, weight: .semibold))
+                Text(message).font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                HStack {
+                    Spacer()
+                    Button("Close") { updater.later() }.buttonStyle(.plain).foregroundStyle(.secondary)
+                    Button("Try again") { Task { await updater.check(userAsked: true) } }
+                }
+            default:
+                EmptyView()
+            }
+        }
+        .padding(18)
+        .frame(width: 330, alignment: .leading)
+        .background(Palette.card, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 18, style: .continuous).strokeBorder(.primary.opacity(0.08)))
+        .shadow(color: .black.opacity(0.14), radius: 24, y: 10)
     }
 }
