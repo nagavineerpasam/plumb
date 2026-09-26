@@ -56,9 +56,12 @@ def _article(sentence: str, rng: random.Random) -> Optional[Tuple[str, int]]:
     return _replace(sentence, m.start(), m.end(), new)
 
 
-def _pointer(sentence: str, at: int, source: str) -> Row:
-    i = next(i for i, (_, s, e) in enumerate(locate_words(sentence)) if e > at)
-    return {"sentence": sentence, "signal": "locate", "expected": f"w{i}", "source": source}
+def _pointer(sentence: str, at: int, source: str, kind: str) -> List[Row]:
+    """The pointer at the word covering `at`, and that word's mistake type."""
+    words = locate_words(sentence)
+    i = next(i for i, (_, s, e) in enumerate(words) if e > at)
+    return [{"sentence": sentence, "signal": "locate", "expected": f"w{i}", "source": source},
+            {"sentence": sentence, "word": words[i][0], "signal": "mistake_type", "expected": kind, "source": source}]
 
 
 def inject(sentences: List[str], seed: int = 20260926) -> List[Row]:
@@ -66,21 +69,21 @@ def inject(sentences: List[str], seed: int = 20260926) -> List[Row]:
     rng = random.Random(seed)
     rows = []
     for sentence in sentences:
-        kinds = [_participle, _agreement, _article]
+        kinds = [(_participle, "verb_form"), (_agreement, "agreement"), (_article, "article")]
         rng.shuffle(kinds)
-        for kind in kinds:
-            made = kind(sentence, rng)
+        for make, kind in kinds:
+            made = make(sentence, rng)
             if made and made[0] != sentence:
                 wrong, at = made
                 rows.append({"sentence": wrong, "signal": "grammar", "expected": "yes", "source": "generated-mistake"})
-                rows.append(_pointer(wrong, at, "generated-mistake"))
+                rows += _pointer(wrong, at, "generated-mistake", kind)
                 break
     return rows
 
 
-def _pair(wrong: str, right: str, word: str, rows: List[Row]) -> None:
+def _pair(wrong: str, right: str, word: str, rows: List[Row], kind: str) -> None:
     rows.append({"sentence": wrong, "signal": "grammar", "expected": "yes", "source": "known-miss"})
-    rows.append(_pointer(wrong, re.search(rf"\b{re.escape(word)}\b", wrong).start(), "known-miss"))
+    rows += _pointer(wrong, re.search(rf"\b{re.escape(word)}\b", wrong).start(), "known-miss", kind)
     rows.append({"sentence": right, "signal": "grammar", "expected": "no", "source": "known-miss"})
 
 
@@ -94,19 +97,19 @@ def known_misses(seed: int = 20260926, per_kind: int = 40) -> List[Row]:
 
     for s, v in some(["He", "She", "My brother", "The manager", "Our teacher", "My neighbour", "It"],
                      ["like coffee", "want to come", "know the answer", "work on Sundays", "need any help", "eat meat", "look ready"]):
-        _pair(f"{s} don't {v}.", f"{s} doesn't {v}.", "don't", rows)
+        _pair(f"{s} don't {v}.", f"{s} doesn't {v}.", "don't", rows, "agreement")
     for s, (verb, rest), end in some(["I", "We"], [("meet", "you"), ("see", "you again"), ("hear", "from you"), ("meet", "the team"), ("see", "your new flat")],
                                      [".", " soon.", " next week."]):
-        _pair(f"{s} look forward to {verb} {rest}{end}", f"{s} look forward to {verb}ing {rest}{end}", verb, rows)
+        _pair(f"{s} look forward to {verb} {rest}{end}", f"{s} look forward to {verb}ing {rest}{end}", verb, rows, "verb_form")
     for head, noun, pred in some(["list", "box", "bag", "collection", "pile", "stack"], ["items", "books", "papers", "toys", "letters", "shoes"],
                                  ["too long", "on the table", "ready", "missing", "very heavy"]):
-        _pair(f"The {head} of {noun} are {pred}.", f"The {head} of {noun} is {pred}.", "are", rows)
+        _pair(f"The {head} of {noun} are {pred}.", f"The {head} of {noun} is {pred}.", "are", rows, "agreement")
     for frame, place in some(["Can you tell me", "Do you know", "Could you tell me"],
                              ["the station", "the bank", "the library", "the nearest hospital", "the post office", "your office", "the exit"]):
-        _pair(f"{frame} where is {place}?", f"{frame} where {place} is?", "is", rows)
+        _pair(f"{frame} where is {place}?", f"{frame} where {place} is?", "is", rows, "word_order")
     for s, obj, when in some(["We", "They", "The team", "The managers"], ["the plan", "the budget", "the problem", "your idea", "the new rules"],
                              ["yesterday", "this morning", "at the meeting", "for an hour"]):
-        _pair(f"{s} discussed about {obj} {when}.", f"{s} discussed {obj} {when}.", "about", rows)
+        _pair(f"{s} discussed about {obj} {when}.", f"{s} discussed {obj} {when}.", "about", rows, "word_extra")
     return rows
 
 

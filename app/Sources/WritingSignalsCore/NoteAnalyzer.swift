@@ -57,6 +57,8 @@ public final class NoteAnalyzer {
     /// learner-essay sentences (run 3): at 0.86, shown pointers were on the examiner's corrected
     /// word 88% of the time.
     public static let pointerThreshold = 0.86
+    /// Below this, the kind of mistake isn't named and the card just says "Check “word”."
+    public static let typeThreshold = 0.5
 
     public init(client: SignalClient, debounce: Duration = .milliseconds(300),
                 retryDelay: Duration = .seconds(1)) {
@@ -163,7 +165,13 @@ public final class NoteAnalyzer {
         guard !asks.isEmpty, !Task.isCancelled, let found = try? await client.locate(asks) else { return }
         for i in sentences.indices {
             guard let answer = found[sentences[i].id] else { continue }
-            let confident = answer.flatMap { $0.probability >= Self.pointerThreshold ? $0 : nil }
+            // Say less, never guess: an unsure pointer is dropped, an unsure type is left unnamed.
+            let confident = answer.flatMap { p -> WordPointer? in
+                guard p.probability >= Self.pointerThreshold else { return nil }
+                var kept = p
+                if (p.typeProbability ?? 0) < Self.typeThreshold { kept.type = nil; kept.typeProbability = nil }
+                return kept
+            }
             sentences[i].pointer = confident
             sentences[i].pointerChecked = true
             knownPointers[sentences[i].text] = .some(confident)

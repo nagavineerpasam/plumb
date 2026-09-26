@@ -14,8 +14,8 @@ import zipfile
 from collections import Counter, defaultdict
 from typing import Dict, Iterable, List
 
-from .catalogue import (CATALOGUE_VERSION, FLOW_QUESTION, FLOW_STATE_FORMAT, LOCATE_MAX_WORDS, QUESTIONS,
-                        locate_question, locate_words)
+from .catalogue import (CATALOGUE_VERSION, FLOW_QUESTION, FLOW_STATE_FORMAT, LOCATE_MAX_WORDS, MISTAKE_TYPES,
+                        QUESTIONS, locate_question, locate_words)
 from .eval.datasets import DAIR_TO_CATALOGUE, DATA_DIR, load_cola, load_dair, load_drafted, load_flow
 
 TRAIN_DIR = os.path.join(DATA_DIR, "train")
@@ -53,6 +53,15 @@ def build(training: Iterable[Row], test_sentences: Iterable[str],
     rows = []
     for r in training:
         key = _key(r["sentence"])
+        if r.get("signal") == "mistake_type":
+            key = (key, _key(r.get("word", "")))
+            if r["expected"] not in MISTAKE_TYPES or not r.get("word") or sentence_hash(r["sentence"]) in banned_hashes:
+                continue
+            if (key, r["signal"]) in seen:
+                continue
+            seen.add((key, r["signal"]))
+            rows.append({**r, "sentence": r["sentence"].strip()})
+            continue
         if r.get("signal") == "flow":
             key = (_key(r.get("previous", "")), key)
             if not key[1] or key in banned_pairs:
@@ -113,6 +122,31 @@ def load_public(rng: random.Random) -> List[Row]:
     return _cap(grammar, rng) + _cap(emotion, rng) + _cap(formality, rng)
 
 
+def fce_type(code: str, missing: bool):
+    """Cambridge FCE error code -> Plumb's learner mistake type (None for word choice, spelling…).
+    Codes are an operation (R replace, M missing, U unnecessary, F form…) plus a part of speech
+    (V verb, N noun, D determiner, T preposition…)."""
+    if code == "TV":
+        return "tense"
+    if code in ("FV", "IV", "DV"):
+        return "verb_form"
+    if code.startswith("AG"):
+        return "agreement"
+    if code == "W":
+        return "word_order"
+    if code in ("FN", "IN", "CN"):
+        return "number"
+    if code.endswith("D") and code[0] in "RFUM":
+        return "article_missing" if missing else "article"
+    if code.endswith("T") and code[0] in "RUM":
+        return "preposition_missing" if missing else "preposition"
+    if code[0] == "M" and code[1:] in ("V", "N", "J", "Y", "A", "C", "Q"):
+        return "word_missing"
+    if code[0] == "U" and code[1:] in ("V", "N", "J", "Y", "A", "C", "Q"):
+        return "word_extra"
+    return None
+
+
 # FCE error types that are spelling or punctuation: the rules' job, not grammar.
 FCE_MECHANICS = {"S", "SA", "RP", "MP", "UP"}
 _SENTENCE = re.compile(r"\S.*?(?:[.!?]+(?=[\"')\]]*(?:\s|$))[\"')\]]*|$)")
@@ -149,11 +183,15 @@ def fce_rows(essays, holdout, rng_seed: int = 20260926) -> List[Row]:
                 continue  # only spelling or punctuation: not a grammar example either way
             rows.append({"sentence": s, "signal": "grammar", "expected": "yes" if grammar else "no", "source": "fce-train"})
             words = locate_words(s)
-            if len(grammar) == 1 and grammar[0][0] < grammar[0][1] and len(words) <= LOCATE_MAX_WORDS:
-                at = grammar[0][0] - a
+            if len(grammar) == 1 and len(words) <= LOCATE_MAX_WORDS:
+                # A missing word (an insertion) points at the word after the gap.
+                at, missing = grammar[0][0] - a, grammar[0][0] == grammar[0][1]
                 i = next((i for i, (_, ws, we) in enumerate(words) if we > at), None)
                 if i is not None:
                     rows.append({"sentence": s, "signal": "locate", "expected": f"w{i}", "source": "fce-train"})
+                    kind = fce_type(grammar[0][3], missing)
+                    if kind:
+                        rows.append({"sentence": s, "word": words[i][0], "signal": "mistake_type", "expected": kind, "source": "fce-train"})
         for p, s in zip(per_essay[-1], per_essay[-1][1:]):
             rows.append({"previous": p, "sentence": s, "signal": "flow", "expected": "no", "source": "fce-train"})
     for i, sents in enumerate(per_essay):
@@ -187,7 +225,10 @@ def load_run3(raw_dir: str, rng: random.Random) -> List[Row]:
     fce = fce_rows(essays, holdout)
     clean = [r["sentence"] for r in fce if r["signal"] == "grammar" and r["expected"] == "no"]
     rows = (_take(fce, "grammar", "yes", 1200, rng) + _take(fce, "grammar", "no", 2400, rng)
-            + _take(fce, "locate", None, 2500, rng) + _take(fce, "flow", "no", 800, rng) + _take(fce, "flow", "yes", 800, rng))
+            + _take(fce, "locate", None, 4000, rng) + _take(fce, "flow", "no", 800, rng) + _take(fce, "flow", "yes", 800, rng))
+    # Mistake types, capped per type so common ones (prepositions) don't drown rare ones (word order).
+    for kind in {r["expected"] for r in fce if r["signal"] == "mistake_type"}:
+        rows += _take(fce, "mistake_type", kind, 700, rng)
     rows += inject(rng.sample(clean, min(900, len(clean))))
     rows += known_misses() + because_nonsense()
 

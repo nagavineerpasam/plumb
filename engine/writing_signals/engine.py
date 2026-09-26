@@ -3,7 +3,8 @@ from typing import Any, Dict, List, Tuple
 
 from laya import Agent
 
-from .catalogue import FLOW_QUESTION, LOCATE_MAX_WORDS, QUESTIONS, flow_state, locate_question, locate_words
+from .catalogue import (FLOW_QUESTION, LOCATE_MAX_WORDS, MISTAKE_TYPE_QUESTION, QUESTIONS, flow_state, locate_question,
+                        locate_words, type_state)
 
 # English only, on the CPU: 2.0 GB and ~0.5 s per sentence on an M1, which fits 8 GB Macs.
 # The Apple GPU path costs ~4 GB for the same model.
@@ -66,7 +67,8 @@ class SignalEngine:
 
     def locate(self, sentences: List[str]) -> List[Any]:
         """For each sentence, the word most likely to be wrong: its text, UTF-16 offsets (as the
-        app counts) and probability. None for a sentence with no words or too many to weigh."""
+        app counts) and probability, plus what kind of mistake it is and how sure that is. None for
+        a sentence with no words or too many to weigh."""
         found = []
         for text in sentences:
             words = locate_words(text)
@@ -77,6 +79,9 @@ class SignalEngine:
             key = max(answer["probabilities"], key=answer["probabilities"].get)
             word, start, end = words[int(key[1:])]
             utf16 = lambda i: len(text[:i].encode("utf-16-le")) // 2
+            kind = self.agent.predict_batch([type_state(text, word)], {"type": MISTAKE_TYPE_QUESTION})[0]["answers"]["type"]
+            label = max(kind["probabilities"], key=kind["probabilities"].get)
             found.append({"text": word, "start": utf16(start), "end": utf16(end),
-                          "probability": answer["probabilities"][key]})
+                          "probability": answer["probabilities"][key],
+                          "type": label, "type_probability": kind["probabilities"][label]})
         return found

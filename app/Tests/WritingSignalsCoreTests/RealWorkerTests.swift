@@ -76,6 +76,7 @@ final class RealWorkerTests: XCTestCase {
         let pointer = try XCTUnwrap(results["s1"] ?? nil)
         XCTAssertEqual((text as NSString).substring(with: pointer.range), pointer.text)
         XCTAssertTrue(pointer.probability > 0 && pointer.probability <= 1)
+        XCTAssertNotNil(pointer.type, "the worker says what kind of mistake it is")
         XCTAssertEqual(results["s2"], .some(nil), "too long to point in")
     }
 

@@ -1,26 +1,39 @@
 import XCTest
 @testable import WritingSignalsCore
 
+/// The card teaches: it names where the mistake is and what kind it is, never the answer.
 final class GrammarHintTests: XCTestCase {
-    let sentence = "Yesterday I goes to the gym."
-    var goes: WordPointer { WordPointer(text: "goes", start: 12, end: 16, probability: 0.93) }
-
-    func testThePointerNamesTheWordAndAddsMacOSsFixForThatWord() {
-        let mac = GrammarDetail(range: NSRange(location: 12, length: 4), message: "“goes” doesn’t agree with the rest of the sentence.", fixes: ["went"])
-        XCTAssertEqual(GrammarHint.line(for: sentence, pointer: goes, macOS: mac), "“goes” looks wrong here. Try “went”.")
-        XCTAssertEqual(GrammarHint.short(for: sentence, pointer: goes, macOS: mac), "“goes” → “went”")
+    private func pointer(_ word: String, in sentence: String, type: String?) -> WordPointer {
+        let r = (sentence as NSString).range(of: word)
+        return WordPointer(text: word, start: r.location, end: NSMaxRange(r), probability: 0.95, type: type, typeProbability: type == nil ? nil : 0.95)
     }
 
-    func testAFixForADifferentWordIsNotOffered() {
-        let elsewhere = GrammarDetail(range: NSRange(location: 0, length: 9), message: "…", fixes: ["Today"])
-        XCTAssertEqual(GrammarHint.line(for: sentence, pointer: goes, macOS: elsewhere), "“goes” looks wrong here.")
-        XCTAssertEqual(GrammarHint.short(for: sentence, pointer: goes, macOS: nil), "Check “goes”")
+    func testEachTypeTeachesTheRuleWithTheLearnersOwnWord() {
+        let s = "Yesterday I goes to the gym."
+        XCTAssertEqual(GrammarHint.line(for: s, pointer: pointer("goes", in: s, type: "tense")),
+                       "Verb tense: check when this happened. Which form of “goes” fits? “Yesterday” tells you when.")
+        XCTAssertEqual(GrammarHint.line(for: "He don't like coffee.", pointer: pointer("don't", in: "He don't like coffee.", type: "agreement")),
+                       "Agreement: “don't” doesn’t match the word it goes with. Check who or what it’s about.")
+        XCTAssertEqual(GrammarHint.line(for: "I went to shop.", pointer: pointer("shop", in: "I went to shop.", type: "article_missing")),
+                       "a / an / the: a small word may be missing before “shop”.")
+        XCTAssertEqual(GrammarHint.short(for: s, pointer: pointer("goes", in: s, type: "tense")), "“goes” · Verb tense")
     }
 
-    func testWithoutAPointerItFallsBackToMacOSThenToTheGeneralHint() {
-        let mac = GrammarDetail(range: NSRange(location: 12, length: 4), message: "“goes” doesn’t agree with the rest of the sentence.", fixes: ["went"])
-        XCTAssertEqual(GrammarHint.line(for: sentence, pointer: nil, macOS: mac), "“goes” doesn’t agree with the rest of the sentence. Try “went”.")
-        XCTAssertEqual(GrammarHint.line(for: sentence, pointer: nil, macOS: nil), GrammarHint.general)
-        XCTAssertEqual(GrammarHint.short(for: sentence, pointer: nil, macOS: nil), "Grammar mistake")
+    func testNoHintEverGivesTheAnswer() {
+        let s = "We discussed about the plan last week."
+        for type in ["tense", "verb_form", "agreement", "article", "article_missing", "preposition", "preposition_missing",
+                     "number", "word_order", "word_missing", "word_extra"] {
+            let line = GrammarHint.line(for: s, pointer: pointer("about", in: s, type: type))
+            XCTAssertFalse(line.contains("Try"), type)
+            XCTAssertTrue(line.contains("“about”"), "\(type) names the learner's word")
+        }
+    }
+
+    func testItSaysLessInsteadOfGuessing() {
+        let s = "They was there."
+        XCTAssertEqual(GrammarHint.line(for: s, pointer: pointer("was", in: s, type: nil)), "Check “was”.")
+        XCTAssertEqual(GrammarHint.short(for: s, pointer: pointer("was", in: s, type: nil)), "Check “was”")
+        XCTAssertEqual(GrammarHint.line(for: s, pointer: nil), GrammarHint.general)
+        XCTAssertEqual(GrammarHint.short(for: s, pointer: nil), "Grammar mistake")
     }
 }

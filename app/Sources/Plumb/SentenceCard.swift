@@ -110,32 +110,21 @@ struct ScaleBar: View {
     }
 }
 
-/// What to tell the learner about a grammar mistake Laya found: the word and a fix when macOS's
-/// grammar checker can place it, otherwise a gentle hint. Cached per sentence text.
+/// What to tell the learner about a grammar mistake: where it is and what kind, never the answer.
 @MainActor
 enum Explanations {
-    private static var cache: [String: GrammarDetail?] = [:]
-
-    static func detail(for sentence: String) -> GrammarDetail? {
-        if let known = cache[sentence] { return known }
-        let found = GrammarExplainer.explain(sentence)
-        if cache.count > 500 { cache.removeAll() }
-        cache[sentence] = found
-        return found
-    }
-
-    /// The card's line, e.g. “goes” looks wrong here. Try “went”.
+    /// The card's line, e.g. Verb tense: check when this happened. Which form of “goes” fits?
     static func grammar(for sentence: AnalyzedSentence) -> String {
-        GrammarHint.line(for: sentence.text, pointer: sentence.pointer, macOS: detail(for: sentence.text))
+        GrammarHint.line(for: sentence.text, pointer: sentence.pointer)
     }
 
     /// The short version for the "Needs a look" list.
     static func short(for sentence: String, pointer: WordPointer?) -> String {
-        GrammarHint.short(for: sentence, pointer: pointer, macOS: detail(for: sentence))
+        GrammarHint.short(for: sentence, pointer: pointer)
     }
 
-    /// Where to underline within the sentence: the model's word, else macOS's.
+    /// Where to underline within the sentence: the word Plumb points at.
     static func wordRange(for sentence: AnalyzedSentence) -> NSRange? {
-        sentence.pointer?.range ?? detail(for: sentence.text)?.range
+        sentence.pointer?.range
     }
 }

@@ -47,18 +47,25 @@ public struct FlowRequest: Codable, Sendable, Equatable {
 }
 
 /// The word the model thinks is wrong in a flagged sentence: its text, its UTF-16 offsets within
-/// the sentence, and how sure the model is.
+/// the sentence, how sure the model is, and what kind of mistake it is (one of the catalogue's
+/// MISTAKE_TYPES, e.g. "tense"; nil when not sure).
 public struct WordPointer: Codable, Sendable, Equatable {
     public var text: String
     public var start: Int
     public var end: Int
     public var probability: Double
+    public var type: String?
+    public var typeProbability: Double?
 
-    public init(text: String, start: Int, end: Int, probability: Double) {
+    enum CodingKeys: String, CodingKey { case text, start, end, probability, type, typeProbability = "type_probability" }
+
+    public init(text: String, start: Int, end: Int, probability: Double, type: String? = nil, typeProbability: Double? = nil) {
         self.text = text
         self.start = start
         self.end = end
         self.probability = probability
+        self.type = type
+        self.typeProbability = typeProbability
     }
 
     public var range: NSRange { NSRange(location: start, length: end - start) }
