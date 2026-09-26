@@ -8,10 +8,8 @@ public enum GrammarHint {
 
     /// The learner-facing name of each mistake type, for the "Needs a look" list.
     public static let names: [String: String] = [
-        "tense": "Verb tense", "verb_form": "Verb form", "agreement": "Agreement",
-        "article": "a / an / the", "article_missing": "a / an / the",
-        "preposition": "Preposition", "preposition_missing": "Preposition", "number": "Singular or plural",
-        "word_order": "Word order", "word_missing": "Missing word", "word_extra": "Extra word",
+        "verb": "Verb", "agreement": "Agreement", "article": "a / an / the", "preposition": "Preposition",
+        "number": "Singular or plural", "word_order": "Word order", "word_missing": "Missing word", "word_extra": "Extra word",
     ]
 
     public static func line(for sentence: String, pointer: WordPointer?) -> String {
@@ -19,14 +17,11 @@ public enum GrammarHint {
         let w = "“\(pointer.text)”"
         guard let type = pointer.type else { return "Check \(w)." }
         switch type {
-        case "tense":
-            return "Verb tense: check when this happened. Which form of \(w) fits?" + (timeWord(in: sentence).map { " “\($0)” tells you when." } ?? "")
-        case "verb_form": return "Verb form: \(w) isn’t the right form of this verb here. Which form fits?"
+        case "verb":
+            return "Verb: check the tense and form of \(w). Which form fits here?" + (timeWord(in: sentence).map { " “\($0)” tells you when." } ?? "")
         case "agreement": return "Agreement: \(w) doesn’t match the word it goes with. Check who or what it’s about."
         case "article": return "a / an / the: check \(w). Is it the right small word, and is it needed?"
-        case "article_missing": return "a / an / the: a small word may be missing before \(w)."
         case "preposition": return "Preposition: \(w) isn’t the usual word here. Which small linking word fits?"
-        case "preposition_missing": return "Preposition: a small linking word may be missing before \(w)."
         case "number": return "Singular or plural: check whether \(w) should be one or many."
         case "word_order": return "Word order: the words around \(w) are in an unusual order. Read it aloud to hear it."
         case "word_missing": return "Missing word: something is missing before \(w)."
@@ -42,7 +37,7 @@ public enum GrammarHint {
         return "“\(pointer.text)” · \(name)"
     }
 
-    /// A word that says when something happens ("Yesterday", "last week"), to anchor a tense hint.
+    /// A word that says when something happens ("Yesterday", "last week"), to anchor a verb hint.
     private static func timeWord(in sentence: String) -> String? {
         let pattern = #"\b(yesterday|tomorrow|tonight|\w+ ago|(last|next) (week|month|year|night|time|summer|winter|weekend))\b"#
         guard let r = sentence.range(of: pattern, options: [.regularExpression, .caseInsensitive]) else { return nil }

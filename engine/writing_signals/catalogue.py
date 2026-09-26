@@ -6,7 +6,7 @@ so what we measure is exactly what the app shows. Bump CATALOGUE_VERSION on any 
 
 import re
 
-CATALOGUE_VERSION = "4"
+CATALOGUE_VERSION = "5"
 
 QUESTIONS = {
     "grammar": {
@@ -97,16 +97,13 @@ def locate_question(sentence: str) -> dict:
 # What kind of mistake the marked word is, so Plumb can teach the rule without giving the answer.
 # Asked only after the pointer has marked a word; the state shows the sentence and that word.
 MISTAKE_TYPES = {
-    "tense": "the verb's tense doesn't fit when this happened",
-    "verb_form": "the wrong form of a verb, like 'gone' for 'went' or 'to meet' for 'to meeting'",
+    "verb": "the verb's tense or form is wrong, like 'goes' for 'went', 'gone' for 'went' or 'to meet' for 'to meeting'",
     "agreement": "a word doesn't agree with another, like 'he don't' or 'the list are'",
     "article": "the wrong or an unneeded 'a', 'an' or 'the' (or 'this', 'some')",
-    "article_missing": "an 'a', 'an' or 'the' is missing before the marked word",
     "preposition": "the wrong or an unneeded small linking word like 'in', 'on', 'at', 'to', 'about'",
-    "preposition_missing": "a small linking word like 'in', 'on' or 'to' is missing before the marked word",
     "number": "singular or plural is wrong, or a noun that can't be counted",
     "word_order": "the words are in an unusual order",
-    "word_missing": "another word is missing before the marked word",
+    "word_missing": "a word is missing before the marked word",
     "word_extra": "the marked word shouldn't be there",
 }
 MISTAKE_TYPE_QUESTION = {

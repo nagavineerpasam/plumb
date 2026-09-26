@@ -69,7 +69,7 @@ def inject(sentences: List[str], seed: int = 20260926) -> List[Row]:
     rng = random.Random(seed)
     rows = []
     for sentence in sentences:
-        kinds = [(_participle, "verb_form"), (_agreement, "agreement"), (_article, "article")]
+        kinds = [(_participle, "verb"), (_agreement, "agreement"), (_article, "article")]
         rng.shuffle(kinds)
         for make, kind in kinds:
             made = make(sentence, rng)
@@ -100,7 +100,7 @@ def known_misses(seed: int = 20260926, per_kind: int = 40) -> List[Row]:
         _pair(f"{s} don't {v}.", f"{s} doesn't {v}.", "don't", rows, "agreement")
     for s, (verb, rest), end in some(["I", "We"], [("meet", "you"), ("see", "you again"), ("hear", "from you"), ("meet", "the team"), ("see", "your new flat")],
                                      [".", " soon.", " next week."]):
-        _pair(f"{s} look forward to {verb} {rest}{end}", f"{s} look forward to {verb}ing {rest}{end}", verb, rows, "verb_form")
+        _pair(f"{s} look forward to {verb} {rest}{end}", f"{s} look forward to {verb}ing {rest}{end}", verb, rows, "verb")
     for head, noun, pred in some(["list", "box", "bag", "collection", "pile", "stack"], ["items", "books", "papers", "toys", "letters", "shoes"],
                                  ["too long", "on the table", "ready", "missing", "very heavy"]):
         _pair(f"The {head} of {noun} are {pred}.", f"The {head} of {noun} is {pred}.", "are", rows, "agreement")

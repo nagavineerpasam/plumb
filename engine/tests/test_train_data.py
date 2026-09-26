@@ -144,18 +144,18 @@ from writing_signals.train_data import fce_type
 
 
 def test_cambridge_codes_map_to_the_eight_learner_types():
-    assert fce_type("TV", missing=False) == "tense"
-    assert fce_type("FV", missing=False) == fce_type("IV", missing=False) == "verb_form"
+    assert fce_type("TV", missing=False) == fce_type("FV", missing=False) == fce_type("IV", missing=False) == "verb"
     assert fce_type("AGV", missing=False) == fce_type("AGN", missing=False) == "agreement"
     assert fce_type("RD", missing=False) == fce_type("UD", missing=False) == "article"
-    assert fce_type("MD", missing=True) == "article_missing"
-    assert fce_type("RT", missing=False) == "preposition" and fce_type("MT", missing=True) == "preposition_missing"
+    assert fce_type("RT", missing=False) == fce_type("UT", missing=False) == "preposition"
     assert fce_type("CN", missing=False) == fce_type("FN", missing=False) == "number"
     assert fce_type("W", missing=False) == "word_order"
-    assert fce_type("MV", missing=True) == "word_missing" and fce_type("UA", missing=False) == "word_extra"
+    # every missing kind is one type: easy to confuse, same lesson ("something is missing before …")
+    assert fce_type("MD", missing=True) == fce_type("MT", missing=True) == fce_type("MV", missing=True) == "word_missing"
+    assert fce_type("UA", missing=False) == "word_extra"
     assert fce_type("RN", missing=False) is None and fce_type("S", missing=False) is None  # word choice, spelling
-    assert set(MISTAKE_TYPES) >= {"tense", "verb_form", "agreement", "article", "article_missing", "preposition",
-                                  "preposition_missing", "number", "word_order", "word_missing", "word_extra"}
+    assert set(MISTAKE_TYPES) == {"verb", "agreement", "article", "preposition", "number", "word_order",
+                                  "word_missing", "word_extra"}
 
 
 def test_a_missing_word_points_at_the_word_after_the_gap_and_gets_its_type():
@@ -166,7 +166,7 @@ def test_a_missing_word_points_at_the_word_after_the_gap_and_gets_its_type():
     [locate] = [r for r in rows if r["signal"] == "locate"]
     assert pointed_word(locate) == "shop"
     [kind] = [r for r in rows if r["signal"] == "mistake_type"]
-    assert kind["expected"] == "article_missing" and kind["word"] == "shop"
+    assert kind["expected"] == "word_missing" and kind["word"] == "shop"
 
 
 def test_type_rows_name_the_marked_word_in_their_state():
@@ -174,16 +174,16 @@ def test_type_rows_name_the_marked_word_in_their_state():
     s = text.index("goes")
     rows = fce_rows([essay("e1", text, [(s, s + 4, "went", "TV")])], holdout=set())
     [kind] = [r for r in rows if r["signal"] == "mistake_type"]
-    assert kind["expected"] == "tense"
+    assert kind["expected"] == "verb"
     assert "goes" in type_state(kind["sentence"], kind["word"]) and "Yesterday I goes" in type_state(kind["sentence"], kind["word"])
 
 
 def test_generated_mistakes_and_known_misses_carry_their_type():
     injected = inject(["We went to the museum and saw an old ship."], seed=3)
     [kind] = [r for r in injected if r["signal"] == "mistake_type"]
-    assert kind["expected"] in {"verb_form", "agreement", "article"} and kind["word"] in kind["sentence"]
+    assert kind["expected"] in {"verb", "agreement", "article"} and kind["word"] in kind["sentence"]
     misses = {r["sentence"]: r for r in known_misses(seed=1) if r["signal"] == "mistake_type"}
     assert misses["He don't like coffee."]["expected"] == "agreement"
-    assert any(r["expected"] == "verb_form" and r["word"] == "meet" for r in misses.values())
+    assert any(r["expected"] == "verb" and r["word"] == "meet" for r in misses.values())
     assert any(r["expected"] == "word_order" for r in misses.values())
     assert any(r["expected"] == "word_extra" and r["word"] == "about" for r in misses.values())

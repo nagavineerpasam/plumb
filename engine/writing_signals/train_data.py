@@ -125,23 +125,22 @@ def load_public(rng: random.Random) -> List[Row]:
 def fce_type(code: str, missing: bool):
     """Cambridge FCE error code -> Plumb's learner mistake type (None for word choice, spelling…).
     Codes are an operation (R replace, M missing, U unnecessary, F form…) plus a part of speech
-    (V verb, N noun, D determiner, T preposition…)."""
-    if code == "TV":
-        return "tense"
-    if code in ("FV", "IV", "DV"):
-        return "verb_form"
+    (V verb, N noun, D determiner, T preposition…). Tense and verb form are one lesson ("verb"),
+    and every missing kind is one ("word_missing"): run 4 showed they're too easily confused."""
+    if code in ("TV", "FV", "IV", "DV"):
+        return "verb"
     if code.startswith("AG"):
         return "agreement"
     if code == "W":
         return "word_order"
     if code in ("FN", "IN", "CN"):
         return "number"
-    if code.endswith("D") and code[0] in "RFUM":
-        return "article_missing" if missing else "article"
-    if code.endswith("T") and code[0] in "RUM":
-        return "preposition_missing" if missing else "preposition"
-    if code[0] == "M" and code[1:] in ("V", "N", "J", "Y", "A", "C", "Q"):
-        return "word_missing"
+    if missing or code[0] == "M":
+        return "word_missing" if code[0] == "M" else None
+    if code.endswith("D") and code[0] in "RFU":
+        return "article"
+    if code.endswith("T") and code[0] in "RU":
+        return "preposition"
     if code[0] == "U" and code[1:] in ("V", "N", "J", "Y", "A", "C", "Q"):
         return "word_extra"
     return None
@@ -224,7 +223,7 @@ def load_run3(raw_dir: str, rng: random.Random) -> List[Row]:
     holdout = {e["id"] for e in essays if fce_holdout(e["id"])}
     fce = fce_rows(essays, holdout)
     clean = [r["sentence"] for r in fce if r["signal"] == "grammar" and r["expected"] == "no"]
-    rows = (_take(fce, "grammar", "yes", 1200, rng) + _take(fce, "grammar", "no", 2400, rng)
+    rows = (_take(fce, "grammar", "yes", 2000, rng) + _take(fce, "grammar", "no", 3600, rng)
             + _take(fce, "locate", None, 4000, rng) + _take(fce, "flow", "no", 800, rng) + _take(fce, "flow", "yes", 800, rng))
     # Mistake types, capped per type so common ones (prepositions) don't drown rare ones (word order).
     for kind in {r["expected"] for r in fce if r["signal"] == "mistake_type"}:

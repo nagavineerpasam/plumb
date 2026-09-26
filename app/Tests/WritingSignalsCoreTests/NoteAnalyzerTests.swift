@@ -130,7 +130,7 @@ final class NoteAnalyzerTests: XCTestCase {
     func testAFlaggedSentenceGetsAConfidentPointerAndCleanOnesAreNeverAsked() async {
         let client = FakeSignalClient()
         client.grammarMistake = ["Yesterday I goes to the gym.", "They was there."]
-        client.pointers = ["Yesterday I goes to the gym.": WordPointer(text: "goes", start: 12, end: 16, probability: 0.9, type: "tense", typeProbability: 0.97),
+        client.pointers = ["Yesterday I goes to the gym.": WordPointer(text: "goes", start: 12, end: 16, probability: 0.9, type: "verb", typeProbability: 0.97),
                            "They was there.": WordPointer(text: "there", start: 9, end: 14, probability: 0.3, type: "agreement", typeProbability: 0.9)]
         let analyzer = NoteAnalyzer(client: client, debounce: .zero)
 
@@ -138,14 +138,14 @@ final class NoteAnalyzerTests: XCTestCase {
         await analyzer.idle()
 
         XCTAssertEqual(analyzer.sentences.map(\.pointer?.text), ["goes", nil, nil], "the unsure pointer is dropped")
-        XCTAssertEqual(analyzer.sentences.first?.pointer?.type, "tense")
+        XCTAssertEqual(analyzer.sentences.first?.pointer?.type, "verb")
         XCTAssertEqual(client.locateRequests.flatMap { $0 }, ["Yesterday I goes to the gym.", "They was there."])
     }
 
     func testAnUnsureTypeIsDroppedButTheWordIsKept() async {
         let client = FakeSignalClient()
         client.grammarMistake = ["She go to school."]
-        client.pointers = ["She go to school.": WordPointer(text: "go", start: 4, end: 6, probability: 0.95, type: "tense", typeProbability: 0.4)]
+        client.pointers = ["She go to school.": WordPointer(text: "go", start: 4, end: 6, probability: 0.95, type: "verb", typeProbability: 0.4)]
         let analyzer = NoteAnalyzer(client: client, debounce: .zero)
 
         analyzer.update(text: "She go to school.")
