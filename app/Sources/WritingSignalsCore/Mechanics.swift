@@ -38,7 +38,9 @@ enum Mechanics {
     private static let loneI = try! NSRegularExpression(pattern: #"(?<![\p{L}\p{N}'’.])i(?=\s|[,;:!?'’]|$|\.(?!\p{L}))"#)
     // A greeting or interjection runs straight into a new clause: "hello how are you", "yes I can".
     private static let introWithoutComma = try! NSRegularExpression(
-        pattern: #"^\W*(hello|hi|hey|yes|well|ok|okay|oh)\s+(?=(how|what|where|when|why|who|i|we|you|it|is|are|can|could|do|did|this|that|please|thanks|thank)\b)"#,
+        // "Hello how are you", and also a greeting to someone: "Hello bro how are you" needs a comma
+        // before "how". The word shown is the one the comma goes after.
+        pattern: #"^\W*(hello|hi|hey|yes|well|ok|okay|oh)(?:\s+(?!(?:how|what|where|when|why|who|i|we|you|it|is|are|can|could|do|did|this|that|please|thanks|thank)\b)(\p{L}+))?\s+(?=(how|what|where|when|why|who|i|we|you|it|is|are|can|could|do|did|this|that|please|thanks|thank)\b)"#,
         options: [.caseInsensitive])
     // "that that" and "had had" are often correct English, so they are not flagged.
     private static let repeated = try! NSRegularExpression(
@@ -81,7 +83,8 @@ enum Mechanics {
             .filter { !(issues.first?.kind == .lowercaseStart && $0.range.location == first?.range.location) }
         if !lowercaseIs.isEmpty { issues.append(MechanicsIssue(.lowercaseI, word: "i")) }
         if let intro = introWithoutComma.firstMatch(in: sentence, range: whole) {
-            issues.append(MechanicsIssue(.missingComma, word: text.substring(with: intro.range(at: 1))))
+            let before = intro.range(at: 2).location != NSNotFound ? intro.range(at: 2) : intro.range(at: 1)
+            issues.append(MechanicsIssue(.missingComma, word: text.substring(with: before)))
         }
         let body = sentence.trimmingCharacters(in: closers.union(.whitespaces))
         if let last = body.last, !".!?…".contains(last) {

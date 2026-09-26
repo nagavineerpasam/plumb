@@ -5,6 +5,7 @@ import Foundation
 public enum ScoreNudge {
     public static func message(score: Double, previous: Double?) -> String {
         let now = shown(score)
+        if now == 100 { return "🎉 A perfect 100! Keep it up with a new chat." }  // nothing to beat
         guard let previous else { return "You scored \(now). Start a new chat and beat it! 💪" }
         let before = shown(previous)
         if now > before { return "🎉 You scored \(now), better than last time (\(before))! Keep it up with a new chat." }

@@ -199,6 +199,16 @@ final class NoteAnalyzerTests: XCTestCase {
                        [[.lowercaseStart, .missingComma], [], []])
     }
 
+    func testGreetingToSomeoneWithoutACommaIsFlagged() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "Hello bro how are you? Hi John, what's new? Hey how is it going?")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.map(\.message) },
+                       [["Missing comma after “bro”"], [], ["Missing comma after “Hey”"]])
+    }
+
     func testIssuesNameTheWordsInvolved() async {
         let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
 

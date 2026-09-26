@@ -6,6 +6,11 @@ final class ScoreNudgeTests: XCTestCase {
         XCTAssertEqual(ScoreNudge.message(score: 0.6, previous: nil), "You scored 60. Start a new chat and beat it! 💪")
     }
 
+    func testAPerfectScoreIsCelebratedNotChallenged() {
+        XCTAssertEqual(ScoreNudge.message(score: 1.0, previous: nil), "🎉 A perfect 100! Keep it up with a new chat.")
+        XCTAssertEqual(ScoreNudge.message(score: 1.0, previous: 1.0), "🎉 A perfect 100! Keep it up with a new chat.")
+    }
+
     func testAHigherScoreCelebrates() {
         XCTAssertEqual(ScoreNudge.message(score: 0.72, previous: 0.6), "🎉 You scored 72, better than last time (60)! Keep it up with a new chat.")
     }
