@@ -1,4 +1,4 @@
-import AppKit
+import Foundation
 
 /// A spelling, capitalization or punctuation mistake found by exact rules, no model involved.
 public struct MechanicsIssue: Sendable, Equatable {
@@ -46,26 +46,35 @@ enum Mechanics {
     private static let repeated = try! NSRegularExpression(
         pattern: #"\b(?!that\b|had\b)(\p{L}+)\s+\1\b"#, options: [.caseInsensitive])
 
-    /// Misspelled words from the built-in macOS spell checker (US or UK English). Words only; no suggestions.
-    @MainActor
+    /// Misspelled words, marked without suggestions. A word is wrong only if it's in neither the US
+    /// nor the UK list; names (capitalised mid-sentence), acronyms and words glued to digits pass.
     static func misspellings(in sentence: String) -> [MechanicsIssue] {
-        let checker = NSSpellChecker.shared
+        guard !englishWords.isEmpty else { return [] }  // a missing list must never mark every word
         let text = sentence as NSString
         var issues: [MechanicsIssue] = []
-        var start = 0
-        while start < text.length {
-            let found = checker.checkSpelling(of: sentence, startingAt: start, language: "en",
-                                              wrap: false, inSpellDocumentWithTag: 0, wordCount: nil)
-            guard found.location != NSNotFound, found.length > 0 else { break }
-            // Wrong only if it's wrong in both US and UK English: "colour" and "color" both pass.
-            let word = text.substring(with: found)
-            let british = checker.checkSpelling(of: word, startingAt: 0, language: "en_GB", wrap: false,
-                                                inSpellDocumentWithTag: 0, wordCount: nil)
-            if british.location != NSNotFound { issues.append(MechanicsIssue(.spelling, word: word, range: found)) }
-            start = NSMaxRange(found)
+        for (i, match) in wordPattern.matches(in: sentence, range: NSRange(location: 0, length: text.length)).enumerated() {
+            let word = text.substring(with: match.range)
+            if i > 0, word.first?.isUppercase == true { continue }            // a name
+            if word.count > 1, word == word.uppercased() { continue }         // an acronym, or shouting
+            var key = word.lowercased().replacingOccurrences(of: "’", with: "'")
+            if key.hasSuffix("'s") { key.removeLast(2) }                      // Sarah's
+            if !englishWords.contains(key) { issues.append(MechanicsIssue(.spelling, word: word, range: match.range)) }
         }
         return issues
     }
+
+    /// Letters, with inner apostrophes ("don't", "don’t"); never part of a number ("21st", "3pm").
+    private static let wordPattern = try! NSRegularExpression(pattern: #"(?<![\p{L}\p{N}_])\p{L}(?:\p{L}|['’](?=\p{L}))*(?![\p{L}\p{N}_])"#)
+
+    /// SCOWL's English words (open source, see SCOWL-Copyright.txt), loaded once. In the packaged
+    /// app the list sits in Contents/Resources; `swift run` and tests use the package's bundle.
+    static let englishWords: Set<String> = {
+        let url = Bundle.main.bundlePath.hasSuffix(".app")
+            ? Bundle.main.url(forResource: "english-words", withExtension: "txt")
+            : Bundle.module.url(forResource: "english-words", withExtension: "txt")
+        guard let url, let text = try? String(contentsOf: url, encoding: .utf8) else { return [] }
+        return Set(text.split(separator: "\n").map(String.init))
+    }()
 
     @MainActor
     static func check(_ sentence: String) -> [MechanicsIssue] {

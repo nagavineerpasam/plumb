@@ -119,6 +119,7 @@ cd app && swift run                                                   # the app 
 ## Credits
 
 - [Laya](https://github.com/NandhaKishorM/laya) by Nanda Kishor M (Apache-2.0).
+- Spelling uses [SCOWL](http://wordlist.aspell.net/) word lists (US + UK) by Kevin Atkinson and contributors (permissive licence; notice in `app/Sources/WritingSignalsCore/Resources/SCOWL-Copyright.txt`).
 - [Whisper](https://github.com/openai/whisper) by OpenAI (MIT), run with [WhisperKit](https://github.com/argmaxinc/WhisperKit) by Argmax (MIT).
 - Trained with [CoLA](https://nyu-mll.github.io/CoLA/), [DAIR Emotion](https://huggingface.co/datasets/dair-ai/emotion) and [Pavlick formality scores](https://huggingface.co/datasets/osyvokon/pavlick-formality-scores) (CC BY 3.0), plus hand-drafted English sets in `engine/data`.
 - Also trained and tested with the [Cambridge Learner Corpus FCE dataset](https://www.cl.cam.ac.uk/research/nl/bea2019st/) (non-commercial research and education use): Yannakoudakis, Helen and Briscoe, Ted and Medlock, Ben, *A New Dataset and Method for Automatically Grading ESOL Texts*, Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies, 2011. Also [BLiMP](https://github.com/alexwarstadt/blimp) (CC BY 4.0) and [JFLEG](https://github.com/keisks/jfleg) (CC BY-NC-SA 4.0, testing only). None of these datasets is included in this repository.

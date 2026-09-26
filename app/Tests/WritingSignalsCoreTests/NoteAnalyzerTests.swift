@@ -250,6 +250,16 @@ final class NoteAnalyzerTests: XCTestCase {
                        [[], [], ["programe"]])
     }
 
+    func testSpellingComesFromTheOpenWordListNotTheMac() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "We met Siobhan at the café on the 21st at 3pm, etc. NASA don’t mind. Sarah's recieved it. Isabel came too.")
+        await analyzer.idle()
+
+        let marked = analyzer.sentences.flatMap { $0.mechanics ?? [] }.filter { $0.kind == .spelling }.compactMap(\.word)
+        XCTAssertEqual(marked, ["recieved"], "names, accents, 21st/3pm, etc., acronyms, curly apostrophes and possessives all pass")
+    }
+
     func testGreetingWithoutACommaIsFlagged() async {
         let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
 

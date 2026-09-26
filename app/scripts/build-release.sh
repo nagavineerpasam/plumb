@@ -19,6 +19,8 @@ mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$CACHE"
 BIN="$(swift build -c release --package-path "$ROOT/app" --arch arm64 --show-bin-path)"
 cp "$BIN/Plumb" "$APP/Contents/MacOS/Plumb"
 cp "$ROOT/app/Sources/Plumb/Resources/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
+# The open-source spelling list and its licence notice.
+cp "$ROOT/app/Sources/WritingSignalsCore/Resources/english-words.txt" "$ROOT/app/Sources/WritingSignalsCore/Resources/SCOWL-Copyright.txt" "$APP/Contents/Resources/"
 cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
