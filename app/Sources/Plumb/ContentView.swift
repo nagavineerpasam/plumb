@@ -72,9 +72,10 @@ struct ContentView: View {
             }
             .scrollIndicators(.never)
             Spacer(minLength: 8)
-            sidebarButton("Progress", systemImage: "chart.line.uptrend.xyaxis") {
+            ProgressButton(showing: model.showingProgress) {
                 withAnimation(.smooth) { model.showingProgress.toggle() }
             }
+            .padding(.bottom, 16)  // a little air, so Progress stands on its own
             sidebarButton("Settings", systemImage: "gearshape") { openSettings() }
         }
     }
@@ -460,5 +461,48 @@ struct UpdateCard: View {
         .background(Palette.card, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .overlay(RoundedRectangle(cornerRadius: 18, style: .continuous).strokeBorder(.primary.opacity(0.08)))
         .shadow(color: .black.opacity(0.14), radius: 24, y: 10)
+    }
+}
+
+/// The sidebar's Progress button: warm orange like Speak, because seeing how you've improved is
+/// the fun part. It lifts on hover and presses in on click.
+struct ProgressButton: View {
+    let showing: Bool
+    let action: () -> Void
+    @State private var hovering = false
+
+    var body: some View {
+        Button(action: action) {
+            Label(showing ? "Back to chat" : "Progress", systemImage: showing ? "arrow.uturn.left" : "chart.line.uptrend.xyaxis")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 12).padding(.vertical, 9)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(ProgressButtonStyle(hovering: hovering))
+        .onHover { hovering = $0 }
+        .focusable(false)
+        .pointingHand()
+    }
+}
+
+struct ProgressButtonStyle: ButtonStyle {
+    let hovering: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        let pressed = configuration.isPressed
+        configuration.label
+            .background {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(LinearGradient(colors: [Color(red: 0.96, green: 0.56, blue: 0.33), Color(red: 0.89, green: 0.42, blue: 0.18)],
+                                         startPoint: .top, endPoint: .bottom))
+                    .shadow(color: Palette.sunrise.opacity(pressed ? 0.2 : (hovering ? 0.5 : 0.3)),
+                            radius: pressed ? 3 : (hovering ? 10 : 6), y: pressed ? 1 : (hovering ? 4 : 2))
+            }
+            .scaleEffect(pressed ? 0.97 : 1)
+            .offset(y: hovering && !pressed ? -1 : 0)
+            .animation(.spring(duration: 0.25, bounce: 0.3), value: pressed)
+            .animation(.easeOut(duration: 0.18), value: hovering)
     }
 }
