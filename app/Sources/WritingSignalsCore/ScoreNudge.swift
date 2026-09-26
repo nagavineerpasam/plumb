@@ -1,14 +1,14 @@
 import Foundation
 
-/// The short, friendly line at the bottom of a scored chat: how you did, compared with your
-/// previous chat, and an invitation to go again. Scores are compared as shown (whole numbers).
+/// The short, friendly line at the bottom of a scored chat: a celebration when you beat your
+/// previous chat, otherwise encouragement to start a new one and score higher. Scores are compared as shown (whole numbers).
 public enum ScoreNudge {
     public static func message(score: Double, previous: Double?) -> String {
         let now = shown(score)
-        guard let previous else { return "You scored \(now). Start a new chat and beat it." }
+        guard let previous else { return "You scored \(now). Start a new chat and beat it! 💪" }
         let before = shown(previous)
-        if now > before { return "You scored \(now) 🎉 Up from \(before) last time." }
-        return "You scored \(now). Last time was \(before). Check the marks, then try again."
+        if now > before { return "🎉 You scored \(now), better than last time (\(before))! Keep it up with a new chat." }
+        return "You scored \(now). Start a new chat and aim higher! 💪"
     }
 
     private static func shown(_ score: Double) -> Int { Int((score * 100).rounded()) }

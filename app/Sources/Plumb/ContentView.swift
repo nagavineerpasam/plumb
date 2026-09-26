@@ -248,8 +248,6 @@ struct MicButton: View {
                 if dictation.isListening {
                     Circle().fill(.white).frame(width: 7, height: 7)
                         .phaseAnimator([1.0, 0.35]) { dot, opacity in dot.opacity(opacity) } animation: { _ in .easeInOut(duration: 0.8) }
-                } else {
-                    Image(systemName: "mic.fill").font(.system(size: 12, weight: .semibold))
                 }
                 Text(title)
             }
@@ -368,9 +366,6 @@ struct ScoreNudgeBar: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: "sparkles")
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Palette.sunrise)
             Text(message)
                 .font(.system(size: 14, weight: .medium))
                 .lineLimit(2)
