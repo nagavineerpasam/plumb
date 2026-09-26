@@ -45,7 +45,8 @@ class SignalEngine:
     def score(self, sentences: List[str]) -> List[Dict[str, Any]]:
         if not sentences:
             return []
-        outputs = self.agent.predict_batch(sentences, QUESTIONS)
+        # Runs of spaces are the rules' job; the model sees each sentence with single spaces.
+        outputs = self.agent.predict_batch([" ".join(s.split()) for s in sentences], QUESTIONS)
         return [
             {
                 "model": self.model,

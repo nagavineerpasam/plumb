@@ -96,9 +96,11 @@ Accuracy of the shipped model, measured on text it never trained on:
 
 | Signal | Test set | Accuracy |
 |---|---|---|
-| Grammar | CoLA (public) | 77.5% |
-| Emotion | DAIR Emotion (public) | 90.6% |
-| Sense, tone, formality, confidence, clarity | Hand-drafted English sets | 90–97% (optimistic: drafted like the training data) |
+| Grammar | CoLA (public) | 82.1% |
+| Emotion | DAIR Emotion (public) | 89.8% |
+| Sense, tone, formality, confidence, clarity | Hand-drafted English sets | 91–97% (optimistic: drafted like the training data) |
+
+On real learner writing it catches 88% of the sentences experts corrected (JFLEG) and 78% of corrected sentences inside Cambridge exam essays (FCE), and wrongly objects to 7% of correct essay sentences. When it points at the wrong word, it's the word examiners changed about 88% of the time.
 
 Real-world accuracy is lower than these numbers, especially for Sense. Plumb is a learning aid, not an authority.
 

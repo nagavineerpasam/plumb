@@ -58,3 +58,9 @@ def test_flow_scores_each_sentence_against_the_one_before(engine):
     for signal in results:
         assert set(signal["distribution"]) == {"yes", "no"}
         assert signal["value"] in {"yes", "no"}
+
+
+def test_extra_spaces_dont_change_the_models_judgement(engine):
+    # Spacing is the rules' job ("Extra space between words"); the model must not also object.
+    spaced, plain = engine.score(["It was  sunny   today.", "It was sunny today."])
+    assert spaced["signals"] == plain["signals"]

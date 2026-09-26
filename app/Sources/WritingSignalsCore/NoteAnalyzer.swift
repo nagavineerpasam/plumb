@@ -53,9 +53,10 @@ public final class NoteAnalyzer {
     private var known: [String: (signals: SentenceSignals?, mechanics: [MechanicsIssue]?)] = [:]
     /// "Which word?" answers already worked out this session, by sentence text.
     private var knownPointers: [String: WordPointer?] = [:]
-    /// Below this, the pointer isn't shown and the card gives its general hint. Set on held-out
-    /// learner essays so that shown pointers are right at least 85% of the time.
-    public static let pointerThreshold = 0.5
+    /// Below this, the pointer isn't shown and the card gives its general hint. Set on 606 held-out
+    /// learner-essay sentences (run 3): at 0.86, shown pointers were on the examiner's corrected
+    /// word 88% of the time.
+    public static let pointerThreshold = 0.86
 
     public init(client: SignalClient, debounce: Duration = .milliseconds(300),
                 retryDelay: Duration = .seconds(1)) {

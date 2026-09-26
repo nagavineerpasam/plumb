@@ -14,9 +14,9 @@ from .datasets import DATA_DIR, load_cola, load_dair, load_drafted, load_flow
 def _checkpoint():
     from huggingface_hub import snapshot_download
     from ..engine import CHECKPOINT
-    from ..worker import MODEL_FILES
+    # Only notes which base-model revision was checked; never downloads.
     try:
-        revision = os.path.basename(snapshot_download(CHECKPOINT, allow_patterns=MODEL_FILES, local_files_only=True))
+        revision = os.path.basename(snapshot_download(CHECKPOINT, allow_patterns=["*.json"], local_files_only=True))
     except Exception:
         revision = None
     return {"repo": CHECKPOINT, "revision": revision}
