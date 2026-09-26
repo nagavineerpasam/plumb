@@ -46,7 +46,7 @@ enum Mechanics {
     private static let repeated = try! NSRegularExpression(
         pattern: #"\b(?!that\b|had\b)(\p{L}+)\s+\1\b"#, options: [.caseInsensitive])
 
-    /// Misspelled words from the built-in macOS spell checker. Words only; no suggestions.
+    /// Misspelled words from the built-in macOS spell checker (US or UK English). Words only; no suggestions.
     @MainActor
     static func misspellings(in sentence: String) -> [MechanicsIssue] {
         let checker = NSSpellChecker.shared
@@ -57,7 +57,11 @@ enum Mechanics {
             let found = checker.checkSpelling(of: sentence, startingAt: start, language: "en",
                                               wrap: false, inSpellDocumentWithTag: 0, wordCount: nil)
             guard found.location != NSNotFound, found.length > 0 else { break }
-            issues.append(MechanicsIssue(.spelling, word: text.substring(with: found), range: found))
+            // Wrong only if it's wrong in both US and UK English: "colour" and "color" both pass.
+            let word = text.substring(with: found)
+            let british = checker.checkSpelling(of: word, startingAt: 0, language: "en_GB", wrap: false,
+                                                inSpellDocumentWithTag: 0, wordCount: nil)
+            if british.location != NSNotFound { issues.append(MechanicsIssue(.spelling, word: word, range: found)) }
             start = NSMaxRange(found)
         }
         return issues
@@ -87,7 +91,8 @@ enum Mechanics {
             issues.append(MechanicsIssue(.missingComma, word: text.substring(with: before)))
         }
         let body = sentence.trimmingCharacters(in: closers.union(.whitespaces))
-        if let last = body.last, !".!?…".contains(last) {
+        // A line ending in a colon introduces what follows ("Introduction:"), so it needs no full stop.
+        if let last = body.last, !".!?…:".contains(last) {
             issues.append(MechanicsIssue(.missingEndPunctuation))
         }
         if let match = repeated.firstMatch(in: sentence, range: whole) {

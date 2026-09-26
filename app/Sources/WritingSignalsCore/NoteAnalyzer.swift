@@ -14,6 +14,9 @@ public struct AnalyzedSentence: Identifiable, Sendable, Equatable {
     public var flow: Signal?
     /// The sentence this flow result was judged against; a different neighbour voids it.
     var flowPreviousID: String?
+    /// A short line of its own with more text after it ("Dear Sir/Madam", "Introduction"): a
+    /// heading or greeting, which needs no full stop.
+    var heading = false
 
     /// How well this sentence is written, 0...1, once checked: 100% minus the likelihood of a
     /// grammar mistake or of not making sense, whichever is judged likely and larger (p >= 0.5;
@@ -65,6 +68,12 @@ public final class NoteAnalyzer {
             return AnalyzedSentence(id: "s\(nextID)", text: text, range: range,
                                     signals: known[text]?.signals, mechanics: known[text]?.mechanics)
         }
+        // Whether a line is a heading depends on what follows it, so it's worked out on every edit
+        // and applied to the rules' cached results.
+        for (i, heading) in Self.headings(sentences, in: text).enumerated() {
+            sentences[i].heading = heading
+            if let raw = known[sentences[i].text]?.mechanics { sentences[i].mechanics = Self.shown(raw, heading: heading) }
+        }
         // A flow result only holds while the sentence before it is the same one.
         for i in sentences.indices where sentences[i].flow != nil {
             if i == 0 || sentences[i].flowPreviousID != sentences[i - 1].id {
@@ -106,8 +115,9 @@ public final class NoteAnalyzer {
     private func checkMechanics() {
         for i in sentences.indices where sentences[i].mechanics == nil {
             // Splitting uses the raw text, so extra spaces survive into the sentence's range.
-            sentences[i].mechanics = Mechanics.check(sentences[i].text)
-            known[sentences[i].text, default: (nil, nil)].mechanics = sentences[i].mechanics
+            let raw = Mechanics.check(sentences[i].text)
+            known[sentences[i].text, default: (nil, nil)].mechanics = raw
+            sentences[i].mechanics = Self.shown(raw, heading: sentences[i].heading)
         }
     }
 
@@ -130,6 +140,25 @@ public final class NoteAnalyzer {
             } catch {
                 try? await Task.sleep(for: retryDelay)
             }
+        }
+    }
+
+    private static func shown(_ issues: [MechanicsIssue], heading: Bool) -> [MechanicsIssue] {
+        heading ? issues.filter { $0.kind != .missingEndPunctuation } : issues
+    }
+
+    /// For each sentence: is it a whole line of at most four words, with more text after it?
+    static func headings(_ sentences: [AnalyzedSentence], in text: String) -> [Bool] {
+        let ns = text as NSString
+        func isBreak(_ i: Int) -> Bool { CharacterSet.newlines.contains(UnicodeScalar(ns.character(at: i)) ?? " ") }
+        func isSpace(_ i: Int) -> Bool { ns.character(at: i) == 32 || ns.character(at: i) == 9 }
+        return sentences.indices.map { i in
+            guard i < sentences.count - 1, sentences[i].text.split(whereSeparator: \.isWhitespace).count <= 4 else { return false }
+            var before = sentences[i].range.location - 1
+            while before >= 0, isSpace(before) { before -= 1 }
+            var after = NSMaxRange(sentences[i].range)
+            while after < ns.length, isSpace(after) { after += 1 }
+            return (before < 0 || isBreak(before)) && after < ns.length && isBreak(after)
         }
     }
 

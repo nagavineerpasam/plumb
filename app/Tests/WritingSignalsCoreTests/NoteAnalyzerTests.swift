@@ -127,6 +127,43 @@ final class NoteAnalyzerTests: XCTestCase {
         XCTAssertEqual(analyzer.sentences.map(\.text), ["मैं घर जा रहा हूँ।", "तुम कहाँ हो?"])
     }
 
+    func testALineBreakAlwaysEndsASentence() {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+        let text = "Dear Sir/Madam\n\nThe Circle Theatre manager\nI am writing to complain. It was late."
+
+        analyzer.update(text: text)
+
+        XCTAssertEqual(analyzer.sentences.map(\.text),
+                       ["Dear Sir/Madam", "The Circle Theatre manager", "I am writing to complain.", "It was late."])
+        XCTAssertEqual(analyzer.sentences.map { (text as NSString).substring(with: $0.range) },
+                       analyzer.sentences.map(\.text), "ranges still point at each sentence in the note")
+    }
+
+    func testHeadingsAndColonLinesNeedNoFullStop() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "Dear Sir/Madam\n\nIntroduction:\nHere is all the information you need:\nThe hotel is really lovely\nIs everything right")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.map(\.kind) }, [
+            [], [], [],
+            [.missingEndPunctuation], // five words: a sentence, not a heading
+            [.missingEndPunctuation], // the last line is never a heading
+        ])
+    }
+
+    func testALineBecomesAHeadingOnceMoreTextFollowsIt() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "Dear Sir")
+        await analyzer.idle()
+        XCTAssertEqual(analyzer.sentences.first?.mechanics?.map(\.kind), [.missingEndPunctuation])
+
+        analyzer.update(text: "Dear Sir\nThanks for the notes.")
+        await analyzer.idle()
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.map(\.kind) }, [[], []])
+    }
+
     func testMechanicsFlagsCapitalizationAndPunctuation() async {
         let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
 
@@ -187,6 +224,16 @@ final class NoteAnalyzerTests: XCTestCase {
         XCTAssertEqual(spelling.map(\.word), ["seperate", "untill"])
         let text = analyzer.sentences[0].text as NSString
         XCTAssertEqual(spelling.compactMap(\.range).map { text.substring(with: $0) }, ["seperate", "untill"])
+    }
+
+    func testBritishAndAmericanSpellingsBothPass() async {
+        let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
+
+        analyzer.update(text: "My favourite programme realised its colour. My favorite program realized its color. The programe was great.")
+        await analyzer.idle()
+
+        XCTAssertEqual(analyzer.sentences.map { $0.mechanics?.filter { $0.kind == .spelling }.compactMap(\.word) },
+                       [[], [], ["programe"]])
     }
 
     func testGreetingWithoutACommaIsFlagged() async {
