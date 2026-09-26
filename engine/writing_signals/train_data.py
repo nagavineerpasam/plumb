@@ -299,7 +299,8 @@ def main():
                      "data/sense_test_draft.jsonl", "data/flow_test_draft.jsonl",
                      *glob.glob("writing_signals/**/*.py", root_dir=ENGINE_DIR, recursive=True)]:
             z.write(os.path.join(ENGINE_DIR, path), os.path.join("engine", path))
-    with open(os.path.join(TRAIN_DIR, "spot_check.md"), "w", encoding="utf-8") as f:
+    # A fresh sample for a human to eyeball each build; kept with the upload, out of git.
+    with open(os.path.join(KAGGLE_DIR, "spot_check.md"), "w", encoding="utf-8") as f:
         f.write(_spot_check(rows, rng))
 
     counts = Counter((r["signal"], r["expected"], r["source"]) for r in rows)

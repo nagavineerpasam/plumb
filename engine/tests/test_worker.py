@@ -115,5 +115,9 @@ def test_points_at_the_wrong_word_with_utf16_offsets(worker):
     assert units[2 * s1["start"]:2 * s1["end"]].decode("utf-16-le") == s1["text"]
     assert 0 < s1["probability"] <= 1
     from writing_signals.catalogue import MISTAKE_TYPES
-    assert s1["type"] in MISTAKE_TYPES and 0 < s1["type_probability"] <= 1  # what kind of mistake it is
+    from writing_signals.engine import TYPES_FROM_RUN, model_run
+    if model_run(TRAINED_DIR) >= TYPES_FROM_RUN:  # what kind of mistake it is, once the model knows types
+        assert s1["type"] in MISTAKE_TYPES and 0 < s1["type_probability"] <= 1
+    else:
+        assert s1["type"] is None
     assert result["sentences"]["s2"] is None  # too long to point in

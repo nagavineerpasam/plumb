@@ -19,7 +19,7 @@ curl -fsSL https://plumbapp.vercel.app/install.sh | bash
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/dark-editor.png">
-    <img src="docs/screenshots/light-editor.png" alt="A note with grammar mistakes underlined in red, spelling in amber, and a side panel showing 45% correctness">
+    <img src="docs/screenshots/light-editor.png" alt="A note with grammar mistakes underlined in red, spelling in amber, and a side panel showing the note's Score">
   </picture>
 </p>
 
@@ -39,7 +39,7 @@ Most tools fix your English for you, so you never learn. Plumb does the opposite
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/dark-progress.png">
-    <img src="docs/screenshots/light-progress.png" alt="The Progress page: a line chart of each note's correctness over a month, trending upward">
+    <img src="docs/screenshots/light-progress.png" alt="The Progress page: a line chart of each note's Score over a month, trending upward">
   </picture>
 </p>
 
@@ -54,7 +54,7 @@ Most tools fix your English for you, so you never learn. Plumb does the opposite
 Hover any sentence for its Correctness and voice:
 
 <p align="center">
-  <img src="docs/screenshots/light-card.png" alt="Hovering a sentence shows its correctness, sense, tone, emotion, confidence, clarity and formality">
+  <img src="docs/screenshots/light-card.png" alt="Hovering a sentence shows its Score, sense, tone, emotion, confidence, clarity and formality">
 </p>
 
 ## Install

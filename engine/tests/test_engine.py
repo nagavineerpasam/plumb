@@ -64,3 +64,21 @@ def test_extra_spaces_dont_change_the_models_judgement(engine):
     # Spacing is the rules' job ("Extra space between words"); the model must not also object.
     spaced, plain = engine.score(["It was  sunny   today.", "It was sunny today."])
     assert spaced["signals"] == plain["signals"]
+
+
+def test_a_model_not_trained_on_mistake_types_never_names_one(tmp_path):
+    from writing_signals.engine import model_run
+
+    assert model_run(str(tmp_path)) == 2  # models before run 3 carry no marker
+    (tmp_path / "plumb_model.json").write_text('{"catalogue": "3", "run": 3}')
+    assert model_run(str(tmp_path)) == 3
+
+
+def test_locate_gives_a_type_only_when_the_model_knows_types(engine):
+    from writing_signals.engine import TYPES_FROM_RUN, model_run
+
+    [found] = engine.locate(["She go to school every day."])
+    if model_run(engine.checkpoint) >= TYPES_FROM_RUN:
+        assert found["type"] is not None
+    else:
+        assert found["type"] is None and found["type_probability"] is None

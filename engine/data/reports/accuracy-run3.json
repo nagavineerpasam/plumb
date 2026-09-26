@@ -1,6 +1,6 @@
 {
-  "timestamp": "20260925-153326",
-  "catalogue_version": "2",
+  "timestamp": "20260926-093618",
+  "catalogue_version": "3",
   "machine": "x86_64 Linux",
   "threads": 2,
   "samples": {
@@ -9,53 +9,53 @@
     "claude-draft": 1000,
     "note": "full splits"
   },
-  "scoring_seconds": 180.5,
+  "scoring_seconds": 214.1,
   "signals": {
     "grammar": {
       "bar_source": "cola",
       "bar": 0.75,
       "n": 1043,
-      "accuracy": 0.6999041227229147,
+      "accuracy": 0.8207094918504314,
       "majority_baseline": 0.6912751677852349,
-      "pass": false,
+      "pass": true,
       "by_source": {
         "claude-draft": {
           "n": 100,
-          "accuracy": 0.51
+          "accuracy": 0.94
         },
         "cola": {
           "n": 1043,
-          "accuracy": 0.6999041227229147
+          "accuracy": 0.8207094918504314
         }
       },
       "by_language": {
         "en": {
           "n": 1143,
-          "accuracy": 0.6832895888013998
+          "accuracy": 0.8311461067366579
         }
       },
       "best_threshold": {
-        "threshold": 0.4,
-        "accuracy": 0.7075743048897412
+        "threshold": 0.39,
+        "accuracy": 0.8207094918504314
       }
     },
     "sense": {
       "bar_source": "claude-draft",
       "bar": 0.75,
       "n": 200,
-      "accuracy": 0.61,
+      "accuracy": 0.925,
       "majority_baseline": 0.5,
-      "pass": false,
+      "pass": true,
       "by_source": {
         "claude-draft": {
           "n": 200,
-          "accuracy": 0.61
+          "accuracy": 0.925
         }
       },
       "by_language": {
         "en": {
           "n": 200,
-          "accuracy": 0.61
+          "accuracy": 0.925
         }
       }
     },
@@ -63,23 +63,23 @@
       "bar_source": "dair",
       "bar": 0.55,
       "n": 2000,
-      "accuracy": 0.5635,
+      "accuracy": 0.898,
       "majority_baseline": 0.427,
       "pass": true,
       "by_source": {
         "claude-draft": {
           "n": 50,
-          "accuracy": 0.94
+          "accuracy": 1.0
         },
         "dair": {
           "n": 2000,
-          "accuracy": 0.5635
+          "accuracy": 0.898
         }
       },
       "by_language": {
         "en": {
           "n": 2050,
-          "accuracy": 0.5726829268292682
+          "accuracy": 0.9004878048780488
         }
       }
     },
@@ -87,19 +87,19 @@
       "bar_source": "claude-draft",
       "bar": 0.7,
       "n": 200,
-      "accuracy": 0.635,
+      "accuracy": 0.97,
       "majority_baseline": 0.25,
-      "pass": false,
+      "pass": true,
       "by_source": {
         "claude-draft": {
           "n": 200,
-          "accuracy": 0.635
+          "accuracy": 0.97
         }
       },
       "by_language": {
         "en": {
           "n": 200,
-          "accuracy": 0.635
+          "accuracy": 0.97
         }
       }
     },
@@ -107,19 +107,19 @@
       "bar_source": "claude-draft",
       "bar": 0.7,
       "n": 150,
-      "accuracy": 0.6,
+      "accuracy": 0.9466666666666667,
       "majority_baseline": 0.3333333333333333,
-      "pass": false,
+      "pass": true,
       "by_source": {
         "claude-draft": {
           "n": 150,
-          "accuracy": 0.6
+          "accuracy": 0.9466666666666667
         }
       },
       "by_language": {
         "en": {
           "n": 150,
-          "accuracy": 0.6
+          "accuracy": 0.9466666666666667
         }
       }
     },
@@ -127,19 +127,19 @@
       "bar_source": "claude-draft",
       "bar": 0.7,
       "n": 150,
-      "accuracy": 0.7066666666666667,
+      "accuracy": 0.9733333333333334,
       "majority_baseline": 0.3333333333333333,
       "pass": true,
       "by_source": {
         "claude-draft": {
           "n": 150,
-          "accuracy": 0.7066666666666667
+          "accuracy": 0.9733333333333334
         }
       },
       "by_language": {
         "en": {
           "n": 150,
-          "accuracy": 0.7066666666666667
+          "accuracy": 0.9733333333333334
         }
       }
     },
@@ -147,19 +147,19 @@
       "bar_source": "claude-draft",
       "bar": 0.7,
       "n": 150,
-      "accuracy": 0.41333333333333333,
+      "accuracy": 0.9066666666666666,
       "majority_baseline": 0.3333333333333333,
-      "pass": false,
+      "pass": true,
       "by_source": {
         "claude-draft": {
           "n": 150,
-          "accuracy": 0.41333333333333333
+          "accuracy": 0.9066666666666666
         }
       },
       "by_language": {
         "en": {
           "n": 150,
-          "accuracy": 0.41333333333333333
+          "accuracy": 0.9066666666666666
         }
       }
     },
@@ -167,18 +167,18 @@
       "bar_source": "claude-draft",
       "bar": 0.75,
       "n": 200,
-      "accuracy": 0.78,
+      "accuracy": 0.905,
       "pass": true
     }
   },
   "latency": {
     "calls": 40,
-    "p50_ms": 55.650874000036765,
-    "p95_ms": 58.07140899998444
+    "p50_ms": 56.25059449994296,
+    "p95_ms": 59.21909324990793
   },
   "device": "cuda",
   "checkpoint": {
-    "repo": "convaiinnovations/laya",
-    "revision": "55cf4c4ebb4ebe31b2550e8bdf3bd21b99753851"
+    "repo": "/kaggle/working/laya-writing-signals",
+    "revision": null
   }
 }

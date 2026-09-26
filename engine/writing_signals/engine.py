@@ -13,6 +13,20 @@ CHECKPOINT = "convaiinnovations/laya"
 TRAINED_DIR = os.path.expanduser("~/Library/Application Support/Plumb/model")
 
 
+# Mistake types were first trained in run 4; an older model would only guess, so it names none.
+TYPES_FROM_RUN = 4
+
+
+def model_run(checkpoint: str) -> int:
+    """Which training run a model folder holds, from its plumb_model.json (run 3 on); 2 before."""
+    import json
+    try:
+        with open(os.path.join(checkpoint, "plumb_model.json")) as f:
+            return int(json.load(f).get("run", 2))
+    except (OSError, ValueError):
+        return 2
+
+
 def default_checkpoint() -> str:
     return TRAINED_DIR if os.path.exists(os.path.join(TRAINED_DIR, "model.safetensors")) else CHECKPOINT
 
@@ -42,6 +56,7 @@ class SignalEngine:
         self.checkpoint = checkpoint or default_checkpoint()
         self.model = "plumb" if self.checkpoint == TRAINED_DIR else "english"
         self.agent = Agent(self.checkpoint, device=device)
+        self.knows_types = model_run(self.checkpoint) >= TYPES_FROM_RUN
 
     def score(self, sentences: List[str]) -> List[Dict[str, Any]]:
         if not sentences:
@@ -79,9 +94,11 @@ class SignalEngine:
             key = max(answer["probabilities"], key=answer["probabilities"].get)
             word, start, end = words[int(key[1:])]
             utf16 = lambda i: len(text[:i].encode("utf-16-le")) // 2
-            kind = self.agent.predict_batch([type_state(text, word)], {"type": MISTAKE_TYPE_QUESTION})[0]["answers"]["type"]
-            label = max(kind["probabilities"], key=kind["probabilities"].get)
+            label = confidence = None
+            if self.knows_types:
+                kind = self.agent.predict_batch([type_state(text, word)], {"type": MISTAKE_TYPE_QUESTION})[0]["answers"]["type"]
+                label = max(kind["probabilities"], key=kind["probabilities"].get)
+                confidence = kind["probabilities"][label]
             found.append({"text": word, "start": utf16(start), "end": utf16(end),
-                          "probability": answer["probabilities"][key],
-                          "type": label, "type_probability": kind["probabilities"][label]})
+                          "probability": answer["probabilities"][key], "type": label, "type_probability": confidence})
         return found
