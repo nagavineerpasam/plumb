@@ -4,6 +4,8 @@ import Foundation
 /// An app version like 0.2.0, compared number by number (so 0.10.0 is newer than 0.2.1).
 public struct AppVersion: Comparable, Sendable, CustomStringConvertible {
     public let numbers: [Int]
+    /// As written, without a leading "v" (0.2.0), for showing.
+    private let text: String
 
     /// Nil for anything that isn't a plain version, such as the "models-v1" release.
     public init?(_ text: String) {
@@ -13,6 +15,7 @@ public struct AppVersion: Comparable, Sendable, CustomStringConvertible {
         var numbers = parts.compactMap { $0 }
         while numbers.count > 1, numbers.last == 0 { numbers.removeLast() }  // 0.2 == 0.2.0
         self.numbers = numbers
+        self.text = plain
     }
 
     public static func < (a: AppVersion, b: AppVersion) -> Bool {
@@ -23,7 +26,9 @@ public struct AppVersion: Comparable, Sendable, CustomStringConvertible {
         return false
     }
 
-    public var description: String { numbers.count == 1 ? "\(numbers[0]).0" : numbers.map(String.init).joined(separator: ".") }
+    public var description: String { text }
+
+    public static func == (a: AppVersion, b: AppVersion) -> Bool { a.numbers == b.numbers }
 }
 
 /// The latest release, as GitHub's API describes it.

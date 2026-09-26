@@ -28,11 +28,15 @@ struct ContentView: View {
         .background(Palette.canvas)
         .ignoresSafeArea()
         .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
-        .overlay(alignment: .topTrailing) {
+        .overlay {
             if model.updater.showCard {
-                UpdateCard(updater: model.updater)
-                    .padding(.top, 52).padding(.trailing, 20)
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                // Centred over a soft dim, like a Mac sheet, so it's clearly the thing to look at.
+                ZStack {
+                    Color.black.opacity(0.18).ignoresSafeArea()
+                    UpdateCard(updater: model.updater)
+                        .transition(.scale(scale: 0.94).combined(with: .opacity))
+                }
+                .transition(.opacity)
             }
         }
         .animation(.spring(duration: 0.45, bounce: 0.2), value: model.updater.showCard)

@@ -110,11 +110,16 @@ final class Updater {
         let helper = work.appendingPathComponent("finish-update.sh")
         try """
         #!/bin/bash
+        # Logged to ~/Library/Logs/Plumb/update.log, so a failed update can be diagnosed.
+        mkdir -p "$HOME/Library/Logs/Plumb"; exec >>"$HOME/Library/Logs/Plumb/update.log" 2>&1
+        echo "--- $(date): updating $3"
         while kill -0 "$1" 2>/dev/null; do sleep 0.2; done
         target="$3"; previous="$3.previous"
         rm -rf "$previous"
-        if mv "$target" "$previous" && ditto "$2" "$target"; then rm -rf "$previous"
-        else rm -rf "$target"; mv "$previous" "$target"; fi
+        if mv "$target" "$previous"; then
+          if ditto "$2" "$target"; then rm -rf "$previous"; echo "updated"
+          else echo "copy failed: restoring"; rm -rf "$target"; mv "$previous" "$target"; fi
+        else echo "could not move the old app aside"; fi
         open "$target"
         rm -rf "$4"
         """.write(to: helper, atomically: true, encoding: .utf8)

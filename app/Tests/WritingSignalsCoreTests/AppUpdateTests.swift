@@ -10,6 +10,7 @@ final class AppUpdateTests: XCTestCase {
         XCTAssertEqual(try v("0.2"), try v("0.2.0"))
         XCTAssertFalse(try v("0.2.0") < v("0.2.0"))
         XCTAssertNil(AppVersion("models-v1"), "not an app release")
+        XCTAssertEqual(AppVersion("v0.2.0")?.description, "0.2.0", "shown as released, not shortened")
     }
 
     func testReadsTheVersionAndWhatsNewFromAGitHubRelease() throws {
