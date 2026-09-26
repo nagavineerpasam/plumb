@@ -235,6 +235,7 @@ struct TitleField: View {
 /// The first time, it shows the voice model downloading and getting ready.
 struct MicButton: View {
     @Bindable var dictation: Dictation
+    @State private var hovering = false
 
     private var title: String {
         if dictation.preparing != nil { return "Starting…" }
@@ -248,27 +249,51 @@ struct MicButton: View {
                     Circle().fill(.white).frame(width: 7, height: 7)
                         .phaseAnimator([1.0, 0.35]) { dot, opacity in dot.opacity(opacity) } animation: { _ in .easeInOut(duration: 0.8) }
                 } else {
-                    Image(systemName: "mic")
+                    Image(systemName: "mic.fill").font(.system(size: 12, weight: .semibold))
                 }
                 Text(title)
             }
-                .font(.callout.weight(.medium))
-                .foregroundStyle(dictation.isListening ? Color.white : Color.secondary)
-                .padding(.horizontal, 12).padding(.vertical, 6)
-                .background {
-                    Capsule().fill(dictation.isListening ? Color.accentColor : Color.secondary.opacity(0.12))
-                        .shadow(color: .accentColor.opacity(dictation.isListening ? 0.25 + dictation.level * 0.6 : 0),
-                                radius: 4 + dictation.level * 10)
-                }
-                .animation(.easeOut(duration: 0.12), value: dictation.level)
+            .font(.system(size: 14, weight: .semibold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 15).padding(.vertical, 7)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(SpeakButtonStyle(listening: dictation.isListening, hovering: hovering, level: dictation.level))
+        .onHover { hovering = $0 }
         .disabled(dictation.preparing != nil)
         .pointingHand()
         .keyboardShortcut("d", modifiers: [.option, .command])
         .help(dictation.isListening ? "Click to stop (⌥⌘D)" : "Speak into your note (⌥⌘D)")
         .alert(dictation.problem ?? "", isPresented: Binding(get: { dictation.problem != nil },
                                                              set: { if !$0 { dictation.problem = nil } })) {}
+    }
+}
+
+/// The Speak pill: warm sunrise orange with a soft glow that lifts on hover, presses in on click,
+/// and deepens (glowing with the voice level) while listening.
+struct SpeakButtonStyle: ButtonStyle {
+    let listening: Bool
+    let hovering: Bool
+    let level: Double
+
+    func makeBody(configuration: Configuration) -> some View {
+        let pressed = configuration.isPressed
+        let top = listening ? Color(red: 0.87, green: 0.38, blue: 0.14) : Color(red: 0.96, green: 0.56, blue: 0.33)
+        let bottom = listening ? Color(red: 0.78, green: 0.30, blue: 0.09) : Color(red: 0.89, green: 0.42, blue: 0.18)
+        let glow = listening ? 0.45 + level * 0.5 : (hovering ? 0.5 : 0.32)
+        configuration.label
+            .background {
+                Capsule()
+                    .fill(LinearGradient(colors: [top, bottom], startPoint: .top, endPoint: .bottom))
+                    .overlay(Capsule().strokeBorder(.white.opacity(0.22), lineWidth: 1).blendMode(.overlay))
+                    .shadow(color: Palette.sunrise.opacity(pressed ? 0.2 : glow),
+                            radius: pressed ? 3 : (hovering || listening ? 10 + level * 10 : 6),
+                            y: pressed ? 1 : (hovering ? 5 : 3))
+            }
+            .scaleEffect(pressed ? 0.96 : 1)
+            .offset(y: hovering && !pressed ? -1 : 0)
+            .animation(.spring(duration: 0.25, bounce: 0.3), value: pressed)
+            .animation(.easeOut(duration: 0.18), value: hovering)
+            .animation(.easeOut(duration: 0.12), value: level)
     }
 }
 
