@@ -20,6 +20,15 @@ enum Palette {
     /// The website's warm sunrise orange, for the friendly score bar and its button.
     static let sunrise = adaptive(light: 0xe8743b, dark: 0xf08a55)
     static let sunriseWash = adaptive(light: 0xfdeee3, dark: 0x3a2b22)
+    /// Plain raised buttons (Progress, New chat): white on light, a lifted grey on dark.
+    static let raised = adaptive(light: 0xffffff, dark: 0x3a3d44)
+
+    /// A very light wash in the Score's colour, for the score bar: green, amber or red.
+    static func wash(_ score: Double) -> Color {
+        score >= 0.85 ? adaptive(light: 0xeaf7ef, dark: 0x1f3329)
+            : score >= 0.6 ? adaptive(light: 0xfdf4e0, dark: 0x3a3120)
+            : adaptive(light: 0xfdeceb, dark: 0x3d2426)
+    }
 
     /// On since the fine-tuned model passed its bar (CoLA 0.789 vs 0.75; 25 of 30 everyday
     /// mistakes caught with no false alarms). The base model flagged 0 of 30.

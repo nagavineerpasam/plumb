@@ -217,6 +217,8 @@ final class AppModel {
     /// The friendly line at the bottom of a scored chat ("You scored 72 🎉 Up from 60 last time."),
     /// shown a few seconds after the user stops typing or talking; nil while hidden.
     private(set) var nudge: String?
+    /// The score the nudge is about, which colours its bar.
+    private(set) var nudgeScore: Double = 1
     private var nudgeTask: Task<Void, Never>?
     /// Chats worked on this session (only these get the nudge) and those where it was closed.
     private var workedOn: Set<URL> = []
@@ -233,16 +235,18 @@ final class AppModel {
                 try? await Task.sleep(for: .seconds(1))
             }
             guard let self, !Task.isCancelled else { return }
-            self.nudge = self.currentNudge()
+            let current = self.currentNudge()
+            self.nudgeScore = current?.score ?? 1
+            self.nudge = current?.message
         }
     }
 
-    private func currentNudge() -> String? {
+    private func currentNudge() -> (message: String, score: Double)? {
         guard let note = selection, workedOn.contains(note.url), !nudgeClosed.contains(note.url),
               !dictation.isListening, !analyzer.sentences.isEmpty,
               analyzer.sentences.allSatisfy({ $0.signals != nil }),
               let score = analyzer.summary.correctness else { return nil }
-        return ScoreNudge.message(score: score, previous: progress.previousScore(excluding: note.url))
+        return (ScoreNudge.message(score: score, previous: progress.previousScore(excluding: note.url)), score)
     }
 
     /// The ✕ on the nudge: hide it for this chat.

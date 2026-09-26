@@ -148,7 +148,7 @@ struct ContentView: View {
         }
         .overlay(alignment: .bottom) {
             if let nudge = model.nudge, !model.dictation.isListening {
-                ScoreNudgeBar(message: nudge, newChat: { model.newNote() }, close: { model.closeNudge() })
+                ScoreNudgeBar(message: nudge, score: model.nudgeScore, newChat: { model.newNote() }, close: { model.closeNudge() })
                     .padding(.horizontal, 28).padding(.bottom, 22)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
@@ -370,10 +370,11 @@ struct VoiceSetupBar: View {
     }
 }
 
-/// A rounded bar floating at the bottom of a scored chat, in the website's warm sunrise colours:
-/// how you did compared with last time, and a cute button to go again.
+/// A rounded bar floating at the bottom of a scored chat, washed in the Score's colour (green,
+/// amber or red, very light): how you did compared with last time, and a soft button to go again.
 struct ScoreNudgeBar: View {
     let message: String
+    let score: Double
     let newChat: () -> Void
     let close: () -> Void
 
@@ -383,16 +384,11 @@ struct ScoreNudgeBar: View {
                 .font(.system(size: 14, weight: .medium))
                 .lineLimit(2)
             Spacer(minLength: 8)
-            Button(action: newChat) {
+            SoftButton(cornerRadius: 999, action: newChat) {
                 Label("New chat", systemImage: "plus")
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.white)
                     .padding(.horizontal, 14).padding(.vertical, 7)
-                    .background(Palette.sunrise, in: Capsule())
-                    .shadow(color: Palette.sunrise.opacity(0.35), radius: 6, y: 3)
             }
-            .buttonStyle(.plain)
-            .pointingHand()
             Button(action: close) {
                 Image(systemName: "xmark")
                     .font(.system(size: 10, weight: .bold))
@@ -405,8 +401,8 @@ struct ScoreNudgeBar: View {
             .help("Hide for this chat")
         }
         .padding(.leading, 18).padding(.trailing, 10).padding(.vertical, 10)
-        .background(Palette.sunriseWash, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous).strokeBorder(Palette.sunrise.opacity(0.28)))
+        .background(Palette.wash(score), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous).strokeBorder(Palette.band(score).opacity(0.25)))
         .shadow(color: .black.opacity(0.08), radius: 16, y: 6)
     }
 }
@@ -464,41 +460,53 @@ struct UpdateCard: View {
     }
 }
 
-/// The sidebar's Progress button: warm orange like Speak, because seeing how you've improved is
-/// the fun part. It lifts on hover and presses in on click.
+/// The sidebar's Progress button: plain and soft, so Speak stays the only orange thing.
 struct ProgressButton: View {
     let showing: Bool
     let action: () -> Void
+
+    var body: some View {
+        SoftButton(cornerRadius: 12, action: action) {
+            Label(showing ? "Back to chat" : "Progress", systemImage: showing ? "arrow.uturn.left" : "chart.line.uptrend.xyaxis")
+                .font(.system(size: 14, weight: .semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 12).padding(.vertical, 9)
+        }
+    }
+}
+
+/// A plain raised button (white on light, grey on dark) with a soft shadow that lifts on hover
+/// and presses in on click.
+struct SoftButton<Content: View>: View {
+    let cornerRadius: CGFloat
+    let action: () -> Void
+    @ViewBuilder let content: Content
     @State private var hovering = false
 
     var body: some View {
         Button(action: action) {
-            Label(showing ? "Back to chat" : "Progress", systemImage: showing ? "arrow.uturn.left" : "chart.line.uptrend.xyaxis")
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 12).padding(.vertical, 9)
-                .contentShape(Rectangle())
+            content.foregroundStyle(.primary).contentShape(Rectangle())
         }
-        .buttonStyle(ProgressButtonStyle(hovering: hovering))
+        .buttonStyle(SoftButtonStyle(cornerRadius: cornerRadius, hovering: hovering))
         .onHover { hovering = $0 }
         .focusable(false)
         .pointingHand()
     }
 }
 
-struct ProgressButtonStyle: ButtonStyle {
+struct SoftButtonStyle: ButtonStyle {
+    let cornerRadius: CGFloat
     let hovering: Bool
 
     func makeBody(configuration: Configuration) -> some View {
         let pressed = configuration.isPressed
+        let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
         configuration.label
             .background {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(LinearGradient(colors: [Color(red: 0.96, green: 0.56, blue: 0.33), Color(red: 0.89, green: 0.42, blue: 0.18)],
-                                         startPoint: .top, endPoint: .bottom))
-                    .shadow(color: Palette.sunrise.opacity(pressed ? 0.2 : (hovering ? 0.5 : 0.3)),
-                            radius: pressed ? 3 : (hovering ? 10 : 6), y: pressed ? 1 : (hovering ? 4 : 2))
+                shape.fill(Palette.raised)
+                    .overlay(shape.strokeBorder(.primary.opacity(0.07)))
+                    .shadow(color: .black.opacity(pressed ? 0.06 : (hovering ? 0.16 : 0.09)),
+                            radius: pressed ? 2 : (hovering ? 10 : 5), y: pressed ? 1 : (hovering ? 4 : 2))
             }
             .scaleEffect(pressed ? 0.97 : 1)
             .offset(y: hovering && !pressed ? -1 : 0)
