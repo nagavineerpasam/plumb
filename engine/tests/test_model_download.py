@@ -1,6 +1,8 @@
 import os
 import zipfile
 
+import pytest
+
 from writing_signals import worker
 
 
@@ -21,6 +23,7 @@ def test_first_launch_downloads_and_unpacks_the_model_with_progress(tmp_path, mo
 
     worker.ensure_models(events.append)
 
+    assert events[0] == {"type": "stage", "stage": "downloading"}  # the app shows setup at once
     assert (target / "model.safetensors").stat().st_size == 50_000
     assert (target / "tokenizer" / "tokenizer.json").exists()
     size = source.stat().st_size
@@ -43,7 +46,7 @@ def test_an_interrupted_download_resumes(tmp_path, monkeypatch):
     worker.ensure_models(events.append)
 
     assert (target / "model.safetensors").exists()
-    assert events[0]["downloaded"] >= len(data) // 2  # started from where it stopped
+    assert events[1]["downloaded"] >= len(data) // 2  # started from where it stopped
 
 
 def test_nothing_is_downloaded_when_the_model_is_installed(tmp_path, monkeypatch):
@@ -57,3 +60,22 @@ def test_nothing_is_downloaded_when_the_model_is_installed(tmp_path, monkeypatch
     worker.ensure_models(events.append)
 
     assert events == []
+
+
+def test_a_damaged_partial_download_is_thrown_away_and_downloaded_again(tmp_path, monkeypatch):
+    source = tmp_path / "plumb-model.zip"
+    make_model_zip(source)
+    target = tmp_path / "support" / "model"
+    target.parent.mkdir()
+    part = target.parent / "plumb-model.zip.part"
+    data = source.read_bytes()
+    part.write_bytes(data[: len(data) // 2] + b"x" * len(data))  # longer than the model, garbled
+    monkeypatch.setattr(worker, "MODEL_DIR", str(target))
+    monkeypatch.setattr(worker, "MODEL_URL", source.as_uri())
+
+    with pytest.raises(Exception):
+        worker.ensure_models(lambda _: None)
+    assert not part.exists(), "the bad partial file is gone, so the next try starts fresh"
+
+    worker.ensure_models(lambda _: None)
+    assert (target / "model.safetensors").exists()

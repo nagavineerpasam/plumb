@@ -182,6 +182,13 @@ final class AppModel {
             for await event in events { self?.handle(event) }
         }
         startBackfill()
+        // First launch: the writing model isn't here yet, so show setup straight away rather than
+        // waiting for the first downloaded byte.
+        let model = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("Plumb/model/model.safetensors")
+        if Bundle.main.bundlePath.hasSuffix(".app"), !FileManager.default.fileExists(atPath: model.path) {
+            phase = .downloading(0, 0, problem: nil)
+        }
         do { try worker.start() } catch { phase = .down("Could not start the signal worker: \(error.localizedDescription)") }
         // First launch: open a note straight away, so the user can just start typing.
         if store?.notes.isEmpty == true { newNote() } else { open(store?.notes.first) }
@@ -359,6 +366,11 @@ final class AppModel {
                 if case .downloading = phase { phase = .downloading(done, total, problem: nil) }
                 else if done < total { phase = .downloading(done, total, problem: nil) }
             case let .stage(stage):
+                if stage == "downloading" {  // the worker is about to fetch the model: show setup now
+                    if case .downloading = phase {} else { phase = .downloading(0, 0, problem: nil) }
+                    setupStep = 0
+                    return
+                }
                 guard case .downloading = phase else { return }  // only the first launch shows the steps
                 setupStep = stage == "loading" ? 2 : 1
             case let .failed(message):

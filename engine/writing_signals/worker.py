@@ -35,8 +35,37 @@ def ensure_models(emit: Callable[[dict], None]) -> None:
     part = os.path.join(parent, "plumb-model.zip.part")
     have = os.path.getsize(part) if os.path.exists(part) else 0
 
+    emit({"type": "stage", "stage": "downloading"})  # so the app shows setup before the first byte
     request = urllib.request.Request(MODEL_URL, headers={"Range": f"bytes={have}-"} if have else {})
-    with urllib.request.urlopen(request, timeout=60) as response:
+    try:
+        _download(request, part, have, emit)
+    except urllib.error.HTTPError as error:
+        if error.code != 416:
+            raise
+        # The partial file is at least as big as the model, so it's bad: start over next time.
+        os.remove(part)
+        raise
+    staging = MODEL_DIR + ".unpacking"
+    shutil.rmtree(staging, ignore_errors=True)
+    try:
+        with zipfile.ZipFile(part) as archive:
+            emit({"type": "stage", "stage": "unpacking"})
+            archive.extractall(staging)
+    except zipfile.BadZipFile:
+        os.remove(part)  # damaged download: the next try downloads it again
+        shutil.rmtree(staging, ignore_errors=True)
+        raise
+    shutil.rmtree(MODEL_DIR, ignore_errors=True)
+    os.replace(staging, MODEL_DIR)
+    os.remove(part)
+
+
+def _download(request, part: str, have: int, emit: Callable[[dict], None]) -> None:
+    """Fetches the model into `part`, resuming from `have` bytes, and reports progress."""
+    import urllib.request
+    # A short timeout: GitHub's download server has several addresses, and if one doesn't answer we
+    # move on to the next quickly instead of sitting on a blank screen.
+    with urllib.request.urlopen(request, timeout=15) as response:
         resumed = have and getattr(response, "status", 200) == 206
         if not resumed and not MODEL_URL.startswith("file:"):
             have = 0  # the server ignored the range: start over
@@ -58,14 +87,6 @@ def ensure_models(emit: Callable[[dict], None]) -> None:
                     last = now
     size = total or done
     emit({"type": "progress", "downloaded": size, "total": size})
-    emit({"type": "stage", "stage": "unpacking"})
-    staging = MODEL_DIR + ".unpacking"
-    shutil.rmtree(staging, ignore_errors=True)
-    with zipfile.ZipFile(part) as archive:
-        archive.extractall(staging)
-    shutil.rmtree(MODEL_DIR, ignore_errors=True)
-    os.replace(staging, MODEL_DIR)
-    os.remove(part)
 
 
 def _plan(batch: List[dict]) -> List[List[dict]]:

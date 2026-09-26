@@ -1,10 +1,17 @@
 import json
+import os
 import subprocess
 import sys
 
 import pytest
 
 from writing_signals import CATALOGUE_VERSION
+from writing_signals.engine import TRAINED_DIR
+
+# These tests run the real model. They must never download it: a test downloading into the same
+# folder as an installed Plumb would corrupt that install's download.
+pytestmark = pytest.mark.skipif(not os.path.exists(os.path.join(TRAINED_DIR, "model.safetensors")),
+                                reason="the writing model isn't installed")
 
 
 class Worker:
@@ -14,6 +21,7 @@ class Worker:
         self.proc = subprocess.Popen(
             [sys.executable, "-m", "writing_signals.worker"],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, bufsize=1,
+            env={**os.environ, "PLUMB_MODEL_URL": "file:///never-download-in-tests"},
         )
 
     def send(self, *messages):

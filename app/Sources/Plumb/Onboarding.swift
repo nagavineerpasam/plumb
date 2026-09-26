@@ -21,10 +21,16 @@ struct Onboarding: View {
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: 380)
             VStack(alignment: .leading, spacing: 14) {
-                row(0, "Downloading the writing model", detail: total > 0 ? "\(bytes(downloaded)) of \(bytes(total))" : "About 800 MB")
+                row(0, "Downloading the writing model", detail: total > 0 ? "\(bytes(downloaded)) of \(bytes(total))" : "Connecting…")
                 if step == 0 {
-                    ProgressView(value: Double(downloaded), total: Double(max(total, 1)))
-                        .padding(.leading, 30)
+                    Group {
+                        if total > 0 {
+                            ProgressView(value: Double(downloaded), total: Double(total))
+                        } else {
+                            ProgressView().progressViewStyle(.linear)  // connecting: no size yet
+                        }
+                    }
+                    .padding(.leading, 30)
                 }
                 row(1, "Unpacking", detail: nil)
                 row(2, "Starting the checker", detail: nil)
