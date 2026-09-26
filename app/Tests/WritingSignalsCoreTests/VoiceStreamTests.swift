@@ -78,6 +78,11 @@ final class VoiceStreamTests: XCTestCase {
         XCTAssertEqual((text as NSString).substring(with: buffer.grey!), "The results")
     }
 
+    func testTagsAreRemovedButTheWordsAroundThemKept() {
+        XCTAssertEqual(VoiceStream.withoutTags("[BLANK_AUDIO] Hello there"), " Hello there")
+        XCTAssertEqual(VoiceStream.withoutTags("(music)"), "")
+    }
+
     func testNothingNewMeansNoEdit() {
         var text = ""
         var buffer = DictationBuffer(selection: NSRange(location: 0, length: 0), in: text)

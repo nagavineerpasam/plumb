@@ -55,7 +55,7 @@ public struct VoiceStream: Sendable {
         }
     }
 
-    static func withoutTags(_ text: String) -> String {
+    public static func withoutTags(_ text: String) -> String {
         text.replacingOccurrences(of: #"\s*[\[(][^\])]*[\])]"#, with: "", options: .regularExpression)
     }
 

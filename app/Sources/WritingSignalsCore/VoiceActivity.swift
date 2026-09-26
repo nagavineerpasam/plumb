@@ -22,6 +22,12 @@ public struct VoiceActivity: Sendable {
 
     public init() {}
 
+    /// Whether `level` is speech against the measured room, without learning from it; nil while the
+    /// room is still being measured. Used to look back at the first half second once it's known.
+    public func sounds(_ level: Double) -> Bool? {
+        heard < Self.measuring ? nil : level > max(Self.minimum, floor * Self.ratio)
+    }
+
     /// Feeds one buffer's RMS level; true when it sounds like someone speaking.
     public mutating func hears(_ level: Double) -> Bool {
         if heard < Self.measuring {

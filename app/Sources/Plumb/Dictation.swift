@@ -30,8 +30,6 @@ final class Dictation {
     /// spoken words score 0.8+ (a test sentence: "I" 0.81, "goes" 0.83, the rest 0.9+).
     static let unsureBelow = 0.35
     private static let silenceTimeout: TimeInterval = 10
-    /// Whisper's own "probably no speech" score above which a result is ignored.
-    private static let noSpeechAbove: Float = 0.6
     private static let rate = 16_000  // Whisper's sample rate
     /// A pause this long settles the words spoken before it.
     private static let pauseToSettle = rate * 7 / 10
@@ -146,25 +144,29 @@ final class Dictation {
         var stream = VoiceStream(unsureBelow: Self.unsureBelow)
         var settled: [[HeardWord]] = []
         var start = 0        // first sample not yet settled
+        var voicedAtStart = 0
         var lastPreview = 0  // sample count at the last grey preview
         while true {
             try await Task.sleep(for: .milliseconds(200))
-            let (count, lastVoice) = audio.progress
-            let spoke = lastVoice > start
+            let (count, lastVoice, voiced) = audio.progress
+            // A quarter second of speech at least: a click or a cough isn't worth transcribing, and
+            // Whisper tends to "hear" words like "you" in them.
+            let spoke = lastVoice > start && voiced - voicedAtStart >= Self.rate / 4
             let stopping = !isListening
             if spoke, stopping || count - lastVoice >= Self.pauseToSettle || count - start >= Self.longestStretch {
                 let end = min(count, lastVoice + Self.rate / 4)
                 let words = try await transcribe(audio.samples(start..<end), words: true).words
                 start = end
+                voicedAtStart = voiced
                 if !words.isEmpty { settled.append(words) }
                 apply(&stream, settled, unconfirmed: "")
             } else if spoke, !stopping, lastVoice > lastPreview, count - lastPreview >= Self.rate / 2 {
                 lastPreview = count
                 let text = try await transcribe(audio.samples(start..<count), words: false).text
                 if isListening { apply(&stream, settled, unconfirmed: text) }
-            } else if !spoke, count > Self.rate {
+            } else if !spoke, count > Self.rate, count - lastVoice > Self.pauseToSettle {
                 start = count  // nothing said since the last settle: skip the silence (after the first
-                               // second, whose audio is kept in case speech started straight away)
+                voicedAtStart = voiced  // second, whose audio is kept in case speech started at once)
             }
             if stopping { return }
         }
@@ -185,12 +187,13 @@ final class Dictation {
         let options = DecodingOptions(task: .transcribe, language: "en", temperature: 0, skipSpecialTokens: true,
                                       withoutTimestamps: !words, wordTimestamps: words, suppressBlank: true)
         let results = try await kit.transcribe(audioArray: samples, decodeOptions: options)
-        // Whisper "hears" words like "you" in near-silence; drop what it thinks is probably no speech.
-        let segments = results.flatMap(\.segments).filter { $0.noSpeechProb < Self.noSpeechAbove }
+        let segments = results.flatMap(\.segments)
         let text = segments.map(\.text).joined(separator: " ").trimmingCharacters(in: .whitespaces)
         var heard = segments.flatMap { $0.words ?? [] }
             .map { HeardWord(text: $0.word, probability: Double($0.probability)) }
-        if heard.isEmpty, !text.isEmpty { heard = [HeardWord(text: text, probability: 1)] }
+        // No word timings: keep the text as one word, minus any silence tags so real words survive.
+        let spoken = VoiceStream.withoutTags(text).trimmingCharacters(in: .whitespaces)
+        if heard.isEmpty, !spoken.isEmpty { heard = [HeardWord(text: spoken, probability: 1)] }
         return (text, heard)
     }
 
@@ -276,23 +279,38 @@ final class HeardAudio: @unchecked Sendable {
     private var all: [Float] = []
     private var lastVoice = 0
     private var activity = VoiceActivity()
+    /// Samples judged to be speech so far, to tell a real word from a blip of noise.
+    private var voiced = 0
+    /// Buffers heard while the room was still being measured, judged again once it's known.
+    private var early: [(level: Double, end: Int, length: Int)] = []
 
     /// Adds a buffer at microphone level `level`; returns whether it sounded like speech.
     func append(_ chunk: UnsafeBufferPointer<Float>, level: Double) -> Bool {
         lock.withLock {
             all.append(contentsOf: chunk)
-            let voiced = activity.hears(level)
-            if voiced { lastVoice = all.count }
-            return voiced
+            let measuring = activity.sounds(level) == nil
+            let isVoice = activity.hears(level)
+            if isVoice { lastVoice = all.count; voiced += chunk.count }
+            if measuring {
+                if !isVoice { early.append((level, all.count, chunk.count)) }
+                if activity.sounds(level) != nil {  // the room is known now: a quiet early word counts too
+                    for buffer in early where activity.sounds(buffer.level) == true {
+                        lastVoice = max(lastVoice, buffer.end)
+                        voiced += buffer.length
+                    }
+                    early = []
+                }
+            }
+            return isVoice
         }
     }
 
-    /// How many samples have arrived, and the end of the last one with voice in it.
-    var progress: (count: Int, lastVoice: Int) { lock.withLock { (all.count, lastVoice) } }
+    /// How many samples have arrived, the end of the last one with voice in it, and how many were voice.
+    var progress: (count: Int, lastVoice: Int, voiced: Int) { lock.withLock { (all.count, lastVoice, voiced) } }
 
     func samples(_ range: Range<Int>) -> [Float] { lock.withLock { Array(all[range.clamped(to: 0..<all.count)]) } }
 
-    func reset() { lock.withLock { all.removeAll(); lastVoice = 0; activity = VoiceActivity() } }
+    func reset() { lock.withLock { all.removeAll(); lastVoice = 0; voiced = 0; early = []; activity = VoiceActivity() } }
 }
 
 enum DictationError: LocalizedError {

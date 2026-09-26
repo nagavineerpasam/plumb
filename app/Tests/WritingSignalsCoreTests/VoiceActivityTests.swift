@@ -56,6 +56,17 @@ final class VoiceActivityTests: XCTestCase {
         XCTAssertTrue(detector.hears(0.05))
     }
 
+    func testAShortWordWhileMeasuringIsRecognisedOnceTheRoomIsKnown() {
+        var detector = VoiceActivity()
+        _ = feed(&detector, 0.002, seconds: 0.2)
+        _ = feed(&detector, 0.01, seconds: 0.1)   // a quick "hi" at normal volume, while measuring
+        XCTAssertNil(detector.sounds(0.01), "can't judge yet: the room is still being measured")
+        _ = feed(&detector, 0.002, seconds: 0.3)
+
+        XCTAssertEqual(detector.sounds(0.01), true, "looking back, that was speech")
+        XCTAssertEqual(detector.sounds(0.002), false)
+    }
+
     func testSilenceAfterSpeechIsNotVoice() {
         var detector = VoiceActivity()
         _ = feed(&detector, 0.002, seconds: 1)
