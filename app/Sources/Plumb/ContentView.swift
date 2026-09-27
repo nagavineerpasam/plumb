@@ -137,6 +137,7 @@ struct ContentView: View {
                     }
                 }
                 .padding(.horizontal, 52).padding(.top, model.dictation.settingUpFirstTime ? 20 : 40)
+                .padding(.bottom, 16)  // breathing room between the title row and the text
                 SignalEditor(analyzer: model.analyzer, dictation: model.dictation, noteID: model.selection?.url,
                              initialText: model.openedText, showMarks: model.showUnderlines,
                              showsCards: model.feedbackOn(model.selection), onChange: model.edited)
