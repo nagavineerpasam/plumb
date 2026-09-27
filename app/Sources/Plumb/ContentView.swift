@@ -110,19 +110,23 @@ struct ContentView: View {
                         .transition(.move(edge: .top).combined(with: .opacity))
                 }
                 HStack {
+                    // A long title shrinks and ends in "…"; the buttons keep their size.
                     TitleField(title: model.selection?.title ?? "") { model.renameSelection(to: $0) }
-                        .fixedSize()
+                        .frame(minWidth: 140, maxWidth: .infinity, alignment: .leading)
+                        .padding(.trailing, 12)
                     if model.smartFeedback, let note = model.selection {
-                        // This note's own switch: off, it's just a note (no checks, no Score).
-                        Toggle("Smart feedback", isOn: Binding(get: { model.feedbackOn(note) },
-                                                               set: { on in withAnimation(.smooth) { model.setFeedback(on, for: note) } }))
-                            .toggleStyle(.switch).controlSize(.mini)
-                            .font(.callout).foregroundStyle(.secondary)
-                            .padding(.leading, 14)
-                            .help("Check this note’s English, with a Score and progress")
+                        // This note's own switch, as a plain button beside Speak.
+                        let on = model.feedbackOn(note)
+                        SoftButton(cornerRadius: 999, action: { withAnimation(.smooth) { model.setFeedback(!on, for: note) } }) {
+                            Text(on ? "Turn off feedback" : "Turn on feedback")
+                                .font(.system(size: 14, weight: .semibold))
+                                .padding(.horizontal, 15).padding(.vertical, 7)
+                        }
+                        .fixedSize()
+                        .help(on ? "Use this note as plain notes: no checks, no Score" : "Check this note’s English, with a Score and progress")
                     }
-                    Spacer()
                     MicButton(dictation: model.dictation)
+                        .fixedSize()
                     if model.feedbackOn(model.selection) {
                         Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
                             Image(systemName: "sidebar.right")
@@ -242,6 +246,8 @@ struct TitleField: View {
     var body: some View {
         TextField("Untitled", text: $draft)
             .textFieldStyle(.plain)
+            .lineLimit(1)
+            .truncationMode(.tail)
             .font(.system(size: 24, weight: .semibold))
             .focused($focused)
             .onSubmit { focused = false }
