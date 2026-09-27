@@ -9,6 +9,10 @@ struct SignalEditor: NSViewRepresentable {
     /// Changes whenever a different note is opened, so its text replaces the editor's.
     let noteID: URL?
     let initialText: String
+    /// Mark mistakes in the text (Settings → Show underlines).
+    let showMarks: Bool
+    /// Show the sentence card on hover (off when Smart feedback is off for this note).
+    let showsCards: Bool
     let onChange: (String) -> Void
 
     func makeCoordinator() -> Coordinator { Coordinator(analyzer: analyzer, dictation: dictation) }
@@ -51,6 +55,8 @@ struct SignalEditor: NSViewRepresentable {
     func updateNSView(_ scroll: NSScrollView, context: Context) {
         let coordinator = context.coordinator
         coordinator.onChange = onChange
+        coordinator.showMarks = showMarks
+        coordinator.textView?.showsCards = showsCards
         guard coordinator.noteID != noteID, let text = coordinator.textView else { return }
         coordinator.noteID = noteID
         dictation.reset()
@@ -67,6 +73,9 @@ struct SignalEditor: NSViewRepresentable {
         weak var textView: SignalTextView?
         var noteID: URL?
         var onChange: (String) -> Void = { _ in }
+        var showMarks = true {
+            didSet { if showMarks != oldValue { apply(analyzer.sentences, grey: dictation.grey, hints: dictation.hints) } }
+        }
 
         init(analyzer: NoteAnalyzer, dictation: Dictation) {
             self.analyzer = analyzer
@@ -132,7 +141,7 @@ struct SignalEditor: NSViewRepresentable {
                 layout.addRenderingAttribute(.foregroundColor, value: NSColor.tertiaryLabelColor, for: range)
             }
             var marks: [SignalTextView.Mark] = []
-            for sentence in sentences {
+            for sentence in sentences where showMarks {
                 guard let signals = sentence.signals else { continue }  // still being checked: no mark
                 let range = sentence.range
                 let doesntRead = (Palette.flowReady && sentence.flow?.value == "yes")
@@ -155,7 +164,7 @@ struct SignalEditor: NSViewRepresentable {
                 }
             }
             // Mechanics: amber dots under the word involved.
-            for sentence in sentences {
+            for sentence in sentences where showMarks {
                 for issue in sentence.mechanics ?? [] {
                     let local = issue.range ?? Self.place(issue, in: sentence.text)
                     marks.append(.init(range: NSRange(location: sentence.range.location + local.location, length: local.length),
@@ -209,6 +218,10 @@ final class SignalTextView: NSTextView {
             }
         }
     }
+    /// Off when Smart feedback is off for the note: hovering shows nothing.
+    var showsCards = true {
+        didSet { if !showsCards { closeNow() } }
+    }
     private let popover = NSPopover()
     private var hovered: AnalyzedSentence?
     private var lastPoint: NSPoint?
@@ -248,7 +261,7 @@ final class SignalTextView: NSTextView {
     }
 
     func refreshHover() {
-        guard let point = lastPoint, (textStorage?.length ?? 0) > 0 else { return closeSoon() }
+        guard showsCards, let point = lastPoint, (textStorage?.length ?? 0) > 0 else { return closeSoon() }
         let index = characterIndexForInsertion(at: point)
         guard let sentence = sentenceAt(index), let rect = rect(of: sentence.range), rect.contains(point) || rect.insetBy(dx: 0, dy: -4).contains(point) else {
             return closeSoon()

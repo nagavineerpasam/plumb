@@ -43,6 +43,17 @@ public final class NoteAnalyzer {
 
     public var summary: NoteSummary { NoteSummary(sentences) }
 
+    /// Smart feedback for this note. Off, the note is just text: nothing is checked (no model,
+    /// no rules) and there are no marks or Score. Back on, the note is checked again (sentences
+    /// already checked this session come back at once).
+    public var feedback = true {
+        didSet {
+            guard feedback != oldValue else { return }
+            if feedback { update(text: text) } else { clearChecks() }
+        }
+    }
+    private var text = ""
+
     private let client: SignalClient
     private let debounce: Duration
     private let retryDelay: Duration
@@ -72,15 +83,18 @@ public final class NoteAnalyzer {
     }
 
     public func update(text: String) {
+        self.text = text
         // Unchanged sentences keep their id and signals, so only edited ones are re-scored.
         var previous = Dictionary(grouping: sentences, by: \.text)
         let firstNew = nextID
         sentences = Self.split(text).map { text, range in
             if let kept = previous[text]?.first {
                 previous[text]?.removeFirst()
-                return AnalyzedSentence(id: kept.id, text: text, range: range, signals: kept.signals,
-                                        mechanics: kept.mechanics, flow: kept.flow, flowPreviousID: kept.flowPreviousID,
-                                        pointer: kept.pointer, pointerChecked: kept.pointerChecked)
+                // Results cleared by turning Smart feedback off come back from this session's cache.
+                return AnalyzedSentence(id: kept.id, text: text, range: range, signals: kept.signals ?? known[text]?.signals,
+                                        mechanics: kept.mechanics ?? known[text]?.mechanics, flow: kept.flow, flowPreviousID: kept.flowPreviousID,
+                                        pointer: kept.pointerChecked ? kept.pointer : (knownPointers[text] ?? nil),
+                                        pointerChecked: kept.pointerChecked || knownPointers[text] != nil)
             }
             nextID += 1
             return AnalyzedSentence(id: "s\(nextID)", text: text, range: range,
@@ -102,6 +116,7 @@ public final class NoteAnalyzer {
             }
         }
         pending?.cancel()
+        guard feedback else { return clearChecks() }
         pending = Task { [debounce] in
             try? await Task.sleep(for: debounce)
             guard !Task.isCancelled else { return }
@@ -112,9 +127,22 @@ public final class NoteAnalyzer {
         }
     }
 
+    private func clearChecks() {
+        pending?.cancel()
+        for i in sentences.indices {
+            sentences[i].signals = nil
+            sentences[i].mechanics = nil
+            sentences[i].pointer = nil
+            sentences[i].pointerChecked = false
+            sentences[i].flow = nil
+            sentences[i].flowPreviousID = nil
+        }
+    }
+
     /// Checks, on request, whether each sentence follows the one before it. Only pairs without a
     /// current result are sent; results for pairs that changed meanwhile are dropped.
     public func checkFlow() async {
+        guard feedback else { return }
         let pairs = sentences.indices.dropFirst().filter { sentences[$0].flow == nil }.map {
             (FlowRequest(id: sentences[$0].id, previous: sentences[$0 - 1].text, sentence: sentences[$0].text),
              sentences[$0 - 1].id)

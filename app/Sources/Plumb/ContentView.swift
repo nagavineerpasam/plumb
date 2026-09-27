@@ -12,7 +12,7 @@ struct ContentView: View {
         HStack(alignment: .top, spacing: 12) {
             sidebar.frame(width: 220)
             page
-            if model.showDashboard && !model.showingProgress {
+            if model.showDashboard && !model.showingProgress && model.feedbackOn(model.selection) {
                 Dashboard(summary: model.analyzer.summary,
                           pending: model.analyzer.sentences.filter { $0.signals == nil }.count,
                           hasText: !model.analyzer.sentences.isEmpty,
@@ -111,18 +111,31 @@ struct ContentView: View {
                 }
                 HStack {
                     TitleField(title: model.selection?.title ?? "") { model.renameSelection(to: $0) }
+                        .fixedSize()
+                    if model.smartFeedback, let note = model.selection {
+                        // This note's own switch: off, it's just a note (no checks, no Score).
+                        Toggle("Smart feedback", isOn: Binding(get: { model.feedbackOn(note) },
+                                                               set: { on in withAnimation(.smooth) { model.setFeedback(on, for: note) } }))
+                            .toggleStyle(.switch).controlSize(.mini)
+                            .font(.callout).foregroundStyle(.secondary)
+                            .padding(.leading, 14)
+                            .help("Check this note’s English, with a Score and progress")
+                    }
                     Spacer()
                     MicButton(dictation: model.dictation)
-                    Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
-                        Image(systemName: "sidebar.right")
+                    if model.feedbackOn(model.selection) {
+                        Button { withAnimation(.smooth) { model.showDashboard.toggle() } } label: {
+                            Image(systemName: "sidebar.right")
+                        }
+                        .buttonStyle(.borderless).foregroundStyle(.tertiary)
+                        .pointingHand()
+                        .help(model.showDashboard ? "Hide signals" : "Show signals")
                     }
-                    .buttonStyle(.borderless).foregroundStyle(.tertiary)
-                    .pointingHand()
-                    .help(model.showDashboard ? "Hide signals" : "Show signals")
                 }
                 .padding(.horizontal, 52).padding(.top, model.dictation.settingUpFirstTime ? 20 : 40)
                 SignalEditor(analyzer: model.analyzer, dictation: model.dictation, noteID: model.selection?.url,
-                             initialText: model.openedText, onChange: model.edited)
+                             initialText: model.openedText, showMarks: model.showUnderlines,
+                             showsCards: model.feedbackOn(model.selection), onChange: model.edited)
             }
             .opacity(model.selection == nil ? 0 : 1)
             .animation(.smooth, value: model.dictation.settingUpFirstTime)

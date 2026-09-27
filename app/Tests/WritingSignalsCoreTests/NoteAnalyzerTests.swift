@@ -187,6 +187,41 @@ final class NoteAnalyzerTests: XCTestCase {
         XCTAssertEqual(quick.last, ["Yesterday I goes home."])
     }
 
+    func testWithSmartFeedbackOffANoteIsJustText() async {
+        let client = FakeSignalClient()
+        client.grammarMistake = ["Yesterday I goes to the gym."]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+        analyzer.feedback = false
+
+        analyzer.update(text: "Yesterday I goes to the gym. hello how are you")
+        await analyzer.idle()
+
+        XCTAssertTrue(client.requests.isEmpty, "no model at all")
+        XCTAssertTrue(client.locateRequests.isEmpty && client.flowRequests.isEmpty)
+        XCTAssertTrue(analyzer.sentences.allSatisfy { $0.signals == nil && $0.mechanics == nil && $0.pointer == nil })
+        XCTAssertNil(analyzer.summary.correctness, "no Score")
+    }
+
+    func testTurningSmartFeedbackOffClearsTheMarksAndOnChecksAgain() async {
+        let client = FakeSignalClient()
+        client.grammarMistake = ["Yesterday I goes to the gym."]
+        let analyzer = NoteAnalyzer(client: client, debounce: .zero)
+        analyzer.update(text: "Yesterday I goes to the gym.")
+        await analyzer.idle()
+        XCTAssertNotNil(analyzer.sentences.first?.signals)
+
+        analyzer.feedback = false
+        XCTAssertNil(analyzer.sentences.first?.signals)
+        XCTAssertNil(analyzer.summary.correctness)
+
+        let asked = client.requests.count
+        analyzer.feedback = true
+        await analyzer.idle()
+        XCTAssertEqual(analyzer.sentences.first?.signals?.signals["grammar"]?.value, "yes")
+        XCTAssertNotNil(analyzer.summary.correctness)
+        XCTAssertEqual(client.requests.count, asked, "already checked this session: back at once, no model")
+    }
+
     func testALineBreakAlwaysEndsASentence() {
         let analyzer = NoteAnalyzer(client: FakeSignalClient(), debounce: .zero)
         let text = "Dear Sir/Madam\n\nThe Circle Theatre manager\nI am writing to complain. It was late."

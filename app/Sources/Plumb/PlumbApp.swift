@@ -56,12 +56,41 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
+            FeedbackSettings()
+                .tabItem { Label("Feedback", systemImage: "text.badge.checkmark") }
             AppearanceSettings()
                 .tabItem { Label("Appearance", systemImage: "paintbrush") }
             UpdateSettings(updater: updater)
                 .tabItem { Label("Updates", systemImage: "arrow.down.circle") }
         }
         .frame(width: 460)
+    }
+}
+
+/// Smart feedback (the checks, the model, the Score) and whether mistakes are marked in the text.
+struct FeedbackSettings: View {
+    @AppStorage("smartFeedback") private var smartFeedback = true
+    @AppStorage("showUnderlines") private var showUnderlines = true
+
+    var body: some View {
+        Form {
+            Section {
+                Toggle("Smart feedback", isOn: $smartFeedback)
+            } footer: {
+                Text(smartFeedback
+                     ? "Plumb checks your English, shows your Score and tracks your progress. You can also turn it off for a single note, next to its title."
+                     : "Plumb is a plain notes app: no checks, no Score, and the AI model isn’t running. Speak still works.")
+                    .foregroundStyle(.secondary)
+            }
+            Section {
+                Toggle("Show underlines", isOn: $showUnderlines)
+            } footer: {
+                Text("Off: mistakes aren’t marked in your text, but the side panel and hovering a sentence still show them.")
+                    .foregroundStyle(.secondary)
+            }
+            .disabled(!smartFeedback)
+        }
+        .formStyle(.grouped)
     }
 }
 
@@ -134,6 +163,60 @@ final class AppModel {
     let progress = ProgressStore(file: WorkerLocation.dataFolder.appendingPathComponent("progress.json"))
     /// Bumped whenever a score is recorded, so the Progress page redraws.
     private(set) var progressVersion = 0
+    /// Which notes have Smart feedback turned off.
+    let feedbackStore = FeedbackStore(file: WorkerLocation.dataFolder.appendingPathComponent("feedback.json"))
+    /// Bumped when a note's Smart feedback changes, so the views follow.
+    private(set) var feedbackVersion = 0
+
+    /// Smart feedback everywhere (Settings). Off stops the AI model entirely; on starts it again.
+    var smartFeedback: Bool {
+        get { access(keyPath: \.smartFeedback); return UserDefaults.standard.object(forKey: "smartFeedback") as? Bool ?? true }
+    }
+    /// Whether mistakes are marked in the text (Settings); the panel and card show them either way.
+    var showUnderlines: Bool {
+        get { access(keyPath: \.showUnderlines); return UserDefaults.standard.object(forKey: "showUnderlines") as? Bool ?? true }
+    }
+
+    /// Whether this note gets Smart feedback: on in Settings and not turned off for the note.
+    func feedbackOn(_ note: Note?) -> Bool {
+        _ = feedbackVersion
+        guard smartFeedback, let note else { return smartFeedback }
+        return feedbackStore.isOn(note.url)
+    }
+
+    /// The switch beside a note's title. Off, the note is just text and leaves the Progress chart.
+    func setFeedback(_ on: Bool, for note: Note) {
+        try? feedbackStore.set(note.url, on: on)
+        if !on {
+            try? progress.deleted(note.url)
+            statuses[note.url] = nil
+            progressVersion += 1
+        }
+        feedbackVersion += 1
+        if note == selection { analyzer.feedback = on }
+        settleNudge()
+    }
+
+    /// Follows the Settings switches (they're written by the Settings window).
+    private func settingsChanged() {
+        withMutation(keyPath: \.smartFeedback) {}
+        withMutation(keyPath: \.showUnderlines) {}
+        let on = smartFeedback
+        guard on != workerWanted else { return }
+        workerWanted = on
+        if on {
+            phase = .starting
+            do { try worker.start() } catch { phase = .down("Could not start the signal worker: \(error.localizedDescription)") }
+            startBackfill()
+        } else {
+            backfill?.cancel()
+            worker.stop()  // no model running at all
+        }
+        analyzer.feedback = feedbackOn(selection)
+        settleNudge()
+    }
+    private var workerWanted = true
+    private var settingsObserver: NSObjectProtocol?
     var showingProgress = false
     private var lastEdit = Date()
     private var unscorable: Set<URL> = []
@@ -181,7 +264,12 @@ final class AppModel {
         Task { [weak self] in
             for await event in events { self?.handle(event) }
         }
-        startBackfill()
+        settingsObserver = NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            MainActor.assumeIsolated { self?.settingsChanged() }
+        }
+        workerWanted = smartFeedback
+        analyzer.feedback = smartFeedback
+        if smartFeedback { startBackfill() }
         // First launch: the writing model isn't here yet, so show setup straight away rather than
         // waiting for the first downloaded byte.
         let model = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
@@ -189,13 +277,16 @@ final class AppModel {
         if Bundle.main.bundlePath.hasSuffix(".app"), !FileManager.default.fileExists(atPath: model.path) {
             phase = .downloading(0, 0, problem: nil)
         }
-        do { try worker.start() } catch { phase = .down("Could not start the signal worker: \(error.localizedDescription)") }
+        if smartFeedback {
+            do { try worker.start() } catch { phase = .down("Could not start the signal worker: \(error.localizedDescription)") }
+        }
         // First launch: open a note straight away, so the user can just start typing.
         if store?.notes.isEmpty == true { newNote() } else { open(store?.notes.first) }
     }
 
     var statusLine: String {
-        switch phase {
+        guard smartFeedback else { return "Smart feedback off" }
+        return switch phase {
         case .starting: "Loading language models…"
         case .downloading: "Downloading language models…"
         case .ready: "Signals on · runs on this Mac"
@@ -207,6 +298,7 @@ final class AppModel {
 
     /// This session's check of the note, else its last saved score, so every scored note has a dot.
     func status(of note: Note) -> NoteStatus {
+        guard feedbackOn(note) else { return .unchecked }  // not checked: a plain grey dot
         if let status = statuses[note.url] { return status }
         _ = progressVersion
         guard let score = progress.points(since: .distantPast).first(where: { $0.note == note.url })?.correctness
@@ -242,7 +334,7 @@ final class AppModel {
     }
 
     private func currentNudge() -> (message: String, score: Double)? {
-        guard let note = selection, workedOn.contains(note.url), !nudgeClosed.contains(note.url),
+        guard let note = selection, feedbackOn(note), workedOn.contains(note.url), !nudgeClosed.contains(note.url),
               !dictation.isListening, !analyzer.sentences.isEmpty,
               analyzer.sentences.allSatisfy({ $0.signals != nil }),
               let score = analyzer.summary.correctness else { return nil }
@@ -279,8 +371,10 @@ final class AppModel {
                 try? await Task.sleep(for: .seconds(30))
                 guard let self, Date().timeIntervalSince(self.lastEdit) > 30,
                       !self.dictation.isListening,
+                      self.smartFeedback,
                       let note = self.store?.notes.first(where: {
                           $0 != self.selection && !self.progress.hasScore($0.url) && !self.unscorable.contains($0.url)
+                              && self.feedbackStore.isOn($0.url)
                       }),
                       let text = try? self.store?.text(of: note) else { continue }
                 let scorer = NoteAnalyzer(client: self.worker, debounce: .zero, retryDelay: .seconds(5))
@@ -300,6 +394,7 @@ final class AppModel {
         showingProgress = false
         guard note != selection else { return }
         flush()
+        analyzer.feedback = feedbackOn(note)
         selection = note
         openedText = (try? note.map { try store?.text(of: $0) ?? "" }) ?? ""
         settleNudge()
@@ -328,6 +423,7 @@ final class AppModel {
         perform {
             guard let renamed = try store?.rename(note, to: title) else { return }
             try? progress.renamed(note.url, to: renamed.url)
+            try? feedbackStore.renamed(note.url, to: renamed.url)
             if selection == note {
                 // The editor reloads when the file changes; give it the text just saved, not the
                 // text from when the note was opened.
@@ -345,6 +441,7 @@ final class AppModel {
         if selection == note { flush(); selection = nil; openedText = ""; settleNudge() }
         perform { try store?.delete(note) }
         try? progress.deleted(note.url)
+        try? feedbackStore.deleted(note.url)
         progressVersion += 1
     }
 
@@ -385,6 +482,7 @@ final class AppModel {
                 }
             case .exited:
                 if case .downloading = phase { return }
+                guard smartFeedback else { return }  // stopped on purpose: Smart feedback is off
                 phase = .down("Signal worker restarting…")
             }
         }
