@@ -35,8 +35,11 @@ main() {
   trap 'hdiutil detach "$mount" -quiet 2>/dev/null || true; rm -rf "$work"' EXIT
 
   step "Downloading Plumb"
-  curl -fL --progress-bar -o "$work/Plumb.dmg" "$RELEASE/Plumb.dmg"
-  curl -fsSL -o "$work/Plumb.dmg.sha256" "$RELEASE/Plumb.dmg.sha256"
+  # GitHub's download server has several addresses and one can be unreachable from some networks: the
+  # connect timeout moves on to the next in 5 s instead of 75. The small fingerprint comes first, so
+  # nothing downloads silently after the progress bar reaches 100%.
+  curl -fsSL --connect-timeout 10 -o "$work/Plumb.dmg.sha256" "$RELEASE/Plumb.dmg.sha256"
+  curl -fL --connect-timeout 10 --progress-bar -o "$work/Plumb.dmg" "$RELEASE/Plumb.dmg"
 
   step "Checking the download"
   (cd "$work" && shasum -a 256 -c Plumb.dmg.sha256 >/dev/null) \
