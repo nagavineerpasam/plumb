@@ -22,8 +22,9 @@ struct PlumbApp: App {
     var body: some Scene {
         WindowGroup("Plumb") {
             ContentView(model: model)
-                .frame(minWidth: 960, minHeight: 600)
+                .frame(minWidth: 800, minHeight: 600)
         }
+        .defaultSize(width: 1280, height: 820)
         .windowStyle(.hiddenTitleBar)
         .commands {
             CommandGroup(replacing: .newItem) {
