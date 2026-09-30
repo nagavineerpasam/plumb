@@ -7,12 +7,19 @@ struct ContentView: View {
     @Bindable var model: AppModel
     @Environment(\.openSettings) private var openSettings
     @State private var confirmDelete: Note?
+    @State private var width: CGFloat = 0
+
+    /// Below this window width the signals panel hides itself: the notes list (220), the page's title
+    /// row at its narrowest (about 520) and the panel (320), with the gaps between, don't fit, and
+    /// SwiftUI would cut off both edges of the window instead.
+    private static let widthForDashboard: CGFloat = 1120
+    private var roomForDashboard: Bool { width >= Self.widthForDashboard }
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             sidebar.frame(width: 220)
             page
-            if model.showDashboard && !model.showingProgress && model.feedbackOn(model.selection) {
+            if model.showDashboard && roomForDashboard && !model.showingProgress && model.feedbackOn(model.selection) {
                 Dashboard(summary: model.analyzer.summary,
                           pending: model.analyzer.sentences.filter { $0.signals == nil }.count,
                           hasText: !model.analyzer.sentences.isEmpty,
@@ -27,6 +34,7 @@ struct ContentView: View {
         .background(alignment: .top) { TitleBarArea().frame(height: 44) }
         .background(Palette.canvas)
         .ignoresSafeArea()
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
         .onChange(of: model.analyzer.summary) { _, summary in model.record(summary) }
         .overlay {
             if model.updater.showCard {
@@ -133,7 +141,9 @@ struct ContentView: View {
                         }
                         .buttonStyle(.borderless).foregroundStyle(.tertiary)
                         .pointingHand()
-                        .help(model.showDashboard ? "Hide signals" : "Show signals")
+                        .disabled(!roomForDashboard)
+                        .help(!roomForDashboard ? "Make the window wider to see signals"
+                              : model.showDashboard ? "Hide signals" : "Show signals")
                     }
                 }
                 .padding(.horizontal, 52).padding(.top, model.dictation.settingUpFirstTime ? 20 : 40)
